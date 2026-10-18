@@ -9,8 +9,3 @@ import { langOfPath, type UrlLang } from "@/lib/tracks/urls";
 export function useUrlLang(): UrlLang {
   return langOfPath(usePathname());
 }
-
-/** "/" → "/pt" and "/#about" → "/pt#about" on Portuguese pages. */
-export function homeHref(lang: UrlLang, hash = ""): string {
-  return (lang === "pt" ? "/pt" : "/") + hash;
-}

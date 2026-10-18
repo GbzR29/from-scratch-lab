@@ -1,5 +1,5 @@
 // src/lib/tracks/seo.ts
-// What search engines and link previews see for /learn, a track or a lesson,
+// What search engines and link previews see for the home page, a track or a lesson,
 // in English or Portuguese: title, description, canonical URL, hreflang links,
 // Open Graph and JSON-LD. Built on the server from the catalog, the chapter
 // lists and the PT title files.
@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import { TRACK_CATALOG, type TrackInfo } from "./catalog";
 import { getTrack } from "./index";
 import type { Chapter, Track } from "./types";
-import { SITE_URL, chapterHref, languageAlternates, learnHref, trackHref, type UrlLang } from "./urls";
+import { SITE_URL, chapterHref, homeHref, languageAlternates, trackHref, type UrlLang } from "./urls";
 import { SEO_COPY, seoWording } from "./seoText";
 import { chapterDates } from "./dates";
 import { learningTranslations } from "@/lib/i18n/learning/learningTranslantions";
@@ -25,7 +25,7 @@ import physicsPt from "./physics/i18n/pt/_track";
 import sdl3Pt from "./sdl3/i18n/pt/_track";
 import vulkanPt from "./vulkan/i18n/pt/_track";
 
-const SITE_NAME = "gabrielfrc.dev";
+export const SITE_NAME = "From Scratch Lab";
 const LOCALE: Record<UrlLang, string> = { en: "en_US", pt: "pt_BR" };
 const IN_LANGUAGE: Record<UrlLang, string> = { en: "en", pt: "pt-BR" };
 
@@ -50,12 +50,12 @@ function strings(lang: UrlLang): Record<string, string | undefined> {
   return learningTranslations[lang] as Record<string, string | undefined>;
 }
 
-/** The track's name as /learn shows it ("OpenGL 4.6", "Matemática"…). */
+/** The track's name as the home page shows it ("OpenGL 4.6", "Matemática"…). */
 export function trackName(info: TrackInfo, lang: UrlLang): string {
   return strings(lang)[`trackName_${info.id}`] ?? info.title;
 }
 
-/** The track's paragraph from the /learn card. */
+/** The track's paragraph from its home page card. */
 function trackDescription(info: TrackInfo, lang: UrlLang): string {
   return strings(lang)[info.descKey] ?? strings("en")[info.descKey] ?? info.descFallback ?? info.title;
 }
@@ -71,7 +71,7 @@ export function sectionName(trackId: string, section: string | undefined, lang: 
 
 /** Shared head tags: canonical in this language + hreflang to both copies. */
 function pageMeta(title: string, description: string, enPath: string, lang: UrlLang, type: "website" | "article"): Metadata {
-  const url = lang === "pt" ? `/pt${enPath}` : enPath;
+  const url = lang === "pt" ? (enPath === "/" ? "/pt" : `/pt${enPath}`) : enPath;
   return {
     title,
     description,
@@ -82,9 +82,10 @@ function pageMeta(title: string, description: string, enPath: string, lang: UrlL
 
 // ── Metadata ───────────────────────────────────────────────────────────────
 
-export function learnMetadata(lang: UrlLang): Metadata {
+/** The home page (the track list). */
+export function homeMetadata(lang: UrlLang): Metadata {
   const copy = SEO_COPY[lang];
-  return pageMeta(copy.learnTitle, copy.learnDesc, learnHref(), lang, "website");
+  return pageMeta(`${SITE_NAME} | ${copy.learnTitle}`, copy.learnDesc, homeHref(), lang, "website");
 }
 
 export function trackMetadata(trackPath: string, lang: UrlLang): Metadata {
@@ -111,7 +112,8 @@ export function chapterMetadata(trackPath: string, chapterId: string, lang: UrlL
 
 // ── JSON-LD (structured data) ───────────────────────────────────────────────
 
-const PROVIDER = { "@type": "Person", name: "Gabriel Carvalho", url: SITE_URL };
+const AUTHOR = { "@type": "Person", name: "Gabriel Carvalho", url: "https://www.gabrielfrc.dev" };
+const PROVIDER = { "@type": "Organization", name: SITE_NAME, url: SITE_URL, founder: AUTHOR };
 
 function breadcrumbs(items: { name: string; path: string }[]) {
   return {
@@ -146,7 +148,7 @@ export function trackJsonLd(trackPath: string, lang: UrlLang): object | null {
         })),
       },
       breadcrumbs([
-        { name: SEO_COPY[lang].learn, path: learnHref(lang) },
+        { name: SITE_NAME, path: homeHref(lang) },
         { name, path: trackHref(trackPath, lang) },
       ]),
     ],
@@ -175,7 +177,8 @@ export function chapterJsonLd(trackPath: string, chapterId: string, lang: UrlLan
         timeRequired: chapter.minRead ? `PT${chapter.minRead}M` : undefined,
         datePublished: dates?.created,
         dateModified: dates?.updated,
-        author: PROVIDER,
+        author: AUTHOR,
+        publisher: PROVIDER,
         isPartOf: {
           "@type": "Course",
           name: seoWording(info.id, info.title, lang).title,
@@ -183,7 +186,7 @@ export function chapterJsonLd(trackPath: string, chapterId: string, lang: UrlLan
         },
       },
       breadcrumbs([
-        { name: SEO_COPY[lang].learn, path: learnHref(lang) },
+        { name: SITE_NAME, path: homeHref(lang) },
         { name: trackName(info, lang), path: trackHref(trackPath, lang) },
         { name, path: chapterHref(trackPath, chapter.id, lang) },
       ]),

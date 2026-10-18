@@ -3,18 +3,18 @@
 // Plain data only — no chapter content is imported here.
 //
 // To add a track: add an entry here, then register its chapters in ./index.ts
-// (tracks without chapters show up as "coming soon" on /learn).
+// (tracks without chapters show up as "coming soon" on the home page).
 
 export type TrackStatus = "available" | "coming-soon";
 
 export interface TrackInfo {
   id: string;
-  /** The /learn/[trackPath] route segment. Changing it breaks existing URLs. */
+  /** The /[trackPath] route segment. Changing it breaks existing URLs. */
   path: string;
   title: string;
   accentColor: string;
   status: TrackStatus;
-  /** Shown on the /learn card only while the track has no chapters yet. */
+  /** Shown on the home page card only while the track has no chapters yet. */
   plannedLessons: number;
   /** Translation keys (learning bundle) for the card, with an English fallback. */
   levelKey: string;

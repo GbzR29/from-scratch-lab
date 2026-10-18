@@ -4,21 +4,22 @@
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { CoffeeCup } from "@/components/nav/CoffeeCup";
-import { CONTACT } from "./links";
+import { LINKS } from "@/components/nav/links";
 
 export default function HomeFooter() {
   const { t } = useLanguage();
 
   return (
     <footer className="hm-foot">
-      <span>gabrielfrc.dev · {new Date().getFullYear()}</span>
+      <span>
+        fromscratchlab.com · {new Date().getFullYear()} · {t.footBy}{" "}
+        <a href={LINKS.author}>Gabriel Carvalho</a>
+      </span>
       <nav aria-label="Links">
-        <a href={CONTACT.github} target="_blank" rel="noopener noreferrer">github</a>
-        <a href={CONTACT.linkedin} target="_blank" rel="noopener noreferrer">linkedin</a>
-        <a href={CONTACT.cv} target="_blank" rel="noopener noreferrer">{t.contactCv.toLowerCase()}</a>
-        <a href={CONTACT.kofi} target="_blank" rel="noopener noreferrer" className="hm-kofi">
+        <a href={LINKS.github} target="_blank" rel="noopener noreferrer">github</a>
+        <a href={LINKS.kofi} target="_blank" rel="noopener noreferrer" className="hm-kofi">
           <CoffeeCup size={13} />
-          {t.footCoffee ?? "buy me a coffee"}
+          {t.footCoffee}
         </a>
       </nav>
     </footer>

@@ -2,7 +2,7 @@
 // Reading progress, kept in this browser only:
 //   lesson:<trackId>:progress   the chapters opened in a track (JSON array of ids)
 //   lesson:last                 the last chapter opened anywhere ({ track, chapter })
-// /learn reads both to show progress bars and "resume where you left off".
+// The home page reads both to show progress bars and "resume where you left off".
 "use client";
 
 import { useCallback, useState } from "react";
@@ -11,7 +11,7 @@ const progressKey = (trackId: string) => `lesson:${trackId}:progress`;
 const LAST_KEY = "lesson:last";
 
 export interface LastLesson {
-  /** Route segment of the track (/learn/<track>). */
+  /** Route segment of the track (/<track>). */
   track: string;
   chapter: string;
   /** Chapter title in the language it was read in, and its 1-based number. */
@@ -39,7 +39,7 @@ export function readLastLesson(): LastLesson | null {
   }
 }
 
-/** Remembers the open chapter for "resume where you left off" on /learn. */
+/** Remembers the open chapter for "resume where you left off" on the home page. */
 export function rememberLastLesson(last: LastLesson) {
   try { localStorage.setItem(LAST_KEY, JSON.stringify(last)); } catch { /* storage blocked */ }
 }

@@ -1,0 +1,68 @@
+// src/lib/i18n/nav/navTranslations.ts
+// Strings for the site chrome: the top bars, the phone menu and the footer.
+
+export const navTranslations = {
+  en: {
+    navTracks:    "tracks",
+    navReference: "OpenGL reference",
+    navAuthor:    "author",
+    navDark:      "☾ dark",
+    navLight:     "☀ light",
+    navLanguage:  "Language",
+    navMenu:      "Menu",
+    navClose:     "Close menu",
+    navTheme:     "Theme",
+    footBy:       "made by",
+    footCoffee:   "buy me a coffee",
+    notFoundEyebrow: "404 · page not found",
+    notFoundTitle:   "Nothing here",
+    notFoundBody:    "This address does not lead to a lesson. The track may have another name, or the link may be old.",
+    notFoundBack:    "See every track →",
+  },
+
+  pt: {
+    navTracks:    "trilhas",
+    navReference: "referência OpenGL",
+    navAuthor:    "autor",
+    navDark:      "☾ escuro",
+    navLight:     "☀ claro",
+    navLanguage:  "Idioma",
+    navMenu:      "Menu",
+    navClose:     "Fechar menu",
+    navTheme:     "Tema",
+    footBy:       "feito por",
+    footCoffee:   "me pague um café",
+    notFoundEyebrow: "404 · página não encontrada",
+    notFoundTitle:   "Nada aqui",
+    notFoundBody:    "Este endereço não leva a uma lição. A trilha pode ter outro nome, ou o link pode ser antigo.",
+    notFoundBack:    "Ver todas as trilhas →",
+  },
+
+  es: {
+    navTracks:    "cursos",
+    navReference: "referencia OpenGL",
+    navAuthor:    "autor",
+    navDark:      "☾ oscuro",
+    navLight:     "☀ claro",
+    navLanguage:  "Idioma",
+    navMenu:      "Menú",
+    navClose:     "Cerrar menú",
+    navTheme:     "Tema",
+    footBy:       "hecho por",
+    footCoffee:   "invítame un café",
+  },
+
+  zh: {
+    navTracks:    "课程",
+    navReference: "OpenGL 参考",
+    navAuthor:    "作者",
+    navDark:      "☾ 深色",
+    navLight:     "☀ 浅色",
+    navLanguage:  "语言",
+    navMenu:      "菜单",
+    navClose:     "关闭菜单",
+    navTheme:     "主题",
+    footBy:       "作者",
+    footCoffee:   "请我喝杯咖啡",
+  },
+};

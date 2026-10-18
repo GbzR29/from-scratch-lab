@@ -12,6 +12,15 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ## Outubro de 2026
 
+### 2026-10-18
+
+- **O site vira o From Scratch Lab (fromscratchlab.com), separado do portfólio.** Os cursos saem de `gabrielfrc.dev/learn` e passam a ser um site próprio, com o histórico do git preservado (as datas das lições dependem dele).
+  - **Rotas na raiz:** a lista de trilhas (o antigo `/learn`) é a página inicial; trilhas e lições ficam em `/<trilha>/<lição>` (ex.: `/OpenGL/legacy`), a referência em `/OpenGL/reference`, e as cópias em português em `/pt` e `/pt/<trilha>/<lição>`. Links antigos `/learn/...` e `/pt/learn/...` redirecionam (308) para o endereço novo, e `?chapter=` continua funcionando. Um endereço que não é trilha dá 404, com página própria no visual da home (antes ia para `/status`).
+  - **Removido o que era do portfólio:** home pessoal (sobre, ferramentas, contato), blog e MongoDB, página do livro, `/status`, `/api/ping`, currículo, fotos e imagens de projetos, partículas, textos de interface que só eles usavam e CSS sem uso (seções do portfólio em `home.css`, efeitos de brilho em `globals.css`). Dependências retiradas: mongodb, framer-motion, react-icons, react-icon, t-writer.js, @radix-ui/react-slot, class-variance-authority.
+  - **Marca nova:** "From Scratch Lab" na barra, no menu do celular, no rodapé (com "feito por Gabriel Carvalho" apontando para gabrielfrc.dev, GitHub e Ko-fi) e nos cards de prévia de link (`fromscratchlab.com`); ícone provisório novo (cubo isométrico nas cores do site) no lugar do logo "GC". Links da barra: trilhas, referência OpenGL e autor. Migalha das lições "trilhas / OpenGL / …".
+  - **SEO:** `SITE_URL = https://fromscratchlab.com`; títulos, canonical, hreflang, Open Graph (`siteName` "From Scratch Lab"), JSON-LD (curso publicado pelo From Scratch Lab, autor Gabriel Carvalho), sitemap (901 endereços) e robots com o domínio novo. O arquivo de verificação antigo do Search Console foi removido (a propriedade nova vem no passo 4).
+  - README, CLAUDE.md ("Where things live") e o nome do pacote (`from-scratch-lab`) atualizados.
+
 ### 2026-10-17
 
 - **Física, lote 5: seção nova "Fluidos e calor"** (4 capítulos, EN e PT, depois de "Oscilações e ondas"; a trilha passa a ter 20 lições). Física pura, sem código; cada capítulo tem caixa de objetivos, deduções passo a passo, fórmula ao vivo, exemplos resolvidos, erros comuns e ideias-chave.

@@ -1,50 +1,37 @@
-# Dev Portfolio
+# From Scratch Lab
 
-Personal development portfolio showcasing selected projects in software engineering, game development, and real-time graphics programming.
+Free, interactive courses that build things up from the first principle:
+OpenGL, GLSL, Vulkan, C/C++, x86-64 Assembly, SDL3, game development,
+algorithms, AI, math, physics and music theory. Every formula is explained
+term by term, and the figures run live in the browser.
 
-This repository contains the source code for my personal website — a place where I document projects, experiments, and technical explorations ranging from low-level systems and rendering engines to modern web applications and interactive tools.
+**[fromscratchlab.com](https://fromscratchlab.com)** · English and Portuguese (`/pt`)
 
-The focus is not just presentation, but clarity, performance, and clean architecture.
+## What is inside
 
----
+- **Tracks** of hand-written lessons, each with live figures you can drag,
+  rotate and play with (SVG, WebGL2 and Web Audio), step-by-step derivations
+  and practice rounds.
+- **Function reference** for OpenGL (`/OpenGL/reference`), linked from the lessons.
+- Reading progress stays in the browser: no account, no sign-up.
 
-## ✨ Philosophy
-
-This portfolio follows a few core principles:
-
-• Clean and readable code  
-• Performance-first mindset  
-• Minimal and functional design  
-• Strong technical substance over visual noise  
-• Built with modern tools, engineered with care  
-
-The goal is to present real engineering work, not just screenshots.
-
----
-
-## 🚀 What you'll find here
-
-- Game engine experiments (C++ / OpenGL)
-- Real-time rendering projects
-- Graphics programming studies
-- Web applications and tools
-- Technical write-ups and tutorials
-- Playable or interactive demos
-
----
-
-## 🛠 Tech Stack
-
-- TypeScript
-- React
-- Next.js
-- Node.js
-- Tailwind CSS
-
----
-
-## 📦 Running locally
+## Running locally
 
 ```bash
 npm install
 npm run dev
+```
+
+Then open <http://localhost:3000>. `npm run build` makes the production build;
+`npx tsc --noEmit -p .` type-checks.
+
+Built with Next.js (App Router), React, TypeScript, Tailwind CSS and KaTeX.
+How the code is organised is described in [CLAUDE.md](CLAUDE.md); the dated
+history of every change is in [CHANGELOG.md](CHANGELOG.md) (Portuguese).
+
+## Author
+
+Made by [Gabriel Carvalho](https://www.gabrielfrc.dev). If a lesson helped you,
+you can [buy me a coffee](https://ko-fi.com/gabrielfrc).
+
+MIT License.

@@ -1,13 +1,13 @@
 // src/lib/reference/seo.ts
 // Titles and descriptions of the API reference pages
-// (/learn/<track>/reference and /learn/<track>/reference/<function>), built
+// (/<track>/reference and /<track>/reference/<function>), built
 // on the server from the same entries the pages show. English only: the
 // reference has no /pt copy.
 
 import type { Metadata } from "next";
 import { displayName, getReference, referenceHref, referenceIndex } from "./index";
 
-const SITE_NAME = "gabrielfrc.dev";
+const SITE_NAME = "From Scratch Lab";
 
 function meta(title: string, description: string, url: string): Metadata {
   return {

@@ -1,35 +1,39 @@
-# dev-portfolio
+# From Scratch Lab
 
-Next.js 16 (App Router) + React 19 + Tailwind. Personal portfolio with a blog
-(MongoDB) and a set of interactive graphics-programming courses under `/learn`.
+Next.js 16 (App Router) + React 19 + Tailwind. Free interactive courses at
+<https://fromscratchlab.com>: the home page is the track list, tracks and lessons
+sit at the root (`/<track>/<id>`), Portuguese copies under `/pt`. Split on
+2026-10-18 from the author's portfolio (gabrielfrc.dev, where it lived under `/learn`;
+next.config.ts redirects old `/learn/*` paths). No database.
 
 Commands: `npm run dev`, `npm run build`, `npx tsc --noEmit -p .`, `npx eslint <path>`.
 `predev`/`prebuild` regenerate `src/lib/generated/assets.json` from `public/textures`
 and `src/lib/generated/chapter-dates.json` (lesson created/updated dates from git, shown in the lesson header;
 `npm run dates`; committed, since the deploy's shallow clone has no history).
 Record every change with its date at the top of `CHANGELOG.md` (Portuguese, newest first).
-The build logs a MongoDB `ENOTFOUND` when offline — expected, the blog handles it.
 
 ## Where things live
 
 ```
-src/app/page.tsx, src/components/home/ Home (and the book page /the-weight-of-being); styles in src/styles/home.css (--hm-* tokens, .home scope)
-src/components/nav/                    SiteMenu (phone ☰ sheet, styles in src/styles/sitemenu.css) + siteLinks (links, languages) shared by HomeNav and LearnTopBar; HomeNav is the nav of every page (blog/status borrow it via .hm-scope)
-src/app/learn/page.tsx                 /learn landing — track cards on the Home look (HomeNav, home.css); data from the catalog + progress
-src/styles/learn.css                   /learn look: re-values the theme.css tokens while a .learn page is shown, syntax colours, figure numbering
-src/lib/tracks/progress.ts             reading progress + "last lesson" in localStorage (sidebar, /learn "resume")
-src/app/learn/[trackPath]/(lesson)/    LessonView.tsx = the ONE reader for every lesson of every track, mounted by layout.tsx;
-                                       page.tsx (/learn/<track>, redirects old ?chapter= links) and [chapterId]/page.tsx
-                                       (/learn/<track>/<id>) only give metadata + JSON-LD (src/lib/tracks/lessonRoutes.tsx, seo.ts)
-src/app/pt/                            Portuguese copies with their own URLs (/pt, /pt/learn, /pt/learn/<track>/<id>): thin files
+src/app/page.tsx, src/components/home/ home page = the track list (TracksHome.tsx: cards from the catalog + progress, HomeNav,
+                                       HomeFooter, Stars); styles in src/styles/home.css (--hm-* tokens, .home scope); app/not-found.tsx same look
+src/components/nav/                    SiteMenu (phone ☰ sheet, styles in src/styles/sitemenu.css) + siteLinks (BRAND, links, languages)
+                                       shared by HomeNav and LearnTopBar; links.ts = outside addresses (GitHub, Ko-fi, author's site)
+src/styles/learn.css                   lesson look: re-values the theme.css tokens while a .learn page is shown, syntax colours, figure numbering
+src/lib/tracks/progress.ts             reading progress + "last lesson" in localStorage (sidebar, home page "resume")
+src/app/[trackPath]/(lesson)/          LessonView.tsx = the ONE reader for every lesson of every track, mounted by layout.tsx
+                                       (which 404s any first segment that is not a track); page.tsx (/<track>, redirects old
+                                       ?chapter= links) and [chapterId]/page.tsx (/<track>/<id>) only give metadata + JSON-LD
+                                       (src/lib/tracks/lessonRoutes.tsx, seo.ts)
+src/app/pt/                            Portuguese copies with their own URLs (/pt, /pt/<track>/<id>): thin files
                                        reusing the English pages with lang "pt"; LanguageProvider reads the /pt prefix
-src/lib/tracks/urls.ts                 SITE_URL, learnHref/trackHref/chapterHref(…, lang), pathInLang — build every URL with these;
+src/lib/tracks/urls.ts                 SITE_URL, homeHref/trackHref/chapterHref(…, lang), pathInLang — build every URL with these;
                                        in client components get the page's language with useUrlLang() (src/lib/i18n/useUrlLang.ts)
 src/lib/tracks/seoText.ts              per-track search wording ("OpenGL Tutorial" / "Tutorial de OpenGL") for titles
 src/app/sitemap.ts, src/app/robots.ts  EN + PT pages (hreflang) and the API reference, for search engines
 src/lib/og/                            link-preview images: card.tsx draws (fonts in src/assets/fonts), cards.tsx = text per page;
                                        each route's opengraph-image.tsx only picks a card (a new route with its own openGraph needs one)
-src/app/learn/[trackPath]/reference/   function reference pages (src/lib/reference; one file per category in reference/opengl;
+src/app/[trackPath]/reference/         function reference pages (/OpenGL/reference, English only) (src/lib/reference; one file per category in reference/opengl;
                                        family pages glUniform* etc. = entries with `family`; `diagram: "<id>"` → components/reference/diagrams)
 src/lib/tracks/catalog.ts              THE list of tracks: id, route path, title, color, status, level/description keys
 src/lib/tracks/index.ts                registry: joins catalog entries with each track's chapter list (getTrack)

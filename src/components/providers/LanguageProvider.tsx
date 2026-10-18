@@ -1,7 +1,7 @@
 "use client";
 
 // ── Language ────────────────────────────────────────────────────────────────
-// Pages under /pt (Home, /learn, tracks, lessons) are Portuguese by URL, so
+// Pages under /pt (the home page, tracks, lessons) are Portuguese by URL, so
 // search engines index them in PT; visiting one also saves PT as the reader's
 // choice. Elsewhere the saved choice applies (English by default). Picking a
 // language moves to that language's copy of the page when there is one.

@@ -1,36 +1,31 @@
 // src/lib/i18n/index.ts
-import { homeTranslations } from "./home/homeTranslations";
+import { navTranslations } from "./nav/navTranslations";
 import { learningTranslations } from "./learning/learningTranslantions";
-import { blogTranslations } from "./blog/blogTranslations";
 import { openglTranslations } from "./opengl/openglTranslations";
 import { glslTranslations } from "./glsl/glslTranslations";
 
 export const translations = {
   en: {
-    ...homeTranslations.en,
+    ...navTranslations.en,
     ...learningTranslations.en,
-    ...blogTranslations.en,
     ...openglTranslations.en,
     ...glslTranslations.en,
   },
   pt: {
-    ...homeTranslations.pt,
+    ...navTranslations.pt,
     ...learningTranslations.pt,
-    ...blogTranslations.pt,
     ...openglTranslations.pt,
     ...glslTranslations.pt,
   },
   zh: {
-    ...homeTranslations.zh,
+    ...navTranslations.zh,
     ...learningTranslations.zh,
-    ...blogTranslations.zh,
     ...openglTranslations.zh,
     ...glslTranslations.zh,
   },
   es: {
-    ...homeTranslations.es,
+    ...navTranslations.es,
     ...learningTranslations.es,
-    ...blogTranslations.es,
     ...openglTranslations.es,
     ...glslTranslations.es,
   }

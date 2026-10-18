@@ -1,12 +1,12 @@
 // app/sitemap.ts → /sitemap.xml
-// Every public page for search engines: the main pages, each track and each
+// Every public page for search engines: the home page, each track and each
 // lesson in English and in Portuguese (/pt, linked to each other as hreflang
 // alternates), and the API reference pages.
 
 import type { MetadataRoute } from "next";
 import { ALL_TRACKS } from "@/lib/tracks";
 import { chapterDates } from "@/lib/tracks/dates";
-import { SITE_URL, chapterHref, learnHref, pathInLang, trackHref } from "@/lib/tracks/urls";
+import { SITE_URL, chapterHref, homeHref, pathInLang, trackHref } from "@/lib/tracks/urls";
 import { getReference, referenceHref } from "@/lib/reference";
 
 type Entry = MetadataRoute.Sitemap[number];
@@ -24,10 +24,7 @@ function bothLanguages(enPath: string, extra: Extra): Entry[] {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: MetadataRoute.Sitemap = [
-    ...bothLanguages("/", { changeFrequency: "monthly", priority: 1 }),
-    ...bothLanguages(learnHref(), { changeFrequency: "weekly", priority: 0.9 }),
-    { url: `${SITE_URL}/the-weight-of-being`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.5 },
+    ...bothLanguages(homeHref(), { changeFrequency: "weekly", priority: 1 }),
   ];
 
   for (const [trackPath, track] of Object.entries(ALL_TRACKS)) {

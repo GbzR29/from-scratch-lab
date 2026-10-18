@@ -19,16 +19,20 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-    ],
-  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
+  },
+  // ── Old URLs ──────────────────────────────────────────────────────────────
+  // The courses lived under /learn on the author's portfolio (gabrielfrc.dev)
+  // until 2026-10-18. The portfolio sends /learn/* here with the path intact;
+  // these move it to the root.
+  async redirects() {
+    return [
+      { source: "/learn", destination: "/", permanent: true },
+      { source: "/learn/:path*", destination: "/:path*", permanent: true },
+      { source: "/pt/learn", destination: "/pt", permanent: true },
+      { source: "/pt/learn/:path*", destination: "/pt/:path*", permanent: true },
+    ];
   },
 };
 

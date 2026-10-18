@@ -3,6 +3,7 @@
 
 import type { RefEntry, Reference } from "./types";
 import { openGLReference } from "./opengl";
+import { trackHref } from "@/lib/tracks/urls";
 
 const ALL_REFERENCES: Record<string, Reference> = {
   OpenGL: openGLReference,
@@ -30,7 +31,7 @@ export function familiesOf(ref: Reference, name: string): RefEntry[] {
 }
 
 export function referenceHref(ref: Reference, name?: string): string {
-  const base = `/learn/${encodeURIComponent(ref.trackPath)}/reference`;
+  const base = `${trackHref(ref.trackPath)}/reference`;
   return name ? `${base}/${name}` : base;
 }
 

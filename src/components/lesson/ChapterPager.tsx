@@ -4,6 +4,8 @@
 
 import Link from "next/link";
 import type { Chapter } from "@/lib/tracks/types";
+import { homeHref } from "@/lib/tracks/urls";
+import { useUrlLang } from "@/lib/i18n/useUrlLang";
 import { ChapterLink } from "./ChapterLink";
 
 interface PagerLabels {
@@ -22,6 +24,7 @@ export function ChapterPager({ prev, next, onSelect, chapterHref, labels }: {
   chapterHref: (id: string) => string;
   labels: PagerLabels;
 }) {
+  const urlLang = useUrlLang();
   return (
     <nav className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-16 pt-8 border-t border-[var(--border)]">
       {prev ? (
@@ -37,7 +40,7 @@ export function ChapterPager({ prev, next, onSelect, chapterHref, labels }: {
           <span className="font-display text-[19px] leading-snug truncate group-hover:text-[var(--primary)]">{next.title}</span>
         </ChapterLink>
       ) : (
-        <Link href="/learn" className={`${BOX} text-left sm:text-right hover:border-[var(--primary)] group`}>
+        <Link href={homeHref(urlLang)} className={`${BOX} text-left sm:text-right hover:border-[var(--primary)] group`}>
           <small className="font-mono text-[11.5px] text-[var(--primary)]">✓ {labels.done}</small>
           <span className="font-display text-[19px] leading-snug group-hover:text-[var(--primary)]">{labels.backToTracks} →</span>
         </Link>

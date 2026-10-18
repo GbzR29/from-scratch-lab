@@ -6,19 +6,22 @@
 
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import type { Language } from "@/lib/i18n";
-import { homeHref, useUrlLang } from "@/lib/i18n/useUrlLang";
-import { learnHref } from "@/lib/tracks/urls";
+import { useUrlLang } from "@/lib/i18n/useUrlLang";
+import { homeHref, trackHref } from "@/lib/tracks/urls";
+import { LINKS } from "./links";
 
 export const LANGUAGES: Language[] = ["en", "pt", "es", "zh"];
+
+/** The site's name, shown in every bar and menu. */
+export const BRAND = "From Scratch Lab";
 
 export function useSiteLinks() {
   const { t } = useLanguage();
   const lang = useUrlLang();
   return [
-    { href: homeHref(lang, "#about"), label: t.navAbout },
-    { href: learnHref(lang), label: t.navLearn },
-    { href: "/the-weight-of-being", label: t.navBook },
-    { href: "/blog", label: t.navBlog },
-    { href: homeHref(lang, "#contact"), label: t.navContact },
+    { href: homeHref(lang), label: t.navTracks },
+    // Built here rather than with referenceHref, which would pull the whole reference into every page
+    { href: `${trackHref("OpenGL")}/reference`, label: t.navReference },
+    { href: LINKS.author, label: `${t.navAuthor} ↗` },
   ];
 }

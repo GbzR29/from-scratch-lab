@@ -35,7 +35,7 @@ const CHAPTERS: Record<string, Chapter[]> = {
   physics: physicsChapters,
 };
 
-// Keyed by route segment (/learn/[trackPath]). Built once, so every lookup of
+// Keyed by route segment (/[trackPath]). Built once, so every lookup of
 // the same path returns the same object.
 const ALL_TRACKS: Record<string, Track> = Object.fromEntries(
   TRACK_CATALOG

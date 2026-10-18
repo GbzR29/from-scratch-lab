@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, Search } from "lucide-react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { displayName, loc, referenceHref, type Reference } from "@/lib/reference";
+import { trackHref } from "@/lib/tracks/urls";
 
 /** Left rail for reference pages: filter box + functions grouped by category. */
 export function ReferenceSidebar({ reference, activeName }: { reference: Reference; activeName?: string }) {
@@ -29,7 +30,7 @@ export function ReferenceSidebar({ reference, activeName }: { reference: Referen
     <div className="flex flex-col gap-6 py-8">
       <div className="px-6 space-y-4">
         <Link
-          href={`/learn/${encodeURIComponent(reference.trackPath)}`}
+          href={trackHref(reference.trackPath)}
           className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors"
         >
           <ArrowLeft size={12} />

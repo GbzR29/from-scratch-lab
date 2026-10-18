@@ -4,6 +4,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { SITE_URL } from "@/lib/tracks/urls";
+import { SITE_NAME } from "@/lib/tracks/seo";
+import { SEO_COPY } from "@/lib/tracks/seoText";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 
-// Home + book page type family (see src/styles/home.css)
+// Home page and lesson type family (see src/styles/home.css, learn.css)
 const spectral = Spectral({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -41,9 +43,10 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   // Relative canonical / Open Graph URLs resolve against the public domain
   metadataBase: new URL(SITE_URL),
-  title: "Gabriel Carvalho",
-  description:
-    "Gabriel Carvalho, C++ and graphics programmer. Free interactive courses on OpenGL, GLSL, Vulkan, C++ and math, and a science-fiction novel in progress.",
+  // Fallbacks; every page sets its own (src/lib/tracks/seo.ts)
+  title: SITE_NAME,
+  description: SEO_COPY.en.learnDesc,
+  applicationName: SITE_NAME,
 };
 
 

@@ -1,6 +1,6 @@
 // src/lib/reference/types.ts
 //
-// Data model for the per-track API reference (e.g. /learn/OpenGL/reference).
+// Data model for the per-track API reference (e.g. /OpenGL/reference).
 // Entries are plain data so the same source feeds the reference pages, the
 // hover cards in code blocks and the "functions used in this chapter" list.
 

@@ -12,8 +12,9 @@ import type { ReactNode } from "react";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { SiteMenu } from "@/components/nav/SiteMenu";
-import { LANGUAGES } from "@/components/nav/siteLinks";
-import { homeHref, useUrlLang } from "@/lib/i18n/useUrlLang";
+import { BRAND, LANGUAGES } from "@/components/nav/siteLinks";
+import { useUrlLang } from "@/lib/i18n/useUrlLang";
+import { homeHref } from "@/lib/tracks/urls";
 
 export interface Crumb {
   label: string;
@@ -29,7 +30,7 @@ export function LearnTopBar({ crumbs = [] }: { crumbs?: Crumb[] }) {
     <header className="sticky top-0 z-40 h-12 border-b border-[var(--border)] bg-[var(--navbar-bg)] backdrop-blur-md">
       <div className="h-full flex items-center gap-5 px-4 sm:px-6">
         <Link href={homeHref(urlLang)} className="hidden sm:block font-display text-[17px] text-[var(--text-main)] whitespace-nowrap hover:text-[var(--primary)] transition-colors">
-          Gabriel Carvalho
+          {BRAND}
         </Link>
 
         <nav aria-label="Breadcrumb" className="min-w-0 flex-1">

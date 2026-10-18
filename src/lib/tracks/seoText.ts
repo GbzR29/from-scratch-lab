@@ -73,7 +73,6 @@ export const SEO_COPY = {
     learnTitle: "Free interactive courses: OpenGL, GLSL, Vulkan, C++, math and AI",
     learnDesc:
       "Free interactive courses in graphics programming and the math behind it: OpenGL, GLSL shaders, Vulkan, modern C++, SDL3, game dev, algorithms, AI and music theory. Every step explained, with live figures.",
-    learn: "Learn",
   },
   pt: {
     free: "(grátis e interativo)",
@@ -83,6 +82,5 @@ export const SEO_COPY = {
     learnTitle: "Cursos interativos e gratuitos: OpenGL, GLSL, Vulkan, C++, matemática e IA",
     learnDesc:
       "Cursos interativos e gratuitos de programação gráfica e da matemática por trás dela: OpenGL, shaders GLSL, Vulkan, C++ moderno, SDL3, desenvolvimento de jogos, algoritmos, IA e teoria musical. Cada passo explicado, com figuras interativas.",
-    learn: "Aprender",
   },
 } as const;

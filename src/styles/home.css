@@ -1,17 +1,14 @@
 /* =========================================================
-   HOME + BOOK PAGE
+   HOME (the track list) + 404
    Light = "lab notebook" (grid paper, petrol ink).
    Dark  = "dusk" (slate sky, peach accent, static stars).
    Every token here is prefixed --hm- and scoped to .home, so
-   the global theme.css (used by /learn and the blog) is untouched.
-   .hm-scope carries the same tokens without the page styles, for
-   pages that only borrow HomeNav (blog, status).
+   the global theme.css (used by the lessons) is untouched.
 ========================================================= */
 
 /* ── Tokens ─────────────────────────────────────────────── */
 
-.home,
-.hm-scope {
+.home {
   --hm-bg: #f1f1eb;
   --hm-surface: #fafaf6;
   --hm-ink: #1d2427;
@@ -29,8 +26,7 @@
   --hm-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
-.dark .home,
-.dark .hm-scope {
+.dark .home {
   --hm-bg: #1a1c29;
   --hm-surface: #212436;
   --hm-ink: #e7e3ef;
@@ -83,10 +79,6 @@ html:not(.dark) .home {
   position: relative;
 }
 
-/* Floating dots behind the whole page (Particles.tsx); the header and main
-   are positioned and come later, so they paint above it */
-.hm-particles { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; }
-
 /* ── Navigation ─────────────────────────────────────────── */
 
 .hm-nav {
@@ -109,6 +101,7 @@ html:not(.dark) .home {
   color: var(--hm-muted);
 }
 .hm-links a:hover { color: var(--hm-accent); }
+.hm-links a[aria-current] { color: var(--hm-accent); }
 .hm-tools { display: flex; align-items: center; gap: 10px; }
 .hm-pill {
   font-family: var(--hm-mono);
@@ -171,11 +164,9 @@ html:not(.dark) .home {
   text-wrap: balance;
 }
 .hm-lead { font-size: clamp(17px, 2vw, 19px); line-height: 1.6; max-width: 38em; margin: 0; color: var(--hm-ink-soft); }
-.hm-cta { display: flex; flex-wrap: wrap; gap: 10px 22px; font-family: var(--hm-mono); font-size: 13px; }
-.hm-cta a { border-bottom: 1px solid var(--hm-line-strong); padding-bottom: 2px; }
-.hm-cta a:hover { border-color: var(--hm-accent); color: var(--hm-accent); }
-.hm-status { font-family: var(--hm-mono); font-size: 12px; color: var(--hm-muted); display: flex; flex-wrap: wrap; gap: 4px 14px; }
-.hm-status em { font-style: normal; color: var(--hm-accent); }
+.hm-resume { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; font-family: var(--hm-mono); font-size: 12.5px; color: var(--hm-muted); }
+.home .hm-resume a { color: var(--hm-accent); border-bottom: 1px solid var(--hm-line-strong); padding-bottom: 1px; }
+.home .hm-resume a:hover { border-color: var(--hm-accent); }
 
 /* ── Sections ───────────────────────────────────────────── */
 
@@ -195,92 +186,11 @@ html:not(.dark) .home {
   color: var(--hm-muted);
   margin: 0;
 }
-.hm-sec > h2 small { font-size: inherit; text-transform: none; letter-spacing: 0; }
-.hm-ph { color: var(--hm-muted); font-style: italic; }
-.hm-fig { font-family: var(--hm-mono); font-size: 11px; color: var(--hm-muted); }
 .home .hm-more { font-family: var(--hm-mono); font-size: 13px; color: var(--hm-accent); }
 .home .hm-more:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-/* About */
-.hm-about { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px 40px; align-items: start; }
-.hm-about-text { display: grid; gap: 14px; }
-.hm-about-text p { margin: 0; line-height: 1.7; color: var(--hm-ink-soft); max-width: 36em; }
-.hm-about-side { display: grid; gap: 18px; }
-.hm-photo {
-  position: relative;
-  aspect-ratio: 4 / 5;
-  width: 100%;
-  max-width: 280px;
-  border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius);
-  overflow: hidden;
-  background: var(--hm-surface);
-}
-.hm-facts { margin: 0; font-family: var(--hm-mono); font-size: 12.5px; }
-.hm-facts div { display: grid; gap: 2px; padding-block: 10px; border-bottom: 1px solid var(--hm-line); }
-.hm-facts dt { color: var(--hm-muted); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
-.hm-facts dd { margin: 0; color: var(--hm-ink); }
-.hm-photo img { transition: transform 0.6s ease; }
-.hm-photo:hover img { transform: scale(1.03); }
+/* ── Track cards ────────────────────────────────────────── */
 
-/* "Read more" (narrow screens only, see the media query at the end): the fold
-   animates its height with grid rows (0fr → 1fr); the negative margin cancels
-   the parent's gap while it is closed */
-.hm-fold {
-  display: grid;
-  margin-top: -14px;
-  transition: grid-template-rows 0.4s ease, opacity 0.3s ease;
-}
-.hm-fold > div { overflow: hidden; display: grid; gap: 14px; padding-top: 14px; }
-.hm-toggle {
-  display: none;
-  justify-self: start;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--hm-mono);
-  font-size: 13px;
-  color: var(--hm-accent);
-  background: none;
-  border: 0;
-  border-bottom: 1px solid var(--hm-line-strong);
-  padding: 0 0 2px;
-  cursor: pointer;
-}
-.hm-toggle:hover { border-color: var(--hm-accent); }
-.hm-toggle span { display: inline-block; transition: transform 0.3s ease; }
-.hm-toggle[aria-expanded="true"] span { transform: rotate(180deg); }
-
-/* Stack */
-.hm-stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 24px 32px; }
-.hm-group h3 { font-family: var(--hm-display); font-weight: 400; font-size: 18px; margin: 0 0 10px; }
-.hm-group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-.hm-group li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 8px;
-  margin-inline: -8px;
-  border-radius: var(--hm-radius);
-  color: var(--hm-ink-soft);
-  font-size: 15px;
-  transition: color 0.15s, background 0.15s;
-}
-.hm-group li svg { width: 18px; height: 18px; flex: none; color: var(--hm-muted); transition: color 0.15s; }
-.hm-group li:hover { background: var(--hm-surface); color: var(--hm-ink); }
-.hm-group li:hover svg { color: var(--brand, var(--hm-accent)); }
-.hm-tag {
-  margin-left: auto;
-  font-family: var(--hm-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.05em;
-  color: var(--hm-accent);
-  border: 1px solid var(--hm-line-strong);
-  border-radius: 999px;
-  padding: 1px 8px;
-}
-
-/* Now: book + tracks */
-.hm-now { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 18px; }
 .hm-card {
   background: var(--hm-surface);
   border: 1px solid var(--hm-line);
@@ -290,124 +200,11 @@ html:not(.dark) .home {
   display: grid;
   gap: 12px;
   align-content: start;
+  transition: border-color 0.2s, transform 0.2s;
 }
-.hm-kind { font-family: var(--hm-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--hm-accent); }
 .hm-card h3 { font-family: var(--hm-display); font-weight: 400; font-size: 28px; line-height: 1.1; margin: 0; }
 .hm-card p { margin: 0; line-height: 1.6; color: var(--hm-ink-soft); }
 .hm-meta { font-family: var(--hm-mono); font-size: 12px; color: var(--hm-muted); display: flex; flex-wrap: wrap; gap: 4px 14px; }
-.hm-bar { height: 4px; background: var(--hm-line); border-radius: 2px; overflow: hidden; }
-.hm-bar i { display: block; height: 100%; background: var(--hm-accent); }
-.hm-tracks {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px 18px;
-  font-family: var(--hm-mono);
-  font-size: 12.5px;
-}
-.hm-tracks a {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px dotted var(--hm-line-strong);
-  padding-block: 3px;
-  color: var(--hm-ink-soft);
-}
-.hm-tracks a:hover { color: var(--hm-accent); }
-.hm-tracks b { font-weight: 500; color: var(--hm-ink); font-variant-numeric: tabular-nums; }
-
-/* Recent writing */
-.hm-posts { list-style: none; margin: 0; padding: 0; display: grid; }
-.hm-posts a {
-  display: grid;
-  grid-template-columns: 7.5em 1fr;
-  gap: 16px;
-  padding-block: 12px;
-  border-bottom: 1px solid var(--hm-line);
-  align-items: baseline;
-}
-.hm-posts time { font-family: var(--hm-mono); font-size: 12px; color: var(--hm-muted); font-variant-numeric: tabular-nums; }
-.hm-posts span { font-family: var(--hm-display); font-size: 19px; }
-.hm-posts a:hover span { color: var(--hm-accent); }
-
-/* Contact */
-.hm-contact { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px 48px; align-items: start; }
-.hm-contact h3 {
-  font-family: var(--hm-display);
-  font-weight: 400;
-  font-size: clamp(28px, 4vw, 38px);
-  line-height: 1.1;
-  margin: 0 0 12px;
-  text-wrap: balance;
-}
-.hm-contact p { margin: 0; color: var(--hm-ink-soft); line-height: 1.65; max-width: 34em; }
-.hm-mail { margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
-.hm-mail code {
-  font-family: var(--hm-mono);
-  font-size: 15px;
-  color: var(--hm-ink);
-  background: var(--hm-surface);
-  border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius);
-  padding: 8px 12px;
-  user-select: all;
-  overflow-wrap: anywhere;
-}
-.hm-copy {
-  font-family: var(--hm-mono);
-  font-size: 12px;
-  color: var(--hm-accent);
-  background: none;
-  border: 1px solid var(--hm-line-strong);
-  border-radius: var(--hm-radius);
-  padding: 8px 12px;
-  cursor: pointer;
-}
-.hm-rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hm-line); }
-.hm-rows a { display: flex; align-items: center; gap: 12px; padding-block: 14px; border-bottom: 1px solid var(--hm-line); color: var(--hm-ink); }
-.hm-rows svg { width: 18px; height: 18px; color: var(--hm-muted); flex: none; }
-.hm-rows small { margin-left: auto; font-family: var(--hm-mono); font-size: 12px; color: var(--hm-muted); }
-.hm-rows a:hover,
-.hm-rows a:hover svg,
-.hm-rows a:hover small { color: var(--hm-accent); }
-
-/* Footer */
-.hm-foot {
-  padding-block: 28px 36px;
-  border-top: 1px solid var(--hm-line);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 10px;
-  font-family: var(--hm-mono);
-  font-size: 12px;
-  color: var(--hm-muted);
-}
-.hm-foot nav { display: flex; gap: 14px; }
-.hm-foot a:hover { color: var(--hm-accent); }
-.hm-kofi { display: inline-flex; align-items: center; gap: 5px; }
-
-/* ── Book page ──────────────────────────────────────────── */
-
-.hm-book { padding-block: clamp(40px, 8vw, 80px) 48px; display: grid; gap: 18px; }
-.hm-book h1 {
-  font-family: var(--hm-display);
-  font-weight: 400;
-  font-size: clamp(40px, 7vw, 64px);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
-.hm-book-body { display: grid; gap: 14px; max-width: 38em; }
-.hm-book-body p { margin: 0; line-height: 1.75; color: var(--hm-ink-soft); font-size: 17px; }
-
-/* ── /learn landing ─────────────────────────────────────── */
-
-.hm-links a[aria-current] { color: var(--hm-accent); }
-.hm-resume { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; font-family: var(--hm-mono); font-size: 12.5px; color: var(--hm-muted); }
-.home .hm-resume a { color: var(--hm-accent); border-bottom: 1px solid var(--hm-line-strong); padding-bottom: 1px; }
-.home .hm-resume a:hover { border-color: var(--hm-accent); }
 
 .hm-in.hm-wide { max-width: 1400px; }
 .hm-track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 18px; }
@@ -424,74 +221,30 @@ html:not(.dark) .home {
 .home .hm-ref { font-family: var(--hm-mono); font-size: 12px; color: var(--hm-muted); }
 .home a.hm-ref:hover { color: var(--hm-accent); }
 
+/* How the lessons work */
 .hm-how { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 18px 32px; }
 .hm-how h3 { font-family: var(--hm-display); font-weight: 400; font-size: 19px; margin: 0 0 6px; }
 .hm-how p { margin: 0; color: var(--hm-ink-soft); line-height: 1.6; font-size: 14.5px; }
 
-/* ── Blog ───────────────────────────────────────────────── */
+/* ── Footer ─────────────────────────────────────────────── */
 
-.hm-blog-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 20px; }
-.hm-sec .hm-blog-head h2 {
+.hm-foot {
+  padding-block: 28px 36px;
+  border-top: 1px solid var(--hm-line);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
   font-family: var(--hm-mono);
-  font-weight: 500;
-  font-size: 12.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 12px;
   color: var(--hm-muted);
-  margin: 0;
 }
-.hm-filter { display: flex; flex-wrap: wrap; gap: 6px; }
-.hm-filter .hm-pill[aria-pressed="true"] { color: var(--hm-accent); border-color: var(--hm-accent); }
-
-.hm-post { padding: 0; gap: 0; overflow: hidden; grid-template-rows: auto 1fr; }
-.hm-post:hover { border-color: var(--hm-line-strong); transform: translateY(-2px); }
-.hm-post-img { position: relative; aspect-ratio: 16 / 9; border-bottom: 1px solid var(--hm-line); background: var(--hm-bg); }
-.hm-post-img img { transition: transform 0.6s ease; }
-.hm-post:hover .hm-post-img img { transform: scale(1.03); }
-.hm-post-body { padding: 20px 22px 22px; display: grid; gap: 10px; align-content: start; grid-template-rows: auto auto 1fr auto auto; }
-.hm-post h3 { font-size: 22px; transition: color 0.15s; }
-.hm-post:hover h3 { color: var(--hm-accent); }
-.hm-post p { font-size: 14.5px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.hm-post .hm-more { padding-top: 4px; }
-
-/* The newest post: image beside the text on wide screens */
-.hm-post-lead { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); grid-template-rows: none; }
-.hm-post-lead .hm-post-img { aspect-ratio: auto; min-height: 260px; border-bottom: 0; border-right: 1px solid var(--hm-line); }
-.hm-post-lead .hm-post-body { padding: 28px; align-content: center; grid-template-rows: none; }
-.hm-post-lead h3 { font-size: clamp(26px, 3.4vw, 32px); }
-.hm-post-lead p { -webkit-line-clamp: 5; font-size: 15.5px; }
-
-.hm-post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); gap: 18px; }
-
-.hm-news { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 20px 40px; align-items: end; }
-.hm-news h3 { font-family: var(--hm-display); font-weight: 400; font-size: clamp(24px, 3.4vw, 30px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; }
-.hm-news p { margin: 0; color: var(--hm-ink-soft); line-height: 1.65; max-width: 34em; }
-.hm-news-form { display: flex; gap: 8px; }
-.hm-news-form input {
-  flex: 1;
-  min-width: 0;
-  font-family: var(--hm-mono);
-  font-size: 14px;
-  color: var(--hm-ink);
-  background: var(--hm-surface);
-  border: 1px solid var(--hm-line);
-  border-radius: var(--hm-radius);
-  padding: 8px 12px;
-}
-.hm-news-form input::placeholder { color: var(--hm-muted); }
-.hm-news-form input:focus { outline: none; border-color: var(--hm-accent); }
-.hm-copy:hover { border-color: var(--hm-accent); }
-
-@media (max-width: 760px) {
-  .hm-post-lead { grid-template-columns: 1fr; }
-  .hm-post-lead .hm-post-img { aspect-ratio: 16 / 9; min-height: 0; border-right: 0; border-bottom: 1px solid var(--hm-line); }
-  .hm-post-lead .hm-post-body { padding: 20px 22px 22px; }
-  .hm-news { grid-template-columns: 1fr; }
-}
+.hm-foot nav { display: flex; gap: 14px; }
+.hm-foot a:hover { color: var(--hm-accent); }
+.hm-kofi { display: inline-flex; align-items: center; gap: 5px; }
 
 /* ── Motion ─────────────────────────────────────────────── */
-/* Kept small: a short rise-and-fade for the hero on load and for each section
-   the first time it scrolls in (Reveal.tsx adds .hm-reveal / .is-in). */
+/* Kept small: a short rise-and-fade for the hero on load. */
 
 @keyframes hm-rise {
   from { opacity: 0; transform: translateY(10px); }
@@ -505,40 +258,9 @@ html:not(.dark) .home {
 .hm-horizon { transform-origin: center; animation: hm-draw 1.4s ease 0.3s both; }
 @keyframes hm-draw { from { transform: scaleX(0); } to { transform: none; } }
 
-.hm-reveal .hm-sec > * {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.hm-reveal .hm-sec > :nth-child(2) { transition-delay: 0.08s; }
-.hm-reveal .hm-sec > :nth-child(3) { transition-delay: 0.16s; }
-.hm-reveal .hm-sec.is-in > * { opacity: 1; transform: none; }
-
-/* Cards and post rows answer the pointer with a small shift */
-.hm-card { transition: border-color 0.2s, transform 0.2s; }
-.hm-now .hm-card:hover { border-color: var(--hm-line-strong); transform: translateY(-2px); }
-.hm-posts span { transition: color 0.15s; }
-.hm-posts a { transition: padding-left 0.2s ease; }
-.hm-posts a:hover { padding-left: 6px; }
-
 @media (prefers-reduced-motion: reduce) {
   .home *, .home *::before, .home *::after {
     animation: none !important;
     transition: none !important;
   }
-  .hm-reveal .hm-sec > * { opacity: 1; transform: none; }
-}
-
-/* ── Narrow screens ─────────────────────────────────────── */
-
-@media (max-width: 680px) {
-  .hm-about,
-  .hm-contact { grid-template-columns: 1fr; }
-  .hm-fold { grid-template-rows: 0fr; opacity: 0; }
-  .hm-fold[data-open="true"] { grid-template-rows: 1fr; opacity: 1; }
-  .hm-toggle { display: inline-flex; }
-}
-@media (max-width: 520px) {
-  .hm-posts a { grid-template-columns: 1fr; gap: 2px; }
-  .hm-tracks { grid-template-columns: 1fr; }
 }

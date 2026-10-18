@@ -1,5 +1,5 @@
 // src/lib/og/card.tsx
-// The link-preview image (Open Graph, 1200×630) of every page: the Home's
+// The link-preview image (Open Graph, 1200×630) of every page: the home page's
 // light "lab notebook" look — grid paper, petrol ink, Spectral titles, Plex
 // Mono labels — with the track's colour as a stripe on the left. Pages call
 // the builders in ./cards.ts; this file only draws.
@@ -101,7 +101,7 @@ export async function renderOgCard(card: OgCard): Promise<ImageResponse> {
           <div style={{ display: "flex", alignItems: "center" }}>
             {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse draws plain <img> */}
             <img src={logo} width={44} height={44} alt="" />
-            <span style={{ fontFamily: "Spectral", fontSize: 30, marginLeft: 16 }}>gabrielfrc.dev</span>
+            <span style={{ fontFamily: "Spectral", fontSize: 30, marginLeft: 16 }}>fromscratchlab.com</span>
           </div>
           <span style={{ fontSize: 22, color: MUTED }}>{card.footer}</span>
         </div>
