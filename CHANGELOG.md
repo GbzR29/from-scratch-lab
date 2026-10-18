@@ -14,6 +14,11 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-18
 
+- **Redesign, passo 6 (último): ícones e cards de prévia.** O redesign está completo.
+  - **Ícone do site:** sai o provisório verde-petróleo, entra o logo novo (cubo com cota) sobre azul-marinho. Na aba do navegador (`icon.svg` e o novo `favicon.ico` com 16, 32 e 48 px) vai uma versão simplificada, só o cubo e o ponto laranja, porque as linhas de cota viram ruído em tamanho pequeno. `icon.png` (512 px) e `apple-icon.png` (180 px, sem cantos, o iOS arredonda sozinho) usam o logo completo. O `favicon.ico` volta a existir porque robôs e a Vercel pedem `/favicon.ico` direto.
+  - **Cards de prévia de link** (`src/lib/og/card.tsx`): folha na prancheta com moldura de tinta, faixa de título em caixa alta, o ícone da trilha numa caixa tracejada (o logo na home), título em Spectral e um carimbo no rodapé. A faixa colorida de cada trilha deu lugar ao ícone. A lista de trilhas do card da home foi atualizada (entram Assembly, Física e Música).
+  - `Mark` e `TrackGlyph` aceitam cores fixas, porque o gerador de imagens não lê variáveis de CSS; os ícones das trilhas passaram a usar `<g>` em vez de fragmentos, que esse gerador não aceita dentro de um SVG.
+
 - **Redesign, passo 5: página de cada trilha.** `/<trilha>` (ex.: `/Physics`, `/pt/Physics`) deixa de abrir o capítulo 1 e vira a página da trilha.
   - **Topo:** código e área (SC-02 · Ciências), nível, ícone grande, nome e descrição; botão "continuar" (última aula aberta, ou a primeira não lida, ou o capítulo 1) e "começar do início"; barra de progresso com aulas lidas, prontas e planejadas.
   - **Ao lado:** "Antes de começar", com as trilhas que vêm antes desta nos caminhos sugeridos (Física parte de Matemática, OpenGL parte de C/C++), e "Esta trilha": número de aulas e seções, tempo total de leitura e o link da referência de funções, quando existe.

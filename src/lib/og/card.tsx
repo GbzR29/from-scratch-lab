@@ -1,23 +1,29 @@
 // src/lib/og/card.tsx
-// The link-preview image (Open Graph, 1200×630) of every page: the home page's
-// light "lab notebook" look — grid paper, petrol ink, Spectral titles, Plex
-// Mono labels — with the track's colour as a stripe on the left. Pages call
-// the builders in ./cards.ts; this file only draws.
+// The link-preview image (Open Graph, 1200×630) of every page, drawn like the
+// site: a sheet on drafting paper with a label strip on top, the track's
+// drawn glyph (or the mark) in a dashed box, a Spectral title, and a title
+// block at the bottom. Pages call the builders in ./cards.tsx; this file only
+// draws. ImageResponse cannot read CSS variables, so colours are literals here
+// (the home page's light tokens, src/styles/home.css).
 
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { Mark } from "@/components/brand/Mark";
+import { TrackGlyph } from "@/components/brand/TrackGlyph";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
 
-// Home light-theme tokens (src/styles/home.css)
-const BG = "#f1f1eb";
-const INK = "#1d2427";
-const MUTED = "#6a7275";
-const ACCENT = "#2e6166";
-const LINE = "#d8dad2";
-const GRID = "rgba(46, 97, 102, 0.07)";
+const PAPER = "#f2f0e8";
+const SHEET = "#f7f6f0";
+const INK = "#14304d";
+const MUTED = "#3d5670";
+const PENCIL = "#d9541e";
+const PENCIL_TEXT = "#b3421a";
+const DRAW = "#2b6cb0";
+const GRID_MAJOR = "rgba(27, 74, 122, 0.10)";
+const GRID_MINOR = "rgba(27, 74, 122, 0.045)";
 
 export interface OgCard {
   /** Small mono line above the title ("learn / OpenGL 4.6"). */
@@ -29,81 +35,96 @@ export interface OgCard {
   detail?: string;
   /** Right side of the footer ("free interactive course"). */
   footer: string;
-  /** Stripe colour; the site's petrol by default. */
-  accent?: string;
+  /** Catalog id of the track whose glyph is drawn; the mark when absent. */
+  glyph?: string;
 }
 
-// Fonts and logo are read once per server instance
-let assets: Promise<{ spectral: Buffer; mono: Buffer; logo: string }> | undefined;
+// Fonts are read once per server instance
+let assets: Promise<{ spectral: Buffer; mono: Buffer }> | undefined;
 function loadAssets() {
   assets ??= Promise.all([
     readFile(join(process.cwd(), "src/assets/fonts/Spectral-Regular.ttf")),
     readFile(join(process.cwd(), "src/assets/fonts/IBMPlexMono-Regular.ttf")),
-    readFile(join(process.cwd(), "src/app/icon.png")),
-  ]).then(([spectral, mono, logo]) => ({
-    spectral, mono, logo: `data:image/png;base64,${logo.toString("base64")}`,
-  }));
+  ]).then(([spectral, mono]) => ({ spectral, mono }));
   return assets;
 }
 
 /** Long titles get smaller type so they still fit in three lines. */
 function titleSize(title: string, mono: boolean): number {
   const n = title.length * (mono ? 1.25 : 1);
-  if (n <= 24) return 88;
-  if (n <= 44) return 74;
-  if (n <= 70) return 62;
-  return 52;
+  if (n <= 20) return 84;
+  if (n <= 38) return 68;
+  if (n <= 62) return 56;
+  return 46;
 }
 
 export async function renderOgCard(card: OgCard): Promise<ImageResponse> {
-  const { spectral, mono, logo } = await loadAssets();
+  const { spectral, mono } = await loadAssets();
+  const glyphColors = { accent: PENCIL, bg: SHEET, font: "Plex Mono" };
   return new ImageResponse(
     (
       <div
         style={{
-          width: "100%", height: "100%", display: "flex", flexDirection: "column", position: "relative",
-          backgroundColor: BG,
-          backgroundImage: `linear-gradient(${GRID} 1px, transparent 1px), linear-gradient(90deg, ${GRID} 1px, transparent 1px)`,
-          backgroundSize: "32px 32px",
-          padding: "60px 72px 52px 92px",
+          width: "100%", height: "100%", display: "flex", padding: 36,
+          backgroundColor: PAPER,
+          backgroundImage: `linear-gradient(${GRID_MAJOR} 1px, transparent 1px), linear-gradient(90deg, ${GRID_MAJOR} 1px, transparent 1px), linear-gradient(${GRID_MINOR} 1px, transparent 1px), linear-gradient(90deg, ${GRID_MINOR} 1px, transparent 1px)`,
+          backgroundSize: "120px 120px, 120px 120px, 24px 24px, 24px 24px",
           fontFamily: "Plex Mono",
           color: INK,
         }}
       >
-        <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 16, backgroundColor: card.accent ?? ACCENT }} />
-
-        <div style={{ display: "flex", fontSize: 26, color: ACCENT, letterSpacing: 0.5 }}>{card.eyebrow}</div>
-
-        <div style={{ display: "flex", flex: 1, alignItems: "center" }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", border: `2px solid ${INK}`, backgroundColor: SHEET }}>
+          {/* ── Label strip ── */}
           <div
             style={{
-              display: "flex",
-              fontFamily: card.monoTitle ? "Plex Mono" : "Spectral",
-              fontSize: titleSize(card.title, !!card.monoTitle),
-              lineHeight: 1.08,
-              letterSpacing: card.monoTitle ? 0 : -0.5,
+              display: "flex", justifyContent: "space-between", alignItems: "center",
+              padding: "14px 24px", borderBottom: `2px solid ${INK}`,
+              fontSize: 21, letterSpacing: 2, textTransform: "uppercase",
             }}
           >
-            {card.title}
+            <span style={{ color: PENCIL_TEXT }}>{card.eyebrow}</span>
+            <span style={{ color: MUTED }}>fromscratchlab.com</span>
           </div>
-        </div>
 
-        {card.detail && (
-          <div style={{ display: "flex", fontSize: 25, color: MUTED, marginBottom: 30 }}>{card.detail}</div>
-        )}
-
-        <div
-          style={{
-            display: "flex", justifyContent: "space-between", alignItems: "center",
-            borderTop: `2px solid ${LINE}`, paddingTop: 24,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse draws plain <img> */}
-            <img src={logo} width={44} height={44} alt="" />
-            <span style={{ fontFamily: "Spectral", fontSize: 30, marginLeft: 16 }}>fromscratchlab.com</span>
+          {/* ── Glyph + title ── */}
+          <div style={{ flex: 1, display: "flex", alignItems: "center", padding: "0 40px" }}>
+            <div
+              style={{
+                width: 200, height: 200, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center",
+                border: `2px dashed ${DRAW}`, marginRight: 44, color: INK,
+              }}
+            >
+              {card.glyph
+                ? <TrackGlyph id={card.glyph} size={150} colors={glyphColors} />
+                : <Mark size={150} accent={PENCIL} />}
+            </div>
+            <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+              <div
+                style={{
+                  display: "flex",
+                  fontFamily: card.monoTitle ? "Plex Mono" : "Spectral",
+                  fontSize: titleSize(card.title, !!card.monoTitle),
+                  lineHeight: 1.08,
+                  letterSpacing: card.monoTitle ? 0 : -0.5,
+                }}
+              >
+                {card.title}
+              </div>
+              {card.detail && (
+                <div style={{ display: "flex", marginTop: 22, fontSize: 24, color: MUTED }}>{card.detail}</div>
+              )}
+            </div>
           </div>
-          <span style={{ fontSize: 22, color: MUTED }}>{card.footer}</span>
+
+          {/* ── Title block ── */}
+          <div style={{ display: "flex", borderTop: `2px solid ${INK}`, fontSize: 20 }}>
+            <div style={{ display: "flex", alignItems: "center", padding: "12px 22px", borderRight: `2px solid ${INK}`, color: INK }}>
+              <Mark size={40} accent={PENCIL} />
+              <span style={{ fontFamily: "Spectral", fontSize: 28, marginLeft: 14 }}>From Scratch Lab</span>
+            </div>
+            <div style={{ flex: 1, display: "flex", alignItems: "center", padding: "12px 22px", color: MUTED }}>{card.footer}</div>
+            <div style={{ width: 64, display: "flex", borderLeft: `2px solid ${INK}`, backgroundColor: PENCIL }} />
+          </div>
         </div>
       </div>
     ),

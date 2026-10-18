@@ -12,7 +12,7 @@ import { renderOgCard } from "./card";
 const COPY = {
   en: {
     learnTitle: "Learn from scratch",
-    learnDetail: "OpenGL · GLSL · Vulkan · C++ · SDL3 · Game Dev · Math · AI",
+    learnDetail: "C/C++ · Assembly · OpenGL · Vulkan · Math · Physics · AI · Music",
     footer: "free interactive course",
     footerMany: "free interactive courses",
     lessons: (n: number) => `${n} lessons`,
@@ -23,7 +23,7 @@ const COPY = {
   },
   pt: {
     learnTitle: "Aprender do zero",
-    learnDetail: "OpenGL · GLSL · Vulkan · C++ · SDL3 · Game Dev · Matemática · IA",
+    learnDetail: "C/C++ · Assembly · OpenGL · Vulkan · Matemática · Física · IA · Música",
     footer: "curso interativo e gratuito",
     footerMany: "cursos interativos e gratuitos",
     lessons: (n: number) => `${n} lições`,
@@ -60,7 +60,7 @@ export function trackImage(params: { trackPath: string }, lang: UrlLang) {
     title: seoWording(info.id, info.title, lang).title,
     detail: [c.lessons(track.chapters.length), sections > 1 ? c.sections(sections) : ""].filter(Boolean).join(" · "),
     footer: c.footer,
-    accent: info.accentColor,
+    glyph: info.id,
   });
 }
 
@@ -79,14 +79,14 @@ export function chapterImage(params: { trackPath: string; chapterId: string }, l
     detail: [c.lessonOf(index + 1, track.chapters.length), chapter.minRead ? c.minRead(chapter.minRead) : ""]
       .filter(Boolean).join(" · "),
     footer: c.footer,
-    accent: info.accentColor,
+    glyph: info.id,
   });
 }
 
 export function referenceImage(params: { trackPath: string; fn?: string }) {
   const trackPath = decodeSegment(params.trackPath);
   const ref = getReference(trackPath);
-  const accent = trackInfo(trackPath)?.accentColor;
+  const glyph = trackInfo(trackPath)?.id;
   const entry = ref && params.fn ? referenceIndex(ref).get(decodeSegment(params.fn)) : undefined;
   if (!ref || !entry) {
     return renderOgCard({
@@ -94,7 +94,7 @@ export function referenceImage(params: { trackPath: string; fn?: string }) {
       title: `${trackPath} Function Reference`,
       detail: ref ? `${ref.entries.length} functions, explained for beginners` : undefined,
       footer: "free interactive course",
-      accent,
+      glyph,
     });
   }
   const category = ref.categories.find((cat) => cat.id === entry.category)?.title.en;
@@ -104,6 +104,6 @@ export function referenceImage(params: { trackPath: string; fn?: string }) {
     monoTitle: true,
     detail: entry.summary.en.length > 96 ? `${entry.summary.en.slice(0, 93).trimEnd()}…` : entry.summary.en,
     footer: "free interactive course",
-    accent,
+    glyph,
   });
 }
