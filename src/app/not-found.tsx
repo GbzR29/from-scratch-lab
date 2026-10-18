@@ -20,22 +20,14 @@ export default function NotFound() {
 
   return (
     <div className="home">
-      <header className="hm-hero-wrap">
-        <div className="hm-in">
-          <HomeNav />
-          <div className="hm-hero">
-            <div className="hm-eyebrow">{ui.notFoundEyebrow ?? "404 · page not found"}</div>
-            <h1>{ui.notFoundTitle ?? "Nothing here"}</h1>
-            <p className="hm-lead">{ui.notFoundBody}</p>
-            <div className="hm-resume">
-              <Link href={homeHref(urlLang)}>{ui.notFoundBack ?? "See every track →"}</Link>
-            </div>
-          </div>
-        </div>
-      </header>
-      <main className="hm-in">
-        <HomeFooter />
+      <HomeNav />
+      <main className="hm-in hm-404">
+        <div className="hm-kicker hm-label">{ui.notFoundEyebrow ?? "404 · page not found"}</div>
+        <h1>{ui.notFoundTitle ?? "Nothing here"}</h1>
+        <p className="hm-lead">{ui.notFoundBody}</p>
+        <Link className="hm-btn" href={homeHref(urlLang)}>{ui.notFoundBack ?? "See every track →"}</Link>
       </main>
+      <HomeFooter />
     </div>
   );
 }

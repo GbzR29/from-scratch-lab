@@ -1,22 +1,24 @@
 // src/components/home/TracksHome.tsx
 "use client";
 
-// The home page (/ and /pt): every track as a card, with the reader's
-// progress and a "resume" link read from localStorage.
+// The home page (/ and /pt), drawn as a set of sheets: the title sheet with a
+// live figure, the track catalog, the suggested paths and how the lessons
+// work. Reading progress and "continue" come from localStorage.
 
 import "@/styles/home.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import HomeNav from "@/components/home/HomeNav";
-import Stars from "@/components/home/Stars";
 import HomeFooter from "@/components/home/HomeFooter";
+import HeroPendulum from "@/components/home/HeroPendulum";
+import TrackCatalog from "@/components/home/TrackCatalog";
+import PathsSection from "@/components/home/PathsSection";
+import { TrackGlyph } from "@/components/brand/TrackGlyph";
 import { getTrack } from "@/lib/tracks";
-import { TRACK_CATALOG, type TrackInfo } from "@/lib/tracks/catalog";
-import { getReference, referenceHref } from "@/lib/reference";
+import { TRACK_CATALOG } from "@/lib/tracks/catalog";
 import { readLastLesson, readVisited, type LastLesson } from "@/lib/tracks/progress";
-import { trackName } from "@/lib/tracks/crumbs";
-import { chapterHref, trackHref, type UrlLang } from "@/lib/tracks/urls";
+import { chapterHref } from "@/lib/tracks/urls";
 import { useUrlLang } from "@/lib/i18n/useUrlLang";
 
 type Strings = Record<string, string | undefined>;
@@ -29,57 +31,13 @@ const fill = (s: string, values: Record<string, number | string>) =>
 const AVAILABLE = TRACK_CATALOG.filter((info) => getTrack(info.path));
 const TOTAL_LESSONS = AVAILABLE.reduce((n, info) => n + (getTrack(info.path)?.chapters.length ?? 0), 0);
 
-// ── Track card ───────────────────────────────────────────────────────────────
-
-function TrackCard({ info, t, visited, lang }: { info: TrackInfo; t: Strings; visited: number; lang: UrlLang }) {
-  const track = getTrack(info.path);
-  const reference = getReference(info.path);
-  const level = t[info.levelKey] ?? info.levelFallback;
-  const desc = t[info.descKey] ?? info.descFallback;
-  const href = trackHref(info.path, lang);
-
-  if (!track) {
-    return (
-      <article className="hm-card hm-track soon" style={{ "--track": info.accentColor } as React.CSSProperties}>
-        <div className="hm-level"><i />{level} · {t.learnSoon ?? "coming soon"}</div>
-        <h3>{trackName(t, info.path)}</h3>
-        <p>{desc}</p>
-        <div className="hm-meta"><span>{fill(t.learnPlannedN ?? "{n} lessons planned", { n: info.plannedLessons })}</span></div>
-        <div />
-        <div className="hm-track-foot"><span className="hm-ref">{t.learnInPrep ?? "in preparation"}</span></div>
-      </article>
-    );
-  }
-
-  const lessons = track.chapters.length;
-  const sections = new Set(track.chapters.map((c) => c.section).filter(Boolean)).size;
-  const pct = Math.round((visited / lessons) * 100);
-
-  return (
-    <article className="hm-card hm-track" style={{ "--track": info.accentColor } as React.CSSProperties}>
-      <div className="hm-level"><i />{level}</div>
-      <h3>{trackName(t, info.path)}</h3>
-      <p>{desc}</p>
-      <div className="hm-meta">
-        <span>{fill(t.learnLessonsN ?? "{n} lessons", { n: lessons })}</span>
-        {sections > 1 && <span>{fill(t.learnSectionsN ?? "{n} sections", { n: sections })}</span>}
-        {visited > 0 && <span>{fill(t.learnReadN ?? "{n} read", { n: visited })}</span>}
-      </div>
-      {visited > 0 ? <div className="hm-prog" aria-hidden="true"><i style={{ width: `${pct}%` }} /></div> : <div />}
-      <div className="hm-track-foot">
-        <Link className="hm-more" href={href}>{visited > 0 ? t.learnContinue ?? "Continue →" : t.learnStart ?? "Start →"}</Link>
-        {reference && <Link className="hm-ref" href={referenceHref(reference)}>{t.learnReference ?? "reference"}</Link>}
-      </div>
-    </article>
-  );
-}
-
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export default function TracksHome() {
   const { t } = useLanguage();
   const urlLang = useUrlLang();
   const ui = t as unknown as Strings;
+  const sheet = ui.homeSheet ?? "Sheet";
 
   // Progress lives in localStorage, so it is read after mount (the server has none)
   const [visited, setVisited] = useState<Record<string, number>>({});
@@ -89,60 +47,88 @@ export default function TracksHome() {
     const l = readLastLesson();
     setLast(l && getTrack(l.track) ? l : null);
   }, []);
+  const lastInfo = last ? TRACK_CATALOG.find((info) => info.path === last.track) : undefined;
+
+  const title = ui.learnHeroTitle ?? "Learn from scratch";
 
   return (
     <div className="home">
-      <header className="hm-hero-wrap">
-        <Stars />
-        <div className="hm-in">
-            <HomeNav />
-            <div className="hm-hero">
-              <div className="hm-eyebrow">
-                {fill(ui.learnEyebrow ?? "learn · {lessons} lessons in {tracks} tracks", { lessons: TOTAL_LESSONS, tracks: AVAILABLE.length })}
-              </div>
-              <h1>{ui.learnHeroTitle ?? "Learn from scratch"}</h1>
-              <p className="hm-lead">{ui.learnLead}</p>
-              {last && (
-                <div className="hm-resume">
-                  <span>{ui.learnResume ?? "where you left off:"}</span>
-                  <Link href={chapterHref(last.track, last.chapter, urlLang)}>
-                    {trackName(ui, last.track)}
-                    {last.title && <> · {last.number ? `${last.number}. ` : ""}{last.title}</>} →
-                  </Link>
-                </div>
+      <HomeNav />
+
+      <main>
+        {/* ── Sheet 01: title ── */}
+        <section className="hm-hero hm-in">
+          <div className="hm-hero-text">
+            <div className="hm-sheet hm-label">
+              <b>{sheet} 01</b>
+              <span>{fill(ui.homeFacts ?? "{lessons} lessons · {tracks} tracks · free · no sign-up", { lessons: TOTAL_LESSONS, tracks: AVAILABLE.length })}</span>
+            </div>
+            <h1>{title}<i>.</i></h1>
+            <p className="hm-tagline">{ui.homeTagline}</p>
+            <p className="hm-lead">{ui.learnLead}</p>
+            <div className="hm-actions">
+              <a className="hm-btn" href="#tracks">{ui.homeChoose ?? "Choose a track"} →</a>
+              {last && lastInfo && (
+                <Link className="hm-resume" href={chapterHref(last.track, last.chapter, urlLang)}>
+                  <TrackGlyph id={lastInfo.id} size={30} />
+                  <span>
+                    <small>{ui.homeContinue ?? "Continue"}{last.number ? ` · ${last.number}` : ""}</small>
+                    <span>{last.title ?? lastInfo.title}</span>
+                  </span>
+                </Link>
               )}
             </div>
           </div>
-          <div className="hm-horizon" aria-hidden="true" />
-        </header>
+          <HeroPendulum />
+        </section>
 
-        <main>
-          {/* wider than the text column so the cards fill more of the screen (up to 4 per row) */}
-          <section className="hm-sec hm-in hm-wide">
-            <h2>{ui.learnTracks ?? "Tracks"}</h2>
-            <div className="hm-track-grid">
-              {TRACK_CATALOG.map((info) => (
-                <TrackCard key={info.id} info={info} t={ui} visited={visited[info.id] ?? 0} lang={urlLang} />
-              ))}
-            </div>
-          </section>
-
+        {/* ── Sheet 02: catalog ── */}
+        <section id="tracks" className="hm-sec alt">
           <div className="hm-in">
-          <section className="hm-sec">
+            <div className="hm-sec-head">
+              <div>
+                <div className="hm-kicker hm-label">{sheet} 02 · {ui.homeCatalog ?? "catalog"}</div>
+                <h2>{ui.learnTracks ?? "Tracks"}</h2>
+              </div>
+            </div>
+            <TrackCatalog t={ui} visited={visited} lang={urlLang} />
+          </div>
+        </section>
+
+        {/* ── Sheet 03: paths ── */}
+        <section id="paths" className="hm-sec">
+          <div className="hm-in">
+            <div className="hm-kicker hm-label">{sheet} 03 · {ui.homeAssembly ?? "assembly"}</div>
+            <h2>{ui.homePathsTitle ?? "Where to start"}</h2>
+            <p className="hm-sec-lead">{ui.homePathsLead}</p>
+            <PathsSection t={ui} lang={urlLang} />
+          </div>
+        </section>
+
+        {/* ── Sheet 04: how the lessons work ── */}
+        <section className="hm-sec hm-band">
+          <div className="hm-in">
+            <div className="hm-kicker hm-label">{sheet} 04 · {ui.homeSpec ?? "specification"}</div>
             <h2>{ui.learnHowTitle ?? "How the lessons work"}</h2>
-            <div className="hm-how">
-              {[1, 2, 3].map((i) => (
+            <div className="hm-spec">
+              {[
+                [ui.learnHow1Title, ui.learnHow1Body],
+                [ui.learnHow2Title, ui.learnHow2Body],
+                [ui.homeHow4Title, ui.homeHow4Body],
+                [ui.learnHow3Title, ui.learnHow3Body],
+              ].map(([h, p], i) => (
                 <div key={i}>
-                  <h3>{ui[`learnHow${i}Title`]}</h3>
-                  <p>{ui[`learnHow${i}Body`]}</p>
+                  <span>4.{i + 1}</span>
+                  <h3>{h}</h3>
+                  <p>{p}</p>
                 </div>
               ))}
             </div>
-          </section>
-
-          <HomeFooter />
-        </div>
+          </div>
+        </section>
       </main>
+
+      <HomeFooter />
     </div>
   );
 }

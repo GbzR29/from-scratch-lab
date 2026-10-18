@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Spectral, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Archivo, Spectral, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
@@ -19,7 +19,15 @@ const geistMono = Geist_Mono({
 });
 
 
-// Home page and lesson type family (see src/styles/home.css, learn.css)
+// Home page and lesson type family (see src/styles/home.css, learn.css).
+// Archivo is the brand face, used condensed (font-stretch) for the name,
+// headings on the home page and small labels.
+const archivo = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--font-archivo",
+});
+
 const spectral = Spectral({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -54,7 +62,7 @@ export default function RootLayout({children,}: Readonly<{children: React.ReactN
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${spectral.variable} ${plexSans.variable} ${plexMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable} ${spectral.variable} ${plexSans.variable} ${plexMono.variable} antialiased`}>
 
         <LanguageProvider>
           <ThemeProvider>

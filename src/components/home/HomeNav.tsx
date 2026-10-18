@@ -1,9 +1,10 @@
 "use client";
 
 // ── Home navigation ─────────────────────────────────────────────────────────
-// A quiet text bar for the home page (the track list): name, links, theme
-// toggle and the language switch. On phones the links and tools move into the
-// ☰ sheet (components/nav/SiteMenu). Styles: .hm-nav in home.css.
+// The bar on top of the home page (the track list) and the 404: the mark and
+// name, the main links, the language switch, the theme toggle and the Ko-fi
+// link. On phones the links and tools move into the ☰ sheet
+// (components/nav/SiteMenu). Styles: .hm-nav in home.css.
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,43 +12,77 @@ import { useTheme } from "@/components/providers/ThemeProvider";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { SiteMenu } from "@/components/nav/SiteMenu";
 import { BRAND, LANGUAGES, useSiteLinks } from "@/components/nav/siteLinks";
+import { LINKS } from "@/components/nav/links";
+import { Mark } from "@/components/brand/Mark";
 import { useUrlLang } from "@/lib/i18n/useUrlLang";
 import { homeHref } from "@/lib/tracks/urls";
+
+type Strings = Record<string, string | undefined>;
+
+/** "☾ dark" → "dark": the button shows an icon, the words become its label. */
+const plain = (s: string) => s.replace(/^[^\p{L}]+/u, "");
+
+function MoonIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+      <path d="M11.5 10.5A5 5 0 0 1 5.5 4.5a5 5 0 1 0 6 6z" fill="none" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+function SunIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.4">
+      <circle cx="8" cy="8" r="3.2" />
+      <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3" />
+    </svg>
+  );
+}
 
 export default function HomeNav() {
   const { theme, toggleTheme } = useTheme();
   const { language, setLanguage, t } = useLanguage();
+  const ui = t as unknown as Strings;
   const pathname = usePathname();
   const links = useSiteLinks();
   const urlLang = useUrlLang();
+  const themeLabel = plain(theme === "dark" ? t.navLight : t.navDark);
 
   return (
-    <nav className="hm-nav" aria-label="Primary">
-      <Link className="hm-brand" href={homeHref(urlLang)}>{BRAND}</Link>
-      <div className="hm-links">
-        {links.map((l) => (
-          <Link key={l.href} href={l.href} aria-current={pathname === l.href ? "page" : undefined}>{l.label}</Link>
-        ))}
+    <header className="hm-navbar">
+      <nav className="hm-nav hm-in" aria-label="Primary">
+        <Link className="hm-brand" href={homeHref(urlLang)} aria-label={BRAND}>
+          <Mark size={40} />
+          <span className="hm-brand-name" aria-hidden="true">
+            From Scratch
+            <br />
+            Lab
+          </span>
+        </Link>
+        <div className="hm-links">
+          {links.map((l) => (
+            <Link key={l.href} href={l.href} aria-current={pathname === l.href ? "page" : undefined}>
+              {l.label.charAt(0).toUpperCase() + l.label.slice(1)}
+            </Link>
+          ))}
+        </div>
         <div className="hm-tools">
-          <button type="button" className="hm-pill" onClick={toggleTheme}>
-            {theme === "dark" ? t.navLight : t.navDark}
-          </button>
           <div className="hm-langs" role="group" aria-label={t.navLanguage}>
             {LANGUAGES.map((code) => (
-              <button
-                key={code}
-                type="button"
-                lang={code}
-                aria-pressed={language === code}
-                onClick={() => setLanguage(code)}
-              >
+              <button key={code} type="button" lang={code} aria-pressed={language === code} onClick={() => setLanguage(code)}>
                 {code.toUpperCase()}
               </button>
             ))}
           </div>
+          <button type="button" className="hm-iconbtn" onClick={toggleTheme} aria-label={themeLabel} title={themeLabel}>
+            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <a className="hm-support" href={LINKS.kofi} target="_blank" rel="noopener noreferrer">
+            {ui.homeSupport ?? "Support"}
+          </a>
         </div>
-      </div>
-      <SiteMenu className="hm-menu" />
-    </nav>
+        <SiteMenu className="hm-menu" />
+      </nav>
+    </header>
   );
 }

@@ -14,6 +14,11 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-18
 
+- **Redesign, passos 1 e 2: marca nova e home nova.** Visual "prancheta de desenho" (papel quadriculado, tinta azul-marinho, lápis laranja) no tema claro e o "crepúsculo" no escuro, escolhido entre quatro direções de mockup.
+  - **Marca:** logo novo, um cubo isométrico com linhas de cota (`src/components/brand/Mark.tsx`), e um ícone desenhado à mão para cada trilha (`TrackGlyph.tsx`). Fonte nova Archivo (condensada) para a marca, os títulos da home e as etiquetas.
+  - **Home:** seções numeradas como folhas de um projeto. Título com uma figura viva (pêndulo simples com slider e o período T = 2π√(L/g)), botão "continuar" com o ícone da trilha, catálogo agrupado por área (Computação, Gráficos e jogos, Ciências, Música; campo `area` em `catalog.ts`) com filtros de área e nível, trilhas como "pranchas" com código (CP-01…), caminhos sugeridos (`src/lib/tracks/paths.ts`: Programador gráfico, Jogos 2D, Por baixo do capô, Ciência do zero), "Como as aulas funcionam" com um quarto item sobre labs e prática, e rodapé no formato de carimbo de planta. A página 404 segue o mesmo visual.
+  - Textos novos em EN e PT (`src/lib/i18n/home/homeTranslations.ts`). Removido `Stars.tsx` (as estrelas do tema escuro antigo).
+
 - **Endereço principal com `www`.** O site está no ar na Vercel e o domínio principal é `www.fromscratchlab.com` (o domínio sem www redireciona para ele). `SITE_URL` (`src/lib/tracks/urls.ts`) passa a usar o www, então sitemap, robots.txt, canonical, hreflang e Open Graph apontam direto para o endereço final, sem passar por redirecionamento. No portfólio, `gabrielfrc.dev/learn/*` e `/pt/learn/*` já redirecionam (308) para cá. Domínio verificado no Google Search Console (propriedade de domínio, registro TXT no DNS da Vercel).
 
 - **O site vira o From Scratch Lab (fromscratchlab.com), separado do portfólio.** Os cursos saem de `gabrielfrc.dev/learn` e passam a ser um site próprio, com o histórico do git preservado (as datas das lições dependem dele).
