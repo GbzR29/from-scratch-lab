@@ -3,18 +3,18 @@
    The ☰ button and the sheet of src/components/nav/SiteMenu.tsx.
    It is used on the Home, /learn, the lessons and the blog, so it
    carries its own tokens: the Home palette (home.css), light =
-   "lab notebook", dark = "dusk".
+   "drawing board", dark = "dusk".
 ========================================================= */
 
 .site-menu,
 .sm-open {
-  --sm-bg: #f1f1eb;
-  --sm-surface: #fafaf6;
-  --sm-ink: #1d2427;
-  --sm-muted: #6a7275;
-  --sm-accent: #2e6166;
-  --sm-line: #d8dad2;
-  --sm-line-strong: #bfc3b9;
+  --sm-bg: #f2f0e8;
+  --sm-surface: #f7f6f0;
+  --sm-ink: #14304d;
+  --sm-muted: #66798c;
+  --sm-accent: #b3421a;
+  --sm-line: #c9cfd4;
+  --sm-line-strong: #8d9db0;
   --sm-display: var(--font-spectral), Georgia, serif;
   --sm-mono: var(--font-plex-mono), ui-monospace, monospace;
 }

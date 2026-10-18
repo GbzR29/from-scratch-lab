@@ -88,7 +88,7 @@ export function DocsLayout({
     });
   };
 
-  const railBtn = "p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--primary)] hover:bg-[var(--primary-low)] transition-colors";
+  const railBtn = "lc-railbtn transition-colors";
   const backButton = (withLabel: boolean) => {
     const inner = (
       <>
@@ -113,7 +113,7 @@ export function DocsLayout({
             className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setIsDrawerOpen(false)}
           />
-          <aside className="absolute inset-y-0 left-0 w-80 max-w-[85vw] bg-[var(--bg)] border-r border-[var(--border)] overflow-y-auto animate-in slide-in-from-left duration-200">
+          <aside className="lc-rail absolute inset-y-0 left-0 w-80 max-w-[85vw] overflow-y-auto animate-in slide-in-from-left duration-200">
             <div className="flex items-center justify-between px-5 pt-6 pb-3 border-b border-[var(--separator)]">
               <span className="text-sm font-semibold text-[var(--text-main)]">{drawerTitle}</span>
               <button
@@ -132,12 +132,12 @@ export function DocsLayout({
       <div className="flex items-start">
         {/* ── Left rail — pinned to the viewport edge, collapsible ─────── */}
         <aside
-          className={`hidden lg:flex flex-col flex-shrink-0 border-r border-[var(--border)] overflow-hidden ${RAIL} ${
+          className={`lc-rail hidden lg:flex flex-col flex-shrink-0 overflow-hidden ${RAIL} ${
             animate ? "transition-[width] duration-300 ease-out" : ""
           } ${collapsed ? "w-14" : "w-72 xl:w-80"}`}
         >
           {/* Rail header: back + collapse */}
-          <div className={`flex items-center gap-2 border-b border-[var(--separator)] flex-shrink-0 ${
+          <div className={`lc-rail-head flex items-center gap-2 flex-shrink-0 ${
             collapsed ? "flex-col py-3 px-2" : "justify-between px-4 py-2.5"
           }`}>
             {collapsed ? (

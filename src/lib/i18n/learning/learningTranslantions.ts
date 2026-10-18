@@ -38,6 +38,7 @@ export const learningTranslations = {
     lessonCreated:    "created",
     lessonUpdated:    "updated",
     lessonProgress:   "Progress",
+    lessonReadOf:     "{n} of {total} read",
 
     // ── Redesign (2026-09) ──────────────────────────────────────────────
     trackName_cpp: "C/C++",
@@ -175,6 +176,7 @@ export const learningTranslations = {
     lessonCreated:     "criado em",
     lessonUpdated:     "atualizado em",
     lessonProgress:    "Progresso",
+    lessonReadOf:      "{n} de {total} lidas",
 
     // ── Redesign (2026-09) ──────────────────────────────────────────────
     trackName_cpp: "C/C++",

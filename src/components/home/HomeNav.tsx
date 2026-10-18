@@ -14,30 +14,11 @@ import { SiteMenu } from "@/components/nav/SiteMenu";
 import { BRAND, LANGUAGES, useSiteLinks } from "@/components/nav/siteLinks";
 import { LINKS } from "@/components/nav/links";
 import { Mark } from "@/components/brand/Mark";
+import { ThemeIcon, themeLabel as plain } from "@/components/brand/ThemeIcon";
 import { useUrlLang } from "@/lib/i18n/useUrlLang";
 import { homeHref } from "@/lib/tracks/urls";
 
 type Strings = Record<string, string | undefined>;
-
-/** "☾ dark" → "dark": the button shows an icon, the words become its label. */
-const plain = (s: string) => s.replace(/^[^\p{L}]+/u, "");
-
-function MoonIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-      <path d="M11.5 10.5A5 5 0 0 1 5.5 4.5a5 5 0 1 0 6 6z" fill="none" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  );
-}
-
-function SunIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.4">
-      <circle cx="8" cy="8" r="3.2" />
-      <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3" />
-    </svg>
-  );
-}
 
 export default function HomeNav() {
   const { theme, toggleTheme } = useTheme();
@@ -75,7 +56,7 @@ export default function HomeNav() {
             ))}
           </div>
           <button type="button" className="hm-iconbtn" onClick={toggleTheme} aria-label={themeLabel} title={themeLabel}>
-            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+            <ThemeIcon dark={theme === "dark"} />
           </button>
           <a className="hm-support" href={LINKS.kofi} target="_blank" rel="noopener noreferrer">
             {ui.homeSupport ?? "Support"}

@@ -1,7 +1,7 @@
 /* =========================================================
    LEARN (lessons + function reference)
    The Home's two looks applied to the docs pages:
-   light = "lab notebook", dark = "dusk". Instead of new names,
+   light = "drawing board", dark = "dusk". Instead of new names,
    the theme.css tokens get new values while a .learn page is
    on screen, so every widget follows without being edited.
    Data colours (axes, points, curves) are literals in the
@@ -11,25 +11,26 @@
 /* ── Tokens ─────────────────────────────────────────────── */
 
 html:has(.learn) {
-  --bg: #f1f1eb;
-  --surface: #f5f5f0;
-  --surface-overlay: rgba(250, 250, 246, 0.96);
-  --card: #fafaf6;
-  --navbar-bg: rgba(241, 241, 235, 0.92);
+  --bg: #f2f0e8;
+  --surface: #efede4;
+  --surface-overlay: rgba(247, 246, 240, 0.96);
+  --card: #f7f6f0;
+  --navbar-bg: rgba(242, 240, 232, 0.94);
 
-  --border: #d8dad2;
-  --border-strong: #bfc3b9;
-  --separator: rgba(29, 36, 39, 0.1);
+  --border: #c9cfd4;
+  --border-strong: #8d9db0;
+  --separator: rgba(20, 48, 77, 0.12);
 
   /* muted stays ≥ 7:1 on the card, so it survives the widgets' extra opacity */
-  --text-main: #1d2427;
-  --text-muted: #4a5356;
-  --text-navbar: #1d2427;
-  --text-inverse: #fafaf6;
+  --text-main: #14304d;
+  --text-muted: #3d5670;
+  --text-navbar: #14304d;
+  --text-inverse: #f7f6f0;
 
-  --primary: #2e6166;
-  --primary-hover: #234b4f;
-  --primary-low: rgba(46, 97, 102, 0.09);
+  /* vermilion pencil; this shade keeps small text readable on the paper */
+  --primary: #b3421a;
+  --primary-hover: #8f3414;
+  --primary-low: rgba(217, 84, 30, 0.08);
 
   --accent: #7a4e8a;
   --success: #2f7d4f;
@@ -37,34 +38,42 @@ html:has(.learn) {
   --highlight: #9a5b12;
   --highlight-low: rgba(154, 91, 18, 0.08);
 
-  --code-bg: #f5f5ef;
-  --code-text: #1d2427;
-  --code-surface: rgba(29, 36, 39, 0.04);
-  --code-border: rgba(29, 36, 39, 0.12);
-  --code-line: rgba(29, 36, 39, 0.12);
-  --code-muted: rgba(29, 36, 39, 0.55);
-  --code-gutter: #8a908f;
+  --code-bg: #f4f2ea;
+  --code-text: #14304d;
+  --code-surface: rgba(20, 48, 77, 0.04);
+  --code-border: rgba(20, 48, 77, 0.14);
+  --code-line: rgba(20, 48, 77, 0.12);
+  --code-muted: rgba(20, 48, 77, 0.55);
+  --code-gutter: #7d8a96;
 
-  --scrollbar-thumb: #bfc3b9;
-  --scrollbar-thumb-hover: #8f958c;
-  --scrollbar-thumb-active: #2e6166;
+  --scrollbar-thumb: #c9cfd4;
+  --scrollbar-thumb-hover: #8d9db0;
+  --scrollbar-thumb-active: #b3421a;
 
-  --radius-lg: 4px;
-  --radius-md: 3px;
-  --shadow-sm: 3px 3px 0 #d8dad2;
+  --radius-lg: 2px;
+  --radius-md: 2px;
+  --shadow-sm: 3px 3px 0 #c9cfd4;
 
   /* Code colours (src/lib/syntaxTheme.ts) */
-  --syn-comment: #737a78;
-  --syn-punct: #5b6366;
-  --syn-keyword: #2e6166;
+  --syn-comment: #6f7a84;
+  --syn-punct: #4d6074;
+  --syn-keyword: #1f5a96;
   --syn-type: #7a4e8a;
-  --syn-function: #1f4f7a;
+  --syn-function: #14304d;
   --syn-string: #8a5a1e;
-  --syn-number: #a1452e;
+  --syn-number: #b3421a;
+
+  /* Brand pieces (lessonChrome.css): structural ink lines, the mark's dot,
+     the track glyphs and construction lines in drawings */
+  --ink-line: #14304d;
+  --brand-accent: #d9541e;
+  --glyph-accent: #d9541e;
+  --glyph-bg: var(--surface);
+  --draw: #2b6cb0;
 
   /* Height of the sticky top bar; rails, pinned figures and anchors offset by it */
-  --nav-h: 49px;
-  --grid: rgba(46, 97, 102, 0.055);
+  --nav-h: 57px;
+  --grid: rgba(27, 74, 122, 0.06);
 }
 
 html.dark:has(.learn) {
@@ -114,6 +123,11 @@ html.dark:has(.learn) {
   --syn-number: #f0c987;
 
   --shadow-sm: none;
+
+  --ink-line: #55587a;
+  --brand-accent: #f1b39c;
+  --glyph-accent: #f1b39c;
+  --draw: #8fc7e8;
 }
 
 /* ── Type ───────────────────────────────────────────────── */

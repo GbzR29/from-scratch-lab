@@ -1,0 +1,152 @@
+/* =========================================================
+   LESSON CHROME (redesign 2026-10)
+   The top bar (LearnTopBar), the left rail's frame (DocsLayout)
+   and the chapter list (LessonSidebar) of lessons and reference
+   pages, drawn like the home page: ink lines, condensed labels,
+   a round status dot per chapter. Tokens come from learn.css.
+========================================================= */
+
+/* ── Top bar ────────────────────────────────────────────── */
+
+.lc-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: var(--nav-h);
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--ink-line);
+  background: var(--navbar-bg);
+  backdrop-filter: blur(8px);
+}
+.lc-bar-in { height: 100%; display: flex; align-items: center; gap: 18px; padding-inline: 16px 20px; }
+.lc-brand { display: flex; align-items: center; gap: 10px; color: var(--text-main); flex: none; }
+.lc-brand:hover { color: var(--primary); }
+.lc-brand-name {
+  font-family: var(--font-archivo), "Arial Narrow", sans-serif;
+  font-stretch: 78%;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.lc-crumbs { min-width: 0; flex: 1; }
+.lc-crumbs ol { display: flex; align-items: center; gap: 8px; min-width: 0; margin: 0; padding: 0; list-style: none; font-family: var(--font-plex-mono), monospace; font-size: 12.5px; color: var(--text-muted); }
+.lc-crumbs li { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.lc-crumbs a { white-space: nowrap; }
+.lc-crumbs a:hover { color: var(--primary); }
+.lc-crumbs [aria-current] { color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lc-tools { display: flex; align-items: center; gap: 8px; flex: none; font-family: var(--font-plex-mono), monospace; font-size: 12px; }
+.lc-langs { display: flex; }
+.lc-langs button { height: 32px; padding: 0 7px; border: 1px solid transparent; background: none; color: var(--text-muted); cursor: pointer; }
+.lc-langs button:hover { color: var(--text-main); }
+.lc-langs button[aria-pressed="true"] { color: var(--text-main); border-color: var(--ink-line); }
+.lc-iconbtn {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ink-line);
+  background: var(--card);
+  color: var(--text-main);
+  cursor: pointer;
+}
+.lc-iconbtn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Phones: the mark, the page title and ☰ */
+@media (max-width: 767px) {
+  .lc-brand-name, .lc-tools, .lc-crumbs li:not(:last-child) { display: none; }
+}
+
+/* ── Left rail frame ────────────────────────────────────── */
+
+.lc-rail { background: var(--surface); border-right: 1px solid var(--ink-line); }
+.lc-rail-head { border-bottom: 1px solid var(--border); }
+.lc-railbtn { padding: 6px; color: var(--text-muted); border: 1px solid transparent; }
+.lc-railbtn:hover { color: var(--primary); border-color: var(--border); }
+
+/* ── Chapter list ───────────────────────────────────────── */
+
+.lc-side { display: flex; flex-direction: column; gap: 18px; padding: 18px 14px 32px; --glyph-bg: var(--surface); }
+.lc-track { display: flex; align-items: center; gap: 12px; padding: 4px 6px 16px; border-bottom: 1px solid var(--border); }
+.lc-glyphbox { flex: none; width: 48px; height: 48px; display: grid; place-items: center; border: 1px dashed var(--draw); color: var(--text-main); }
+.lc-track-name {
+  display: block;
+  font-family: var(--font-archivo), "Arial Narrow", sans-serif;
+  font-stretch: 80%;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+.lc-track-read { display: block; margin-top: 5px; font-family: var(--font-plex-mono), monospace; font-size: 11.5px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.lc-track-bar { display: block; margin-top: 7px; height: 4px; background: var(--border); }
+.lc-track-bar i { display: block; height: 100%; background: var(--brand-accent); transition: width 0.5s; }
+
+.lc-sec + .lc-sec { margin-top: 6px; }
+.lc-sec-head {
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 6px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--text-muted);
+}
+.lc-sec-head:hover { color: var(--text-main); }
+.lc-sec-head > span:first-child { display: flex; align-items: baseline; gap: 6px; }
+.lc-sec-head svg { align-self: center; flex: none; transition: transform 0.2s; }
+.lc-sec-head[aria-expanded="true"] svg { transform: rotate(90deg); }
+.lc-sec-head b { font-weight: 400; color: var(--primary); }
+.lc-sec-head > span:last-child { letter-spacing: 0; font-variant-numeric: tabular-nums; }
+
+.lc-list { list-style: none; margin: 0 0 4px; padding: 0; }
+.lc-ch {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 15px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 8px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--text-muted);
+  transition: color 0.15s, background 0.15s;
+}
+.lc-ch:hover { color: var(--text-main); background: var(--primary-low); }
+.lc-ch.done { color: color-mix(in srgb, var(--text-muted) 85%, transparent); }
+.lc-ch[aria-current="page"] {
+  color: var(--text-main);
+  font-weight: 600;
+  background: var(--card);
+  box-shadow: inset 3px 0 0 var(--brand-accent), inset 0 0 0 1px var(--border);
+}
+.lc-ch small { font-family: var(--font-plex-mono), monospace; font-size: 10.5px; font-weight: 400; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+/* Status dot: hollow = not read, filled = read, accent ring + core = open now */
+.lc-dot {
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-strong);
+  display: grid;
+  place-items: center;
+}
+.lc-ch.done .lc-dot { border-color: var(--text-main); background: var(--text-main); }
+.lc-ch[aria-current="page"] .lc-dot { border-color: var(--brand-accent); background: transparent; }
+.lc-ch[aria-current="page"] .lc-dot::after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--brand-accent); }
+
+.lc-ref { display: block; padding: 14px 6px 0; border-top: 1px solid var(--border); }
+.lc-ref span:first-child { display: block; font-family: var(--font-plex-mono), monospace; font-size: 12.5px; color: var(--primary); }
+.lc-ref:hover span:first-child { text-decoration: underline; text-underline-offset: 4px; }
+.lc-ref span:last-child { display: block; margin-top: 4px; font-size: 12px; line-height: 1.4; color: var(--text-muted); }

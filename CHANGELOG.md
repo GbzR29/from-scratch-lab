@@ -14,6 +14,12 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-18
 
+- **Redesign, passo 3: moldura das lições.** Lições e referência passam para o visual novo.
+  - **Cores do tema claro** (`learn.css`): papel `#f2f0e8`, tinta azul-marinho `#14304d`, destaque laranja `#b3421a` (tom escuro o bastante para texto pequeno), código com palavras-chave em azul. Os widgets seguem sozinhos, porque usam esses tokens. O escuro continua o crepúsculo. O menu do celular (`sitemenu.css`) usa as mesmas cores.
+  - **Barra do topo** (`LearnTopBar`): logo novo, caminho em fonte mono, idiomas e botão de tema com ícone; agora com 56 px (`--nav-h` 57px).
+  - **Barra lateral** (`LessonSidebar`): cabeçalho com o ícone da trilha, nome em Archivo condensada, "x de y lidas" e barra de progresso; seções numeradas (01, 02…) com x/y; cada capítulo com uma bolinha de status (vazia = não lida, cheia = lida, anel laranja = aberta agora) e a linha atual marcada com uma barra laranja.
+  - Estilos novos em `src/styles/lessonChrome.css`. Ícones de tema compartilhados em `src/components/brand/ThemeIcon.tsx`.
+
 - **Redesign, passos 1 e 2: marca nova e home nova.** Visual "prancheta de desenho" (papel quadriculado, tinta azul-marinho, lápis laranja) no tema claro e o "crepúsculo" no escuro, escolhido entre quatro direções de mockup.
   - **Marca:** logo novo, um cubo isométrico com linhas de cota (`src/components/brand/Mark.tsx`), e um ícone desenhado à mão para cada trilha (`TrackGlyph.tsx`). Fonte nova Archivo (condensada) para a marca, os títulos da home e as etiquetas.
   - **Home:** seções numeradas como folhas de um projeto. Título com uma figura viva (pêndulo simples com slider e o período T = 2π√(L/g)), botão "continuar" com o ícone da trilha, catálogo agrupado por área (Computação, Gráficos e jogos, Ciências, Música; campo `area` em `catalog.ts`) com filtros de área e nível, trilhas como "pranchas" com código (CP-01…), caminhos sugeridos (`src/lib/tracks/paths.ts`: Programador gráfico, Jogos 2D, Por baixo do capô, Ciência do zero), "Como as aulas funcionam" com um quarto item sobre labs e prática, e rodapé no formato de carimbo de planta. A página 404 segue o mesmo visual.
