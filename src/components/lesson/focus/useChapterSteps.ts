@@ -6,7 +6,8 @@
 //     (content before the first h2 is step 0, the introduction), tagging every
 //     child with data-step so focus mode can show one step at a time;
 //   • numbers the figures in document order ("<chapter>.<n>") on their title
-//     span (data-fig-no), which learn.css turns into "fig. 3.2 — …". Numbers
+//     span (data-fig-no), which learn.css turns into "fig. 3.2 — …", and the
+//     h2 sections the same way (data-sec-no, lessonBody.css). Numbers
 //     come from here rather than a CSS counter because a counter skips the
 //     figures on hidden focus-mode steps.
 // Chapters load lazily and re-render on language change, so the DOM is watched
@@ -40,6 +41,9 @@ function tag(root: HTMLElement, chapterNo: number): ChapterStep[] {
     if (child.tagName === "H2") {
       steps.push({ title: child.textContent ?? "", id: child.id || null });
       current = steps.length - 1;
+      // Section number, "<chapter>.<n>", shown before the heading (lessonBody.css)
+      const secNo = `${chapterNo}.${steps.filter((s) => s.title !== null).length}`;
+      if (child.dataset.secNo !== secNo) child.dataset.secNo = secNo;
     } else if (current === -1) {
       steps.push({ title: null, id: null });
       current = 0;

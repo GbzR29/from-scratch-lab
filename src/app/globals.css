@@ -4,6 +4,7 @@
 @import "../styles/practice.css";
 @import "../styles/learn.css";
 @import "../styles/lessonChrome.css";
+@import "../styles/lessonBody.css";
 @import "../styles/sitemenu.css";
 
 @tailwind base;

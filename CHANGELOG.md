@@ -14,6 +14,14 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-18
 
+- **Redesign, passo 4: miolo das lições.** Estilos novos em `src/styles/lessonBody.css`, valendo para todas as trilhas.
+  - **Cabeçalho:** etiqueta em caixa alta, título em Spectral maior, tempo de leitura e data em pequenos quadros.
+  - **Parágrafo de abertura** (`Lead`) em Spectral, como o começo de um capítulo de livro.
+  - **Pranchas:** as metas ("Ao final você vai conseguir") ganham faixa de título e quadradinhos em duas colunas; as ideias-chave, números 01, 02…; o "Antes de começar" segue o mesmo desenho.
+  - **Seções numeradas:** cada subtítulo mostra "13.1", "13.2"… antes do texto (número gravado por `useChapterSteps`, junto com o das figuras).
+  - **Figuras:** moldura com linha de tinta, sombra deslocada e legenda em caixa alta ("FIG. 13.1 — …"). Fórmulas, código, notas, avisos e "Aprofundar" com cantos retos.
+  - **Índice da página:** item atual em negrito com barra laranja. **Paginação:** quadros com linha de tinta, e o "próxima" cheio.
+
 - **Redesign, passo 3: moldura das lições.** Lições e referência passam para o visual novo.
   - **Cores do tema claro** (`learn.css`): papel `#f2f0e8`, tinta azul-marinho `#14304d`, destaque laranja `#b3421a` (tom escuro o bastante para texto pequeno), código com palavras-chave em azul. Os widgets seguem sozinhos, porque usam esses tokens. O escuro continua o crepúsculo. O menu do celular (`sitemenu.css`) usa as mesmas cores.
   - **Barra do topo** (`LearnTopBar`): logo novo, caminho em fonte mono, idiomas e botão de tema com ícone; agora com 56 px (`--nav-h` 57px).

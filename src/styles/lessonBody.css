@@ -1,0 +1,120 @@
+/* =========================================================
+   LESSON BODY (redesign 2026-10)
+   The inside of a lesson drawn like the home page: plates with
+   ink borders and a label strip (goals, key ideas, "before you
+   start"), numbered sections ("13.2"), figures framed as sheets
+   with an uppercase caption, square chips and callouts.
+   Loaded after learn.css, so equal selectors win here.
+========================================================= */
+
+/* ── Chapter header ─────────────────────────────────────── */
+
+.lb-kicker {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+.lb-chip {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 12px;
+  padding: 3px 8px;
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+}
+
+/* The lead paragraph reads like the opening of a book chapter */
+.learn .lb-lead {
+  font-family: var(--font-spectral), Georgia, serif;
+  font-size: 1.32rem;
+  line-height: 1.6;
+}
+
+/* ── Plates: goals, key ideas, before you start ─────────── */
+
+.learn .lb-plate { border: 1px solid var(--ink-line); background: var(--card); }
+.lb-plate-head {
+  margin: 0;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--ink-line);
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+.lb-goals ul,
+.lb-keys ol { list-style: none; margin: 0; padding: 6px 16px 10px; }
+.lb-goals ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); column-gap: 28px; }
+.lb-goals li,
+.lb-keys li { display: flex; gap: 12px; padding: 8px 0; font-size: 15px; line-height: 1.55; color: var(--text-main); }
+.lb-box { flex: none; width: 14px; height: 14px; margin-top: 4px; border: 1.5px solid currentColor; }
+.lb-num { flex: none; font-family: var(--font-plex-mono), monospace; font-size: 12px; line-height: 1.9; color: var(--primary); }
+
+.lb-prereq-text { margin: 0; padding: 10px 14px 0; font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+.lb-prereq-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 10px 14px 14px; list-style: none; }
+.learn .lb-prereq-item { border: 1px solid var(--ink-line); background: var(--bg); }
+.learn .lb-prereq-item:hover { border-color: var(--primary); background: var(--primary-low); }
+
+/* ── Sections: "13.2" before every h2 (number from useChapterSteps) ── */
+
+.learn .lesson-body article > h2 { font-size: 2.05rem; }
+.learn .lesson-body article > h2[data-sec-no]::before {
+  content: attr(data-sec-no);
+  display: inline-block;
+  margin-right: 0.85rem;
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  vertical-align: 0.3em;
+  color: var(--primary);
+}
+
+/* ── Figures: sheets with an uppercase caption ──────────── */
+
+.learn [data-figure] { border-color: var(--ink-line); }
+.learn .lesson-body [data-figure] { box-shadow: 6px 6px 0 color-mix(in srgb, var(--text-main) 8%, transparent); }
+.learn [data-figure] > :first-child:not([data-stage]) { border-bottom-color: var(--ink-line); }
+.learn [data-figure] > :first-child:not([data-stage]) > span:first-child {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.learn .lesson-body [data-fig-no]::before { font-weight: 600; }
+
+/* Formula cards and code */
+.learn .eq-card { border-color: var(--ink-line); box-shadow: none; }
+.learn .lb-code { border-color: var(--border-strong); }
+
+/* ── Callouts: square, inked ────────────────────────────── */
+
+.callout-clean {
+  border-radius: 0;
+  border: 1px solid color-mix(in srgb, var(--tone) 55%, transparent);
+}
+.callout-chip { border-radius: 2px; border-color: color-mix(in srgb, var(--tone) 60%, transparent); }
+.callout-pop { border-radius: 2px; }
+@media (max-width: 639px) {
+  .callout-pop, .callout-pop[data-above] { border-radius: 0; }
+}
+.deeper { border-radius: 2px; border-color: var(--border-strong); }
+.deeper-icon, .deeper-back { border-radius: 2px; }
+
+/* ── On this page ───────────────────────────────────────── */
+
+.lb-toc a[aria-current] {
+  border-left-width: 3px;
+  margin-left: -1px;
+  color: var(--text-main);
+  font-weight: 600;
+  border-left-color: var(--brand-accent);
+}
+
+/* ── Previous / next ────────────────────────────────────── */
+
+.learn .lb-pager-box { border: 1px solid var(--ink-line); background: var(--card); }
+.learn .lb-pager-box:hover { border-color: var(--primary); }
+.learn .lb-pager-next { background: var(--text-main); color: var(--bg); border-color: var(--text-main); }
+.learn .lb-pager-next small { color: inherit; opacity: 0.72; }
+.learn .lb-pager-next:hover { background: var(--primary); border-color: var(--primary); color: var(--text-inverse); }

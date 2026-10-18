@@ -44,10 +44,10 @@ export function BeforeYouStart({ ids }: { ids?: string[] }) {
   if (!items.length) return null;
 
   return (
-    <aside className="mb-10 rounded-xl border border-[var(--border)] bg-[var(--card)] px-5 py-4">
-      <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--primary)]">↺ {ctx.labels.beforeStart}</p>
-      <p className="mt-1.5 text-[14px] leading-relaxed text-[var(--text-muted)]">{ctx.labels.buildsOn}</p>
-      <ul className="mt-3 flex flex-wrap gap-2">
+    <aside className="lb-plate lb-prereq mb-10">
+      <p className="lb-plate-head">↺ {ctx.labels.beforeStart}</p>
+      <p className="lb-prereq-text">{ctx.labels.buildsOn}</p>
+      <ul className="lb-prereq-list">
         {items.map(({ n, chapter }) => {
           const read = ctx.visited.has(chapter.id);
           return (
@@ -55,7 +55,7 @@ export function BeforeYouStart({ ids }: { ids?: string[] }) {
               <button
                 type="button"
                 onClick={() => ctx.open(chapter.id)}
-                className="group inline-flex items-baseline gap-2 rounded-full border border-[var(--border)] px-3 py-1.5 text-left transition-colors hover:border-[var(--primary)] hover:bg-[var(--primary-low)]"
+                className="lb-prereq-item group inline-flex items-baseline gap-2 px-3 py-1.5 text-left transition-colors"
               >
                 <span className="font-mono text-[11px] text-[var(--primary)]">{n}</span>
                 <span className="text-[14px] text-[var(--text-main)] group-hover:text-[var(--primary)]">{chapter.title}</span>

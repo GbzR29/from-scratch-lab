@@ -100,7 +100,7 @@ export function CodeBlock({
   const folded = foldable && !open;
 
   return (
-    <div data-wide="" className="rounded-xl overflow-hidden border border-[var(--border)] !my-8">
+    <div data-wide="" className="lb-code rounded-xl overflow-hidden border border-[var(--border)] !my-8">
       <div className="flex items-center justify-between px-4 py-1.5 bg-[var(--code-bg)] border-b border-[var(--border)]">
         <span className="font-mono text-[11.5px] text-[var(--text-muted)]">
           {filename ?? lang}

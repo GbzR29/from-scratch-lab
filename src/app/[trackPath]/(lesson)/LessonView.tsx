@@ -329,21 +329,21 @@ export default function LessonView() {
         )}
 
         {/* Chapter header */}
-        <header className="mb-10 pb-8 border-b border-[var(--border)] space-y-3">
-          <p className="font-mono text-[12.5px] tracking-[0.04em] text-[var(--primary)]">
+        <header className="lb-head mb-10 pb-8 border-b border-[var(--border)] space-y-3">
+          <p className="lb-kicker">
             {currentChapter?.section ?? trackName} · {chapterOf}
           </p>
-          <h1 className="font-display text-[2.2rem] md:text-[2.9rem] leading-[1.08] tracking-[-0.01em] [text-wrap:balance]">
+          <h1 className="font-display text-[2.4rem] md:text-[3.5rem] leading-[1.04] tracking-[-0.015em] [text-wrap:balance]">
             {currentChapter?.title}
           </h1>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1">
+          <div className="lb-meta flex flex-wrap items-center gap-x-2 gap-y-2 pt-2">
             {currentChapter?.minRead && (
-              <p className="font-mono text-[12px] text-[var(--text-muted)]">
+              <p className="lb-chip">
                 {currentChapter.minRead} {t.lessonMinRead ?? "min read"}
               </p>
             )}
             {dates && (
-              <p className="font-mono text-[12px] text-[var(--text-muted)]">
+              <p className="lb-chip">
                 {t.lessonCreated ?? "created"} <time dateTime={dates.created}>{formatDate(dates.created, language)}</time>
                 {dates.updated !== dates.created && (
                   <> · {t.lessonUpdated ?? "updated"} <time dateTime={dates.updated}>{formatDate(dates.updated, language)}</time></>
