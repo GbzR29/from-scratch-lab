@@ -1,12 +1,14 @@
 // src/lib/tracks/lessonRoutes.tsx
 // The server side of the lesson routes, shared by the English tree
-// (app/[trackPath]/(lesson)) and the Portuguese one (app/pt/[trackPath]/…).
-// The lesson itself is drawn by LessonView in the (lesson) layout; these only
-// check the URL and add metadata and structured data.
+// (app/[trackPath]/…) and the Portuguese one (app/pt/[trackPath]/…).
+// A lesson is drawn by LessonView in the (lesson) layout and the track page by
+// TrackOverview in (overview); these check the URL and add metadata and
+// structured data.
 
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
+import TrackOverview from "@/components/track/TrackOverview";
 import { getTrack } from "./index";
 import { chapterJsonLd, chapterMetadata, findChapter, trackJsonLd, trackMetadata } from "./seo";
 import { chapterHref, decodeSegment, type UrlLang } from "./urls";
@@ -31,7 +33,7 @@ export async function trackPageMetadata({ params }: TrackProps, lang: UrlLang): 
   return trackMetadata(decodeSegment((await params).trackPath), lang);
 }
 
-/** The track's own page (shows its first chapter). Old links, ?chapter=<id>, move to the lesson's URL. */
+/** The track's own page: its map (TrackOverview). Old links, ?chapter=<id>, move to the lesson's URL. */
 export async function TrackRoute({ params, searchParams }: TrackProps, lang: UrlLang) {
   const trackPath = decodeSegment((await params).trackPath);
   const track = await requireTrack(params);
@@ -41,7 +43,12 @@ export async function TrackRoute({ params, searchParams }: TrackProps, lang: Url
     const query = typeof step === "string" ? `?step=${encodeURIComponent(step)}` : "";
     permanentRedirect(chapterHref(trackPath, chapter, lang) + query);
   }
-  return <JsonLd data={trackJsonLd(trackPath, lang)} />;
+  return (
+    <>
+      <JsonLd data={trackJsonLd(trackPath, lang)} />
+      <TrackOverview trackPath={trackPath} />
+    </>
+  );
 }
 
 // ── /<track>/<chapter id> ───────────────────────────────────────────────────

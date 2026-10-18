@@ -1,5 +1,6 @@
-// app/[trackPath]/(lesson)/page.tsx
-// /<track>: the track's own URL (shows its first chapter). Old lesson
+// app/[trackPath]/(overview)/page.tsx
+// /<track>: the track's own page (its map of sections and chapters; outside
+// the (lesson) group, so the lesson reader is not mounted here). Old lesson
 // links, /<track>?chapter=<id>, are sent to /<track>/<id>.
 // Shared with /pt/<track> (src/lib/tracks/lessonRoutes.tsx).
 

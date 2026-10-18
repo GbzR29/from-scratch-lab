@@ -1,5 +1,5 @@
-// app/pt/[trackPath]/(lesson)/page.tsx
-// /pt/<track> (see app/[trackPath]/(lesson)/page.tsx).
+// app/pt/[trackPath]/(overview)/page.tsx
+// /pt/<track> (see app/[trackPath]/(overview)/page.tsx).
 
 import { TrackRoute, trackPageMetadata, type TrackProps } from "@/lib/tracks/lessonRoutes";
 

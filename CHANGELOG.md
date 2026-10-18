@@ -14,6 +14,12 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-18
 
+- **Redesign, passo 5: página de cada trilha.** `/<trilha>` (ex.: `/Physics`, `/pt/Physics`) deixa de abrir o capítulo 1 e vira a página da trilha.
+  - **Topo:** código e área (SC-02 · Ciências), nível, ícone grande, nome e descrição; botão "continuar" (última aula aberta, ou a primeira não lida, ou o capítulo 1) e "começar do início"; barra de progresso com aulas lidas, prontas e planejadas.
+  - **Ao lado:** "Antes de começar", com as trilhas que vêm antes desta nos caminhos sugeridos (Física parte de Matemática, OpenGL parte de C/C++), e "Esta trilha": número de aulas e seções, tempo total de leitura e o link da referência de funções, quando existe.
+  - **Mapa da trilha:** cada seção numerada com x/y lidas e todas as aulas como quadros (cheio = lida, laranja = última aberta, contorno = pronta). Se o catálogo planeja mais aulas do que existem, uma linha tracejada diz quantas estão em preparação.
+  - **Rotas:** `page.tsx` e `opengraph-image.tsx` da trilha saem de `(lesson)` e vão para o grupo novo `(overview)`, em EN e PT, para o leitor de lições não montar nessa página. Links antigos `/<trilha>?chapter=<id>` continuam redirecionando para a aula. Textos novos em `src/lib/i18n/track/trackTranslations.ts`; `trackCode()` em `catalog.ts`.
+
 - **Redesign, passo 4: miolo das lições.** Estilos novos em `src/styles/lessonBody.css`, valendo para todas as trilhas.
   - **Cabeçalho:** etiqueta em caixa alta, título em Spectral maior, tempo de leitura e data em pequenos quadros.
   - **Parágrafo de abertura** (`Lead`) em Spectral, como o começo de um capítulo de livro.

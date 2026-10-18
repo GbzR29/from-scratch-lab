@@ -90,3 +90,11 @@ export const TRACK_CATALOG: TrackInfo[] = [
     descKey: "trackMusicDesc", descFallback: "Music from the ground up: sound and pitch, rhythm and meter, notes and the staff, intervals and scales, chords and harmony, keys and progressions, melody and form — every idea heard, every rule explained.",
   },
 ];
+
+/** A track's sheet code on the home page and its own page: two letters for its
+ *  area, then its place in that area in catalog order (CP-01, GR-03…). */
+const AREA_CODE: Record<TrackArea, string> = { computing: "CP", graphics: "GR", science: "SC", music: "MU" };
+export function trackCode(info: TrackInfo): string {
+  const n = TRACK_CATALOG.filter((x) => x.area === info.area).indexOf(info) + 1;
+  return `${AREA_CODE[info.area]}-${String(n).padStart(2, "0")}`;
+}

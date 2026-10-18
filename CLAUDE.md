@@ -22,9 +22,12 @@ src/components/nav/                    SiteMenu (phone ☰ sheet, styles in src/
 src/styles/learn.css                   lesson look: re-values the theme.css tokens while a .learn page is shown, syntax colours, figure numbering
 src/lib/tracks/progress.ts             reading progress + "last lesson" in localStorage (sidebar, home page "resume")
 src/app/[trackPath]/(lesson)/          LessonView.tsx = the ONE reader for every lesson of every track, mounted by layout.tsx
-                                       (which 404s any first segment that is not a track); page.tsx (/<track>, redirects old
-                                       ?chapter= links) and [chapterId]/page.tsx (/<track>/<id>) only give metadata + JSON-LD
-                                       (src/lib/tracks/lessonRoutes.tsx, seo.ts)
+                                       (which 404s any first segment that is not a track); [chapterId]/page.tsx (/<track>/<id>)
+                                       only gives metadata + JSON-LD (src/lib/tracks/lessonRoutes.tsx, seo.ts)
+src/app/[trackPath]/(overview)/        page.tsx = /<track>, the track page (components/track/TrackOverview + TrackMap, styles
+                                       src/styles/trackPage.css; redirects old ?chapter= links); outside (lesson), so no reader
+src/components/brand/                  Mark (the logo), TrackGlyph (one drawn icon per track id), ThemeIcon
+src/styles/lessonChrome.css, lessonBody.css   lesson top bar + sidebar, and the inside of lessons (plates, numbered sections, figure frames)
 src/app/pt/                            Portuguese copies with their own URLs (/pt, /pt/<track>/<id>): thin files
                                        reusing the English pages with lang "pt"; LanguageProvider reads the /pt prefix
 src/lib/tracks/urls.ts                 SITE_URL, homeHref/trackHref/chapterHref(…, lang), pathInLang — build every URL with these;

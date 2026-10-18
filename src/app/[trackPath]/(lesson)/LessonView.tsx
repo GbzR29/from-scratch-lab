@@ -33,12 +33,10 @@ import { FocusNav, FocusProgress, ModeToggle, useFocusView, useLessonMode } from
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-/** Whether the address bar already points at this chapter (the track's own
- *  page counts for its first chapter). */
-function urlShows(trackPath: string, chapterId: string, firstId: string, lang: UrlLang): boolean {
+/** Whether the address bar already points at this chapter. */
+function urlShows(trackPath: string, chapterId: string, lang: UrlLang): boolean {
   const here = decodeSegment(window.location.pathname).replace(/\/$/, "");
-  const track = decodeSegment(trackHref(trackPath, lang));
-  return here === `${track}/${chapterId}` || (chapterId === firstId && here === track);
+  return here === `${decodeSegment(trackHref(trackPath, lang))}/${chapterId}`;
 }
 
 /** Focus-mode step from ?step= (1-based in the URL, 0-based here). */
@@ -63,7 +61,7 @@ export default function LessonView() {
   const trackPath = params?.trackPath
     ? decodeSegment(params.trackPath as string)
     : "";
-  // The chapter in the URL (/<track>/<id>); none on the track's own page
+  // The chapter in the URL (/<track>/<id>)
   const chapterParam = params?.chapterId ? decodeSegment(params.chapterId as string) : null;
   // Under /pt every lesson link stays in the Portuguese copy
   const urlLang   = langOfPath(usePathname());
@@ -112,11 +110,10 @@ export default function LessonView() {
   }, [track, chapterParam]);
 
   // On chapter change: mark visited, move the URL to the chapter, scroll to top.
-  // The track's own page shows the first chapter and keeps its URL until another is picked.
   useEffect(() => {
     if (!activeChapterId || !track) return;
     markVisited(activeChapterId);
-    if (!urlShows(trackPath, activeChapterId, track.chapters[0].id, urlLang)) {
+    if (!urlShows(trackPath, activeChapterId, urlLang)) {
       router.push(chapterHref(trackPath, activeChapterId, urlLang), { scroll: false });
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -185,7 +182,7 @@ export default function LessonView() {
   // ?step= mirrors the step while focus mode is on
   // (left alone while a move to another chapter's URL is still under way)
   useEffect(() => {
-    if (!activeChapterId || !track || !urlShows(trackPath, activeChapterId, track.chapters[0].id, urlLang)) return;
+    if (!activeChapterId || !track || !urlShows(trackPath, activeChapterId, urlLang)) return;
     const url = new URL(window.location.href);
     if (focus && step > 0) url.searchParams.set("step", String(step + 1));
     else url.searchParams.delete("step");

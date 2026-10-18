@@ -8,7 +8,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { getTrack } from "@/lib/tracks";
-import { TRACK_AREAS, TRACK_CATALOG, type TrackArea, type TrackInfo } from "@/lib/tracks/catalog";
+import { TRACK_AREAS, TRACK_CATALOG, trackCode, type TrackArea, type TrackInfo } from "@/lib/tracks/catalog";
 import { getReference, referenceHref } from "@/lib/reference";
 import { trackName } from "@/lib/tracks/crumbs";
 import { trackHref, type UrlLang } from "@/lib/tracks/urls";
@@ -19,9 +19,6 @@ type Level = "all" | "beginner" | "intermediate" | "advanced";
 
 const fill = (s: string, values: Record<string, number | string>) =>
   s.replace(/\{(\w+)\}/g, (m, k) => (k in values ? String(values[k]) : m));
-
-/** Plate codes: two letters per area, then the track's place in it (CP-01…). */
-const AREA_CODE: Record<TrackArea, string> = { computing: "CP", graphics: "GR", science: "SC", music: "MU" };
 
 /** A "beginner → advanced" track shows under every level. */
 function matchesLevel(info: TrackInfo, level: Level) {
@@ -98,9 +95,8 @@ export default function TrackCatalog({ t, visited, lang }: { t: Strings; visited
     area: a,
     index: i,
     // codes are fixed by catalog order, so they do not change while filtering
-    tracks: TRACK_CATALOG.filter((info) => info.area === a)
-      .map((info, j) => ({ info, code: `${AREA_CODE[a]}-${String(j + 1).padStart(2, "0")}` }))
-      .filter(({ info }) => matchesLevel(info, level)),
+    tracks: TRACK_CATALOG.filter((info) => info.area === a && matchesLevel(info, level))
+      .map((info) => ({ info, code: trackCode(info) })),
   })).filter((g) => (area === "all" || g.area === area) && g.tracks.length > 0);
 
   return (
