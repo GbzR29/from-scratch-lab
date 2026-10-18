@@ -4,8 +4,9 @@
 // track list. Chapter ids and track paths are part of these URLs, so changing
 // one breaks links and search results.
 
-/** The site's public address (sitemap, canonical URLs, Open Graph). */
-export const SITE_URL = "https://fromscratchlab.com";
+/** The site's public address (sitemap, canonical URLs, Open Graph). The www
+ *  host is the primary one on Vercel; the bare domain redirects to it. */
+export const SITE_URL = "https://www.fromscratchlab.com";
 
 /** Languages with their own indexable URLs. English has no prefix. */
 export type UrlLang = "en" | "pt";
