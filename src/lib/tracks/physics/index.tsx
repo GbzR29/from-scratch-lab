@@ -29,4 +29,8 @@ export const physicsChapters: Chapter[] = [
   { id: "fluid-dynamics", section: "Fluids & Heat",           title: "Fluids in Motion",                minRead: 21, load: () => import("./chapters/fluid-dynamics").then((m) => m.FluidDynamicsContent) },
   { id: "temperature-heat", section: "Fluids & Heat",         title: "Temperature & Heat",              minRead: 23, load: () => import("./chapters/temperature-heat").then((m) => m.TemperatureHeatContent) },
   { id: "thermodynamics", section: "Fluids & Heat",           title: "Thermodynamics",                  minRead: 24, load: () => import("./chapters/thermodynamics").then((m) => m.ThermodynamicsContent) },
+  { id: "electric-charge-field", section: "Electricity",      title: "Electric Charge & Field",         minRead: 22, load: () => import("./chapters/electric-charge-field").then((m) => m.ElectricChargeFieldContent) },
+  { id: "electric-potential", section: "Electricity",         title: "Electric Potential & Capacitors", minRead: 22, load: () => import("./chapters/electric-potential").then((m) => m.ElectricPotentialContent) },
+  { id: "circuits", section: "Electricity",                   title: "Electric Circuits",               minRead: 23, load: () => import("./chapters/circuits").then((m) => m.CircuitsContent) },
+  { id: "magnetism", section: "Electricity",                  title: "Magnetism",                       minRead: 22, load: () => import("./chapters/magnetism").then((m) => m.MagnetismContent) },
 ];

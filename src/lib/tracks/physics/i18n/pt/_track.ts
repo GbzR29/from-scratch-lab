@@ -22,6 +22,10 @@ const track = {
     "fluid-dynamics": "Fluidos em movimento",
     "temperature-heat": "Temperatura e calor",
     "thermodynamics": "Termodinâmica",
+    "electric-charge-field": "Carga e campo elétrico",
+    "electric-potential": "Potencial elétrico e capacitores",
+    "circuits": "Circuitos elétricos",
+    "magnetism": "Magnetismo",
   } as Record<string, string>,
   sections: {
     "Foundations & Motion": "Fundamentos e movimento",
@@ -29,6 +33,7 @@ const track = {
     "Conservation & Rotation": "Conservação e rotação",
     "Oscillations & Waves": "Oscilações e ondas",
     "Fluids & Heat": "Fluidos e calor",
+    "Electricity": "Eletricidade",
   } as Record<string, string>,
 };
 

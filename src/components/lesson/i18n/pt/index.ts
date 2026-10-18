@@ -51,6 +51,7 @@ import physicsDyn from "./physicsDyn";
 import physicsCons from "./physicsCons";
 import physicsWave from "./physicsWave";
 import physicsHeat from "./physicsHeat";
+import physicsElec from "./physicsElec";
 import pool from "./pool";
 import river from "./river";
 import post from "./post";
@@ -63,6 +64,6 @@ import underwater from "./underwater";
 import vulkan from "./vulkan";
 import water from "./water";
 
-const bundle: Record<string, string> = { ...advgl, ...ai, ...aiNeural, ...aiDeep, ...aiRl, ...asm, ...asmFlow, ...asmC, ...asmPerf, ...advlighting, ...blackhole, ...cLang, ...cppLang, ...cppOwn, ...cppObj, ...cppGen, ...cppStd, ...cppSys, ...figures, ...fog, ...gamedev, ...glass, ...glintro, ...glsl, ...lighting, ...markov, ...math, ...mathAlgebra, ...mathGeometry, ...mathTrig, ...mathLinAlg, ...mathCalculus, ...mathProbability, ...mathPractice, ...mathLogic, ...mathDiscrete, ...mathAnalysis, ...music, ...musicScore, ...musicTuning, ...musicIntervals, ...musicScales, ...musicMinor, ...ocean, ...pbr, ...perf, ...physics, ...physicsDyn, ...physicsCons, ...physicsWave, ...physicsHeat, ...pool, ...post, ...practice, ...river, ...rt, ...sky, ...special, ...tech, ...underwater, ...vulkan, ...water };
+const bundle: Record<string, string> = { ...advgl, ...ai, ...aiNeural, ...aiDeep, ...aiRl, ...asm, ...asmFlow, ...asmC, ...asmPerf, ...advlighting, ...blackhole, ...cLang, ...cppLang, ...cppOwn, ...cppObj, ...cppGen, ...cppStd, ...cppSys, ...figures, ...fog, ...gamedev, ...glass, ...glintro, ...glsl, ...lighting, ...markov, ...math, ...mathAlgebra, ...mathGeometry, ...mathTrig, ...mathLinAlg, ...mathCalculus, ...mathProbability, ...mathPractice, ...mathLogic, ...mathDiscrete, ...mathAnalysis, ...music, ...musicScore, ...musicTuning, ...musicIntervals, ...musicScales, ...musicMinor, ...ocean, ...pbr, ...perf, ...physics, ...physicsDyn, ...physicsCons, ...physicsWave, ...physicsHeat, ...physicsElec,...pool, ...post, ...practice, ...river, ...rt, ...sky, ...special, ...tech, ...underwater, ...vulkan, ...water };
 
 export default bundle;

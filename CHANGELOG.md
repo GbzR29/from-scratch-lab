@@ -14,6 +14,22 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-18
 
+- **Trilha de Física, seção nova "Eletricidade" (lote 6 de 12).** Quatro capítulos, com cada termo explicado, deduções passo a passo, exemplos resolvidos, erros comuns e metas, em EN e PT:
+  - **Carga e campo elétrico:** os dois tipos de carga, a carga elementar e a conservação, condutores, isolantes e polarização (o balão na parede), a lei de Coulomb e a comparação com a gravidade, a superposição, o campo elétrico e as linhas de campo, o dipolo (e o micro-ondas), o fluxo e a lei de Gauss deduzida para uma carga pontual, os campos de esferas e placas, condutores, gaiola de Faraday e para-raios.
+  - **Potencial elétrico e capacitores:** a energia potencial de duas cargas por uma integral, potencial e tensão, equipotenciais e E = −dV/dx, o elétron-volt, a capacitância de placas paralelas deduzida, dielétricos com tabela de constantes e rigidez, a energia ½CV² e a densidade ½ε₀E², associação em série e em paralelo, usos (flash, desfibrilador, tela sensível ao toque, DRAM).
+  - **Circuitos elétricos:** corrente e a velocidade de arrasto dos elétrons deduzida, fem, a lei de Ohm e a resistividade, potência e por que as linhas de transmissão usam tensão alta, série e paralelo deduzidos, as regras de Kirchhoff, resistência interna, o circuito RC resolvido e a constante de tempo, segurança elétrica.
+  - **Magnetismo:** ímãs, polos que nunca vêm sozinhos, o campo B e o da Terra, a força F = qv × B (que não realiza trabalho), o círculo de uma carga num campo (r = mv/qB e um período que não depende da velocidade), espectrômetro de massa, cíclotron e aurora, a força sobre um fio e o motor elétrico, a lei de Ampère com os campos de um fio e de um solenoide, a força entre fios paralelos (a antiga definição do ampère), materiais magnéticos.
+  - **Widgets novos**, todos com "quebre aqui":
+    - **Campo de cargas pontuais** (`FieldLinesFigure`): cargas arrastáveis e linhas de campo; quebrar soma os tamanhos em vez das setas.
+    - **Lei de Gauss** (`GaussFigure`): o fluxo não muda com o raio; quebrar faz o campo cair como 1/R.
+    - **Equipotenciais** (`EquipotentialFigure`): curvas de nível do potencial e o mesmo trabalho por dois caminhos; quebrar soma um campo em redemoinho.
+    - **Capacitor** (`CapacitorFigure`): placas, dielétrico e bateria ligada ou desligada.
+    - **Circuito com duas lâmpadas** (`CircuitFigure`): série e paralelo com a corrente visível; quebrar faz a primeira lâmpada "gastar corrente".
+    - **Circuito RC** (`RcFigure`): carga e descarga em tempo real; quebrar mantém a corrente inicial.
+    - **Carga num campo magnético** (`ChargeInFieldFigure`): próton, dêuteron e alfa; quebrar inclina a força para a frente.
+    - **Dois fios com corrente** (`WireFieldFigure`): bússolas e a força entre os fios.
+  - Textos dos widgets em `components/lesson/i18n/pt/physicsElec.ts`. A trilha passa a ter 24 de 48 capítulos.
+
 - **Redesign, passo 6 (último): ícones e cards de prévia.** O redesign está completo.
   - **Ícone do site:** sai o provisório verde-petróleo, entra o logo novo (cubo com cota) sobre azul-marinho. Na aba do navegador (`icon.svg` e o novo `favicon.ico` com 16, 32 e 48 px) vai uma versão simplificada, só o cubo e o ponto laranja, porque as linhas de cota viram ruído em tamanho pequeno. `icon.png` (512 px) e `apple-icon.png` (180 px, sem cantos, o iOS arredonda sozinho) usam o logo completo. O `favicon.ico` volta a existir porque robôs e a Vercel pedem `/favicon.ico` direto.
   - **Cards de prévia de link** (`src/lib/og/card.tsx`): folha na prancheta com moldura de tinta, faixa de título em caixa alta, o ícone da trilha numa caixa tracejada (o logo na home), título em Spectral e um carimbo no rodapé. A faixa colorida de cada trilha deu lugar ao ícone. A lista de trilhas do card da home foi atualizada (entram Assembly, Física e Música).

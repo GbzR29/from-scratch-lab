@@ -1271,6 +1271,22 @@
     "created": "2026-10-17",
     "updated": "2026-10-17"
   },
+  "physics/electric-charge-field": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/electric-potential": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/circuits": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/magnetism": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
   "sdl3/whats-new": {
     "created": "2026-09-03",
     "updated": "2026-10-08"

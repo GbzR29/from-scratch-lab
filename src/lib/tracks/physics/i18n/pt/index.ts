@@ -22,9 +22,13 @@ import fluidStatics from "./fluid-statics";
 import fluidDynamics from "./fluid-dynamics";
 import temperatureHeat from "./temperature-heat";
 import thermodynamics from "./thermodynamics";
+import electricChargeField from "./electric-charge-field";
+import electricPotential from "./electric-potential";
+import circuits from "./circuits";
+import magnetism from "./magnetism";
 
 const bundle: LessonText = {
-  strings: { ...unitsMeasurement, ...kinematics1d, ...kinematics2d, ...relativeMotion, ...newtonsLaws, ...forces, ...circularMotion, ...workEnergy, ...momentumCollisions, ...rotation, ...angularMomentum, ...gravityOrbits, ...simpleHarmonic, ...dampingResonance, ...waves, ...sound, ...fluidStatics, ...fluidDynamics, ...temperatureHeat, ...thermodynamics },
+  strings: { ...unitsMeasurement, ...kinematics1d, ...kinematics2d, ...relativeMotion, ...newtonsLaws, ...forces, ...circularMotion, ...workEnergy, ...momentumCollisions, ...rotation, ...angularMomentum, ...gravityOrbits, ...simpleHarmonic, ...dampingResonance, ...waves, ...sound, ...fluidStatics, ...fluidDynamics, ...temperatureHeat, ...thermodynamics, ...electricChargeField, ...electricPotential, ...circuits, ...magnetism },
   titles: track.titles,
   sections: track.sections,
 };
