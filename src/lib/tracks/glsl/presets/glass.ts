@@ -59,26 +59,4 @@ void main() {
     FragColor = vec4(col, 1.0);
 }`,
   },
-  {
-    id: "rim", label: "Fresnel on a mesh",
-    mode: "mesh", mesh: "torus",
-    note: "Schlick's term alone, painted on a mesh: dark where the surface faces you, bright at grazing angles. Raise uPower to thin the rim. The same number drives reflections, rim lights and force-field shields.",
-    frag: `uniform float uR0;     // @slider 0.0 1.0 0.04
-uniform float uPower;  // @slider 1.0 10.0 5.0
-uniform float uShowF;  // @toggle 0
-
-vec3 env(vec3 d) {
-    vec3 c = mix(vec3(0.1, 0.1, 0.12), vec3(0.75, 0.8, 0.9), smoothstep(-0.3, 0.8, d.y));
-    return c + 3.0 * pow(max(dot(d, uLightDir), 0.0), 200.0);
-}
-
-void main() {
-    vec3 N = normalize(vNormal), V = normalize(uCamPos - vWorld);
-    float F = uR0 + (1.0 - uR0) * pow(1.0 - max(dot(N, V), 0.0), uPower);
-    vec3 base = vec3(0.05, 0.06, 0.08) * (0.3 + max(dot(N, uLightDir), 0.0));
-    vec3 col = mix(base, env(reflect(-V, N)), F);
-    if (uShowF > 0.5) col = vec3(F);
-    FragColor = vec4(pow(col, vec3(1.0 / 2.2)), 1.0);
-}`,
-  },
 ];

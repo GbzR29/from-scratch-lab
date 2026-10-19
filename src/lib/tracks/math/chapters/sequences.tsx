@@ -95,6 +95,22 @@ export function SequencesContent({ t }: { t: TrackTranslations }) {
 
       <SequenceFigure t={t} />
 
+      <H3>{tx(t, "mSeq_logTitle", "The logarithm turns a geometric sequence into an arithmetic one")}</H3>
+      <p>
+        {tx(t, "mSeq_logBody",
+          "Take the logarithm of every term of a geometric sequence with positive terms. The rule log(x · y) = log x + log y (exponents chapter) turns each \"multiply by r\" into \"add log r\": the logs form an arithmetic sequence whose first term is log a₁ and whose common difference is log r. Any base works. The exponential function does the reverse: it turns an arithmetic sequence into a geometric one.")}
+      </p>
+      <Derivation t={t} label={tx(t, "mSeq_eqLog", "Logs of a geometric sequence")}
+        steps={[
+          { tex: r`a_n = a_1 \cdot r^{\,n-1}`, why: tx(t, "mSeq_l1", "a geometric sequence with a₁ > 0 and r > 0") },
+          { tex: r`\log a_n = \log a_1 + (n-1)\log r`, why: tx(t, "mSeq_l2", "the log of a product is the sum of the logs, and log rⁿ⁻¹ = (n − 1) log r") },
+          { tex: r`\green{b_n = b_1 + (n-1)\,d}, \quad b_n = \log a_n,\ d = \log r`, why: tx(t, "mSeq_l3", "exactly the n-th term of an arithmetic sequence") },
+        ]} />
+      <p>
+        {tx(t, "mSeq_logUse",
+          "Example: 2, 20, 200, 2 000 (r = 10) has base-10 logs 0.301, 1.301, 2.301, 3.301, an arithmetic sequence with difference 1. This is why exponential growth looks like a straight line on a log-scale graph, why a slide rule multiplies by adding lengths, and why the decibel and pH scales, which take logs of quantities that grow by factors, go up in equal steps.")}
+      </p>
+
       <H2>{tx(t, "mAlg_sumTitle", "Sums: reading Σ")}</H2>
       <p>
         {tx(t, "mAlg_sumBody",

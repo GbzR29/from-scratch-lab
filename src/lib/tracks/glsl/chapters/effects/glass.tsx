@@ -12,6 +12,7 @@ import { ShaderPlayground } from "@/components/lesson/glsl/ShaderPlayground";
 import { WindowLabFigure } from "@/components/lesson/figures/glass/WindowLabFigure";
 import { GlassRayFigure } from "@/components/lesson/figures/glass/GlassRayFigure";
 import { AbsorptionFigure } from "@/components/lesson/figures/glass/AbsorptionFigure";
+import { GlassStudioFigure } from "@/components/lesson/figures/glass/GlassStudioFigure";
 import { FresnelFigure } from "@/components/lesson/glsl/FresnelFigure";
 import { GLASS_PRESETS } from "../../presets/glass";
 import { refractNumbers, schlickNumbers } from "../../live/glass";
@@ -42,6 +43,7 @@ export function GlassContent({ t }: { t: TrackTranslations }) {
       <FresnelSection t={t} />
       <DispersionSection t={t} />
       <AbsorptionSection t={t} />
+      <StudioSection t={t} />
       <RainSection t={t} />
 
       <KeyIdeas t={t} id="glslGlass" items={[
@@ -266,6 +268,34 @@ function AbsorptionSection({ t }: { t: TrackTranslations }) {
       <Callout type="info" t={t}>
         {tx(t, "glslGlass_rtNote", "In a rasteriser you cannot trace the refracted ray through the scene. Real-time glass samples a cube map, the screen behind the object (screen-space refraction, offsetting the UV by the normal), or a blurred copy of the scene for frosted glass. The ball here is ray-traced analytically because it is a sphere.")}
       </Callout>
+    </>
+  );
+}
+
+// ── The glass studio ──────────────────────────────────────────────────────────
+
+function StudioSection({ t }: { t: TrackTranslations }) {
+  return (
+    <>
+      <H2>{tx(t, "glslGlass_studioTitle", "Glass studio: everything in 3D")}</H2>
+      <p>
+        {tx(t, "glslGlass_studioBody",
+          "The studio below puts the whole chapter into one shader. The object is a signed distance function, as in the Raymarching chapter, so any shape works: a sphere, a prism, a cut diamond, a torus, a rounded cube or a thin wine glass. Each pixel sphere-traces its ray to the surface and then follows one path through the glass:")}
+      </p>
+      <LessonTable
+        headers={[tx(t, "glslGlass_stStep", "at each surface"), tx(t, "glslGlass_stWhat", "what the shader does")]}
+        rows={[
+          [tx(t, "glslGlass_st1a", "entering"), tx(t, "glslGlass_st1b", "F from Schlick. Adds F × the reflected sky, keeps (1 − F) of the light and refracts in with η = 1/n.")],
+          [tx(t, "glslGlass_st2a", "inside"), tx(t, "glslGlass_st2b", "marches with the distance negated (−sdf is positive inside) to the far wall, and multiplies by uTint^(d · density): Beer–Lambert.")],
+          [tx(t, "glslGlass_st3a", "leaving, k ≥ 0"), tx(t, "glslGlass_st3b", "refracts out with η = n and the flipped normal; the small inner reflection F is added as a sky look-up instead of being followed.")],
+          [tx(t, "glslGlass_st4a", "leaving, k < 0"), tx(t, "glslGlass_st4b", "total internal reflection: reflect() and keep marching inside. The diamond lives on this case.")],
+          [tx(t, "glslGlass_st5a", "dispersion on"), tx(t, "glslGlass_st5b", "the whole path is traced three times with n − Δn, n and n + Δn, keeping red, green and blue from each.")],
+        ]} />
+      <GlassStudioFigure t={t} />
+      <p>
+        {tx(t, "glslGlass_studioGem",
+          "Why does a diamond sparkle and a glass copy of it does not? Its index is 2.42, so its critical angle is only 24.4°. The pavilion facets below the girdle are cut at about 41°, steeper than that, so light coming in through the top hits them past the critical angle, is totally reflected, crosses to the facet opposite and is reflected again, and leaves back through the top towards your eye. Switch to “count bounces”, then set n to 1.5: with glass the critical angle is 41.8°, most rays leak out of the bottom, and the red disappears. A real brilliant also has 57 facets and a strong dispersion; here 16 crown and 8 pavilion facets are enough to see the effect.")}
+      </p>
     </>
   );
 }

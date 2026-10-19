@@ -485,7 +485,7 @@
   },
   "glsl/glass": {
     "created": "2026-09-24",
-    "updated": "2026-10-18"
+    "updated": "2026-10-19"
   },
   "glsl/fog": {
     "created": "2026-09-24",
@@ -593,7 +593,7 @@
   },
   "math/sequences": {
     "created": "2026-09-25",
-    "updated": "2026-10-13"
+    "updated": "2026-10-19"
   },
   "math/sets": {
     "created": "2026-10-17",

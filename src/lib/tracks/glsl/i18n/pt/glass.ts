@@ -97,7 +97,23 @@ const text: Record<string, string> = {
   glslGlass_absShader: "Para usar a lei, o shader precisa de d, o comprimento do caminho dentro do vidro. Na bola ele vem de graça: é a distância de saída do segundo teste raio–esfera. O shader da bola guarda a tinta em uTint, a cor que sobrevive a uma unidade de vidro, e a eleva à potência d × uDensity. Aumente uDensity: o centro da bola, onde o caminho é mais longo (d = 2), escurece primeiro, e a borda fina continua clara.",
   glslGlass_rtNote: "Num rasterizador, você não consegue traçar o raio refratado pela cena. O vidro em tempo real amostra um cube map, a tela atrás do objeto (refração em espaço de tela, deslocando a UV pela normal) ou uma cópia borrada da cena para vidro jateado. A bola aqui é traçada analiticamente porque é uma esfera.",
   glslGlass_glass_note: "Uma esfera de vidro na frente de uma parede com textura. Cada raio refrata duas vezes (ar → vidro, vidro → ar) com refract(); vermelho, verde e azul usam índices um pouco diferentes, o que separa as cores (dispersão). Lá dentro, a luz é absorvida por Beer–Lambert: uTint é a cor que sobra depois de uma unidade de vidro, elevada à potência d × uDensity. Fresnel mistura o reflexo na borda.",
-  glslGlass_rim_note: "Só o termo de Schlick, pintado numa malha: escuro onde a superfície olha para você, claro em ângulos rasantes. Aumente uPower para afinar a borda. O mesmo número comanda reflexos, luzes de contorno e escudos de campo de força.",
+
+  // ── Glass studio (2026-10-19) ──
+  glslGlass_studioTitle: "Estúdio de vidro: tudo em 3D",
+  glslGlass_studioBody: "O estúdio abaixo junta o capítulo inteiro num shader só. O objeto é uma função de distância com sinal, como no capítulo de Raymarching, então qualquer forma serve: uma esfera, um prisma, um diamante lapidado, um toro, um cubo arredondado ou uma taça de vinho fina. Cada pixel avança o seu raio por sphere tracing até a superfície e então segue um caminho só pelo vidro:",
+  glslGlass_stStep: "em cada superfície",
+  glslGlass_stWhat: "o que o shader faz",
+  glslGlass_st1a: "entrando",
+  glslGlass_st1b: "F vem de Schlick. Soma F × o céu refletido, fica com (1 − F) da luz e refrata para dentro com η = 1/n.",
+  glslGlass_st2a: "lá dentro",
+  glslGlass_st2b: "avança com a distância negada (−sdf é positivo lá dentro) até a parede do outro lado e multiplica por uTint^(d · densidade): Beer–Lambert.",
+  glslGlass_st3a: "saindo, k ≥ 0",
+  glslGlass_st3b: "refrata para fora com η = n e a normal invertida; a pequena reflexão interna F é somada como uma consulta ao céu em vez de ser seguida.",
+  glslGlass_st4a: "saindo, k < 0",
+  glslGlass_st4b: "reflexão interna total: reflect() e continua avançando lá dentro. O diamante vive desse caso.",
+  glslGlass_st5a: "com dispersão",
+  glslGlass_st5b: "o caminho inteiro é traçado três vezes, com n − Δn, n e n + Δn, ficando com o vermelho, o verde e o azul de cada um.",
+  glslGlass_studioGem: "Por que um diamante brilha e uma cópia dele em vidro não? O índice dele é 2,42, então o ângulo crítico é só 24,4°. As facetas do pavilhão, abaixo da cintura, são lapidadas a uns 41°, mais inclinadas que isso, então a luz que entra por cima bate nelas além do ângulo crítico, é totalmente refletida, atravessa até a faceta oposta, é refletida de novo e sai de volta por cima, em direção ao seu olho. Mude para “contar quiques” e depois ponha n = 1,5: no vidro o ângulo crítico é 41,8°, a maior parte dos raios vaza por baixo, e o vermelho some. Um brilhante de verdade tem 57 facetas e uma dispersão forte; aqui 16 facetas na coroa e 8 no pavilhão bastam para ver o efeito.",
 
   // ── Rain on a window ──
   glslGlass_winTitle: "Chuva numa janela",

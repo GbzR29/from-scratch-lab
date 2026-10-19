@@ -12,6 +12,17 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ## Outubro de 2026
 
+### 2026-10-19
+
+- **Trilha de GLSL, "Vidro, refração e Fresnel": seção nova "Estúdio de vidro: tudo em 3D".** O widget novo `GlassStudioFigure` traça por raymarching, num shader só (`studioShader.ts`), um objeto de vidro debaixo de um céu de verdade (cube maps do site) e sobre um piso de ladrilhos.
+  - **Objetos:** esfera, prisma, diamante lapidado (16 facetas na coroa, 8 no pavilhão), toro, cubo arredondado e taça de vinho.
+  - **Interação:** câmera orbital com zoom, giro automático, índice n com atalhos para água, vidro e diamante, dispersão, absorção (Beer–Lambert com tinta escolhível), número de quiques internos e escolha do céu.
+  - **Modos de visualização:** tudo, só F, só reflexo, só refração e "contar quiques", que colore cada pixel pelo número de reflexões internas totais e mostra por que o diamante brilha e o vidro não.
+  - O texto novo explica, numa tabela, o que o shader faz em cada superfície, e por que a lapidação do diamante prende a luz. Em EN e PT.
+  - Saiu o preset "Fresnel on a mesh" do playground, que só mostrava formas cinzas; a bola de vidro continua lá como shader editável.
+
+- **Matemática, Sequências e séries:** seção nova "O logaritmo transforma uma PG numa PA", com a dedução (log aₙ = log a₁ + (n − 1) log r), um exemplo e os usos (gráficos em escala log, régua de cálculo, decibéis, pH), em EN e PT.
+
 ### 2026-10-18
 
 - **Trilha de GLSL, capítulo "Vidro, refração e Fresnel" revisado (lote 1 de 4 do plano vidro + neve).** A teoria foi reescrita para explicar cada termo, em EN e PT:
