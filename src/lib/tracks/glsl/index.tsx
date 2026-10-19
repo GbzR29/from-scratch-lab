@@ -37,7 +37,8 @@ export const glslChapters: Chapter[] = [
   { id: "glass",       section: EFFECTS, title: "Glass, Refraction & Fresnel", minRead: 30, load: () => import("./chapters/effects/glass").then((m) => m.GlassContent) },
   { id: "gems-bubbles", section: EFFECTS, title: "Gems & Bubbles",          minRead: 24, load: () => import("./chapters/effects/gems").then((m) => m.GemsContent) },
   { id: "fog",       section: EFFECTS, title: "Fog",                         minRead: 18, load: () => import("./chapters/effects/fog").then((m) => m.FogContent) },
-  { id: "stylized",    section: EFFECTS, title: "Toon, Dissolve & Hologram",   minRead: 11, load: () => import("./chapters/effects/stylized").then((m) => m.StylizedContent) },
+  { id: "snow",        section: EFFECTS, title: "Snow & Blizzards",            minRead: 24, load: () => import("./chapters/effects/snow").then((m) => m.SnowContent) },
+  { id: "stylized",   section: EFFECTS, title: "Toon, Dissolve & Hologram",   minRead: 11, load: () => import("./chapters/effects/stylized").then((m) => m.StylizedContent) },
   // ── Raymarching ─────────────────────────────────────────────────────────
   { id: "raymarching", section: RAYMARCH, title: "Raymarching",                minRead: 17, load: () => import("./chapters/raymarching").then((m) => m.RaymarchingContent) },
   { id: "black-hole",  section: RAYMARCH, title: "Black Holes: Bending Light", minRead: 28, load: () => import("./chapters/blackhole").then((m) => m.BlackHoleContent) },

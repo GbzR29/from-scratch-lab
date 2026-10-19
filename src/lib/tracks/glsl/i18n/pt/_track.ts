@@ -20,6 +20,7 @@ const track = {
     glass: "Vidro, refração e Fresnel",
     "gems-bubbles": "Gemas e bolhas",
     fog: "Neblina",
+    snow: "Neve e nevascas",
     stylized: "Toon, dissolve e holograma",
     raymarching: "Raymarching",
     "black-hole": "Buracos negros: a luz que se curva",

@@ -19,11 +19,12 @@ import raytracing from "./raytracing";
 import sdf from "./sdf";
 import shaderClass from "./shader-class";
 import shapes from "./shapes";
+import snow from "./snow";
 import types from "./types";
 import underwater from "./underwater";
 
 const bundle: LessonText = {
-  strings: { ...blackhole, ...builtinVars, ...builtins, ...effects, ...fragcoord, ...gems, ...glass, ...noise, ...ocean, ...playground, ...pool, ...raymarching, ...river, ...raytracing, ...sdf, ...shaderClass, ...shapes, ...types, ...underwater },
+  strings: { ...blackhole, ...builtinVars, ...builtins, ...effects, ...fragcoord, ...gems, ...glass, ...noise, ...ocean, ...playground, ...pool, ...raymarching, ...river, ...raytracing, ...sdf, ...shaderClass, ...shapes, ...snow, ...types, ...underwater },
   titles: track.titles,
   sections: track.sections,
 };

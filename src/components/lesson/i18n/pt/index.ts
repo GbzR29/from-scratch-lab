@@ -62,12 +62,13 @@ import post from "./post";
 import practice from "./practice";
 import rt from "./rt";
 import sky from "./sky";
+import snow from "./snow";
 import special from "./special";
 import tech from "./tech";
 import underwater from "./underwater";
 import vulkan from "./vulkan";
 import water from "./water";
 
-const bundle: Record<string, string> = { ...advgl, ...ai, ...aiNeural, ...aiDeep, ...aiRl, ...asm, ...asmFlow, ...asmC, ...asmPerf, ...advlighting, ...blackhole, ...cLang, ...cppLang, ...cppOwn, ...cppObj, ...cppGen, ...cppStd, ...cppSys, ...figures, ...fog, ...gamedev, ...gems, ...glass, ...glintro, ...glsl, ...lighting, ...markov, ...math, ...mathAlgebra, ...mathGeometry, ...mathTrig, ...mathLinAlg, ...mathCalculus, ...mathProbability, ...mathPractice, ...mathLogic, ...mathDiscrete, ...mathAnalysis, ...music, ...musicScore, ...musicTuning, ...musicIntervals, ...musicScales, ...musicMinor, ...ocean, ...pbr, ...perf, ...physics, ...physicsDyn, ...physicsCons, ...physicsWave, ...physicsHeat, ...physicsElec, ...physicsLight, ...physicsMech, ...physicsRel, ...pool, ...post, ...practice, ...river, ...rt, ...sky, ...special, ...tech, ...underwater, ...vulkan, ...water };
+const bundle: Record<string, string> = { ...advgl, ...ai, ...aiNeural, ...aiDeep, ...aiRl, ...asm, ...asmFlow, ...asmC, ...asmPerf, ...advlighting, ...blackhole, ...cLang, ...cppLang, ...cppOwn, ...cppObj, ...cppGen, ...cppStd, ...cppSys, ...figures, ...fog, ...gamedev, ...gems, ...glass, ...glintro, ...glsl, ...lighting, ...markov, ...math, ...mathAlgebra, ...mathGeometry, ...mathTrig, ...mathLinAlg, ...mathCalculus, ...mathProbability, ...mathPractice, ...mathLogic, ...mathDiscrete, ...mathAnalysis, ...music, ...musicScore, ...musicTuning, ...musicIntervals, ...musicScales, ...musicMinor, ...ocean, ...pbr, ...perf, ...physics, ...physicsDyn, ...physicsCons, ...physicsWave, ...physicsHeat, ...physicsElec, ...physicsLight, ...physicsMech, ...physicsRel, ...pool, ...post, ...practice, ...river, ...rt, ...sky, ...snow, ...special, ...tech, ...underwater, ...vulkan, ...water };
 
 export default bundle;
