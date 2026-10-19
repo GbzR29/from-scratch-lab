@@ -17,15 +17,17 @@ import { STUDIO_FS } from "./studioShader";
 // chapter's pieces: the Fresnel weight alone, the reflection alone, the
 // refraction alone, and a count of total internal reflections per pixel.
 
-type Shape = "sphere" | "prism" | "gem" | "torus" | "cube" | "wine";
+type Shape = "sphere" | "prism" | "torus" | "cube" | "wine";
 type View = "full" | "fresnel" | "reflect" | "refract" | "bounces";
-const SHAPES: Shape[] = ["sphere", "prism", "gem", "torus", "cube", "wine"];
+const SHAPES: Shape[] = ["sphere", "prism", "torus", "cube", "wine"];
+/** uShape in studioShader.ts (2 was the old diamond; cut gems have their own chapter). */
+const SHAPE_ID: Record<Shape, number> = { sphere: 0, prism: 1, torus: 3, cube: 4, wine: 5 };
 const VIEWS: View[] = ["full", "fresnel", "reflect", "refract", "bounces"];
-const SHAPE_EN: Record<Shape, string> = { sphere: "sphere", prism: "prism", gem: "diamond", torus: "torus", cube: "rounded cube", wine: "wine glass" };
+const SHAPE_EN: Record<Shape, string> = { sphere: "sphere", prism: "prism", torus: "torus", cube: "rounded cube", wine: "wine glass" };
 const VIEW_EN: Record<View, string> = { full: "everything", fresnel: "F only", reflect: "reflection", refract: "refraction", bounces: "count bounces" };
 /** What each shape looks best with: index, internal bounces followed. */
 const SUGGEST: Record<Shape, { ior: number; bounces: number }> = {
-  sphere: { ior: 1.5, bounces: 3 }, prism: { ior: 1.5, bounces: 4 }, gem: { ior: 2.42, bounces: 7 },
+  sphere: { ior: 1.5, bounces: 3 }, prism: { ior: 1.5, bounces: 4 },
   torus: { ior: 1.5, bounces: 3 }, cube: { ior: 1.5, bounces: 4 }, wine: { ior: 1.5, bounces: 3 },
 };
 const MEDIA: [string, number][] = [["water", 1.33], ["glass", 1.5], ["diamond", 2.42]];
@@ -39,13 +41,13 @@ const hexToRgb = (h: string) => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 1
 
 export function GlassStudioFigure({ t }: { t?: TrackTranslations }) {
   const [look, setLook] = useState<Look>({ yaw: 0.6, pitch: -0.32, fov: 0.85 });
-  const [shape, setShape] = useState<Shape>("gem");
+  const [shape, setShape] = useState<Shape>("sphere");
   const [view, setView] = useState<View>("full");
-  const [ior, setIor] = useState(2.42);
+  const [ior, setIor] = useState(1.5);
   const [disp, setDisp] = useState(0.03);
   const [density, setDensity] = useState(0.3);
   const [tint, setTint] = useState("#d9f0ea");
-  const [bounces, setBounces] = useState(7);
+  const [bounces, setBounces] = useState(3);
   const [spin, setSpin] = useState(true);
   const sky = useSky({ initial: "sky_04" });
   const vis = useVisible<HTMLDivElement>();
@@ -75,7 +77,7 @@ export function GlassStudioFigure({ t }: { t?: TrackTranslations }) {
     gl.uniform3fv(u("uCamU"), b.u);
     gl.uniform1f(u("uTanHalf"), Math.tan(look.fov / 2));
     gl.uniform1f(u("uAspect"), size.aspect);
-    gl.uniform1i(u("uShape"), SHAPES.indexOf(shape));
+    gl.uniform1i(u("uShape"), SHAPE_ID[shape]);
     gl.uniform1i(u("uView"), VIEWS.indexOf(view));
     gl.uniform1i(u("uBounces"), bounces);
     gl.uniform1i(u("uZero"), 0);
@@ -94,7 +96,7 @@ export function GlassStudioFigure({ t }: { t?: TrackTranslations }) {
     fresnel: tx(t, "figStudio_vFresnel", "The Fresnel weight F of the first surface, black = 0, white = 1. It is dark where the surface faces you and turns white towards every rim, on every shape. That is the number the full image uses to mix reflection over refraction."),
     reflect: tx(t, "figStudio_vReflect", "Only the reflected ray of the first surface: the object as a perfect mirror. The full image shows this much of it at each pixel: F."),
     refract: tx(t, "figStudio_vRefract", "Only light that goes through, with no partial reflections. Total internal reflection is kept, since it is not optional: past the critical angle refract() gives nothing else."),
-    bounces: tx(t, "figStudio_vBounces", "Each pixel coloured by how many times its path was totally reflected inside: grey none, blue one, red five or more. The diamond lights up: its facets are cut so that light entering the top bounces off the pavilion and comes back out of the top. Lower n towards glass and watch the red die out as the critical angle widens."),
+    bounces: tx(t, "figStudio_vBounces", "Each pixel coloured by how many times its path was totally reflected inside: grey none, blue one, red five or more. The prism and the rounded cube light up where light meets an inner face past the critical angle. Raise n towards diamond (2.42) and the colours spread as the critical angle narrows; lower it towards water and they die out."),
   };
 
   return (

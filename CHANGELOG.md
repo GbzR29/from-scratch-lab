@@ -14,6 +14,23 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-19
 
+- **Trilha de GLSL: sem widgets nem explicações repetidas entre capítulos.**
+  - **Vidro → Chuva no vidro:** a seção "Chuva numa janela" saiu do capítulo de vidro e foi para "Chuva no vidro", junto com o Laboratório de Janela (o widget antigo, mais bonito). O widget novo `RainGlassFigure` foi apagado. O capítulo de chuva junta a física do capítulo novo (quando a gota escorre, gota como lente, ponto de orvalho) com a técnica do laboratório (campo de alturas, dente de serra, rastros, mips, vidro jateado e dispersão).
+  - **Laboratório de Janela melhorado:** o embaçado volta por e^(−k·dt) com um controle de k (antes voltava linear e com degraus de arredondamento); limpar com o ponteiro carimba discos ao longo do segmento, então um movimento rápido não deixa falhas; controles, vistas e presets traduzidos para PT.
+  - **Vidro → Gemas e bolhas:** o diamante saiu do estúdio de vidro (forma, código do shader e parágrafo); o estúdio agora aponta para o capítulo de gemas, que explica o brilho do diamante com o brilhante de 57 facetas.
+
+- **Trilha de GLSL: capítulo novo "Rachaduras e estilhaços" (`/GLSL/shatter`), em Receitas de efeitos, logo depois de Chuva no vidro.**
+  - **Por que o vidro quebra tão fácil:** resistência ideal E/10 ≈ 7 GPa contra 30–100 MPa de uma janela; concentração de tensão de Inglis, σ(1 + 2a/b); dedução do balanço de energia de Griffith (σf = √(2Eγ/πa), tenacidade K_IC ≈ 0,75 MPa·√m) com fórmula ao vivo da resistência pelo tamanho do defeito; por que a trinca dispara e se ramifica a ~1500 m/s.
+  - **Widget `FlawFigure`:** placa tracionada com um defeito elíptico; as linhas de carga se amontoam nas pontas (furo redondo, fenda, trinca afiada) e o fator de Inglis ao vivo.
+  - **Teia de aranha e cubinhos:** trincas radiais pela flexão e anéis depois no vidro comum; o vidro temperado, a energia guardada u = σ²/2E e por que ele vira cubinhos.
+  - **Trincas por Voronoi:** distância exata até a borda (segunda passada), Voronoi em coordenadas log-polares em volta do impacto (q = (S·ln r/r0, N·θ/2π), θ que dá a volta), volta da distância para pixels pela jacobiana, frente da trinca v·t, anéis que quebram depois e só em parte, inclinação por caco.
+  - **Widget `CrackFigure`:** janela diante de um jardim; clique para jogar a pedra; vidro de janela (teia) ou temperado (cubinhos), trincas espalhando em câmera lenta, cacos inclinados que deslocam o fundo e brilham, bordas verdes; vistas "cacos" e "grade deformada".
+  - **As faces de uma quebra:** por que a borda é verde (ferro + Beer–Lambert ao longo do vidro), espelho, névoa e franja, σf·√r_m = A.
+  - **Cacos que voam:** placa pré-fraturada (recorte por semiplanos no CPU), todos os cacos numa malha só com índice do caco por vértice, dedução da fórmula fechada (parábola + giro por quatérnio) e fórmula ao vivo do tempo até o chão.
+  - **Textura de animação de vértices (VAT):** simulação de corpos rígidos com impulsos no chão, atrito e sono, gravada numa textura RGBA32F (linha 2f = centro, 2f + 1 = quatérnio), leitura com mistura entre quadros e o cuidado com q e −q; tabela comparando fórmula fechada, VAT, partículas na GPU e física no CPU.
+  - **Widget `ShatterFigure`:** placa 3D de cacos de Voronoi, clique na placa para jogar a pedra, orbitar; fórmula fechada (os cacos atravessam o chão) contra textura gravada (quicam e assentam); vistas "ids dos cacos" e "a textura" (a VAT desenhada como imagem); faces de fratura verdes que só aparecem quando a trinca chega.
+  - Em EN e PT.
+
 - **Trilha de GLSL: capítulo novo "Chuva no vidro" (`/GLSL/rain-glass`), em Receitas de efeitos, logo depois de Fogo e fumaça.**
   - **Por que as gotas grudam e depois escorrem:** tensão superficial, ângulo de contato e histerese; dedução do raio a partir do qual uma gota escorre (r_c ≈ 1,7 mm numa janela) com fórmula ao vivo; stick-slip, gotas que se engolem e seguem rastros molhados.
   - **Cada gota é uma lente:** f = R/(n − 1) ≈ 3R e a imagem invertida dentro de cada gota; a refração como deslocamento do fundo pela inclinação da água, δ ≈ (n − 1)·∇h.

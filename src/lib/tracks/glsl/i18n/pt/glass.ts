@@ -7,7 +7,6 @@ const text: Record<string, string> = {
   glslGlass_goal2: "Calcular quanta luz reflete com o termo de Fresnel.",
   glslGlass_goal3: "Adicionar dispersão e absorção colorida.",
   glslGlass_goal4: "Desenhar vidro em tempo real a partir de um cube map ou da tela: liso, jateado, estampado ou vitral.",
-  glslGlass_goal5: "Renderizar chuva escorrendo por uma janela.",
 
   // ── Refraction (2026-10-18) ──
   glslGlass_snellTitle: "Refração",
@@ -142,13 +141,13 @@ const text: Record<string, string> = {
   glslGlass_caTitle: "Aberração cromática e a superfície que falta",
   glslGlass_caBody: "A aberração cromática é o truque da dispersão de antes: três chamadas de refract() com três índices, ficando com o vermelho da primeira, o verde da segunda e o azul da terceira. Num rasterizador cada uma é só uma leitura de textura, então os jogos a usam à vontade, muitas vezes com um Δn bem maior que o do vidro real. Repare também no que o nó e a esfera erram: eles refratam uma vez só, na frente. Uma bola de verdade refrata de novo na saída e vira o mundo de cabeça para baixo, como fazem a bola traçada e o estúdio. A correção de costume desenha antes as faces de trás numa textura de normais e profundidades, para que a passada do vidro possa refratar uma segunda vez onde o raio sai (a refração em espaço de imagem de Wyman, 2005).",
   glslGlass_paneTitle: "Vidro estampado e vitral",
-  glslGlass_paneBody: "Uma vidraça plana não desvia a vista: o raio vira na entrada e desvira na saída. O que faz o vidro do banheiro esconder o que está atrás é um desenho prensado na superfície. Dê à superfície uma altura h(p) e a inclinação ∇h a entorta, exatamente como as gotas de chuva mais adiante neste capítulo: leia a vista em uv − k·∇h. Canelado, martelado e pirâmides são só h diferentes. O vitral é o caso oposto: a superfície é quase plana e a cor vem da absorção. Cada peça é uma célula de Voronoi com a sua cor e a sua espessura irregular, então ela deixa passar pow(cor, d·densidade), e o chumbo fica onde os dois centros de célula mais próximos estão quase à mesma distância (F₂ − F₁ perto de 0).",
+  glslGlass_paneBody: "Uma vidraça plana não desvia a vista: o raio vira na entrada e desvira na saída. O que faz o vidro do banheiro esconder o que está atrás é um desenho prensado na superfície. Dê à superfície uma altura h(p) e a inclinação ∇h a entorta, exatamente como as gotas de chuva do capítulo Chuva no vidro: leia a vista em uv − k·∇h. Canelado, martelado e pirâmides são só h diferentes. O vitral é o caso oposto: a superfície é quase plana e a cor vem da absorção. Cada peça é uma célula de Voronoi com a sua cor e a sua espessura irregular, então ela deixa passar pow(cor, d·densidade), e o chumbo fica onde os dois centros de célula mais próximos estão quase à mesma distância (F₂ − F₁ perto de 0).",
   glslGlassPane_patterned_note: "Uma altura h(p) é prensada na vidraça: caneluras, covinhas de martelo, uma grade de pirâmides ou blocos de vidro. A luz se curva onde a superfície está inclinada, então o jardim atrás é lido em uv − k·∇h, com ∇h medido por diferenças finitas. Os três canais usam k um pouco diferentes, o que deixa bordas de arco-íris nas luzes.",
   glslGlassPane_stained_note: "As células de Voronoi são os pedaços de vidro, e as bordas entre elas são o chumbo. Cada pedaço tem a sua cor, a luz que sobra depois de uma unidade de espessura, e a sua espessura irregular d, então deixa passar pow(cor, d·densidade): Beer–Lambert de novo. Vidro feito à mão é ondulado, então o jardim atrás é lido através de um pequeno deslocamento de ruído. Aumente a densidade e os pedaços grossos ficam quase pretos primeiro.",
 
   // ── Glass studio (2026-10-19) ──
   glslGlass_studioTitle: "Estúdio de vidro: tudo em 3D",
-  glslGlass_studioBody: "O estúdio abaixo junta o capítulo inteiro num shader só. O objeto é uma função de distância com sinal, como no capítulo de Raymarching, então qualquer forma serve: uma esfera, um prisma, um diamante lapidado, um toro, um cubo arredondado ou uma taça de vinho fina. Cada pixel avança o seu raio por sphere tracing até a superfície e então segue um caminho só pelo vidro:",
+  glslGlass_studioBody: "O estúdio abaixo junta o capítulo inteiro num shader só. O objeto é uma função de distância com sinal, como no capítulo de Raymarching, então qualquer forma serve: uma esfera, um prisma, um toro, um cubo arredondado ou uma taça de vinho fina. Cada pixel avança o seu raio por sphere tracing até a superfície e então segue um caminho só pelo vidro:",
   glslGlass_stStep: "em cada superfície",
   glslGlass_stWhat: "o que o shader faz",
   glslGlass_st1a: "entrando",
@@ -158,33 +157,10 @@ const text: Record<string, string> = {
   glslGlass_st3a: "saindo, k ≥ 0",
   glslGlass_st3b: "refrata para fora com η = n e a normal invertida; a pequena reflexão interna F é somada como uma consulta ao céu em vez de ser seguida.",
   glslGlass_st4a: "saindo, k < 0",
-  glslGlass_st4b: "reflexão interna total: reflect() e continua avançando lá dentro. O diamante vive desse caso.",
+  glslGlass_st4b: "reflexão interna total: reflect() e continua avançando lá dentro. As gemas lapidadas vivem desse caso (próximo capítulo).",
   glslGlass_st5a: "com dispersão",
   glslGlass_st5b: "o caminho inteiro é traçado três vezes, com n − Δn, n e n + Δn, ficando com o vermelho, o verde e o azul de cada um.",
-  glslGlass_studioGem: "Por que um diamante brilha e uma cópia dele em vidro não? O índice dele é 2,42, então o ângulo crítico é só 24,4°. As facetas do pavilhão, abaixo da cintura, são lapidadas a uns 41°, mais inclinadas que isso, então a luz que entra por cima bate nelas além do ângulo crítico, é totalmente refletida, atravessa até a faceta oposta, é refletida de novo e sai de volta por cima, em direção ao seu olho. Mude para “contar quiques” e depois ponha n = 1,5: no vidro o ângulo crítico é 41,8°, a maior parte dos raios vaza por baixo, e o vermelho some. Um brilhante de verdade tem 57 facetas e uma dispersão forte; aqui 16 facetas na coroa e 8 no pavilhão bastam para ver o efeito.",
-
-  // ── Rain on a window ──
-  glslGlass_winTitle: "Chuva numa janela",
-  glslGlass_winBody: "Uma janela com chuva junta tudo deste capítulo num vidro plano. Cada gota é uma pequena lente que curva a rua atrás dela. A condensação em volta das gotas espalha a luz e borra a vista, e uma gota que escorre limpa essa condensação e deixa um rastro limpo. A versão em tempo real mais conhecida é o Shadertoy “Heartfelt”, de Martijn Steinrucken (BigWIngs). O laboratório abaixo reconstrói a técnica dele passo a passo e acrescenta vidro jateado, dispersão e uma condensação que você pode limpar com o ponteiro.",
-  glslGlass_dropHTitle: "Gotas como campo de alturas",
-  glslGlass_dropHBody: "Uma gota é modelada como as marolas da água: um escalar c(uv) que é 0 no vidro seco e sobe em direção a 1 dentro de uma gota, uma aproximação grosseira da espessura da gota. Onde o vidro está inclinado por uma gota, a luz se curva numa quantidade proporcional à inclinação (a forma de ângulos pequenos da lei de Snell). Então o fundo é lido com um deslocamento igual ao gradiente de c, estimado a partir de duas avaliações extras a um pixel de distância:",
-  glslGlass_offLabel: "Deslocamento de refração a partir do campo de gotas",
-  glslGlass_wGrad: "diferenças finitas com ε = 0,001, e é por isso que drops() roda três vezes por pixel",
-  glslGlass_wK: "o slider de refração: quão fortemente uma inclinação curva a vista (representa (1 − 1/n) × a distância até a cena)",
-  glslGlass_cellsTitle: "Milhares de gotas a partir de uma grade",
-  glslGlass_cellsBody: "Como nas estrelas e nas gotas de chuva sobre a água, nenhuma gota é guardada. O vidro é cortado em células, 6 vezes mais altas que largas porque as gotas escorrem na vertical, e cada célula faz o hash do seu id em três números aleatórios n = (n.x, n.y, n.z). n.x posiciona a gota na horizontal, n.z dá a ela o seu próprio relógio e balanço, e cada coluna de células é deslocada por uma quantidade aleatória para que as linhas nunca se alinhem. Três camadas são somadas: gotas minúsculas paradas numa grade de 40 células e duas camadas de gotas que escorrem, a segunda com 1,85× a escala para variar os tamanhos.",
-  glslGlass_sawLabel: "Grudar e depois escorrer: o dente de serra",
-  glslGlass_wSaw: "sobe suavemente enquanto t vai de 0 a b = 0,85 e depois cai de volta a 0 nos 15% restantes. Uma subida lenta e uma queda repentina",
-  glslGlass_wY: "a altura da gota dentro da sua célula. A grade inteira rola para baixo a uma velocidade constante enquanto a gota sobe dentro dela quase na mesma velocidade, então na tela a gota mal se arrasta. Quando o dente de serra cai, a gota salta para baixo na sua célula. É o movimento de grudar e escorrer das gotas de verdade, seguras pela tensão superficial até ficarem pesadas o bastante",
-  glslGlass_wX: "a posição horizontal: n.x − ½ mais um balanço sin(y + sin y), cuja amplitude diminui perto das laterais da célula para a gota nunca sair da sua coluna",
-  glslGlass_trailBody: "O rastro é uma faixa vertical acima da gota. Ele é estreito onde a gota acabou de passar e mais estreito ainda mais acima, já que r diminui com a altura. Ao longo dele, um padrão repetido fract(10·v) posiciona gotinhas deixadas para trás, e é por isso que um rastro de verdade parece um colar de contas. As gotas paradas usam o mesmo dente de serra com b = 0,025: elas aparecem quase instantaneamente (uma gota de chuva batendo) e evaporam ao longo do resto do ciclo. Por fim, as camadas são somadas e passadas por smoothstep(0,3, 1, c). Isso funde gotas vizinhas numa superfície suave, do jeito que gotas de água que se tocam se juntam.",
-  glslGlass_blurTitle: "Desfoque a partir da cadeia de mips",
-  glslGlass_lodLabel: "Escolhendo quão borrado fica cada pixel",
-  glslGlass_wLod: "o nível de mip passado para textureLod. O nível L é a imagem com média de 2^L × 2^L texels, então borrar por cerca de R pixels significa ler o nível log₂R",
-  glslGlass_wF: "condensação neste pixel: o slider de névoa × a máscara de limpeza × (1 − rastro), porque gotas que escorrem limpam o vidro por onde passam",
-  glslGlass_wC: "a máscara das gotas: dentro de uma gota o nível vai a 0, então a vista fica nítida. Uma gota é água límpida no meio da névoa",
-  glslGlass_lodNote: "Mipmaps dão desfoque variável de graça, mas em forma de caixa: uma luz forte vira um quadrado. Seis amostras extras em volta de um círculo, no mesmo nível, o arredondam num bokeh de verdade. A máscara de limpeza é uma pequena textura de 192×108 que a página atualiza a partir do ponteiro e que volta a embaçar um pouco a cada frame.",
-  glslGlass_frostBody: "O vidro jateado é uma superfície áspera. Todo raio que o atravessa é refratado numa direção um pouco aleatória, e um pixel tira a média de muitos desses raios, o que é um desfoque cujo raio cresce com a aspereza. A sua forma barata é um nível de mip proporcional ao jateado, mais uma variação por pixel do deslocamento para o aspecto granulado do vidro gravado. A dispersão reaproveita o deslocamento da gota três vezes, com forças um pouco diferentes para vermelho, verde e azul (1 ± 0,3k), então luzes fortes vistas através de uma gota ganham franjas coloridas, como a bola de vidro acima.",
+  glslGlass_studioNext: "Mude para “contar quiques” e aumente n: quanto maior o índice, mais estreito o ângulo crítico, e mais de cada caminho fica preso lá dentro por reflexão interna total. As gemas lapidadas são construídas inteiras em cima disso, e ganham um capítulo próprio logo a seguir, com um brilhante de verdade de 57 facetas e o seu fogo.",
 
   // ── Key ideas ──
   glslGlass_key0: "A luz anda a c/n dentro de um material; a lei de Snell n₁ sin θ₁ = n₂ sin θ₂ diz quanto um raio se curva.",
@@ -196,10 +172,6 @@ const text: Record<string, string> = {
   glslGlass_key6: "Dispersão: n(λ) ≈ A + B/λ²; um shader refrata R, G e B com três η um pouco diferentes.",
   glslGlass_key7: "Prisma: as duas refrações viram a luz para o mesmo lado; no desvio mínimo, n = sin((A + D)/2) / sin(A/2).",
   glslGlass_key8: "Absorção: T = e^(−σ·d) por canal; em GLSL pow(tint, d), com d o comprimento do caminho lá dentro.",
-  glslGlass_key9: "Um rasterizador não consegue seguir T. Ele lê um cube map em T (só o céu), a tela onde P + d·T cai (só o que está na tela) ou um mip borrado dela (jateado).",
-  glslGlass_key10: "Chuva no vidro: as gotas são um campo de alturas c; leia a cena em uv + k·∇c.",
-  glslGlass_key11: "As gotas vêm de células de grade com hash; um dente de serra dá o movimento de grudar e escorrer; os rastros limpam a névoa.",
-  glslGlass_key12: "Desfoque = nível de mip ≈ log₂(raio); a condensação e o jateado escolhem o nível, as gotas o forçam a 0.",
-};
+  glslGlass_key9: "Um rasterizador não consegue seguir T. Ele lê um cube map em T (só o céu), a tela onde P + d·T cai (só o que está na tela) ou um mip borrado dela (jateado).",};
 
 export default text;

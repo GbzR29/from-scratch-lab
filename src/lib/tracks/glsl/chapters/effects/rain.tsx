@@ -1,14 +1,14 @@
 // src/lib/tracks/glsl/chapters/effects/rain.tsx
 "use client";
 
-import { Callout, CodeBlock, H2, H3 } from "@/components/lesson/LessonComponents";
+import { Callout, H2, H3 } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
 import { Derivation } from "@/components/lesson/Derivation";
 import { LiveFormula } from "@/components/lesson/LiveFormula";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
-import { RainGlassFigure } from "@/components/lesson/figures/rain/RainGlassFigure";
+import { WindowLabFigure } from "@/components/lesson/figures/glass/WindowLabFigure";
 import { slideNumbers, dewNumbers } from "../../live/rain";
 
 const r = String.raw;
@@ -21,8 +21,8 @@ export function RainContent({ t }: { t: TrackTranslations }) {
   return (
     <Article>
       <Lead>
-        {tx(t, "glslRain_intro",
-          "A rainy window is one of the most recognisable shots in film and games, and almost everything in it is a small piece of physics: drops that cling to the glass until they are suddenly heavy enough to slide, paths that wander and follow each other, a whole upside-down street inside every drop, and fog on the inside of the glass that a hand can wipe away. This chapter builds it from the tools of the last few chapters: hashed cells, a height field, refraction, mipmaps and a ping-pong texture.")}
+        {tx(t, "glslRain_intro2",
+          "A rainy window is one of the most recognisable shots in film and games, and almost everything in it is a small piece of physics: drops that cling to the glass until they are suddenly heavy enough to slide, paths that wander and follow each other, a whole upside-down street inside every drop, and fog on the inside of the glass that a hand can wipe away. This chapter explains that physics, then builds the effect from the tools of the last few chapters: hashed cells, a height field, refraction and mipmaps.")}
       </Lead>
 
       <Goals t={t} id="glslRain" items={[
@@ -41,11 +41,11 @@ export function RainContent({ t }: { t: TrackTranslations }) {
         "A drop on glass is held by contact-angle hysteresis: it slides once its weight beats γ·w·(cos θR − cos θA), which for water on glass means a radius of 1–2 mm.",
         "Drops slide in jumps (stick-slip), swallow the drops they touch, and prefer old wet trails, where less holds them back.",
         "A drop is a strong lens, f ≈ R/(n − 1) ≈ 3R: every street light beyond a few millimetres forms a small inverted image inside it.",
-        "In a shader, refraction through a thin layer of water is a shift of the background by the surface's slope, δ ≈ (n − 1)·slope.",
-        "Rain is hashed cells again: tall cells for sliding drops, a time function for their stick-slip, one path shared by drop and trail, small cells for still drops.",
+        "In a shader, refraction through a thin layer of water is a shift of the background by the surface's slope: read the scene at uv + k·∇c.",
+        "Rain is hashed cells: tall cells in two layers for sliding drops, a sawtooth for their stick-slip, a strip above each drop for its trail, a fine grid for still drops.",
         "Lighting and refraction come from one height field, differenced in x and y.",
-        "Glass fogs below the dew point; fogged glass is the background read at a blurry mip level, clear where drops, trails and a wiping mask say so.",
-        "The wiping mask is the only memory: a ping-pong texture that decays by e^(−k·dt), exactly like the footprints in the snow.",
+        "Glass fogs below the dew point; fogged glass is the background read at a blurry mip level, sharp where drops, trails and a wiping mask say so.",
+        "The wiping mask is the only memory: a small texture that fogs back by e^(−k·dt) each frame, whatever the frame rate.",
       ]} />
     </Article>
   );
@@ -119,14 +119,18 @@ function LensSection({ t }: { t: TrackTranslations }) {
         {tx(t, "glslRain_prismBody",
           "A shader does not need to trace the lens. Think of the drop as many tiny prisms, each tilted like the drop's surface at that point. A thin prism of angle A turns light by about (n − 1)·A, and for a surface with slope s the angle is close to s. So refraction becomes a shift: read the background a little away from the pixel, by an amount proportional to the surface's slope there. At a drop's centre the slope is zero and nothing moves; towards its edge the slope grows, the shift grows, and past the middle the pixel is reading the far side of the scene: the image flips.")}
       </p>
-      <Equation label={tx(t, "glslRain_shiftLabel", "Refraction as a shift")}
+      <H3>{tx(t, "glslRain_dropHTitle", "Drops as a height field")}</H3>
+      <p>
+        {tx(t, "glslRain_dropHBody",
+          "A drop is modelled like the water ripples: a scalar c(uv) that is 0 on dry glass and rises toward 1 inside a drop, a rough stand-in for the drop's thickness. Its slope is estimated from two extra evaluations a tiny step apart, and the background is read shifted by that slope. The same slope also gives the normal for lighting, so one height field drives everything:")}
+      </p>
+      <Equation label={tx(t, "glslRain_offLabel", "Refraction offset from the drop field")}
         where={[
-          [r`\nabla h`, tx(t, "glslRain_wGrad", "the slope of the water's surface: how fast its height h changes along x and y")],
-          [r`k`, tx(t, "glslRain_wK", "the lens strength: (n − 1) times the distance to what is seen, folded into one number")],
+          [r`\nabla c \approx \tfrac{1}{\varepsilon}\big(c(u{+}\varepsilon,v) - c,\ c(u,v{+}\varepsilon) - c\big)`, tx(t, "glslRain_wGrad", "finite differences with ε = 0.001, which is why drops() runs three times per pixel")],
+          [r`k`, tx(t, "glslRain_wK", "the refraction slider: how strongly a slope bends the view. It stands for (n − 1) × the distance to the scene, folded into one number")],
         ]}
-        words={tx(t, "glslRain_shiftWords", "Each pixel reads the scene behind the glass from a point moved against the slope of the water. The same slope also gives the normal for lighting, so one height field drives everything.")}
-        glsl={`vec2 grad = vec2(h(p + ex) - h(p), h(p + ey) - h(p)) / e;\nvec3 behind = textureLod(scene, uv - grad * k, 0.0).rgb;`}>
-        {r`\delta \approx (n - 1)\,\nabla h, \qquad \mathbf{uv}' = \mathbf{uv} - k\,\nabla h`}
+        glsl={`vec2 n = vec2(drops(uv + e).x - c, drops(uv + e.yx).x - c);\nvec3 col = textureLod(uScene, UV + n * k, lod).rgb;`}>
+        {r`\text{colour}(uv) = \text{scene}\big(uv + k\,\nabla c(uv)\big)`}
       </Equation>
     </>
   );
@@ -139,29 +143,21 @@ function CellsSection({ t }: { t: TrackTranslations }) {
     <>
       <H2>{tx(t, "glslRain_cellsTitle", "Drops from hashed cells")}</H2>
       <p>
-        {tx(t, "glslRain_cellsBody",
-          "The drops are made exactly like the falling snow: the glass is cut into cells, each cell holds at most one drop, and a hash of the cell's number decides everything about it. Two layers are enough. Sliding drops live in tall cells, three times higher than wide, so each has room to run down its own column. Still drops live in small square cells. Both write into one height field h, the thickness of water on the glass.")}
+        {tx(t, "glslRain_cellsBody2",
+          "The technique here follows the best-known real-time rainy window, Martijn Steinrucken's (BigWIngs) Shadertoy “Heartfelt”. As with the stars and the falling snow, no drop is stored. The glass is cut into cells, 6 times taller than wide because drops slide vertically, and every cell hashes its id into three random numbers n = (n.x, n.y, n.z). n.x places the drop horizontally, n.z gives it its own clock and wobble, and each column of cells is shifted by a random amount so that the rows never line up. Three layers are added together: tiny still drops on a 40-cell grid, and two layers of sliding drops, the second at 1.85× the scale so the sizes vary.")}
       </p>
-      <H3>{tx(t, "glslRain_slipTitle", "Stick-slip in one line")}</H3>
+      <Equation label={tx(t, "glslRain_sawLabel", "Stick, then slide: the sawtooth")}
+        where={[
+          [r`\operatorname{saw}(b, t)`, tx(t, "glslRain_wSaw", "rises smoothly while t goes from 0 to b = 0.85, then drops back to 0 in the remaining 15%. A slow climb and a sudden fall")],
+          [r`y`, tx(t, "glslRain_wY", "the drop's height inside its cell. The whole grid scrolls down at a constant speed while the drop climbs inside it almost as fast, so on screen the drop barely creeps. When the sawtooth falls, the drop jumps down its cell: the stick-slip worked out above, held by hysteresis until it lets go")],
+          [r`x`, tx(t, "glslRain_wX", "the horizontal position: n.x − ½ plus a wobble sin(y + sin y), whose amplitude shrinks near the cell's sides so the drop never leaves its column")],
+        ]}
+        glsl={`float saw(float b, float t) { return smoothstep(0.0, b, t) * smoothstep(1.0, b, t); }\nfloat y = (saw(0.85, fract(t + n.z)) - 0.5) * 0.9 + 0.5;`}>
+        {r`\operatorname{saw}(b, t) = \operatorname{smoothstep}(0, b, t)\cdot\operatorname{smoothstep}(1, b, t) \qquad y = 0.9\big(\operatorname{saw}(0.85,\ \operatorname{fract}(t + n_z)) - 0.5\big) + 0.5`}
+      </Equation>
       <p>
-        {tx(t, "glslRain_slipBody",
-          "A sliding drop's height in its cell is a function of time. Split one trip down the cell into five stretches; in each, the drop stays put for the first 55% and then slides quickly to the next stop. Its sideways position is a wobbly function of height, the same function for the drop and its trail, so the trail is exactly where the drop has been:")}
-      </p>
-      <CodeBlock lang="glsl" filename="sliding drop" t={t}>{`// cell: tall cells, 7 across the window, 3 times higher than wide
-vec3  n  = hash3(cellId);                      // this drop's random numbers
-float ph = fract(time * (0.05 + 0.06 * n.y) + n.x) * 5.0;
-float y  = 0.88 - 0.76 * (floor(ph) + smoothstep(0.55, 1.0, fract(ph))) / 5.0;   // stick, then slip; never at the cell's ends
-float pathX(float y) { return (n.x - 0.5) * 0.45 + 0.09 * sin(y * 17.0) * sin(y * 7.3); }
-
-vec2  d = vec2(st.x - pathX(y), (st.y - y) * 3.0) / radius;
-float h = radius * sqrt(max(1.0 - dot(d, d), 0.0));      // a spherical cap
-
-// The trail: above the drop, near its path, fading with distance
-float above = st.y - y;
-float trail = above > 0.0 ? smoothstep(w, 0.6 * w, abs(st.x - pathX(st.y))) * exp(-1.2 * above) : 0.0;`}</CodeBlock>
-      <p>
-        {tx(t, "glslRain_trailBody",
-          "The trail carries no water of its own (it is too thin to matter), but it marks where the glass was wiped, so it clears the fog and removes the still drops it crosses. Along it, a few tiny drops are scattered, one per short stretch of height, each placed by its own hash. Shading then needs the slope of h, from two extra evaluations a small step to the right and up. To keep the shader compact, the three evaluations sit in one loop, so the drop code is compiled only once.")}
+        {tx(t, "glslRain_trailBody2",
+          "The trail is a vertical strip above the drop. It is narrow where the drop has just passed and narrower still further up, since r shrinks with height. Along it, a repeating pattern fract(10·v) places small droplets left behind, which is why a real trail looks beaded. The trail carries little water, but it marks where the glass was wiped, so it clears the fog. The still drops use the same sawtooth with b = 0.025: they appear almost instantly (a raindrop hitting) and evaporate over the rest of their cycle. Finally the layers are summed and passed through smoothstep(0.3, 1, c). That merges neighbouring drops into one smooth surface, the way touching water drops fuse.")}
       </p>
     </>
   );
@@ -186,14 +182,28 @@ function FogSection({ t }: { t: TrackTranslations }) {
         compute={dewNumbers()}
         note={tx(t, "glslRain_liveDewNote", "A room at 20 °C and 60% humidity has a dew point of 12 °C: any glass colder than that fogs. Breathe into a cold car and the humidity jumps; the dew point climbs past the temperature of the windscreen, and it fogs in seconds.")} />
       <p>
-        {tx(t, "glslRain_mipBody",
-          "Blurring the whole background every frame would be expensive, but there is a free blur at hand: mipmaps. The street is drawn once into a texture, and the GPU builds its chain of half-size copies, each a box-filtered average of the one before. Reading level 4 or 5 of that chain gives a soft blur at the cost of one texture lookup. Fogged glass reads a blurry level and adds a pale veil (the fog also scatters the room's light back at you); wherever a drop, a trail or a hand has cleared the glass, the shader reads level 0, sharp.")}
+        {tx(t, "glslRain_mipBody2",
+          "Blurring the whole background every frame would be expensive, but there is a free blur at hand: mipmaps. The street is drawn once into a texture, and the GPU builds its chain of half-size copies, each a box-filtered average of the one before. Reading a high level of that chain gives a soft blur at the cost of one texture lookup. Fogged glass reads a blurry level and adds a pale veil (the fog also scatters the room's light back at you); wherever a drop or a trail has cleared the glass, the shader reads level 0, sharp:")}
       </p>
+      <Equation label={tx(t, "glslRain_lodLabel", "Choosing how blurry each pixel is")}
+        where={[
+          [r`\text{lod}`, tx(t, "glslRain_wLod", "the mip level passed to textureLod. Level L is the image averaged over 2^L × 2^L texels, so blurring by about R pixels means reading level log₂R")],
+          [r`f`, tx(t, "glslRain_wFog", "condensation at this pixel: the fog slider × the wipe mask × (1 − trail), because sliding drops clear the glass they cross")],
+          [r`c`, tx(t, "glslRain_wC", "the drop mask: inside a drop the level goes to 0, so the view is sharp. A drop is clear water in the middle of the mist")],
+        ]}
+        note={tx(t, "glslRain_lodNote", "Mipmaps give free, variable blur, but box-shaped: a bright light turns into a square. Six extra taps around a circle at the same level round it off into proper bokeh.")}>
+        {r`\text{lod} = \operatorname{mix}\!\big(\max(f\cdot\text{blur},\ 5\cdot\text{frost}),\ 0,\ \operatorname{smoothstep}(0.1, 0.2, c)\big)`}
+      </Equation>
       <p>
-        {tx(t, "glslRain_wipeBody",
-          "The wiping works like the footprints in the snow: a small texture remembers how clear each part of the glass is. Each frame reads it and writes it again (ping-pong), multiplying by e^(−k·dt) so the fog creeps back at the same rate at any frame rate, and the pointer stamps a stripe into it along the segment from its last position to its current one, so a fast hand leaves an unbroken stripe.")}
+        {tx(t, "glslRain_wipeBody2",
+          "The wiping works like the footprints in the snow: a small texture (192×108) remembers how clear each part of the glass is. The pointer stamps soft discs into it along the segment from its last position to its current one, so a fast hand leaves an unbroken stripe. Every frame the clear part shrinks by a factor e^(−k·dt), so the fog creeps back at the same rate at any frame rate, as condensation does.")}
       </p>
-      <RainGlassFigure t={t} />
+      <WindowLabFigure t={t} />
+      <H3>{tx(t, "glslRain_frostTitle", "Frosted glass and coloured fringes")}</H3>
+      <p>
+        {tx(t, "glslRain_frostBody",
+          "Frosted glass is a rough surface. Every ray that crosses it is refracted in a slightly random direction, and a pixel averages many such rays, which is a blur whose radius grows with the roughness. Its cheap form is a mip level proportional to the frost, plus a per-pixel jitter of the offset for the grainy look of etched glass. Dispersion reuses the drop offset three times with slightly different strengths for red, green and blue (1 ± 0.3k), so bright lights seen through a drop get coloured fringes, the same trick as the three refract() calls in the glass chapter.")}
+      </p>
       <Callout type="tip" t={t}>
         {tx(t, "glslRain_gameTip", "Games put the same effect on the camera instead of a window: rain splashing on the lens in a driving game or in a storm. There the drops are usually a few frames of a pre-made normal map, played as a flipbook and faded in and out, and refraction is the same shift of the already-rendered image by the normal. The upside-down image inside each drop is often left out; it is small, but it is what makes a close-up of a rainy window look real.")}
       </Callout>

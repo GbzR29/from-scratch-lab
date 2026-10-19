@@ -9,7 +9,6 @@ import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { ShaderPlayground } from "@/components/lesson/glsl/ShaderPlayground";
-import { WindowLabFigure } from "@/components/lesson/figures/glass/WindowLabFigure";
 import { GlassRayFigure } from "@/components/lesson/figures/glass/GlassRayFigure";
 import { AbsorptionFigure } from "@/components/lesson/figures/glass/AbsorptionFigure";
 import { GlassStudioFigure } from "@/components/lesson/figures/glass/GlassStudioFigure";
@@ -39,7 +38,6 @@ export function GlassContent({ t }: { t: TrackTranslations }) {
         "Compute how much light reflects with the Fresnel term.",
         "Add dispersion and coloured absorption.",
         "Draw glass in real time from a cube map or from the screen, clear, frosted, patterned or stained.",
-        "Render rain running down a window.",
       ]} />
 
       <RefractionSection t={t} />
@@ -48,7 +46,6 @@ export function GlassContent({ t }: { t: TrackTranslations }) {
       <AbsorptionSection t={t} />
       <StudioSection t={t} />
       <RealtimeSection t={t} />
-      <RainSection t={t} />
 
       <KeyIdeas t={t} id="glslGlass" items={[
         "Light moves at c/n inside a material; Snell's law n₁ sin θ₁ = n₂ sin θ₂ says how much a ray bends.",
@@ -61,9 +58,6 @@ export function GlassContent({ t }: { t: TrackTranslations }) {
         "Prism: both refractions turn the light the same way; at minimum deviation n = sin((A + D)/2) / sin(A/2).",
         "Absorption: T = e^(−σ·d) per channel; in GLSL pow(tint, d), with d the path length inside.",
         "A rasteriser cannot follow T. It reads a cube map at T (sky only), the screen where P + d·T lands (only what is on screen), or a blurred mip of it (frosted).",
-        "Rain on glass: drops are a height field c; read the scene at uv + k·∇c.",
-        "Drops come from hashed grid cells; a sawtooth gives the stick-then-slide motion; trails clear the fog.",
-        "Blur = mip level ≈ log₂(radius); condensation and frost choose the level, drops force it to 0.",
       ]} />
     </Article>
   );
@@ -325,7 +319,7 @@ function StudioSection({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "glslGlass_studioTitle", "Glass studio: everything in 3D")}</H2>
       <p>
         {tx(t, "glslGlass_studioBody",
-          "The studio below puts the whole chapter into one shader. The object is a signed distance function, as in the Raymarching chapter, so any shape works: a sphere, a prism, a cut diamond, a torus, a rounded cube or a thin wine glass. Each pixel sphere-traces its ray to the surface and then follows one path through the glass:")}
+          "The studio below puts the whole chapter into one shader. The object is a signed distance function, as in the Raymarching chapter, so any shape works: a sphere, a prism, a torus, a rounded cube or a thin wine glass. Each pixel sphere-traces its ray to the surface and then follows one path through the glass:")}
       </p>
       <LessonTable
         headers={[tx(t, "glslGlass_stStep", "at each surface"), tx(t, "glslGlass_stWhat", "what the shader does")]}
@@ -333,13 +327,13 @@ function StudioSection({ t }: { t: TrackTranslations }) {
           [tx(t, "glslGlass_st1a", "entering"), tx(t, "glslGlass_st1b", "F from Schlick. Adds F × the reflected sky, keeps (1 − F) of the light and refracts in with η = 1/n.")],
           [tx(t, "glslGlass_st2a", "inside"), tx(t, "glslGlass_st2b", "marches with the distance negated (−sdf is positive inside) to the far wall, and multiplies by uTint^(d · density): Beer–Lambert.")],
           [tx(t, "glslGlass_st3a", "leaving, k ≥ 0"), tx(t, "glslGlass_st3b", "refracts out with η = n and the flipped normal; the small inner reflection F is added as a sky look-up instead of being followed.")],
-          [tx(t, "glslGlass_st4a", "leaving, k < 0"), tx(t, "glslGlass_st4b", "total internal reflection: reflect() and keep marching inside. The diamond lives on this case.")],
+          [tx(t, "glslGlass_st4a", "leaving, k < 0"), tx(t, "glslGlass_st4b", "total internal reflection: reflect() and keep marching inside. Cut gems live on this case (next chapter).")],
           [tx(t, "glslGlass_st5a", "dispersion on"), tx(t, "glslGlass_st5b", "the whole path is traced three times with n − Δn, n and n + Δn, keeping red, green and blue from each.")],
         ]} />
       <GlassStudioFigure t={t} />
       <p>
-        {tx(t, "glslGlass_studioGem",
-          "Why does a diamond sparkle and a glass copy of it does not? Its index is 2.42, so its critical angle is only 24.4°. The pavilion facets below the girdle are cut at about 41°, steeper than that, so light coming in through the top hits them past the critical angle, is totally reflected, crosses to the facet opposite and is reflected again, and leaves back through the top towards your eye. Switch to “count bounces”, then set n to 1.5: with glass the critical angle is 41.8°, most rays leak out of the bottom, and the red disappears. A real brilliant also has 57 facets and a strong dispersion; here 16 crown and 8 pavilion facets are enough to see the effect.")}
+        {tx(t, "glslGlass_studioNext",
+          "Switch to “count bounces” and raise n: the higher the index, the narrower the critical angle, and the more of each path is trapped inside by total internal reflection. Cut gems are built entirely on that, and they get their own chapter next, with a real 57-facet brilliant and its fire.")}
       </p>
     </>
   );
@@ -391,73 +385,9 @@ function RealtimeSection({ t }: { t: TrackTranslations }) {
       <H3>{tx(t, "glslGlass_paneTitle", "Patterned and stained glass")}</H3>
       <p>
         {tx(t, "glslGlass_paneBody",
-          "A flat pane does not bend the view at all: the ray turns on the way in and turns back on the way out. What makes bathroom glass hide what is behind it is a pattern pressed into the surface. Give the surface a height h(p) and the slope ∇h tilts it, exactly like the rain drops later in this chapter: read the view at uv − k·∇h. Reeds, hammered dimples and pyramids are just different h. Stained glass is the opposite case: the surface is almost flat and the colour comes from absorption. Each piece is a Voronoi cell with its own colour and its own uneven thickness, so it passes pow(colour, d·density), and the lead is wherever the two nearest cell centres are about equally far (F₂ − F₁ near 0).")}
+          "A flat pane does not bend the view at all: the ray turns on the way in and turns back on the way out. What makes bathroom glass hide what is behind it is a pattern pressed into the surface. Give the surface a height h(p) and the slope ∇h tilts it, exactly like the raindrops in the Rain on Glass chapter: read the view at uv − k·∇h. Reeds, hammered dimples and pyramids are just different h. Stained glass is the opposite case: the surface is almost flat and the colour comes from absorption. Each piece is a Voronoi cell with its own colour and its own uneven thickness, so it passes pow(colour, d·density), and the lead is wherever the two nearest cell centres are about equally far (F₂ − F₁ near 0).")}
       </p>
       <ShaderPlayground presets={GLASS_PANE_PRESETS} t={t} id="glslGlassPane" editorOpen={false} />
-    </>
-  );
-}
-
-// ── Rain on a window ──────────────────────────────────────────────────────────
-
-function RainSection({ t }: { t: TrackTranslations }) {
-  return (
-    <>
-      <H2>{tx(t, "glslGlass_winTitle", "Rain on a window")}</H2>
-      <p>
-        {tx(t, "glslGlass_winBody",
-          "A rainy window brings everything in this chapter together on a flat pane. Each drop is a small lens that bends the street behind it. The condensation around the drops scatters light and blurs the view, and a sliding drop wipes that condensation away and leaves a clear trail. The best-known real-time version is Martijn Steinrucken's (BigWIngs) Shadertoy “Heartfelt”. The lab below rebuilds its technique step by step, and adds frosted glass, dispersion and condensation you can wipe with the pointer.")}
-      </p>
-
-      <WindowLabFigure t={t} />
-
-      <H3>{tx(t, "glslGlass_dropHTitle", "Drops as a height field")}</H3>
-      <p>
-        {tx(t, "glslGlass_dropHBody",
-          "A drop is modelled like the water ripples: a scalar c(uv) that is 0 on dry glass and rises toward 1 inside a drop, a rough stand-in for the drop's thickness. Where the glass is tilted by a drop, light bends by an amount proportional to the slope (the small-angle form of Snell's law). So the background is read at an offset equal to the gradient of c, estimated from two extra evaluations one pixel apart:")}
-      </p>
-      <Equation label={tx(t, "glslGlass_offLabel", "Refraction offset from the drop field")}
-        where={[
-          [r`\nabla c \approx \tfrac{1}{\varepsilon}\big(c(u{+}\varepsilon,v) - c,\ c(u,v{+}\varepsilon) - c\big)`, tx(t, "glslGlass_wGrad", "finite differences with ε = 0.001, which is why drops() runs three times per pixel")],
-          [r`k`, tx(t, "glslGlass_wK", "the refraction slider: how strongly a slope bends the view (it stands for (1 − 1/n) × the distance to the scene)")],
-        ]}
-        glsl={`vec2 n = vec2(drops(uv + e).x - c, drops(uv + e.yx).x - c);\nvec3 col = textureLod(uScene, UV + n * k, lod).rgb;`}>
-        {r`\text{colour}(uv) = \text{scene}\big(uv + k\,\nabla c(uv)\big)`}
-      </Equation>
-
-      <H3>{tx(t, "glslGlass_cellsTitle", "Thousands of drops from a grid")}</H3>
-      <p>
-        {tx(t, "glslGlass_cellsBody",
-          "As with the stars and the raindrops on water, no drop is stored. The glass is cut into cells, 6 times taller than wide because drops slide vertically, and every cell hashes its id into three random numbers n = (n.x, n.y, n.z). n.x places the drop horizontally, n.z gives it its own clock and wobble, and each column of cells is shifted by a random amount so that the rows never line up. Three layers are added together: tiny static drops on a 40-cell grid, and two layers of sliding drops, the second at 1.85× the scale so the sizes vary.")}
-      </p>
-      <Equation label={tx(t, "glslGlass_sawLabel", "Stick, then slide: the sawtooth")}
-        where={[
-          [r`\operatorname{saw}(b, t)`, tx(t, "glslGlass_wSaw", "rises smoothly while t goes from 0 to b = 0.85, then drops back to 0 in the remaining 15%. A slow climb and a sudden fall")],
-          [r`y`, tx(t, "glslGlass_wY", "the drop's height inside its cell. The whole grid scrolls down at a constant speed while the drop climbs inside it almost as fast, so on screen the drop barely creeps. When the sawtooth falls, the drop jumps down its cell. It is the stick-then-slide motion of real drops, held by surface tension until they are heavy enough")],
-          [r`x`, tx(t, "glslGlass_wX", "the horizontal position: n.x − ½ plus a wobble sin(y + sin y), whose amplitude shrinks near the cell's sides so the drop never leaves its column")],
-        ]}
-        glsl={`float saw(float b, float t) { return smoothstep(0.0, b, t) * smoothstep(1.0, b, t); }\nfloat y = (saw(0.85, fract(t + n.z)) - 0.5) * 0.9 + 0.5;`}>
-        {r`\operatorname{saw}(b, t) = \operatorname{smoothstep}(0, b, t)\cdot\operatorname{smoothstep}(1, b, t) \qquad y = 0.9\big(\operatorname{saw}(0.85,\ \operatorname{fract}(t + n_z)) - 0.5\big) + 0.5`}
-      </Equation>
-      <p>
-        {tx(t, "glslGlass_trailBody",
-          "The trail is a vertical strip above the drop. It is narrow where the drop has just passed and narrower still further up, since r shrinks with height. Along it, a repeating pattern fract(10·v) places small droplets left behind, which is why a real trail looks beaded. The static drops use the same sawtooth with b = 0.025: they appear almost instantly (a raindrop hitting) and evaporate over the rest of their cycle. Finally the layers are summed and passed through smoothstep(0.3, 1, c). That merges neighbouring drops into one smooth surface, the way touching water drops fuse.")}
-      </p>
-
-      <H3>{tx(t, "glslGlass_blurTitle", "Blur from the mip chain")}</H3>
-      <Equation label={tx(t, "glslGlass_lodLabel", "Choosing how blurry each pixel is")}
-        where={[
-          [r`\text{lod}`, tx(t, "glslGlass_wLod", "the mip level passed to textureLod. Level L is the image averaged over 2^L × 2^L texels, so blurring by about R pixels means reading level log₂R")],
-          [r`f`, tx(t, "glslGlass_wF", "condensation at this pixel: the fog slider × the wipe mask × (1 − trail), because sliding drops clear the glass they cross")],
-          [r`c`, tx(t, "glslGlass_wC", "the drop mask: inside a drop the level goes to 0, so the view is sharp. A drop is clear water in the middle of the mist")],
-        ]}
-        note={tx(t, "glslGlass_lodNote", "Mipmaps give free, variable blur, but box-shaped: a bright light turns into a square. Six extra taps around a circle at the same level round it off into proper bokeh. The wipe mask is a small 192×108 texture that the page updates from the pointer and that fogs back up a little every frame.")}>
-        {r`\text{lod} = \operatorname{mix}\!\big(\max(f\cdot\text{blur},\ 5\cdot\text{frost}),\ 0,\ \operatorname{smoothstep}(0.1, 0.2, c)\big)`}
-      </Equation>
-      <p>
-        {tx(t, "glslGlass_frostBody",
-          "Frosted glass is a rough surface. Every ray that crosses it is refracted in a slightly random direction, and a pixel averages many such rays, which is a blur whose radius grows with the roughness. Its cheap form is a mip level proportional to the frost, plus a per-pixel jitter of the offset for the grainy look of etched glass. Dispersion reuses the drop offset three times with slightly different strengths for red, green and blue (1 ± 0.3k), so bright lights seen through a drop get coloured fringes, like the glass ball above.")}
-      </p>
     </>
   );
 }

@@ -18,7 +18,7 @@ out vec4 FragColor;
 uniform samplerCube uSky;
 uniform vec3  uCamPos, uCamF, uCamR, uCamU;
 uniform float uTanHalf, uAspect;
-uniform int   uShape;        // 0 sphere, 1 prism, 2 diamond, 3 torus, 4 rounded cube, 5 wine glass
+uniform int   uShape;        // 0 sphere, 1 prism, 3 torus, 4 rounded cube, 5 wine glass (cut gems: figures/gems)
 uniform int   uView;         // 0 full, 1 Fresnel F, 2 reflection only, 3 refraction only, 4 bounce count
 uniform int   uBounces;      // internal bounces followed, 1..8
 uniform int   uZero;         // always 0: keeps loops from being unrolled
@@ -35,23 +35,6 @@ mat2 rot(float a) { float c = cos(a), s = sin(a); return mat2(c, -s, s, c); }
 float smin(float a, float b, float k) {
   float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);
   return mix(b, a, h) - k * h * (1.0 - h);
-}
-
-// A cut gem: table on top, crown facets, girdle, pavilion down to a point.
-// Each facet is a plane; folding the angle into one sector evaluates them all.
-float facet(vec3 p, float sectors, vec2 a, vec2 n) {
-  float s = 6.2831853 / sectors;
-  float ang = mod(atan(p.z, p.x) + 0.5 * s, s) - 0.5 * s;
-  vec2 q = vec2(length(p.xz) * cos(ang), p.y);
-  return dot(q - a, normalize(n));
-}
-float sdGem(vec3 p) {
-  p *= 1.05;
-  float d = p.y - 0.36;                                          // table
-  d = max(d, facet(p, 16.0, vec2(1.0, 0.06), vec2(0.62, 1.0)));  // crown
-  d = max(d, facet(p, 16.0, vec2(1.0, 0.0), vec2(1.0, 0.0)));    // girdle
-  d = max(d, facet(p, 8.0, vec2(1.0, -0.03), vec2(0.86, -1.0))); // pavilion
-  return d / 1.05;
 }
 
 float sdPrism(vec3 p) {                    // triangle in x/y, extruded along z
@@ -72,7 +55,6 @@ float map(vec3 p) {
   p.xz = rot(uAngle) * p.xz;
   if (uShape == 0) return length(p) - 1.0;
   if (uShape == 1) { p.xy = rot(0.25) * p.xy; return sdPrism(p); }
-  if (uShape == 2) { p.yz = rot(-0.35) * p.yz; return sdGem(p); }
   if (uShape == 3) { p.yz = rot(1.0) * p.yz; return length(vec2(length(p.xz) - 0.78, p.y)) - 0.34; }
   if (uShape == 4) { p.xy = rot(0.5) * p.xy; vec3 q = abs(p) - 0.52; return length(max(q, 0.0)) + min(max(q.x, max(q.y, q.z)), 0.0) - 0.18; }
   return sdWine(p);

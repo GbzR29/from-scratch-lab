@@ -40,6 +40,7 @@ export const glslChapters: Chapter[] = [
   { id: "snow",        section: EFFECTS, title: "Snow & Blizzards",            minRead: 24, load: () => import("./chapters/effects/snow").then((m) => m.SnowContent) },
   { id: "fire",        section: EFFECTS, title: "Fire & Smoke",                minRead: 22, load: () => import("./chapters/effects/fire").then((m) => m.FireContent) },
   { id: "rain-glass",  section: EFFECTS, title: "Rain on Glass",               minRead: 18, load: () => import("./chapters/effects/rain").then((m) => m.RainContent) },
+  { id: "shatter",     section: EFFECTS, title: "Cracks & Shattering",         minRead: 26, load: () => import("./chapters/effects/shatter").then((m) => m.ShatterContent) },
   { id: "stylized", section: EFFECTS, title: "Toon, Dissolve & Hologram",   minRead: 11, load: () => import("./chapters/effects/stylized").then((m) => m.StylizedContent) },
   // ── Raymarching ─────────────────────────────────────────────────────────
   { id: "raymarching", section: RAYMARCH, title: "Raymarching",                minRead: 17, load: () => import("./chapters/raymarching").then((m) => m.RaymarchingContent) },

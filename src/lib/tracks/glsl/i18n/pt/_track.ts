@@ -23,6 +23,7 @@ const track = {
     snow: "Neve e nevascas",
     fire: "Fogo e fumaça",
     "rain-glass": "Chuva no vidro",
+    shatter: "Rachaduras e estilhaços",
     stylized: "Toon, dissolve e holograma",
     raymarching: "Raymarching",
     "black-hole": "Buracos negros: a luz que se curva",
