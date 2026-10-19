@@ -97,6 +97,14 @@ const text: Record<string, string> = {
   mWv_cb3: "eleve as duas equações ao quadrado e some; o parêntese é 1, então R² = 25",
   mWv_cb4: "divida a segunda equação pela primeira; cos φ e sin φ são ambos positivos, então φ está no quadrante I",
   mWv_cb5: "ponha R e φ de volta no alvo",
+
+  // KeyIdeas
+  mWv_key0: "A altura de um ponto que gira num círculo com velocidade ω é sin ωt: o movimento harmônico simples.",
+  mWv_key1: "A sin(2πft + φ) + C: amplitude, frequência, fase, deslocamento; T = 1/f, ω = 2πf.",
+  mWv_key2: "a sin ωt + b cos ωt é uma onda só, com amplitude √(a² + b²) e fase atan2(b, a).",
+  mWv_key3: "Frequências próximas dão batimentos; harmônicos somados constroem ondas quadradas e dente de serra.",
+  mWv_key4: "A e^(−λt) sin(…) vai morrendo: balanços, molas, cordas dedilhadas.",
+  mWv_key5: "A partir de um gráfico: C = (máx + mín)/2, A = (máx − mín)/2, T = de pico a pico.",
 };
 
 export default text;

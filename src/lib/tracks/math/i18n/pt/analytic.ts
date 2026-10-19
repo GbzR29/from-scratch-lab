@@ -134,6 +134,15 @@ const text: Record<string, string> = {
   mAn_pa5: "divida os dois lados por 4p",
   mAn_ellWords: "Uma elipse é uma circunferência com x medido em unidades de a e y em unidades de b; os focos ficam a c do centro, onde c² = a² − b².",
   mAn_hypWords: "A equação da elipse com um sinal de menos: dois ramos em vez de um laço fechado, e os focos agora mais afastados, c² = a² + b².",
+
+  // KeyIdeas
+  mAn_key0: "Ponto médio: tire a média das coordenadas; uma fração t do caminho: A + t(B − A).",
+  mAn_key1: "Retas: y = mx + b, y − y₁ = m(x − x₁) ou ax + by = c (que aceita retas verticais).",
+  mAn_key2: "Retas paralelas têm inclinações iguais; as inclinações de retas perpendiculares multiplicadas dão −1.",
+  mAn_key3: "Circunferência: (x − h)² + (y − k)² = r²; complete o quadrado para ler o centro e o raio.",
+  mAn_key4: "Reta contra circunferência dá uma equação do 2º grau; o discriminante conta os cruzamentos.",
+  mAn_key5: "Parábola: distância ao foco = distância à diretriz; elipse: soma constante; hipérbole: diferença constante.",
+  mAn_key6: "Excentricidade e = c/a: 0 circunferência, < 1 elipse, 1 parábola, > 1 hipérbole.",
 };
 
 export default text;

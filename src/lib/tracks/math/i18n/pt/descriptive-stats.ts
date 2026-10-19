@@ -103,6 +103,16 @@ const text: Record<string, string> = {
   mDesc_p2: "quase todo o peso está na taxa mais baixa, a dos cálculos grandes, então o total é puxado para 78%",
   mDesc_p3: "a taxa geral de B: aqui três quartos do peso estão no grupo fácil, o dos cálculos pequenos",
   mDesc_p4: "B ganha no total embora perca nos dois grupos: os totais comparam misturas diferentes, não tratamentos diferentes",
+
+  // KeyIdeas
+  mDesc_key0: "As frequências relativas dos dados se comportam como uma função de probabilidade; um histograma é o retrato de densidade dos dados, com a área como proporção.",
+  mDesc_key1: "A média x̄ = Σxᵢ/n é o ponto de equilíbrio; a mediana é o meio dos dados ordenados e resiste a valores extremos.",
+  mDesc_key2: "Assimetria à direita: média > mediana. Simétrico: média ≈ mediana.",
+  mDesc_key3: "Os quartis dividem os dados ordenados em quatro; AIQ = Q3 − Q1 é a largura da metade do meio.",
+  mDesc_key4: "s² = Σ(xᵢ − x̄)²/(n − 1); s tem as unidades dos dados; os desvios sempre somam 0.",
+  mDesc_key5: "O resumo de cinco números dá um diagrama de caixa; valores a mais de 1,5 AIQ além da caixa são possíveis valores extremos.",
+  mDesc_key6: "Com y = ax + b, as medidas de centro se transformam como os valores; as de dispersão são multiplicadas por |a|.",
+  mDesc_key7: "Juntar grupos com misturas diferentes pode inverter uma comparação (paradoxo de Simpson).",
 };
 
 export default text;

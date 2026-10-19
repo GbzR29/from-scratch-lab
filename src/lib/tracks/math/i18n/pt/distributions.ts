@@ -152,6 +152,15 @@ const text: Record<string, string> = {
   mDist_liveZNote: "O ponto de partida é a primeira linha da tabela: 186 cm está 2 desvios padrão acima de 170, e só 2,3% são mais altos. Tente x = 158 para a terceira linha. Dobre σ para 16 e os mesmos 186 cm dão só z = 1: agora 15,9% são mais altos.",
   mDist_liveApprox: "Experimente: aproximação normal contra a soma exata",
   mDist_liveApproxNote: "O −0,5 é a correção de continuidade: a barra de k começa meia unidade antes de k. O ponto de partida são as 100 moedas: 0,029 contra o exato 0,028. Agora ponha n = 20, p = 0,05 e k = 2: np(1 − p) fica abaixo de 1 e a aproximação dá 0,30 contra o exato 0,26. É aí que a Poisson se sai melhor: 1 − e⁻¹ · 2 ≈ 0,264.",
+
+  // KeyIdeas
+  mDist_key0: "Binomial(n, p): C(n, k) pᵏ(1 − p)ⁿ⁻ᵏ para k sucessos em n tentativas independentes; média np, variância np(1 − p).",
+  mDist_key1: "Geométrica(p): (1 − p)ᵏ⁻¹p para o primeiro sucesso na tentativa k; média 1/p; sem memória.",
+  mDist_key2: "Poisson(λ): e^(−λ)λᵏ/k!, o limite de Binomial(n, λ/n); média e variância ambas λ.",
+  mDist_key3: "Exponencial(λ): o tempo de espera entre eventos de Poisson; P(T > t) = e^(−λt), média 1/λ, sem memória.",
+  mDist_key4: "Normal(μ, σ²): o sino; padronize com z = (x − μ)/σ e leia Φ numa tabela.",
+  mDist_key5: "68–95–99,7% de uma normal fica a até 1, 2, 3 desvios-padrão da média.",
+  mDist_key6: "Uma binomial com np(1 − p) grande é quase normal; use a correção de continuidade de ½.",
 };
 
 export default text;

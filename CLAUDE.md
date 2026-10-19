@@ -15,6 +15,8 @@ Record every change with its date at the top of `CHANGELOG.md` (Portuguese, newe
 ## Where things live
 
 ```
+src/components/home/hero/              the live figure beside the home title: HeroFigure picks one of a deck per visit (frame.tsx =
+                                       shared card + useHeroClock; one file per figure; add a figure = one file + one DECK entry)
 src/app/page.tsx, src/components/home/ home page = the track list (TracksHome.tsx: cards from the catalog + progress, HomeNav,
                                        HomeFooter, Stars); styles in src/styles/home.css (--hm-* tokens, .home scope); app/not-found.tsx same look
 src/components/nav/                    SiteMenu (phone ☰ sheet, styles in src/styles/sitemenu.css) + siteLinks (BRAND, links, languages)
@@ -126,7 +128,8 @@ from the `chapters` array — never hand-write them.
 
 ## Still to do (agreed, one small step at a time)
 
-- Translations: PT is complete (all tracks + widgets). ES/ZH exist only for OpenGL and GLSL lessons; no ES/ZH widget text yet.
+- Translations: PT is complete except the Algorithms track, whose lessons have no PT text yet (only titles; audit
+  2026-10-18). ES/ZH exist only for OpenGL and GLSL lessons; no ES/ZH widget text yet.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

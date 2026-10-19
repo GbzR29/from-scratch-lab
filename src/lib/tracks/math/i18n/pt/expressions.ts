@@ -104,6 +104,14 @@ const text: Record<string, string> = {
   mExpr_specialWords: "O quadrado de uma soma é o primeiro ao quadrado, mais duas vezes o produto, mais o segundo ao quadrado. A soma vezes a diferença dos mesmos dois números é a diferença dos quadrados.",
   mExpr_liveHorner: "Experimente: as duas formas para qualquer x",
   mExpr_liveHornerNote: "Qualquer que seja o x escolhido, as duas linhas terminam no mesmo número: são a mesma expressão escrita de dois jeitos. A linha aninhada só multiplica por x duas vezes, e o parêntese em âmbar é o único número intermediário que você precisa guardar.",
+
+  // KeyIdeas
+  mExpr_key0: "Uma variável é um número que você ainda não nomeou; ela obedece a todas as regras que os números obedecem.",
+  mExpr_key1: "Termos são os pedaços ligados por + e −; cada um é um coeficiente vezes uma parte literal.",
+  mExpr_key2: "Calcule o valor substituindo entre parênteses e depois seguindo a ordem das operações.",
+  mExpr_key3: "Só termos semelhantes (mesma parte literal) se juntam: some os coeficientes.",
+  mExpr_key4: "k(a + b) = ka + kb: expandir lê da esquerda para a direita, fatorar da direita para a esquerda.",
+  mExpr_key5: "(a + b)² = a² + 2ab + b², nunca a² + b²; confira uma reescrita trocando as letras por um número.",
 };
 
 export default text;

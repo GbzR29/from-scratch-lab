@@ -75,6 +75,14 @@ const text: Record<string, string> = {
   mOrd_nest3: "termine o [ ]: 16 − 6 = 10",
   mOrd_nest4: "dentro do { }, × antes de +: 3 × 10 = 30, depois 2 + 30 = 32",
   mOrd_nest5: "fora: 32 ÷ 4 = 8, e por último a subtração 8 − 1 = 7",
+
+  // KeyIdeas
+  mOrd_key0: "Parênteses, depois potências, depois × e ÷, depois + e −.",
+  mOrd_key1: "Operações do mesmo nível vão da esquerda para a direita; só cadeias de potências vão da direita para a esquerda.",
+  mOrd_key2: "Uma potência só se prende ao que está logo antes dela: −3² = −9, (−3)² = 9.",
+  mOrd_key3: "Traços de fração e sinais de raiz são parênteses invisíveis; ponha parênteses de verdade ao escrever numa linha só.",
+  mOrd_key4: "Toda expressão é uma árvore; o cálculo vai das folhas para cima, e os parênteses mudam a árvore.",
+  mOrd_key5: "Colchetes aninhados se resolvem do par mais de dentro para fora, reescrevendo a linha a cada passo.",
 };
 
 export default text;

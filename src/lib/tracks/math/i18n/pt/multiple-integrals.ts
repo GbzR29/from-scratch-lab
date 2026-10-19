@@ -104,6 +104,15 @@ const text: Record<string, string> = {
   mMul_t1: "de dentro: a altura da coluna sob o plano",
   mMul_t2: "do meio: a área da fatia em x, um triângulo retângulo de catetos 1 − x",
   mMul_t3: "de fora: ⅓ × base ½ × altura 1, a fórmula da pirâmide",
+
+  // KeyIdeas
+  mMul_key0: "∬_R f dA é o limite das somas de caixinhas f · ΔA: o volume com sinal sob a superfície.",
+  mMul_key1: "Calcule-a como integral iterada: a de dentro com a outra variável congelada, depois a de fora.",
+  mMul_key2: "Num retângulo a ordem não importa (Fubini); em outras regiões os limites de dentro dependem da variável de fora.",
+  mMul_key3: "Trocar a ordem pode transformar uma integral impossível numa fácil.",
+  mMul_key4: "∬ 1 dA é a área; divida ∬ f dA por ela para ter a média; pese pela densidade para ter massa e centro de massa.",
+  mMul_key5: "Em coordenadas polares dA = r dr dθ; isso dá πR², 4πR³/3 e ∫ e^(−x²) dx = √π.",
+  mMul_key6: "Integrais triplas somam f dV sobre um sólido, aninhadas do mesmo jeito.",
 };
 
 export default text;

@@ -79,6 +79,14 @@ const text: Record<string, string> = {
   mRat_temp4: "confira com 37 °C: 32 + 1,8 × 37 = 32 + 66,6 = 98,6 °F, a temperatura normal do corpo",
   mRat_liveTemp: "Experimente: qualquer temperatura",
   mRat_liveTempNote: "Abaixo de 0 °C a fração t é negativa e acima de 100 °C passa de 1: a fórmula extrapola além dos dois pontos fixos, e aqui isso está certo. Ache a única temperatura que marca o mesmo número nas duas escalas.",
+
+  // KeyIdeas
+  mRat_key0: "Uma razão a : b compara por divisão; a é a parte a/(a + b) do total.",
+  mRat_key1: "Taxas levam unidades, e as unidades se cancelam como fatores: velocidade × tempo = distância. Converta unidades multiplicando por frações iguais a 1, como 1000 m / 1 km.",
+  mRat_key2: "A proporção direta mantém y/x constante; a inversa mantém x · y constante.",
+  mRat_key3: "p % = p/100. Parte = p × todo; porcentagem = parte / todo; todo = parte / p.",
+  mRat_key4: "Uma variação de p multiplica por (1 + p); variações seguidas se multiplicam, não se somam.",
+  mRat_key5: "t = (x − a)/(b − a) é a fração do caminho; a interpolação e as conversões de escala (°C para °F) se apoiam nisso.",
 };
 
 export default text;

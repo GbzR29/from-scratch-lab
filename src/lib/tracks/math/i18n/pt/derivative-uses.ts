@@ -109,6 +109,15 @@ const text: Record<string, string> = {
   mUse_liveSqrtNote: "Δx = 0,1 é o √4,1 da tabela. Dobre o passo para 0,2 e o erro quase quadruplica, de 0,00015 para 0,0006: ele cresce com Δx². Longe de 4, em Δx = 2, a tangente erra por 0,05.",
   mUse_newtonWords: "A partir do palpite atual, recue o quanto a função está longe de zero, dividido por quão íngreme ela é ali.",
   mUse_lhWords: "Quando o de cima e o de baixo somem juntos, compare a rapidez com que cada um some: a razão das inclinações.",
+
+  // KeyIdeas
+  mUse_key0: "f′ > 0: subindo; f′ < 0: descendo; f′ = 0: um ponto crítico.",
+  mUse_key1: "Uma troca de sinal + → − é um máximo, − → + um mínimo; sem troca não é nenhum dos dois.",
+  mUse_key2: "f″ > 0 curva para cima (∪), f″ < 0 curva para baixo (∩); a inflexão é onde isso troca.",
+  mUse_key3: "Teorema do valor médio: em algum ponto a taxa instantânea é igual à taxa média. Derivadas iguais querem dizer funções que diferem por uma constante.",
+  mUse_key4: "Otimize escrevendo uma função de uma variável, resolvendo f′ = 0 e conferindo as pontas do intervalo.",
+  mUse_key5: "f(a + Δx) ≈ f(a) + f′(a)Δx: a tangente aproxima a curva ali perto.",
+  mUse_key6: "O método de Newton x − f/f′ dobra os algarismos certos a cada passo perto de uma raiz, mas precisa de um bom começo.",
 };
 
 export default text;

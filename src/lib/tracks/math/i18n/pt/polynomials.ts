@@ -112,6 +112,14 @@ const text: Record<string, string> = {
   mPoly_remWords: "Dividir um polinômio por x menos r deixa um resto, e esse resto é simplesmente o valor do polinômio em r.",
   mPoly_liveHorner: "Experimente: Horner em qualquer x",
   mPoly_liveHornerNote: "Cada seta é um passo: multiplique o número âmbar por x, depois some o próximo coeficiente (−6, depois 2, depois −1). O número verde no fim é p(x). Experimente x = 3 e compare com a conferência sob a forma de Horner acima.",
+
+  // KeyIdeas
+  mPoly_key0: "Um polinômio é uma soma de coeficientes vezes potências inteiras de x; o grau é a maior potência.",
+  mPoly_key1: "Multiplique termo a termo; o grau de um produto é a soma dos graus.",
+  mPoly_key2: "Calcule com Horner: ((aₙx + aₙ₋₁)x + …)x + a₀, uma multiplicação e uma soma por coeficiente.",
+  mPoly_key3: "p(r) é o resto da divisão por (x − r); (x − r) é um fator exatamente quando p(r) = 0.",
+  mPoly_key4: "Raízes simples cruzam o eixo, raízes duplas o tocam; grau n quer dizer no máximo n raízes reais.",
+  mPoly_key5: "Longe da origem, o termo de maior grau vence: ele decide para onde vão as pontas do gráfico.",
 };
 
 export default text;

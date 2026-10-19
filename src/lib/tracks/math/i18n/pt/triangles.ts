@@ -142,6 +142,15 @@ const text: Record<string, string> = {
   mTri_liveNo: "não há triângulo",
   mTri_liveCloseNote: "A fórmula ordena os três comprimentos primeiro, então basta uma comparação. Faça os dois menores somarem exatamente o maior para ver o caso plano, degenerado.",
   mTri_centroidWords: "O x do ponto de equilíbrio é a média dos x dos três vértices, e o seu y a média dos y.",
+
+  // KeyIdeas
+  mTri_key0: "O lado a é oposto ao vértice A; o maior lado fica de frente para o maior ângulo.",
+  mTri_key1: "A + B + C = 180°, provado com uma reta paralela e ângulos alternos.",
+  mTri_key2: "Um ângulo externo é igual à soma dos dois ângulos internos não adjacentes.",
+  mTri_key3: "Classificados pelos lados (equilátero, isósceles, escaleno) e pelos ângulos (acutângulo, retângulo, obtusângulo).",
+  mTri_key4: "Desigualdade triangular: o maior lado precisa ser menor que os outros dois juntos.",
+  mTri_key5: "LLL, LAL, ALA, LAA e o caso hipotenusa–cateto (HC) provam congruência; AAA e LLA não.",
+  mTri_key6: "O baricentro é a média dos vértices, onde as medianas se encontram.",
 };
 
 export default text;

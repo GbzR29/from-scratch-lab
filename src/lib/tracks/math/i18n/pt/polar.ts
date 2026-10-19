@@ -88,6 +88,15 @@ const text: Record<string, string> = {
   mPol_ci1: "o círculo na forma cartesiana",
   mPol_ci2: "troque x² + y² por r² e x por r cos θ",
   mPol_ci3: "divida os dois lados por r; só o polo r = 0 poderia se perder, e r = 4 cos θ ainda passa por ele em θ = 90°",
+
+  // KeyIdeas
+  mPol_key0: "Polares (r, θ): x = r cos θ, y = r sin θ; de volta: r = √(x² + y²), θ = atan2(y, x).",
+  mPol_key1: "asin, acos e atan cobrem cada uma só metade da volta; atan2 cobre a volta inteira.",
+  mPol_key2: "Um ângulo mais qualquer número de voltas inteiras é a mesma direção.",
+  mPol_key3: "Leve as diferenças para (−π, π] para obter o giro mais curto e para interpolar ângulos.",
+  mPol_key4: "Curvas polares dão r em função de θ: circunferências, espirais, rosáceas, cardioides.",
+  mPol_key5: "Setores são testes polares: distância mais ângulo ajustado.",
+  mPol_key6: "Equações polares: substitua x = r cos θ, y = r sin θ, x² + y² = r².",
 };
 
 export default text;

@@ -164,6 +164,15 @@ const text: Record<string, string> = {
   mTech_liveP: "Experimente: o teste p, até b = 10ᵏ",
   mTech_liveDiv: "diverge",
   mTech_livePNote: "Com p = 2 a área até 10 é 0,9 e até um milhão é 0,999999: ela se fixa em 1. Baixe p para 1 e cada fator de 10 acrescenta 2,303; baixe para 0,5 e a área explode. p = 1,1 converge, para 10, mas tão devagar que em b = um milhão ainda está em 7,5.",
+
+  // KeyIdeas
+  mTech_key0: "Substituição é a regra da cadeia ao contrário: u = g(x), du = g′(x) dx, e converta os limites.",
+  mTech_key1: "Integração por partes é a regra do produto ao contrário: ∫ u dv = uv − ∫ v du; escolha u para ficar mais simples (LIATE).",
+  mTech_key2: "Se a integral volta depois de duas rodadas por partes, resolva-a como uma equação.",
+  mTech_key3: "As identidades de arco metade transformam sin² e cos² em cossenos integráveis; potências ímpares separam um fator.",
+  mTech_key4: "Frações parciais quebram uma fração de polinômios em pedaços que se integram em logaritmos.",
+  mTech_key5: "x = r sin θ transforma √(r² − x²) em r cos θ e prova a área πr².",
+  mTech_key6: "Integrais impróprias são limites: ∫₁^∞ x⁻ᵖ converge só para p > 1, ∫₀¹ x⁻ᵖ só para p < 1.",
 };
 
 export default text;

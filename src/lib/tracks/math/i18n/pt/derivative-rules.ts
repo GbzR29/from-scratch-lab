@@ -150,6 +150,15 @@ const text: Record<string, string> = {
   mRule_i3: "isole y′",
   mRule_i4: "no ponto (3, 4) do círculo de raio 5",
   mRule_implBody3: "O raio até (3, 4) tem inclinação 4/3, e (−3/4) · (4/3) = −1: a tangente é perpendicular ao raio, como o capítulo do círculo descobriu pela geometria.",
+
+  // KeyIdeas
+  mRule_key0: "Derivar é linear: constantes saem para fora, somas se separam.",
+  mRule_key1: "Regra da potência: (xⁿ)′ = n xⁿ⁻¹ para qualquer n real.",
+  mRule_key2: "Regra do produto (uv)′ = u′v + uv′: as duas faixas de um retângulo que cresce.",
+  mRule_key3: "Regra da cadeia: derivada de fora calculada no de dentro, vezes a derivada de dentro. As taxas se multiplicam.",
+  mRule_key4: "Regra do quociente: (u′v − uv′)/v².",
+  mRule_key5: "sin′ = cos, cos′ = −sin (em radianos); (eˣ)′ = eˣ; (ln x)′ = 1/x.",
+  mRule_key6: "Trabalhe de fora para dentro: nomeie a última operação, aplique a regra dela e depois derive as partes.",
 };
 
 export default text;

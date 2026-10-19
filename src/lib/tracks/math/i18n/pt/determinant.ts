@@ -115,6 +115,14 @@ const text: Record<string, string> = {
   mDet_livePx: "x de P",
   mDet_livePy: "y de P",
   mDet_liveBaryNote: "A = (0, 0), B = (4, 0), C = (0, 4), como no exemplo. A barra fica cheia enquanto P está dentro. Tente P = (4, 0): v = 1, P é o vértice B. Tente P = (3, 3): u fica negativo, porque P atravessou a aresta BC.",
+
+  // KeyIdeas
+  mDet_key0: "Uma transformação linear multiplica toda área pelo mesmo fator, o determinante.",
+  mDet_key1: "2 × 2: det = ad − bc, a área com sinal do paralelogramo formado pelas colunas.",
+  mDet_key2: "Negativo: o plano é espelhado. Zero: ele achata e a matriz não pode ser desfeita.",
+  mDet_key3: "det(AB) = det A · det B; rotações e cisalhamentos têm det 1.",
+  mDet_key4: "3 × 3: volume com sinal, o produto misto, calculado pela expansão em cofatores.",
+  mDet_key5: "Testes de orientação, sentido de giro e pesos baricêntricos são todos determinantes 2 × 2.",
 };
 
 export default text;

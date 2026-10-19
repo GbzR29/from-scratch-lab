@@ -104,6 +104,15 @@ const text: Record<string, string> = {
   mRv_s2: "divida a desigualdade por 2, que é positivo, então ≤ continua ≤; isso é a CDF de X em y/2",
   mRv_s3: "uma densidade é a inclinação da sua CDF; a regra da cadeia traz a inclinação de y/2, que é ½",
   mRv_s4: "F_X′ = f_X. Para X uniforme em [0, 1], f_X = 1, então f_Y = ½ em [0, 2]: metade da altura, o dobro da largura, área ainda 1",
+
+  // KeyIdeas
+  mRv_key0: "Uma variável aleatória dá um número a cada resultado; {X = x} e {X ≤ x} são eventos.",
+  mRv_key1: "Uma X discreta é descrita pela sua função de probabilidade p(x) = P(X = x): não negativa, somando 1.",
+  mRv_key2: "A função de distribuição F(x) = P(X ≤ x) sobe de 0 a 1; P(a < X ≤ b) = F(b) − F(a).",
+  mRv_key3: "Para Y = g(X), some as probabilidades de todos os x que vão para o mesmo y.",
+  mRv_key4: "Uma tabela conjunta dá as marginais pelas somas de linhas e colunas; independência quer dizer que cada célula é o produto das suas margens.",
+  mRv_key5: "Uma X contínua tem P(X = x) = 0 e uma densidade f: probabilidade é área, ∫ f = 1, e f pode passar de 1.",
+  mRv_key6: "F é a área acumulada de f, então F′ = f; medianas e percentis resolvem F(x) = ½, 0,9, ….",
 };
 
 export default text;

@@ -105,6 +105,14 @@ const text: Record<string, string> = {
   mInv_liveSolve: "Experimente: novos lados direitos, a mesma A⁻¹",
   mInv_liveSolveNote: "Começa no sistema acima. A⁻¹ foi calculada uma vez; cada novo par de lados direitos agora custa um produto matriz–vetor. Tente b = (3, 4): a resposta é (1, 0), porque b é a primeira coluna de A.",
   mInv_rigidWords: "Para desfazer \"gire, depois mova\", volte primeiro e depois desgire: transponha a rotação, e desgire também o deslocamento, com o sinal trocado.",
+
+  // KeyIdeas
+  mInv_key0: "A⁻¹ desfaz A: A⁻¹A = AA⁻¹ = I. Ela existe exatamente quando det A ≠ 0.",
+  mInv_key1: "2 × 2: troque a e d, troque o sinal de b e c, divida por ad − bc.",
+  mInv_key2: "(AB)⁻¹ = B⁻¹A⁻¹; a inversa de uma rotação é a sua transposta.",
+  mInv_key3: "Um sistema é Ax = b; a sua solução é x = A⁻¹b, a receita de colunas que chega a b.",
+  mInv_key4: "A eliminação com operações de linha e pivoteamento resolve qualquer tamanho; [A | I] → [I | A⁻¹].",
+  mInv_key5: "Mapa → coordenadas locais é M⁻¹; a inversa de um movimento rígido é Rᵀ com translação −Rᵀt.",
 };
 
 export default text;

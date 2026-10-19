@@ -88,6 +88,15 @@ const text: Record<string, string> = {
   mPr_liveSharedTex: "em comum",
   mPr_livePeople: "pessoas n",
   mPr_liveBdayNote: "A pessoa 1 pode fazer aniversário em qualquer dia (365/365), a pessoa 2 tem de evitar um dia (364/365), a pessoa 3 dois dias, e assim por diante: o produto é a chance de todos os aniversários serem diferentes. A barra passa da metade entre 22 e 23 pessoas e está quase cheia aos 60.",
+
+  // KeyIdeas
+  mPr_key0: "O espaço amostral Ω lista todos os resultados; um evento é um subconjunto; ou, e, não são união, interseção, complemento.",
+  mPr_key1: "Com resultados igualmente prováveis P(A) = |A|/|Ω|; para dois dados, os 36 pares ordenados são os resultados igualmente prováveis.",
+  mPr_key2: "A probabilidade é a frequência relativa a longo prazo; sequências curtas podem ficar longe dela.",
+  mPr_key3: "Os axiomas: P ≥ 0, P(Ω) = 1, eventos disjuntos se somam.",
+  mPr_key4: "P(Aᶜ) = 1 − P(A); P(A ∪ B) = P(A) + P(B) − P(A ∩ B).",
+  mPr_key5: "“Pelo menos um” = 1 − P(nenhum): de Méré, aniversários.",
+  mPr_key6: "Com infinitos resultados, a probabilidade é uma razão de comprimentos ou áreas, e pontos isolados têm probabilidade 0.",
 };
 
 export default text;

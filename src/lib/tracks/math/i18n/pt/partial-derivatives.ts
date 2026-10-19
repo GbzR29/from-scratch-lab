@@ -121,6 +121,15 @@ const text: Record<string, string> = {
   mPar_l2: "∇f = λ∇g, uma equação por componente; elimine λ",
   mPar_l3: "ponha y = 2x na restrição",
   mPar_l4: "a mesma resposta de antes, sem isolar uma variável na restrição primeiro",
+
+  // KeyIdeas
+  mPar_key0: "Uma derivada parcial é uma derivada comum com todas as outras entradas congeladas.",
+  mPar_key1: "As parciais mistas concordam: fₓᵧ = fᵧₓ para funções suaves.",
+  mPar_key2: "O gradiente ∇f = (fₓ, f_y) aponta morro acima pelo caminho mais íngreme; o seu comprimento é essa inclinação.",
+  mPar_key3: "A inclinação ao longo de um vetor unitário u é ∇f · u; ela é zero ao longo das curvas de nível, então ∇f ⊥ curvas de nível.",
+  mPar_key4: "df = fₓ dx + f_y dy: o plano tangente, e a regra de como os erros se somam.",
+  mPar_key5: "Pontos críticos têm ∇f = 0; D = fₓₓf_yy − fₓᵧ² separa mínimos, máximos e pontos de sela.",
+  mPar_key6: "Com uma restrição g = c, o melhor ponto tem ∇f = λ∇g.",
 };
 
 export default text;

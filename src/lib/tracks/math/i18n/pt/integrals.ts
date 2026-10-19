@@ -105,6 +105,15 @@ const text: Record<string, string> = {
   mInt_liveSqNote: "n = 2 dá 5, as duas faixas pela borda direita 1 · 1 + 1 · 4. A soma pela direita é sempre grande demais para uma curva que sobe, então a barra (8/3 dividido pela soma) sobe até 1 por baixo: 0,94 em n = 25, 0,985 em n = 100.",
   mInt_propsWords: "Constantes e somas podem sair da integral; dois pedaços vizinhos somam o todo; ir de b de volta até a troca o sinal.",
   mInt_avgWords: "A área total dividida pela largura: a altura do retângulo plano que guarda a mesma área.",
+
+  // KeyIdeas
+  mInt_key0: "A área sob uma taxa é a variação total: a distância é a área sob a velocidade.",
+  mInt_key1: "Uma soma de Riemann soma n faixas de largura Δx = (b − a)/n e altura f num ponto de amostra.",
+  mInt_key2: "∫ₐᵇ f(x) dx é o limite das somas de Riemann quando n → ∞: uma área com sinal.",
+  mInt_key3: "∫₀ᵇ x² dx = b³/3, pela soma dos quadrados; o mesmo ⅓ do cone.",
+  mInt_key4: "Integrais são lineares, se dividem em qualquer ponto e trocam de sinal quando os limites se invertem.",
+  mInt_key5: "Esquerda/direita: erro ~ Δx; ponto médio/trapézio ~ Δx²; Simpson ~ Δx⁴.",
+  mInt_key6: "A partir de leituras, um total é uma soma de faixas taxa × largura; as somas à esquerda e à direita cercam uma taxa crescente.",
 };
 
 export default text;

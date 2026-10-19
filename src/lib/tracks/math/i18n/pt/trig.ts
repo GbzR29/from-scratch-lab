@@ -113,6 +113,15 @@ const text: Record<string, string> = {
   mRt_liveTwo: "Experimente: uma montanha que não dá para alcançar",
   mRt_liveCloser: "chegue mais perto: β precisa ser maior que α",
   mRt_liveTwoNote: "Desça β em direção a α: o denominador encolhe e h dispara. Dois ângulos quase iguais querem dizer que você mal se aproximou comparado com a distância da montanha, então um errinho de leitura muda muito a resposta. Agrimensores andam o bastante para os dois ângulos ficarem bem diferentes.",
+
+  // KeyIdeas
+  mRt_key0: "Triângulos retângulos com o mesmo ângulo são semelhantes, então as razões entre os lados dependem só do ângulo.",
+  mRt_key1: "sin = oposto/hipotenusa, cos = adjacente/hipotenusa, tan = oposto/adjacente = sin/cos.",
+  mRt_key2: "Com hipotenusa 1, os catetos são cos θ e sin θ, então cos²θ + sin²θ = 1.",
+  mRt_key3: "sin θ = cos(90° − θ); os valores exatos vêm de meio quadrado e de meio triângulo equilátero.",
+  mRt_key4: "arcsin, arccos e arctan transformam uma razão de volta num ângulo.",
+  mRt_key5: "A inclinação de uma reta é a tangente do seu ângulo; h = d · tan θ.",
+  mRt_key6: "Resolva em passos: desenhe, nomeie, escolha a razão com uma só incógnita, isole e confira com Pitágoras.",
 };
 
 export default text;

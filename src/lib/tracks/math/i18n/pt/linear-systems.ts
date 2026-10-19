@@ -88,6 +88,14 @@ const text: Record<string, string> = {
   mSys_liveCramer: "Experimente: qualquer sistema 2 × 2",
   mSys_liveNoUnique: "nenhuma solução única: as retas são paralelas ou iguais",
   mSys_liveCramerNote: "Começa no exemplo acima. Agora faça a segunda linha ser um múltiplo da primeira, por exemplo a = 1, b = 2, c = 2, d = 4: o determinante cai para 0 e a fórmula não tem por quanto dividir.",
+
+  // KeyIdeas
+  mSys_key0: "A solução de um sistema satisfaz todas as equações ao mesmo tempo: para duas retas, o ponto onde se cruzam.",
+  mSys_key1: "Substituição: isole uma incógnita numa equação e ponha na outra.",
+  mSys_key2: "Eliminação: multiplique e some equações para que uma incógnita se cancele.",
+  mSys_key3: "0 = número (falso) quer dizer retas paralelas, sem solução; 0 = 0 quer dizer a mesma reta.",
+  mSys_key4: "Cramer: x = (ed − bf)/(ad − bc), y = (af − ec)/(ad − bc); ad − bc = 0 quer dizer que não há solução única.",
+  mSys_key5: "n incógnitas precisam de n equações independentes; a eliminação funciona em qualquer tamanho.",
 };
 
 export default text;

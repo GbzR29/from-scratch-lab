@@ -107,6 +107,15 @@ const text: Record<string, string> = {
   mLin_liveZero: "divisão por zero: sem resposta",
   mLin_liveNeg: "antes de o relógio começar",
   mLin_liveTimeNote: "Ponha a em 0: a fórmula divide por zero, que é o caso que o rearranjo teve de excluir. Deixe v menor que u com a positivo: o tempo sai negativo. A álgebra está certa, mas a pergunta não tem resposta no futuro.",
+
+  // KeyIdeas
+  mLin_key0: "Uma equação afirma que duas expressões são iguais; uma solução é um valor que a torna verdadeira.",
+  mLin_key1: "Faça a mesma coisa dos dois lados: some, subtraia, multiplique ou divida por qualquer coisa menos 0.",
+  mLin_key2: "Desfaça o que foi feito com x na ordem inversa: a última operação primeiro.",
+  mLin_key3: "Junte os termos com x de um lado e as constantes do outro; elimine frações com o mmc.",
+  mLin_key4: "a·x = c tem uma solução se a ≠ 0, nenhuma se 0 = c ≠ 0, e todo x se 0 = 0.",
+  mLin_key5: "Rearrumar uma fórmula é resolvê-la para outra letra; anote todo denominador pelo qual você divide.",
+  mLin_key6: "Sempre confira a resposta na equação original, ou na frase original.",
 };
 
 export default text;

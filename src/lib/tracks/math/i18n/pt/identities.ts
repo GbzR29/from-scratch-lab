@@ -106,6 +106,15 @@ const text: Record<string, string> = {
   mId_pr1: "desenvolva com (a + b)² = a² + 2ab + b²",
   mId_pr2: "reagrupe os dois quadrados juntos",
   mId_pr3: "o parêntese é 1 por Pitágoras, e 2 sin x cos x é sin 2x pela fórmula do arco duplo",
+
+  // KeyIdeas
+  mId_key0: "Uma identidade vale para todo ângulo; ela é uma ferramenta para reescrever.",
+  mId_key1: "A rotação leva (1, 0) em (cos θ, sin θ) e (0, 1) em (−sin θ, cos θ).",
+  mId_key2: "x' = x cos θ − y sin θ, y' = x sin θ + y cos θ; em volta de um pivô, subtraia-o e some-o de volta.",
+  mId_key3: "Girar (cos α, sin α) por β dá as fórmulas de soma de ângulos.",
+  mId_key4: "sin 2α = 2 sin α cos α; cos² α = (1 + cos 2α)/2.",
+  mId_key5: "Rotações no plano somam os ângulos, então uma sequência de giros é um giro só.",
+  mId_key6: "Prove uma identidade transformando um lado no outro, nunca passando termos para o outro lado do =.",
 };
 
 export default text;

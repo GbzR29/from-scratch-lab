@@ -91,6 +91,15 @@ const text: Record<string, string> = {
   mUc_liveQuad: "quadrante",
   mUc_liveRefNote: "Primeiro o quadrante, depois o ângulo de referência θ′ pela regra daquele quadrante, depois os sinais: o cos é negativo em II e III, o sin em III e IV. Tente 150°, 210° e 330°: os mesmos 30° em todos, com sinais diferentes.",
   mUc_periodWords: "Mais uma volta completa traz o ponto de volta para onde estava, então seno e cosseno se repetem; meia volta já devolve à tangente o seu valor antigo.",
+
+  // KeyIdeas
+  mUc_key0: "Um radiano é o comprimento do arco dividido pelo raio; uma volta inteira é 2π, então 180° = π.",
+  mUc_key1: "Em radianos: arco s = rθ, setor ½r²θ, velocidade na borda v = ωr.",
+  mUc_key2: "No círculo unitário, o ponto no ângulo θ é (cos θ, sin θ), para todo θ.",
+  mUc_key3: "Os sinais seguem o quadrante; os tamanhos vêm do ângulo de referência.",
+  mUc_key4: "sin e cos se repetem a cada 2π, tan a cada π; o seno é ímpar, o cosseno é par.",
+  mUc_key5: "(c₁ + R cos θ, c₂ + R sin θ) é o ponto no ângulo θ de uma circunferência de raio R em volta de c.",
+  mUc_key6: "Rumos correm no sentido horário a partir do norte: θ = 90° − rumo.",
 };
 
 export default text;

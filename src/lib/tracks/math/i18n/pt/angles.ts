@@ -153,6 +153,15 @@ const text: Record<string, string> = {
   mAng_liveH: "hora h",
   mAng_liveM: "minutos m",
   mAng_liveClockNote: "Experimente 12:00 (h = 0, m = 0): os dois ponteiros no 12, 0°. Depois 6:00: 180°, os ponteiros numa única linha reta. Às 3:15 a resposta não é 0°: o ponteiro das horas já avançou 7,5° além do 3.",
+
+  // KeyIdeas
+  mAng_key0: "Um ponto não tem tamanho; uma reta é infinita para os dois lados, uma semirreta para um lado, um segmento tem duas pontas e um comprimento.",
+  mAng_key1: "Um ângulo mede o giro em volta do vértice; uma volta inteira tem 360°, um ângulo raso 180°, um ângulo reto 90°.",
+  mAng_key2: "Agudo < 90° < obtuso < 180° < côncavo < 360°.",
+  mAng_key3: "Ângulos complementares somam 90°, suplementares 180°, e os ângulos em volta de um ponto 360°.",
+  mAng_key4: "Ângulos opostos pelo vértice são sempre iguais.",
+  mAng_key5: "Com retas paralelas, ângulos correspondentes e alternos são iguais, e ângulos colaterais somam 180°.",
+  mAng_key6: "Traga os rumos de volta para 0° – 360° somando ou subtraindo voltas inteiras; o giro mais curto nunca passa de 180°.",
 };
 
 export default text;

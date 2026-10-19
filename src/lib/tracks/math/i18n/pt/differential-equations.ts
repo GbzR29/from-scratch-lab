@@ -128,6 +128,15 @@ const text: Record<string, string> = {
   mOde_liveFree: "sem atrito: oscila para sempre",
   mOde_liveUnder: "subamortecido: oscila dentro de um envelope que encolhe",
   mOde_liveDampNote: "γ = 1, ω = 2 dá λ = −1 ± 1,73i: oscila com frequência 1,73 dentro de um envelope e^(−t). Suba γ para 2, igual a ω, e as raízes se juntam: amortecimento crítico. Acima disso as duas raízes são reais e negativas, e a mais lenta, mais perto de 0, decide quanto tempo leva a volta.",
+
+  // KeyIdeas
+  mOde_key0: "Uma equação diferencial relaciona uma função desconhecida com as suas derivadas; as condições iniciais escolhem uma solução.",
+  mOde_key1: "Um campo de direções desenha y′ = F(t, y) como tracinhos; as soluções os seguem; F = 0 dá os equilíbrios.",
+  mOde_key2: "y′ = ky ⇒ y = y₀eᵏᵗ; a meia-vida e o tempo de duplicação são ln 2/|k|.",
+  mOde_key3: "Equações separáveis: ∫ dy/h(y) = ∫ g(t) dt; o resfriamento e a curva logística se resolvem assim.",
+  mOde_key4: "O método de Euler anda pela inclinação: yₙ₊₁ = yₙ + hF; o seu erro é proporcional a h.",
+  mOde_key5: "Um equilíbrio é estável quando F′(y*) < 0; Euler em y′ = −ky só é estável para h < 2/k.",
+  mOde_key6: "y″ + 2γy′ + ω²y = 0: as raízes características decidem entre superamortecido, crítico ou oscilação que se apaga; elas são autovalores.",
 };
 
 export default text;

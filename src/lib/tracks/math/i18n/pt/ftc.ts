@@ -104,6 +104,15 @@ const text: Record<string, string> = {
   mFtc_liveTop: "topo",
   mFtc_liveLand: "pouso",
   mFtc_liveThrowNote: "v₀ = 8 é o arremesso resolvido abaixo: topo a 4,77 m depois de 0,82 s, pouso depois de 1,80 s. Dobre v₀ para 16 e o topo sobe de 4,77 m para 14,6 m: a altura ganha, v₀²/19,6, cresce com o quadrado da velocidade.",
+
+  // KeyIdeas
+  mFtc_key0: "A(x) = ∫ₐˣ f(t) dt acumula área conforme a ponta direita anda.",
+  mFtc_key1: "Parte 1: A′(x) = f(x). A área cresce no ritmo da altura da curva.",
+  mFtc_key2: "Primitivas diferem por uma constante: ∫ f dx = F + C.",
+  mFtc_key3: "Parte 2: ∫ₐᵇ f dx = F(b) − F(a) para qualquer primitiva F.",
+  mFtc_key4: "Integre uma taxa para obter a variação total: velocidade → deslocamento.",
+  mFtc_key5: "Aceleração constante: v = v₀ + at, s = s₀ + v₀t + ½at²; as constantes são as condições iniciais.",
+  mFtc_key6: "Sempre confira uma primitiva derivando-a.",
 };
 
 export default text;

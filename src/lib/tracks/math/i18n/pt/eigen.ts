@@ -103,6 +103,15 @@ const text: Record<string, string> = {
   mEig_liveEigNote: "Começa no exemplo completo abaixo, [[2, 1], [1, 2]]. Tente b = −1, c = 1, a = d = 0: o quarto de volta, λ = ±i. Faça b = c (uma matriz simétrica): o número dentro da raiz nunca fica negativo.",
   mEig_vietaWords: "Os dois autovalores somam a soma dos elementos da diagonal e multiplicados dão o determinante.",
   mEig_powerWords: "Divida o vetor nas suas partes ao longo dos autovetores. Cada aplicação de A multiplica cada parte pelo seu próprio autovalor, então depois de n aplicações cada parte foi multiplicada n vezes.",
+
+  // KeyIdeas
+  mEig_key0: "Av = λv: um autovetor é uma direção que A não gira; λ é o esticamento ao longo dela.",
+  mEig_key1: "Ache λ por det(A − λI) = 0; para 2 × 2 isso é λ² − (tr A)λ + det A = 0.",
+  mEig_key2: "Os autovalores somam o traço e multiplicados dão o determinante.",
+  mEig_key3: "Discriminante negativo: nenhum autovetor real, como nas rotações.",
+  mEig_key4: "Matrizes simétricas têm autovalores reais e autovetores perpendiculares.",
+  mEig_key5: "Aⁿ multiplica cada parte própria por λⁿ: o maior |λ| domina e decide a estabilidade.",
+  mEig_key6: "Toda rotação 3D tem um autovetor com λ = 1: o seu eixo.",
 };
 
 export default text;

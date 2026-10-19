@@ -117,6 +117,15 @@ const text: Record<string, string> = {
   mVol_liveBall: "Experimente: pele contra volume",
   mVol_liveBallR: "raio r",
   mVol_liveBallNote: "A superfície por unidade de volume é 3/r: uma bola duas vezes maior tem metade da pele para o seu volume. É a lei do quadrado e do cubo da próxima seção num único número.",
+
+  // KeyIdeas
+  mVol_key0: "O volume conta cubos unitários; as unidades vão ao cubo (1 m³ = 10⁶ cm³, 1 L = 1000 cm³).",
+  mVol_key1: "Prismas e cilindros: área da base × altura perpendicular.",
+  mVol_key2: "Cavalieri: fatias iguais em cada altura querem dizer volumes iguais, então inclinar não muda nada.",
+  mVol_key3: "Pirâmides e cones são ⅓ do prisma ou cilindro correspondente.",
+  mVol_key4: "Esfera: V = 4/3 πr³ por fatias, S = 4πr² por pirâmides finas.",
+  mVol_key5: "A área da superfície é a área da planificação; caixa 2(ab + bc + ca).",
+  mVol_key6: "Ampliar por k: superfície ×k², volume ×k³.",
 };
 
 export default text;

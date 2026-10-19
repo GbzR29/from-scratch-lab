@@ -102,6 +102,15 @@ const text: Record<string, string> = {
   mFrac_mix2: "denominador comum: mmc(4, 6) = 12. Multiplique 11/4 em cima e embaixo por 3, e 11/6 por 2",
   mFrac_mix3: "some os numeradores: 33 + 22 = 55 doze avos",
   mFrac_mix4: "de volta a número misto: 55 ÷ 12 = 4 resto 7, então 4 inteiros e 7/12. Confira: 4 × 12 + 7 = 55",
+
+  // KeyIdeas
+  mFrac_key0: "a/b quer dizer a partes de tamanho 1/b, e também a ÷ b; o denominador nunca é 0.",
+  mFrac_key1: "Multiplicar ou dividir em cima e embaixo pelo mesmo número mantém o valor; divida pelo mdc para chegar à forma irredutível.",
+  mFrac_key2: "Some e subtraia com um denominador comum; multiplique em cima com em cima e embaixo com embaixo; divida multiplicando pelo inverso.",
+  mFrac_key3: "Compare a/b e c/d (b, d > 0) com exatidão usando inteiros: a·d contra c·b.",
+  mFrac_key4: "Um decimal é uma fração sobre uma potência de dez; a/b termina só se o denominador irredutível não tiver primos além de 2 e 5; senão, é uma dízima periódica.",
+  mFrac_key5: "A mesma regra vale em qualquer base: na base 2 só terminam os denominadores que são potências de 2, então 1/10 é periódico em binário.",
+  mFrac_key6: "Arredonde olhando o algarismo seguinte, e só uma vez, no fim; piso, teto e truncamento diferem para números negativos.",
 };
 
 export default text;

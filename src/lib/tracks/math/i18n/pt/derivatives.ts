@@ -101,6 +101,15 @@ const text: Record<string, string> = {
   mDer_liveErr: "erro",
   mDer_liveExact: "exata",
   mDer_liveDiffNote: "Divida h ao meio, de 0,2 para 0,1: o erro da progressiva cai à metade, o da central cai a um quarto. Em h = 0,01 a diferença central bate com cos 1 em quatro casas, a progressiva só em uma, como no exemplo resolvido 4.",
+
+  // KeyIdeas
+  mDer_key0: "A inclinação da secante (f(a + h) − f(a))/h é uma taxa média de variação.",
+  mDer_key1: "A derivada f′(a) é o seu limite quando h → 0: a inclinação da tangente, a taxa instantânea.",
+  mDer_key2: "A reta tangente y = f(a) + f′(a)(x − a) é a melhor imitação de f por uma reta perto de a.",
+  mDer_key3: "f′ é uma função: x² → 2x, x³ → 3x², 1/x → −1/x², √x → 1/(2√x).",
+  mDer_key4: "Posição → velocidade → aceleração → arranco: cada uma é a derivada da anterior.",
+  mDer_key5: "Não há derivada em bicos, tangentes verticais ou quebras.",
+  mDer_key6: "A partir de dados, use a diferença central (f(x + h) − f(x − h))/2h; o seu erro encolhe como h².",
 };
 
 export default text;

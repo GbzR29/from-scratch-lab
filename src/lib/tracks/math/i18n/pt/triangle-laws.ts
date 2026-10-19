@@ -115,6 +115,15 @@ const text: Record<string, string> = {
   mTl_liveArea: "Experimente: abra a dobradiça",
   mTl_liveAreaNote: "Duas varetas de comprimento fixo unidas por uma dobradiça: a barra mostra sin C, a fração da maior área possível. Ela fica cheia em 90° e volta a 0 quando o triângulo fecha (0°) ou achata (180°). 30° e 150° dão a mesma área, porque sin(180° − C) = sin C.",
   mTrig_ikWords: "Sabendo os dois comprimentos do braço e a distância até o alvo, a lei dos cossenos ao contrário diz quanto o cotovelo precisa dobrar.",
+
+  // KeyIdeas
+  mTl_key0: "O lado a fica de frente para o ângulo A; cada lei junta um lado com o ângulo oposto a ele.",
+  mTl_key1: "Lei dos cossenos: c² = a² + b² − 2ab cos C, Pitágoras mais uma correção.",
+  mTl_key2: "Lei dos senos: a/sin A = b/sin B = c/sin C = 2R.",
+  mTl_key3: "Área = ½ab sin C a partir de dois lados e do ângulo entre eles.",
+  mTl_key4: "LLL e LAL: cossenos; ALA e LAA: senos; LLA pode dar 0, 1 ou 2 triângulos.",
+  mTl_key5: "Um braço de dois segmentos que alcança um ponto é um triângulo LLL: a lei dos cossenos dá os dois ângulos das juntas.",
+  mTl_key6: "Confira uma solução: os ângulos somam 180°, e o maior ângulo fica de frente para o maior lado.",
 };
 
 export default text;

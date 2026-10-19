@@ -94,6 +94,15 @@ const text: Record<string, string> = {
   mSer_liveErr: "erro",
   mSer_liveSinNote: "Começa na conta à mão abaixo: x = 0,1 com dois termos, erro 8,3 × 10⁻⁸ contra uma cota de 8,3 × 10⁻⁸. O polinômio de grau n é igual ao de grau n + 1, então a cota usa a potência n + 2. Tome x = 3: o grau 3 erra por 1,6, o grau 9 por 0,004. A cota fica sempre acima do erro verdadeiro.",
   mSer_eulerWords: "Ponha iθ na série da exponencial: os termos reais que saem são a série do cosseno, e os imaginários são i vezes a série do seno.",
+
+  // KeyIdeas
+  mSer_key0: "O polinômio de Taylor copia f e as suas n primeiras derivadas em a: coeficientes f⁽ᵏ⁾(a)/k!.",
+  mSer_key1: "eˣ = Σ xᵏ/k!; seno e cosseno ficam com os termos ímpares e pares, de sinais alternados; todas convergem em toda parte.",
+  mSer_key2: "1/(1 − x) = 1 + x + x² + … só para |x| < 1: o raio vai até onde a função quebra.",
+  mSer_key3: "Termos que encolhem até 0 não bastam: a série harmônica diverge, Σ 1/k² converge.",
+  mSer_key4: "O teste da razão compara uma série com uma geométrica: limite de |aₖ₊₁/aₖ| abaixo de 1 quer dizer convergência.",
+  mSer_key5: "A cota de Lagrange M|x − a|ⁿ⁺¹/(n + 1)! diz quantos termos você precisa.",
+  mSer_key6: "Substituir iθ em eˣ prova a fórmula de Euler; séries também dão limites, integrais e raízes.",
 };
 
 export default text;

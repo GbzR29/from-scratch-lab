@@ -114,6 +114,14 @@ const text: Record<string, string> = {
   mCx_liveOut: "|z| > 2: c está fora do conjunto",
   mCx_liveIn: "ainda dentro de 2 depois de seis passos: c parece estar dentro",
   mCx_liveMandelNote: "Começa em c = −1, a primeira linha da tabela. Tente as outras linhas: a = 1, b = 0; a = 0, b = 1; a = 1, b = 1. Depois tente c = −0,75 + 0,25i, perto da borda do conjunto: depois de seis passos ele ainda parece dentro, mas escapa no passo 13. Perto da borda, poucos passos não bastam para decidir. A barra fica cheia enquanto |z| ≤ 2.",
+
+  // KeyIdeas
+  mCx_key0: "i² = −1; um número complexo a + bi é o ponto (a, b) do plano complexo.",
+  mCx_key1: "Some como vetores; multiplique distribuindo e trocando i² por −1.",
+  mCx_key2: "A multiplicação multiplica os comprimentos e soma os ângulos; multiplicar por i é um quarto de volta.",
+  mCx_key3: "z̄ = a − bi; z z̄ = |z|²; divida multiplicando em cima e embaixo pelo conjugado.",
+  mCx_key4: "zⁿ = rⁿ(cos nθ + i sin nθ); as n raízes de 1 formam um n-ágono regular.",
+  mCx_key5: "e^(iθ) = cos θ + i sin θ; um complexo unitário é uma rotação no plano.",
 };
 
 export default text;

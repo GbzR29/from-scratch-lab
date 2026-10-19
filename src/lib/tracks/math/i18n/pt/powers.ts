@@ -87,6 +87,14 @@ const text: Record<string, string> = {
   mPow_sq1: "10 = 8 + 2, então 2¹⁰ = 2⁸ · 2²",
   mPow_sq2: "eleve ao quadrado repetidamente: 2² = 4, 4² = 16 = 2⁴, 16² = 256 = 2⁸",
   mPow_sq3: "multiplique as partes de que precisa: 256 × 4 = 1024",
+
+  // KeyIdeas
+  mPow_key0: "bⁿ são n cópias de b multiplicadas; a área cresce com o quadrado do tamanho, o volume com o cubo.",
+  mPow_key1: "Mesma base: multiplicar → somar expoentes, dividir → subtrair, potência de potência → multiplicar.",
+  mPow_key2: "b⁰ = 1 e b⁻ⁿ = 1/bⁿ mantêm essas regras funcionando; um expoente negativo é um inverso.",
+  mPow_key3: "A notação científica m × 10ᵏ, com 1 ≤ m < 10, escreve qualquer tamanho de forma compacta; para multiplicar, multiplique as partes m e some os expoentes.",
+  mPow_key4: "√x é o número não negativo cujo quadrado é x; √(ab) = √a√b, mas √(a + b) ≠ √a + √b.",
+  mPow_key5: "Heron: tire a média de g e x/g repetidas vezes. Potências grandes: eleve ao quadrado repetidas vezes. Para números não negativos, comparar os quadrados é comparar os números.",
 };
 
 export default text;

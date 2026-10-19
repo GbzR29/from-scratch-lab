@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import HomeNav from "@/components/home/HomeNav";
 import HomeFooter from "@/components/home/HomeFooter";
-import HeroPendulum from "@/components/home/HeroPendulum";
+import HeroFigure from "@/components/home/hero/HeroFigure";
 import TrackCatalog from "@/components/home/TrackCatalog";
 import PathsSection from "@/components/home/PathsSection";
 import { TrackGlyph } from "@/components/brand/TrackGlyph";
@@ -79,7 +79,7 @@ export default function TracksHome() {
               )}
             </div>
           </div>
-          <HeroPendulum />
+          <HeroFigure />
         </section>
 
         {/* ── Sheet 02: catalog ── */}

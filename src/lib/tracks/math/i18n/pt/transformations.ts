@@ -113,6 +113,15 @@ const text: Record<string, string> = {
   mTf_liveRotNote: "Quatro quartos de volta sempre trazem o ponto de volta. Dois quartos de volta dão (−x, −y), qualquer que seja o ponto: a meia volta.",
   mTf_scaleWords: "A escala multiplica x por um fator e y por outro; o cisalhamento soma k vezes a altura ao x e deixa o y como está.",
   mTf_c3: "teste um ponto: as duas ordens levam (1, 0) a lugares diferentes",
+
+  // KeyIdeas
+  mTf_key0: "Uma transformação leva cada ponto a uma imagem; transforme uma figura pelos seus vértices.",
+  mTf_key1: "Translação (x + a, y + b); reflexões trocam o sinal ou trocam as coordenadas.",
+  mTf_key2: "Quarto de volta em torno da origem: (x, y) → (−y, x); em torno de um pivô, vá até ele e volte.",
+  mTf_key3: "Movimentos rígidos mantêm comprimentos e ângulos; congruente quer dizer ligado por um deles.",
+  mTf_key4: "Reflexões (e escalas negativas) invertem o sentido de percurso dos vértices.",
+  mTf_key5: "A escala multiplica a área por sₓ s_y; o cisalhamento mantém a área.",
+  mTf_key6: "A ordem importa: escalar ou girar depois de mover também muda onde a figura termina.",
 };
 
 export default text;

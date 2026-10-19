@@ -128,6 +128,15 @@ const text: Record<string, string> = {
   mLim_liveTrue: "valor verdadeiro",
   mLim_liveCalc: "calculadora de 10 algarismos",
   mLim_liveTableNote: "De k = 1 a 4 a calculadora concorda com ½. Em k = 5 ela responde 1, o dobro da verdade: cos x perdeu o último algarismo no arredondamento, e esse algarismo era tudo o que o numerador tinha. Em k = 6 ela arredonda cos x para exatamente 1 e responde 0. O valor verdadeiro nunca se afasta de ½.",
+
+  // KeyIdeas
+  mLim_key0: "lim f(x) = L quando x → a: f(x) chega tão perto de L quanto você quiser para x perto o bastante de a (x ≠ a).",
+  mLim_key1: "O valor f(a) não importa; o limite é para onde a função está indo.",
+  mLim_key2: "Os dois limites laterais precisam concordar para o limite existir.",
+  mLim_key3: "Substitua primeiro; se der 0/0, fatore, use o conjugado ou um limite conhecido.",
+  mLim_key4: "sin x / x → 1 quando x → 0, em radianos: o teorema do confronto prova isso.",
+  mLim_key5: "Contínua em a: lim f(x) = f(a). As quebras são buracos, saltos ou explosões.",
+  mLim_key6: "Uma função contínua que troca de sinal tem uma raiz no meio: a bissecção a encontra.",
 };
 
 export default text;

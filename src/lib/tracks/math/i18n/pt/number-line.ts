@@ -147,6 +147,14 @@ const text: Record<string, string> = {
   mNL_dM2: "lei comutativa: troque 7 e 4 de lugar dentro dos parênteses",
   mNL_dM3: "lei associativa de novo: agora agrupe 25 com 4",
   mNL_dM4: "25 × 4 = 100, e multiplicar por 100 é fácil. Cada passo foi uma lei, então o valor nunca mudou",
+
+  // KeyIdeas
+  mNL_key0: "A reta numérica põe cada número real no seu lugar: mais à direita quer dizer maior, e os negativos espelham os positivos em volta do 0.",
+  mNL_key1: "ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ: cada conjunto acrescenta os números de que uma operação precisava (negativos, frações, irracionais).",
+  mNL_key2: "Subtrair é somar o oposto: a − b = a + (−b). Um número ímpar de sinais de menos num produto o deixa negativo.",
+  mNL_key3: "|x| é a distância de x até 0; |a − b| é a distância entre a e b, e nunca é negativa.",
+  mNL_key4: "As propriedades comutativa, associativa e distributiva deixam rearrumar + e ×, nunca − ou ÷.",
+  mNL_key5: "A divisão por zero não é definida; 0 dividido por um número diferente de zero dá 0.",
 };
 
 export default text;

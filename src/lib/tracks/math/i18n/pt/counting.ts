@@ -116,6 +116,15 @@ const text: Record<string, string> = {
   mCnt_ieWords: "Some os tamanhos dos conjuntos, subtraia o que está em dois deles, devolva o que está nos três: tudo acaba contado exatamente uma vez.",
   mCnt_liveIE: "Experimente: divisíveis por a ou por b, de 1 a N",
   mCnt_liveIENote: "⌊N/a⌋ quer dizer N/a arredondado para baixo: a quantidade de múltiplos de a até N. Um número divisível por a e por b é múltiplo do mínimo múltiplo comum deles, mmc(a, b), e por isso esse termo tira a contagem dupla. Tente a = 4, b = 6: a sobreposição são os múltiplos de 12, não de 24. A barra é a fração de 1 … N que foi contada.",
+
+  // KeyIdeas
+  mCnt_key0: "Escolhas feitas uma depois da outra se multiplicam; alternativas que não podem acontecer juntas se somam.",
+  mCnt_key1: "n itens diferentes podem ser ordenados de n! jeitos; arrumar k deles dá n!/(n − k)!.",
+  mCnt_key2: "Ignorar a ordem divide por k!: C(n, k) = n!/(k!(n − k)!), e C(n, k) = C(n, n − k).",
+  mCnt_key3: "A regra de Pascal C(n, k) = C(n − 1, k − 1) + C(n − 1, k) constrói o triângulo; as suas linhas são os coeficientes de (a + b)ⁿ e somam 2ⁿ.",
+  mCnt_key4: "Importa a ordem? Pode repetir? As quatro respostas dão nᵏ, n!/(n − k)!, C(n + k − 1, k) e C(n, k).",
+  mCnt_key5: "Letras repetidas: divida n! pelo fatorial de cada contagem de repetição.",
+  mCnt_key6: "A inclusão–exclusão subtrai uma vez as sobreposições; “pelo menos um” costuma ser mais fácil como total menos nenhum.",
 };
 
 export default text;

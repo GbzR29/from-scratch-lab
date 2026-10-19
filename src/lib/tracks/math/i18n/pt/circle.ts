@@ -122,6 +122,15 @@ const text: Record<string, string> = {
   mCir_th3: "os ângulos do triângulo grande APB: x em A, y em B, e x + y em P",
   mCir_th4: "junte os termos",
   mCir_th5: "divida os dois lados por 2",
+
+  // KeyIdeas
+  mCir_key0: "Uma circunferência são todos os pontos à distância r do centro; d = 2r.",
+  mCir_key1: "Todas as circunferências são semelhantes, então C/d é uma constante só: π ≈ 3,14159.",
+  mCir_key2: "C = πd = 2πr; A = πr² (fatias rearrumadas num retângulo πr × r).",
+  mCir_key3: "Arquimedes encurralou π entre polígonos de dentro e de fora usando só Pitágoras.",
+  mCir_key4: "Arco e setor são a fração θ/360 do comprimento e da área.",
+  mCir_key5: "A tangente é perpendicular ao raio; o ângulo inscrito num semicírculo mede 90°.",
+  mCir_key6: "Ponto dentro do círculo: dx² + dy² ≤ r², sem raiz quadrada.",
 };
 
 export default text;

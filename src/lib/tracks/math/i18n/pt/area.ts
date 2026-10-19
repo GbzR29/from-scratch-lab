@@ -101,6 +101,14 @@ const text: Record<string, string> = {
   mArea_liveK: "fator de escala k",
   mArea_liveScaleNote: "Imagine k = 100: um piso de 3 m × 2 m medido em centímetros. Com k = 0,5 a área cai para um quarto, não para a metade.",
   mArea_shoeWords: "Para cada lado, multiplique em cruz (o x deste vértice vezes o y do próximo, menos o x do próximo vezes o y deste), some todos os resultados e divida o total por dois.",
+
+  // KeyIdeas
+  mArea_key0: "Perímetro é o comprimento em volta (unidades de comprimento); área são os quadrados unitários de dentro (unidades ao quadrado).",
+  mArea_key1: "Retângulo b · h; paralelogramo b · h; triângulo ½ · b · h; trapézio ½ · (a + b) · h.",
+  mArea_key2: "A altura é sempre perpendicular à base.",
+  mArea_key3: "Figuras compostas: some as partes ou subtraia as partes que faltam.",
+  mArea_key4: "Ampliar por k multiplica o perímetro por k e a área por k²; o mesmo vale para conversões de unidade.",
+  mArea_key5: "Fórmula do cadarço: A = ½ Σ (xᵢyᵢ₊₁ − xᵢ₊₁yᵢ); o sinal diz se é anti-horário (+) ou horário (−).",
 };
 
 export default text;

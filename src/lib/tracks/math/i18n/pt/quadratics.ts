@@ -97,6 +97,14 @@ const text: Record<string, string> = {
   mQuad_liveLinear: "não é quadrática, a fórmula dividiria por 0",
   mQuad_liveNone: "nenhuma raiz real",
   mQuad_liveRootsNote: "Começa no exemplo resolvido. Deixe c grande e positivo com a positivo: Δ fica negativo e as raízes somem. Experimente a = 1, b = −4, c = 4: Δ = 0 e as duas raízes se fundem numa só.",
+
+  // KeyIdeas
+  mQuad_key0: "y = ax² + bx + c é uma parábola: a > 0 abre para cima, a < 0 para baixo; c é o valor em 0.",
+  mQuad_key1: "A forma canônica a(x − h)² + k mostra o vértice (h, k), com h = −b/(2a).",
+  mQuad_key2: "Raízes quadradas dão ± duas respostas; a regra do produto nulo transforma fatores em raízes.",
+  mQuad_key3: "Completar o quadrado soma (b/2)² para formar um quadrado perfeito; isso prova a fórmula.",
+  mQuad_key4: "x = (−b ± √(b² − 4ac)) / (2a); Δ = b² − 4ac conta as raízes reais.",
+  mQuad_key5: "x₁ + x₂ = −b/a, x₁x₂ = c/a: uma conferência, e um jeito rápido de fatorar à mão.",
 };
 
 export default text;

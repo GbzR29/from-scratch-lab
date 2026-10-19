@@ -128,6 +128,14 @@ const text: Record<string, string> = {
   mMat_pMirrorShear: "espelho · cisalhamento",
   mMat_pShop: "compras",
   mMat_liveMulNote: "Começa no exemplo acima: um quarto de volta depois de um esticamento. Rode até o fim e aperte ⇄ BA: as mesmas duas matrizes na outra ordem dão outro produto. Os outros exemplos prontos são os exemplos resolvidos mais abaixo. Digite qualquer número em A ou B e clique num elemento do produto para ver como ele é feito.",
+
+  // KeyIdeas
+  mMat_key0: "Uma matriz guarda uma regra linear: novo x = ax + by, novo y = cx + dy.",
+  mMat_key1: "Matriz × vetor: cada saída é uma linha em produto escalar com o vetor, ou, igualmente, x·coluna 1 + y·coluna 2.",
+  mMat_key2: "As colunas são onde os passos unitários vão parar; monte uma matriz escolhendo-as.",
+  mMat_key3: "Transformações lineares mantêm as retas retas, paralelas e igualmente espaçadas, e fixam a origem.",
+  mMat_key4: "AB quer dizer B primeiro, depois A; a ordem importa, o agrupamento não.",
+  mMat_key5: "Coordenadas homogêneas (w = 1 para pontos, w = 0 para direções) deixam uma matriz também transladar.",
 };
 
 export default text;

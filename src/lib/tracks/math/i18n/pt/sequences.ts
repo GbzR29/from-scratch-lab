@@ -99,6 +99,14 @@ const text: Record<string, string> = {
   mSeq_dS2: "subtraia: os termos do meio em âmbar aparecem nas duas linhas e se cancelam, só sobrevivem o primeiro e o último",
   mSeq_dS3: "ponha S em evidência à esquerda e a à direita",
   mSeq_dS4: "divida por 1 − r, o que só é permitido quando r ≠ 1",
+
+  // KeyIdeas
+  mSeq_key0: "Uma sequência é uma lista ordenada a₁, a₂, …; regras explícitas pulam para qualquer termo, regras recursivas avançam a partir do anterior.",
+  mSeq_key1: "Progressão aritmética: some d a cada passo, aₙ = a₁ + (n − 1)d; os termos ficam numa reta.",
+  mSeq_key2: "Progressão geométrica: multiplique por r a cada passo, aₙ = a₁ · rⁿ⁻¹; os termos crescem ou decaem exponencialmente.",
+  mSeq_key3: "Σ quer dizer “some todos estes”; 1 + … + n = n(n + 1)/2 e Sₙ = n(a₁ + aₙ)/2.",
+  mSeq_key4: "Soma geométrica: a(1 − rⁿ)/(1 − r); com |r| < 1 a soma infinita é a/(1 − r).",
+  mSeq_key5: "Crescimento ou decaimento repetido pelo mesmo fator é uma progressão geométrica: use a fórmula para prevê-lo.",
 };
 
 export default text;

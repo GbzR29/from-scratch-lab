@@ -107,6 +107,15 @@ const text: Record<string, string> = {
   mPy_d3b: "o triângulo retângulo em pé: um cateto é a distância f pelo chão, o outro a variação de altura Δz",
   mPy_d3c: "f é ela mesma a hipotenusa de um triângulo retângulo no chão, com catetos Δx e Δy",
   mPy_d3d: "elevar uma raiz quadrada ao quadrado a desfaz",
+
+  // KeyIdeas
+  mPy_key0: "Num triângulo retângulo, a² + b² = c², onde c é a hipotenusa, oposta ao ângulo reto.",
+  mPy_key1: "Prova: quatro cópias do triângulo num quadrado de lado a + b deixam descoberto c² ou a² + b².",
+  mPy_key2: "c = √(a² + b²); um cateto é √(c² − outro cateto²).",
+  mPy_key3: "Ternas como 3-4-5 têm lados inteiros; a recíproca testa se há ângulo reto.",
+  mPy_key4: "Lado maior c: c² < a² + b² agudo, = reto, > obtuso.",
+  mPy_key5: "Distância: d = √(Δx² + Δy²), e no espaço some Δz².",
+  mPy_key6: "Para comparar distâncias, compare os quadrados; não precisa de raiz.",
 };
 
 export default text;

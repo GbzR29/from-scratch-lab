@@ -14,6 +14,9 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-18
 
+- **Página inicial: figuras sorteadas.** A figura viva ao lado do título deixa de ser sempre o pêndulo: cada visita sorteia uma de seis (pêndulo simples, um círculo desenhando uma senoide, lançamento oblíquo, a luz entrando na água, curva de Bézier, descida do gradiente), sem repetir a da visita anterior, e o botão "outra" passa para a próxima. Todas no mesmo traço, com um controle e a fórmula ao vivo, em EN e PT.
+- **Ideias-chave da Matemática em português.** 51 capítulos mostravam a caixa de ideias-chave em inglês em `/pt`; as 340 frases foram traduzidas. Uma auditoria de todas as trilhas mostrou que a trilha de Algoritmos ainda não tem texto de lição em PT (só os títulos).
+
 - **Trilha de Física, seção nova "Eletromagnetismo e luz" (lote 7 de 12).** Quatro capítulos, com cada termo explicado, deduções passo a passo, exemplos resolvidos, erros comuns e metas, em EN e PT:
   - **Indução eletromagnética:** os experimentos de Faraday, o fluxo magnético, a lei de Faraday e o sinal de menos de Lenz como conservação da energia (o ímã no cano de cobre), a fem da barra em movimento deduzida de dois jeitos e a força de frenagem, correntes parasitas (freios magnéticos, fogão de indução), o gerador deduzido (ε = NBAω sen ωt) e o valor eficaz da tomada, autoindutância do solenoide, energia ½LI² e circuito RL, o transformador e por que a rede usa tensão alta.
   - **As equações de Maxwell e a luz:** as quatro leis lado a lado, o paradoxo do capacitor e a corrente de deslocamento deduzida, as equações completas, a equação de onda deduzida com c = 1/√(μ₀ε₀) e E = cB, antenas, o espectro eletromagnético, energia, intensidade e pressão de radiação, polarização e a lei de Malus.

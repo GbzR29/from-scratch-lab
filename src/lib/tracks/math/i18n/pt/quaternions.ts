@@ -119,6 +119,14 @@ const text: Record<string, string> = {
   mQuat_liveSlerp: "Experimente: slerp de nenhum giro até um giro em torno de y",
   mQuat_liveSlerpNote: "Começa no exemplo resolvido 3 abaixo: a meio caminho de 90° em torno de y dá (0,924; 0; 0,383; 0), um giro de 45°. A barra é a fração do giro já feita, e ela é sempre igual a t: o slerp gira com velocidade constante.",
   mQuat_matWords: "Cada coluna é um dos três eixos girado pelo quatérnio, escrito com os quatro números w, x, y, z.",
+
+  // KeyIdeas
+  mQuat_key0: "Ângulos de Euler sofrem de gimbal lock; matrizes acumulam erro e se misturam mal; eixo–ângulo é difícil de combinar.",
+  mQuat_key1: "i² = j² = k² = ijk = −1; ij = k mas ji = −k, como no produto vetorial.",
+  mQuat_key2: "(w₁, v₁)(w₂, v₂) = (w₁w₂ − v₁·v₂, w₁v₂ + w₂v₁ + v₁ × v₂).",
+  mQuat_key3: "Rotação de θ em volta do unitário n: q = (cos θ/2, sin θ/2 · n), v' = q v q*.",
+  mQuat_key4: "q₂q₁ aplica q₁ primeiro; o inverso de um quatérnio unitário é o seu conjugado; q e −q são a mesma rotação.",
+  mQuat_key5: "O slerp mistura pelo arco mais curto com velocidade constante; o nlerp é a aproximação barata.",
 };
 
 export default text;

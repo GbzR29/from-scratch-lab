@@ -90,6 +90,15 @@ const text: Record<string, string> = {
   mIneq_liveC: "centro c",
   mIneq_liveR: "distância r",
   mIneq_liveAbsNote: "O segmento sempre tem o centro c no meio e comprimento 2r. Com r = 0 ele encolhe até o único ponto x = c: estar a 0 de distância de c é ser c.",
+
+  // KeyIdeas
+  mIneq_key0: "a < b quer dizer que a está à esquerda de b na reta numérica.",
+  mIneq_key1: "As soluções são faixas: semirretas e segmentos, escritos em notação de intervalo.",
+  mIneq_key2: "Somar, subtrair ou multiplicar por um número positivo mantém o símbolo.",
+  mIneq_key3: "Multiplicar ou dividir por um número negativo espelha a reta: inverta o símbolo.",
+  mIneq_key4: "Desigualdades duplas são um “e” (um segmento); aplique cada passo às três partes.",
+  mIneq_key5: "|x − c| < r quer dizer c − r < x < c + r: a menos de r de c.",
+  mIneq_key6: "Confira uma resposta com um ponto de teste de cada lado da fronteira, e com a própria fronteira.",
 };
 
 export default text;

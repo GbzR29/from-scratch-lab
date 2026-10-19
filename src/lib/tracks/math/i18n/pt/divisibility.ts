@@ -101,6 +101,14 @@ const text: Record<string, string> = {
   mDiv_euclidWords: "Troque o par pelo número menor e o resto da divisão do maior por ele. Os divisores comuns não mudam. Quando o resto chega a 0, o outro número é o mdc.",
   mDiv_lcmWords: "Multiplique os dois números e divida pelo mdc deles, para que os fatores em comum não sejam contados duas vezes.",
   mDiv_congWords: "Dois números são congruentes módulo n quando deixam o mesmo resto na divisão por n, o que acontece exatamente quando a diferença entre eles é múltiplo de n.",
+
+  // KeyIdeas
+  mDiv_key0: "a = q·b + r com 0 ≤ r < b; b divide a (b | a) quando r = 0.",
+  mDiv_key1: "Os divisores vêm em pares d e n/d, então basta testar até √n.",
+  mDiv_key2: "Um primo tem exatamente dois divisores, 1 e ele mesmo; todo n > 1 se fatora em primos de um único jeito.",
+  mDiv_key3: "mdc(a, b) = mdc(b, a mod b), mdc(a, 0) = a: o algoritmo de Euclides, sem fatorar nada.",
+  mDiv_key4: "mmc(a, b) = a / mdc(a, b) × b; o mdc é “os maiores pedaços iguais”, o mmc é “quando eles se alinham”.",
+  mDiv_key5: "Restos são aritmética de relógio: passos de k num ciclo de n visitam todas as posições exatamente quando mdc(k, n) = 1.",
 };
 
 export default text;

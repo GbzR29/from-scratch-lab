@@ -103,6 +103,15 @@ const text: Record<string, string> = {
   mFn_dInv2: "desfaça o × 3 dividindo os dois lados por 3: agora x está escrito em função de y",
   mFn_dInv3: "essa regra, que leva uma saída de volta à sua entrada, é a função inversa",
   mFn_dInv4: "confira: ir para a frente e depois voltar tem de devolver o número de onde você partiu",
+
+  // KeyIdeas
+  mFn_key0: "Uma função dá exatamente uma saída para cada entrada; f(x) é a saída, não f vezes x.",
+  mFn_key1: "O domínio são as entradas permitidas: nada de divisão por 0, nem √ ou log de negativos.",
+  mFn_key2: "Leia gráficos: altura = saída, cruzamentos com o eixo x = zeros, subindo = crescente.",
+  mFn_key3: "y = mx + b: a inclinação m é subida sobre avanço, b é o valor em 0.",
+  mFn_key4: "Funções definidas por partes trocam de regra; confira se as partes se encontram para nada saltar.",
+  mFn_key5: "y = a·f(b(x − c)) + d: os ajustes de fora agem como se espera, os de dentro agem ao contrário.",
+  mFn_key6: "(f ∘ g)(x) = f(g(x)); uma inversa desfaz uma função e espelha o gráfico dela na reta y = x.",
 };
 
 export default text;

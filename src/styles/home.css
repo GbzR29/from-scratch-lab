@@ -237,6 +237,22 @@ html.dark:has(.home) body { background-color: #1a1c29; }
 .hm-fig-head b { color: var(--hm-accent-text); }
 .hm-fig-hint { margin-left: auto; display: flex; align-items: center; gap: 6px; color: var(--hm-draw); text-transform: none; letter-spacing: 0; }
 .hm-fig-hint i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.hm-fig-next {
+  font: inherit;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--hm-accent-text);
+  background: none;
+  border: 1px solid var(--hm-line-soft);
+  padding: 2px 8px;
+  cursor: pointer;
+}
+.hm-fig-next:hover, .hm-fig-next:focus-visible { border-color: var(--hm-accent); }
+.hm-fig-head b, .hm-fig-next { white-space: nowrap; }
+@media (max-width: 520px) {
+  .hm-fig-hint { display: none; }
+  .hm-fig-next { margin-left: auto; }
+}
 .hm-figure svg { display: block; width: 100%; height: auto; }
 .hm-fig-stage {
   background-image:
