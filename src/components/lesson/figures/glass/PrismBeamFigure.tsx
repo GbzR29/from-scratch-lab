@@ -21,6 +21,8 @@ const MEDIA_EN: Record<Medium, string> = { crown: "crown glass", flint: "flint g
 const MEDIA_KEYS = Object.keys(MEDIA) as Medium[];
 const TARGET = [1.9, -1.0, 0] as const;
 const DIST = 7.2;
+/** Highest upward pitch: the camera sits at y = −1 − 7.2 sin(pitch) and must stay above the floor (y = −2.6). */
+const MAX_PITCH = 0.15;
 
 type Res = { prog: WebGLProgram; vao: WebGLVertexArrayObject };
 
@@ -125,7 +127,7 @@ export function PrismBeamFigure({ t }: { t?: TrackTranslations }) {
         {tx(t, "figPrism_note", "Each wavelength is traced on its own with its own n from Cauchy, so violet, with the largest n, is always turned the most. Inside the glass the paths are so close that the beam still looks white; only after the second face does the fan open. Rock the prism: the spectrum goes down and comes back up, and the turning point is the minimum deviation. Flint glass, the default, spreads the colours about three times more than crown glass. Diamond's 24° critical angle traps the light inside a 60° prism: it bounces off the second face and leaves through the base. With 3 wavelengths you see what a three-channel shader really computes: three separate beams, with gaps between them where a real spectrum has yellow and cyan.")}
       </>}>
       <div ref={vis.ref}>
-        <GLView<Res> orbit init={init} draw={draw} look={look} onLook={setLook} resolution={0.8}
+        <GLView<Res> orbit init={init} draw={draw} look={look} onLook={l => setLook({ ...l, pitch: Math.min(l.pitch, MAX_PITCH) })} resolution={0.8}
           frame={[look, beams, spec, haze, radius, medium, turn]} aspect={16 / 9} fovRange={[0.35, 1.3]} />
       </div>
     </Figure>

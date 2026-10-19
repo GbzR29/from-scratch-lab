@@ -30,6 +30,8 @@ const SUGGEST: Record<Shape, { ior: number; bounces: number }> = {
 };
 const MEDIA: [string, number][] = [["water", 1.33], ["glass", 1.5], ["diamond", 2.42]];
 const DIST = 3.6;
+/** Highest upward pitch: the orbiting camera sits at y = −3.6 sin(pitch) − 0.1 and must stay above the floor (y = −1.13). */
+const MAX_PITCH = 0.2;
 
 type Res = { prog: WebGLProgram; vao: WebGLVertexArrayObject; skyTex?: WebGLTexture | null; skyFrom?: SkyImages | null };
 
@@ -133,7 +135,7 @@ export function GlassStudioFigure({ t }: { t?: TrackTranslations }) {
         {tx(t, "figStudio_note", "Every pixel follows one path through the glass: refracted on the way in, then at each exit either out or, past the critical angle, back in. The branch it does not follow is added as a look-up of the sky, weighted by Fresnel. Try the sphere at n = 1.0 (it vanishes), then 1.33 and 2.42: the world behind it flips and shrinks. Turn the prism slowly with dispersion up to see coloured edges. Raise absorption on the wine glass: only the thick base and stem take on the tint, because Beer–Lambert depends on the distance travelled inside.")}
       </>}>
       <div ref={vis.ref}>
-        <GLView<Res> orbit init={init} draw={draw} look={look} onLook={setLook} resolution={0.8}
+        <GLView<Res> orbit init={init} draw={draw} look={look} onLook={l => setLook({ ...l, pitch: Math.min(l.pitch, MAX_PITCH) })} resolution={0.8}
           frame={[look, shape, view, ior, disp, density, tint, bounces, angle, sky.images]} aspect={16 / 9} fovRange={[0.35, 1.3]} />
       </div>
     </Figure>

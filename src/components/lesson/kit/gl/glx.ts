@@ -2,7 +2,7 @@
 // Framebuffers (depth, colour, float, multiple targets, cube depth), a
 // fullscreen pass, and meshes carrying UVs and tangents for normal mapping.
 
-import { mat4, type Mat4, type Vec3 } from "./gl";
+import { mat4, sub, cross, norm, type Mat4, type Vec3 } from "./gl";
 
 // ── Matrices GLM has and gl.ts did not need yet ───────────────────────────────
 /** glm::ortho(left, right, bottom, top, near, far) */
@@ -203,6 +203,38 @@ export function spherePNUT(rings = 32, segments = 48): Float32Array {
   for (let i = 0; i < rings; i++) for (let j = 0; j < segments; j++) {
     const a = v(i, j), b = v(i + 1, j), c = v(i + 1, j + 1), d = v(i, j + 1);
     out.push(...a, ...c, ...b, ...a, ...d, ...c);
+  }
+  return new Float32Array(out);
+}
+
+/**
+ * (p, q) torus knot: a tube of radius `tube` around the curve that winds p times
+ * around the axis and q times through the hole. Fits in a sphere of radius ≈ 0.5 + tube.
+ */
+export function torusKnotPNUT(p = 2, q = 3, tube = 0.1, steps = 256, sides = 24): Float32Array {
+  const curve = (t: number): Vec3 => {
+    const r = (2 + Math.cos(q * t)) / 6;
+    return [r * Math.cos(p * t), (Math.sin(q * t)) / 6, r * Math.sin(p * t)];
+  };
+  // Tube frame from neighbouring points: T along the curve, N and B across it
+  const ring = (i: number) => {
+    const t = (i / steps) * Math.PI * 2, e = 1e-3;
+    const c = curve(t), a = curve(t - e), b = curve(t + e);
+    const T = norm(sub(b, a));
+    const B = norm(cross(T, [a[0] + b[0], a[1] + b[1], a[2] + b[2]]));
+    const N = cross(B, T);
+    return Array.from({ length: sides + 1 }, (_, j) => {
+      const ang = (j / sides) * Math.PI * 2, cs = Math.cos(ang), sn = Math.sin(ang);
+      const n: Vec3 = [N[0] * cs + B[0] * sn, N[1] * cs + B[1] * sn, N[2] * cs + B[2] * sn];
+      return [c[0] + n[0] * tube, c[1] + n[1] * tube, c[2] + n[2] * tube, ...n, i / steps, j / sides, ...T];
+    });
+  };
+  const out: number[] = [];
+  let prev = ring(0);
+  for (let i = 1; i <= steps; i++) {
+    const cur = ring(i);
+    for (let j = 0; j < sides; j++) out.push(...prev[j], ...prev[j + 1], ...cur[j + 1], ...prev[j], ...cur[j + 1], ...cur[j]);
+    prev = cur;
   }
   return new Float32Array(out);
 }

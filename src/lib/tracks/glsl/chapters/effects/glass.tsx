@@ -14,8 +14,9 @@ import { GlassRayFigure } from "@/components/lesson/figures/glass/GlassRayFigure
 import { AbsorptionFigure } from "@/components/lesson/figures/glass/AbsorptionFigure";
 import { GlassStudioFigure } from "@/components/lesson/figures/glass/GlassStudioFigure";
 import { PrismBeamFigure } from "@/components/lesson/figures/glass/PrismBeamFigure";
+import { RealtimeGlassFigure } from "@/components/lesson/figures/glass/RealtimeGlassFigure";
 import { FresnelFigure } from "@/components/lesson/glsl/FresnelFigure";
-import { GLASS_PRESETS } from "../../presets/glass";
+import { GLASS_PRESETS, GLASS_PANE_PRESETS } from "../../presets/glass";
 import { refractNumbers, schlickNumbers } from "../../live/glass";
 
 const r = String.raw;
@@ -37,6 +38,7 @@ export function GlassContent({ t }: { t: TrackTranslations }) {
         "Follow a ray into and out of glass, and catch total internal reflection.",
         "Compute how much light reflects with the Fresnel term.",
         "Add dispersion and coloured absorption.",
+        "Draw glass in real time from a cube map or from the screen, clear, frosted, patterned or stained.",
         "Render rain running down a window.",
       ]} />
 
@@ -45,6 +47,7 @@ export function GlassContent({ t }: { t: TrackTranslations }) {
       <DispersionSection t={t} />
       <AbsorptionSection t={t} />
       <StudioSection t={t} />
+      <RealtimeSection t={t} />
       <RainSection t={t} />
 
       <KeyIdeas t={t} id="glslGlass" items={[
@@ -57,6 +60,7 @@ export function GlassContent({ t }: { t: TrackTranslations }) {
         "Dispersion: n(λ) ≈ A + B/λ²; a shader refracts R, G and B with three slightly different η.",
         "Prism: both refractions turn the light the same way; at minimum deviation n = sin((A + D)/2) / sin(A/2).",
         "Absorption: T = e^(−σ·d) per channel; in GLSL pow(tint, d), with d the path length inside.",
+        "A rasteriser cannot follow T. It reads a cube map at T (sky only), the screen where P + d·T lands (only what is on screen), or a blurred mip of it (frosted).",
         "Rain on glass: drops are a height field c; read the scene at uv + k·∇c.",
         "Drops come from hashed grid cells; a sawtooth gives the stick-then-slide motion; trails clear the fog.",
         "Blur = mip level ≈ log₂(radius); condensation and frost choose the level, drops force it to 0.",
@@ -307,7 +311,7 @@ function AbsorptionSection({ t }: { t: TrackTranslations }) {
       </p>
       <ShaderPlayground presets={GLASS_PRESETS} t={t} id="glslGlass" />
       <Callout type="info" t={t}>
-        {tx(t, "glslGlass_rtNote", "In a rasteriser you cannot trace the refracted ray through the scene. Real-time glass samples a cube map, the screen behind the object (screen-space refraction, offsetting the UV by the normal), or a blurred copy of the scene for frosted glass. The ball here is ray-traced analytically because it is a sphere.")}
+        {tx(t, "glslGlass_rtNote2", "The ball here is ray-traced analytically because it is a sphere. A game draws glass as triangles and cannot trace the refracted ray through the scene; the section “Glass in a rasteriser” below shows what it does instead.")}
       </Callout>
     </>
   );
@@ -337,6 +341,59 @@ function StudioSection({ t }: { t: TrackTranslations }) {
         {tx(t, "glslGlass_studioGem",
           "Why does a diamond sparkle and a glass copy of it does not? Its index is 2.42, so its critical angle is only 24.4°. The pavilion facets below the girdle are cut at about 41°, steeper than that, so light coming in through the top hits them past the critical angle, is totally reflected, crosses to the facet opposite and is reflected again, and leaves back through the top towards your eye. Switch to “count bounces”, then set n to 1.5: with glass the critical angle is 41.8°, most rays leak out of the bottom, and the red disappears. A real brilliant also has 57 facets and a strong dispersion; here 16 crown and 8 pavilion facets are enough to see the effect.")}
       </p>
+    </>
+  );
+}
+
+// ── Glass in a rasteriser ─────────────────────────────────────────────────────
+
+function RealtimeSection({ t }: { t: TrackTranslations }) {
+  return (
+    <>
+      <H2>{tx(t, "glslGlass_rtTitle", "Glass in a rasteriser")}</H2>
+      <p>
+        {tx(t, "glslGlass_rtBody",
+          "A game draws glass as triangles. The fragment shader runs for one point P on the front surface and knows its normal N and the view direction I, so it can compute T = refract(I, N, 1/n) in one line. What it cannot do is follow T: the rest of the scene is other triangles, drawn by other draw calls, and the shader has no way to ask them what T hits. So real-time glass looks the answer up in something prepared in advance. There are three usual places:")}
+      </p>
+      <LessonTable
+        headers={[
+          tx(t, "glslGlass_rtTech", "technique"),
+          tx(t, "glslGlass_rtReads", "what it reads"),
+          tx(t, "glslGlass_rtSees", "what it sees"),
+          tx(t, "glslGlass_rtFails", "where it fails"),
+        ]}
+        rows={[
+          [tx(t, "glslGlass_rt1a", "cube map"), "texture(uSky, T)", tx(t, "glslGlass_rt1c", "the far environment"), tx(t, "glslGlass_rt1d", "anything near the glass is missing; a cube map captured inside the room (a reflection probe) helps")],
+          [tx(t, "glslGlass_rt2a", "screen space"), tx(t, "glslGlass_rt2b", "the scene drawn into a texture, where P + d·T lands on screen"), tx(t, "glslGlass_rt2c", "everything on screen"), tx(t, "glslGlass_rt2d", "d is a guess; things off screen or in front of the glass cannot show")],
+          [tx(t, "glslGlass_rt3a", "frosted"), tx(t, "glslGlass_rt3b", "the same texture at a blurrier mip level"), tx(t, "glslGlass_rt3c", "a blurred scene"), tx(t, "glslGlass_rt3d", "plain mips blur in squares; a few jittered taps round them off")],
+        ]} />
+      <p>
+        {tx(t, "glslGlass_rtScreen",
+          "Screen-space refraction needs the scene behind the glass first. So the frame is drawn in two passes: everything opaque goes into a texture, then that texture is copied to the screen and the glass is drawn on top, reading from it. To know where to read, the shader pretends the refracted ray travels a fixed distance d, takes the point it reaches and runs it through the same view and projection matrices as any vertex:")}
+      </p>
+      <Equation label={tx(t, "glslGlass_ssLabel", "Where screen-space refraction reads")}
+        where={[
+          [r`\mathbf P`, tx(t, "glslGlass_wP", "the world position of this fragment on the glass")],
+          [r`\mathbf T`, tx(t, "glslGlass_wT", "refract(I, N, 1/n), the direction the light goes inside")],
+          [r`d`, tx(t, "glslGlass_wD", "how far to walk along T: a guess at the thickness, or the distance to what is behind. One number for the whole object")],
+          [r`M_{VP}`, tx(t, "glslGlass_wVP", "projection × view, the matrix that put the vertices on screen")],
+        ]}
+        words={tx(t, "glslGlass_ssWords", "Walk d along the refracted ray, project that point like a vertex, and turn the result from −1..1 into 0..1 texture coordinates.")}
+        glsl={`vec4 c  = uViewProj * vec4(P + T * d, 1.0);\nvec2 uv = c.xy / c.w * 0.5 + 0.5;\nvec3 behind = texture(uScene, uv).rgb;`}>
+        {r`\begin{gathered} \mathbf c = M_{VP}\,(\mathbf P + d\,\mathbf T,\ 1) \\[2pt] uv = \tfrac12\,\frac{\mathbf c_{xy}}{\mathbf c_w} + \tfrac12 \end{gathered}`}
+      </Equation>
+      <RealtimeGlassFigure t={t} />
+      <H3>{tx(t, "glslGlass_caTitle", "Chromatic aberration and the missing surface")}</H3>
+      <p>
+        {tx(t, "glslGlass_caBody",
+          "Chromatic aberration is the dispersion trick from before: three refract() calls with three indices, keeping red from the first, green from the second, blue from the third. In a rasteriser each one is just a texture read, so games use it freely, often with Δn far larger than real glass. Notice too what the knot and the sphere get wrong: they refract only once, at the front. A real ball refracts again on the way out and turns the world upside down, as the traced ball and the studio do. The usual fix draws the back faces first into a texture of normals and depths, so the glass pass can refract a second time where the ray leaves (Wyman's image-space refraction, 2005).")}
+      </p>
+      <H3>{tx(t, "glslGlass_paneTitle", "Patterned and stained glass")}</H3>
+      <p>
+        {tx(t, "glslGlass_paneBody",
+          "A flat pane does not bend the view at all: the ray turns on the way in and turns back on the way out. What makes bathroom glass hide what is behind it is a pattern pressed into the surface. Give the surface a height h(p) and the slope ∇h tilts it, exactly like the rain drops later in this chapter: read the view at uv − k·∇h. Reeds, hammered dimples and pyramids are just different h. Stained glass is the opposite case: the surface is almost flat and the colour comes from absorption. Each piece is a Voronoi cell with its own colour and its own uneven thickness, so it passes pow(colour, d·density), and the lead is wherever the two nearest cell centres are about equally far (F₂ − F₁ near 0).")}
+      </p>
+      <ShaderPlayground presets={GLASS_PANE_PRESETS} t={t} id="glslGlassPane" editorOpen={false} />
     </>
   );
 }

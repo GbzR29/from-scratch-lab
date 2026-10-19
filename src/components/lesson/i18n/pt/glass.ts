@@ -1,6 +1,28 @@
 // PT text for the glass widgets. Keys match the tx() calls there; English is the fallback in the code.
 
 const text: Record<string, string> = {
+  // ── RealtimeGlassFigure (2026-10-19) ──
+  figRtGlass_title: "Vidro num rasterizador",
+  figRtGlass_mode_cube: "cube map",
+  figRtGlass_mode_screen: "espaço de tela",
+  figRtGlass_mode_frosted: "jateado",
+  figRtGlass_shape_knot: "nó toroidal",
+  figRtGlass_shape_sphere: "esfera",
+  figRtGlass_shape_lens: "lente",
+  figRtGlass_ior: "índice n",
+  figRtGlass_spread: "aberração cromática ±Δn",
+  figRtGlass_depth: "distância d",
+  figRtGlass_rough: "rugosidade",
+  figRtGlass_fresnel: "reflexo de Fresnel",
+  figRtGlass_show: "onde ele lê",
+  figRtGlass_spin: "girar",
+  figRtGlass_nCube: "refract() dá uma direção, e um cube map é uma tabela de direções: uma leitura de textura. É o vidro mais barato que existe, mas o cube map guarda só o céu distante. O chão e os pilares não estão nele, então o vidro mostra céu onde deveria estar o chão. Os jogos corrigem isso com cube maps capturados de dentro da sala (sondas de reflexo).",
+  figRtGlass_nScreen: "A sala é desenhada primeiro numa textura. Cada pixel do vidro anda uma distância d ao longo de T, projeta esse ponto de volta na tela e lê a sala ali. Agora o chão e os pilares se curvam através do vidro. O custo: d é um palpite, o mesmo para todo pixel, e só existe o que está na tela. Gire a câmera até um pilar ficar logo atrás da borda do nó: as cores borram onde a leitura cai fora da imagem.",
+  figRtGlass_nFrosted: "O vidro jateado espalha cada raio um pouco, então um pixel vê uma média das direções vizinhas: um borrão. A textura da sala tem mipmaps, então uma cópia mais borrada está a um textureLod de distância; seis leituras num pequeno anel, girado ao acaso para cada pixel, arredondam os blocos quadrados do mip e dão o grão do vidro jateado.",
+  figRtGlass_noteMouse: "Arraste para girar a câmera, role para dar zoom. ",
+  figRtGlass_noteTouch: "Arraste para girar a câmera, faça pinça para dar zoom. ",
+  figRtGlass_note: "Uma malha de triângulos de verdade, desenhada do jeito que um jogo desenha. Só a superfície da frente refrata, então a esfera amplia o mundo em vez de virá-lo de cabeça para baixo como a bola traçada do estúdio: falta a segunda superfície. Ligue “onde ele lê” para ver a própria leitura. A aberração cromática é o truque da dispersão de novo: três chamadas de refract() com três índices.",
+
   // ── PrismBeamFigure (2026-10-19) ──
   figPrism_title: "Um prisma num quarto escuro",
   figPrism_w16: "16 comprimentos de onda",

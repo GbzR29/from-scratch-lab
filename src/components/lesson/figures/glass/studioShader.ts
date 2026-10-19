@@ -91,7 +91,7 @@ vec3 normalAt(vec3 p) {                    // tetrahedron of 4 taps, one call si
 
 vec3 env(vec3 ro, vec3 rd) {
   vec3 sky = texture(uSky, rd).rgb + 3.0 * pow(max(dot(rd, SUN), 0.0), 900.0);
-  if (rd.y > -0.002) return sky;
+  if (rd.y > -0.002 || ro.y < FLOOR) return sky;                   // looking up, or seen from below the floor
   float t = (FLOOR - ro.y) / rd.y;
   vec3 p = ro + rd * t;
   vec2 c = floor(p.xz * 0.9);
