@@ -8,11 +8,12 @@ export const GLASS_PRESETS: PlaygroundPreset[] = [
   {
     id: "glass", label: "glass ball: refraction + dispersion",
     channels: [POOL],
-    note: "A glass sphere in front of a textured wall. Each ray refracts twice (air → glass, glass → air) with refract(); red, green and blue use slightly different indices, which splits the colours (dispersion). Fresnel blends in the reflection at the rim.",
+    note: "A glass sphere in front of a textured wall. Each ray refracts twice (air → glass, glass → air) with refract(); red, green and blue use slightly different indices, which splits the colours (dispersion). Inside, the light is absorbed by Beer–Lambert: uTint is the colour left after one unit of glass, raised to the power d × uDensity. Fresnel blends in the reflection at the rim.",
     frag: `uniform float uIOR;         // @slider 1.0 2.4 1.5
 uniform float uDispersion;  // @slider 0.0 0.1 0.03
 uniform float uFresnel;     // @toggle 1
-uniform vec3  uTint;        // @color 0.9 0.97 1.0
+uniform vec3  uTint;        // @color 0.55 0.85 0.75
+uniform float uDensity;     // @slider 0.0 3.0 0.4
 
 vec3 wall(vec3 ro, vec3 rd) {                         // the backdrop: plane z = -2.5
     float t = (-2.5 - ro.z) / rd.z;
@@ -32,11 +33,13 @@ vec2 sphere(vec3 ro, vec3 rd, float r) {             // entry and exit distances
 vec3 through(vec3 ro, vec3 rd, float ior) {
     vec3 p  = ro + rd * sphere(ro, rd, 1.0).x;
     vec3 r1 = refract(rd, normalize(p), 1.0 / ior);    // entering: eta = n_air / n_glass
-    vec3 q  = p + r1 * sphere(p, r1, 1.0).y;           // exit point
+    float d = sphere(p, r1, 1.0).y;                    // path length inside the glass
+    vec3 q  = p + r1 * d;                              // exit point
     vec3 n2 = -normalize(q);                           // normal facing the ray, inside
     vec3 r2 = refract(r1, n2, ior);                    // leaving: eta = n_glass / n_air
-    if (dot(r2, r2) < 1e-4) return env(reflect(r1, n2)) * 0.5;   // total internal reflection
-    return wall(q, r2);
+    vec3 absorb = pow(max(uTint, vec3(1e-3)), vec3(d * uDensity));   // Beer–Lambert
+    if (dot(r2, r2) < 1e-4) return env(reflect(r1, n2)) * 0.5 * absorb;   // total internal reflection
+    return wall(q, r2) * absorb;
 }
 
 void main() {
@@ -48,7 +51,7 @@ void main() {
         vec3 n = normalize(ro + rd * t);
         vec3 refr = vec3(through(ro, rd, uIOR - uDispersion).r,
                          through(ro, rd, uIOR).g,
-                         through(ro, rd, uIOR + uDispersion).b) * uTint;
+                         through(ro, rd, uIOR + uDispersion).b);
         float r0 = pow((uIOR - 1.0) / (uIOR + 1.0), 2.0);
         float F  = r0 + (1.0 - r0) * pow(1.0 - max(dot(-rd, n), 0.0), 5.0);
         col = mix(refr, env(reflect(rd, n)), uFresnel * F);

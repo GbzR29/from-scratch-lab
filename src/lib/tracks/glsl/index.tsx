@@ -34,7 +34,7 @@ export const glslChapters: Chapter[] = [
   { id: "underwater",  section: EFFECTS, title: "Underwater",                  minRead: 24, load: () => import("./chapters/effects/underwater").then((m) => m.UnderwaterContent) },
   { id: "pool",        section: EFFECTS, title: "Interactive Pool",            minRead: 22, load: () => import("./chapters/effects/pool").then((m) => m.PoolContent) },
   { id: "river",       section: EFFECTS, title: "Rivers & Lakes: Flow Maps",   minRead: 24, load: () => import("./chapters/effects/river").then((m) => m.RiverContent) },
-  { id: "glass",       section: EFFECTS, title: "Glass, Refraction & Fresnel", minRead: 21, load: () => import("./chapters/effects/glass").then((m) => m.GlassContent) },
+  { id: "glass",       section: EFFECTS, title: "Glass, Refraction & Fresnel", minRead: 30, load: () => import("./chapters/effects/glass").then((m) => m.GlassContent) },
   { id: "fog",         section: EFFECTS, title: "Fog",                         minRead: 18, load: () => import("./chapters/effects/fog").then((m) => m.FogContent) },
   { id: "stylized",    section: EFFECTS, title: "Toon, Dissolve & Hologram",   minRead: 11, load: () => import("./chapters/effects/stylized").then((m) => m.StylizedContent) },
   // ── Raymarching ─────────────────────────────────────────────────────────

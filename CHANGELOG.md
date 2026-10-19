@@ -14,6 +14,16 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-18
 
+- **Trilha de GLSL, capítulo "Vidro, refração e Fresnel" revisado (lote 1 de 4 do plano vidro + neve).** A teoria foi reescrita para explicar cada termo, em EN e PT:
+  - **Refração:** por que a luz se curva (n = c/v), a lei de Snell com explicação "em palavras", a dedução passo a passo de `refract()` a partir da lei de Snell (partes normal e tangente, de onde vem o k e por que k < 0 é reflexão interna total), tabela "entrando × saindo" (qual normal e qual η passar), código que refrata nos dois sentidos, o ângulo crítico e a fórmula ao vivo "refract() à mão".
+  - **Fresnel:** dedução de R₀ a partir das equações de Fresnel, Schlick com "em palavras", como o mix() conserva a energia, por que a saída do vidro precisa de cos θ₂ e a fórmula ao vivo "Schlick contra o valor exato".
+  - **Dispersão e absorção:** a equação de Cauchy n(λ) ≈ A + B/λ², as três refrações por canal no shader, a dedução de Beer–Lambert a partir de uma camada fina e o uso de `pow(tint, d)`.
+  - **Shader da bola de vidro:** agora tem absorção de Beer–Lambert de verdade (`uDensity`, com o caminho d dentro da esfera).
+  - **Dois widgets novos:**
+    - **Raios no vidro, um refract() de cada vez** (`GlassRayFigure`): placa, prisma, bola e fibra óptica, laser arrastável, reflexos com a intensidade de Fresnel, luz branca com dispersão e uma tabela com a normal, o η, o N·I e o k de cada acerto.
+    - **Beer–Lambert: cor a partir da espessura** (`AbsorptionFigure`): cunha de vidro de garrafa, cobalto, âmbar ou água, com as três curvas e^(−σd) e a cor resultante.
+  - O texto PT do capítulo saiu de `glsl/i18n/pt/effects.ts` e foi para um arquivo próprio, `glsl/i18n/pt/glass.ts`.
+
 - **Trilha de Física, seção nova "Relatividade" (lote 9 de 12).** Quatro capítulos, com cada termo explicado, deduções passo a passo, exemplos resolvidos, erros comuns e metas, em EN e PT:
   - **Relatividade especial:** o enigma da velocidade da luz (Galileu contra Maxwell, o éter, Michelson–Morley), os dois postulados de Einstein, a dilatação do tempo deduzida com o relógio de luz e uma tabela de γ, os múons dos raios cósmicos, a contração do comprimento deduzida do ponto de vista do múon, a relatividade da simultaneidade (o trem de Einstein, γLv/c²), o limite do dia a dia γ ≈ 1 + v²/2c² e o experimento de Hafele–Keating.
   - **Espaço-tempo:** eventos, linhas de mundo e diagramas de espaço-tempo, a transformação de Lorentz deduzida dos dois postulados, dois referenciais num diagrama só, o intervalo s² = (cΔt)² − Δx² e sua invariância deduzida, tempo próprio, separações tipo tempo, luz e espaço, cones de luz e causalidade, a soma relativística de velocidades deduzida, o paradoxo dos gêmeos pelo tempo próprio e o Doppler relativístico.
