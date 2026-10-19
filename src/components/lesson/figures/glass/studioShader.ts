@@ -99,7 +99,10 @@ vec3 env(vec3 ro, vec3 rd) {
   vec3 col = vec3(0.68, 0.66, 0.62) + 0.2 * tile;
   float s = exp(-dot(p.xz, p.xz) * 1.4);                           // soft, tinted shadow under the glass
   col *= mix(vec3(1.0), 0.25 + 0.5 * uTint, 0.6 * s);
-  return mix(sky, col, exp(-t * 0.045));
+  // far away the floor fades into the haze at the horizon: sample the sky just
+  // above it, since below the horizon the sky images hold their own ground
+  vec3 haze = texture(uSky, normalize(vec3(rd.x, 0.03, rd.z))).rgb;
+  return mix(haze, col, exp(-t * 0.045));
 }
 
 // Schlick, using the angle on the thin side when light leaves (exact TIR)

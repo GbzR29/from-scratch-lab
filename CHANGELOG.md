@@ -20,6 +20,8 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
   - **Interação:** câmera orbital, girar o prisma, botão "desvio mínimo", balançar o prisma, vidro crown, flint, água e diamante (que prende a luz), exagero do leque, largura do feixe, névoa, e "16 comprimentos de onda" × "3, como um shader" (três feixes separados, sem amarelo nem ciano).
   - Texto novo com a dedução do desvio mínimo, n = sin((A + D)/2) / sin(A/2), os números do vidro crown e uma ideia-chave nova. Em EN e PT.
 
+- **Estúdio de vidro, correção:** perto do horizonte o chão se misturava com a parte do céu abaixo do horizonte, que em algumas imagens tem chão próprio e fazia faixas pretas e brancas. Agora o chão some na névoa com a cor do céu logo acima do horizonte.
+
 - **Trilha de GLSL, "Vidro, refração e Fresnel": seção nova "Estúdio de vidro: tudo em 3D".** O widget novo `GlassStudioFigure` traça por raymarching, num shader só (`studioShader.ts`), um objeto de vidro debaixo de um céu de verdade (cube maps do site) e sobre um piso de ladrilhos.
   - **Objetos:** esfera, prisma, diamante lapidado (16 facetas na coroa, 8 no pavilhão), toro, cubo arredondado e taça de vinho.
   - **Interação:** câmera orbital com zoom, giro automático, índice n com atalhos para água, vidro e diamante, dispersão, absorção (Beer–Lambert com tinta escolhível), número de quiques internos e escolha do céu.
