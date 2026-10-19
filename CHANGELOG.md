@@ -14,6 +14,13 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-19
 
+- **Trilha de GLSL: capítulo novo "Gemas e bolhas" (`/GLSL/gems-bubbles`), em Receitas de efeitos, logo depois de Vidro.**
+  - **Por que um diamante brilha:** brilho, fogo e cintilação; tabela de diamante, moissanita, zircônia cúbica e vidro; a dedução da janela do pavilhão (três testes: θc < α, 180° − 3α > θc, |180° − 4α| < θc), que dá 38,9°–51,1° para o diamante e só 41,1°–46,3° para o vidro; fórmula ao vivo dos três testes; dθ_out/dn = sin θ_in / cos θ_out para o fogo.
+  - **Widget `GemCutFigure`:** corte 2D de um brilhante iluminado de cima, raios traçados com refract(), Fresnel e reflexão interna total; verde sai pela coroa, vermelho vaza pelo pavilhão; gráfico da luz que volta contra o ângulo do pavilhão com a janela marcada; luz branca em 7 comprimentos de onda.
+  - **Widget `DiamondFigure`:** brilhante de 73 facetas traçado exatamente como lista de planos (sem raymarching), ângulos de lapidação ao vivo, renderização espectral com 1, 3 ou 8 comprimentos de onda, vitrine com lâmpadas ou céu, vistas "por onde sai" e "contar reflexões".
+  - **Bolhas de sabão:** dedução da fórmula de Airy da película fina (caminho 2nt cos θt, sinal de meia onda, série geométrica), fórmula ao vivo, e o widget `BubbleFigure`: bolha 3D com interferência em 16 comprimentos de onda nas duas paredes, película escorrendo e girando, película negra no topo, fundo preto de fotógrafo, vistas de espessura e "sem interferência".
+  - Em EN e PT.
+
 - **Trilha de GLSL, "Vidro, refração e Fresnel": seção nova "Vidro num rasterizador".** Como um jogo desenha vidro sem poder seguir o raio refratado pela cena.
   - **Widget novo `RealtimeGlassFigure`:** uma malha de triângulos de verdade (nó toroidal, esfera ou lente) rasterizada diante de uma sala com chão e pilares, em três técnicas: cube map (só enxerga o céu), refração em espaço de tela (a sala desenhada antes numa textura, lida onde P + d·T cai na tela) e vidro jateado (nível de mip borrado + seis leituras com jitter). Tem aberração cromática, reflexo de Fresnel e o modo "onde ele lê", que pinta a própria leitura.
   - **Playground novo com dois presets editáveis:** vidro estampado (canelado, martelado, pirâmides e blocos de vidro, por campo de alturas e ∇h) e vitral (células de Voronoi, chumbo por F₂ − F₁, cor por Beer–Lambert com espessura irregular).

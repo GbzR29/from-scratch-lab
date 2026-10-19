@@ -18,6 +18,7 @@ const track = {
     pool: "Piscina interativa",
     river: "Rios e lagos: flow maps",
     glass: "Vidro, refração e Fresnel",
+    "gems-bubbles": "Gemas e bolhas",
     fog: "Neblina",
     stylized: "Toon, dissolve e holograma",
     raymarching: "Raymarching",

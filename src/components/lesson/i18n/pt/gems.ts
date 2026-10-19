@@ -1,0 +1,60 @@
+// PT text for the gem and bubble widgets (figures/gems). Keys match the tx() calls there; English is the fallback in the code.
+
+const text: Record<string, string> = {
+  // ── GemCutFigure (2026-10-19) ──
+  figGemCut_title: "Para onde vai a luz num brilhante",
+  figGemCut_white: "luz branca",
+  figGemCut_m_diamond: "diamante 2,42",
+  figGemCut_m_moissanite: "moissanita 2,65",
+  figGemCut_m_cz: "zircônia cúbica 2,16",
+  figGemCut_m_glass: "vidro 1,52",
+  figGemCut_alpha: "ângulo do pavilhão α",
+  figGemCut_beta: "ângulo da coroa β",
+  figGemCut_boost: "abertura das cores ×",
+  figGemCut_ideal: "Tolkowsky 1919",
+  figGemCut_shallow: "raso demais",
+  figGemCut_deep: "fundo demais",
+  figGemCut_window: "janela",
+  figGemCut_return: "luz que volta",
+  figGemCut_plot: "luz que sai de volta pela coroa",
+  figGemCut_axis: "ângulo do pavilhão α",
+  figGemCut_note: "A luz cai reta de cima sobre a pedra. O verde sai pela coroa e chega a quem olha de cima; o vermelho vaza pelo pavilhão e se perde. Arraste pelo gráfico ou mova α. Abaixo da janela o pavilhão é raso demais: a primeira faceta é atingida com menos que o ângulo crítico e a luz escorre por baixo (um “olho de peixe”). Acima dela a pedra é funda demais: depois de duas reflexões a luz volta inclinada demais para sair pela mesa e escapa pelo outro lado (uma “cabeça de prego” escura). Troque para vidro: o ângulo crítico dele é tão maior que a janela encolhe para poucos graus. Na luz branca as cores só se separam onde a luz sai inclinada; isso é o fogo.",
+
+  // ── DiamondFigure (2026-10-19) ──
+  figDiamond_title: "Um brilhante redondo, traçado",
+  figDiamond_view_light: "luz",
+  figDiamond_view_return: "por onde sai",
+  figDiamond_view_tir: "contar reflexões",
+  figDiamond_boost: "dispersão ×",
+  figDiamond_colours: "cores",
+  figDiamond_lamps: "vitrine",
+  figDiamond_sky: "céu",
+  figDiamond_spin: "girar",
+  figDiamond_vLight: "A pedra como você a veria. Cada comprimento de onda segue o seu próprio caminho: as reflexões lá dentro são as mesmas para todos, mas cada saída desvia o violeta um pouco mais que o vermelho. Ponha cores em 1 e o fogo some; o que sobra é o brilho, a luz branca que a lapidação devolve. Gire devagar: os lampejos que vêm e vão são a cintilação.",
+  figDiamond_vReturn: "Por onde a luz que entra em cada pixel sai da pedra: verde pela coroa, de volta para quem olha; vermelho pelo pavilhão, perdida. Visto de cima, um diamante bem lapidado é quase todo verde. Baixe α para menos de uns 38° e abre-se um anel vermelho em volta da mesa (olho de peixe); suba acima de 48° e o meio fica vermelho (cabeça de prego).",
+  figDiamond_vTir: "Quantas vezes o caminho é totalmente refletido lá dentro antes de sair pela primeira vez: cinza nenhuma, azul uma, amarelo duas, vermelho cinco ou mais. Sob a mesa quase todo caminho faz as duas reflexões no pavilhão da dedução. Troque para vidro e a maior parte da cor some.",
+  figDiamond_noteMouse: "Arraste para girar a câmera, role para dar zoom. ",
+  figDiamond_noteTouch: "Arraste para girar a câmera, faça pinça para dar zoom. ",
+  figDiamond_note: "73 planos e nenhuma marcha: o raio entra no maior t dos planos em que está entrando e sai no menor t dos planos pelos quais está saindo. Lá dentro, cada saída deixa sair (1 − F) da luz e guarda F; além do ângulo crítico, guarda tudo. A moissanita tem mais que o dobro da dispersão do diamante e solta visivelmente mais cor; o vidro, com a mesma lapidação, fica sem graça.",
+
+  // ── BubbleFigure (2026-10-19) ──
+  figBubble_title: "Uma bolha de sabão",
+  figBubble_view_colour: "cor",
+  figBubble_view_thickness: "espessura",
+  figBubble_view_plain: "sem interferência",
+  figBubble_mean: "espessura média",
+  figBubble_drain: "escoamento",
+  figBubble_swirl: "redemoinho",
+  figBubble_flow: "escorrer",
+  figBubble_backdrop: "fundo preto",
+  figBubble_top: "topo",
+  figBubble_bottom: "base",
+  figBubble_vColour: "Cada parede reflete alguns comprimentos de onda e deixa os outros passarem, conforme a espessura e o ângulo. Perto da borda a luz atravessa a película inclinada, o caminho lá dentro é mais curto (cos θt) e as cores mudam. Baixe a espessura média até o topo ficar preto.",
+  figBubble_vThickness: "A própria película: escuro é fino, claro é grosso, até 1200 nm; preto puro é abaixo de 30 nm, fino demais para refletir qualquer coisa. As cores da outra vista seguem exatamente essas curvas de nível.",
+  figBubble_vPlain: "A mesma bolha com os reflexos somados como potências, como se as duas ondas não tivessem relação. É o que acontece quando a película é mais grossa que o comprimento de coerência da luz, alguns micrômetros para a luz do sol: uma vidraça ou uma gota d'água. Toda a cor some; o que sobra é um reflexo de Fresnel fraco e sem cor.",
+  figBubble_noteMouse: "Arraste para girar a câmera, role para dar zoom. ",
+  figBubble_noteTouch: "Arraste para girar a câmera, faça pinça para dar zoom. ",
+  figBubble_note: "Três caminhos chegam ao seu olho: refletido na parede da frente, direto pelas duas paredes, e refletido no lado de dentro da parede de trás, que faz a pequena segunda imagem do céu, de cabeça para baixo. Cada um é pesado pela refletância da película fina em 16 comprimentos de onda. Uma parede reflete no máximo uns 8%, então contra um céu claro a luz que atravessa afoga as cores; os fotógrafos põem um cartão preto atrás da bolha, como faz o botão de fundo preto, e deixam o céu na frente dela para ser refletido. Películas muito grossas (acima de uns 1000 nm) desbotam para rosa e verde pálidos: muitos comprimentos de onda cabem nelas, e as cores se compensam.",
+};
+
+export default text;
