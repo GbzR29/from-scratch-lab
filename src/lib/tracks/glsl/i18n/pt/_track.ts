@@ -21,6 +21,8 @@ const track = {
     "gems-bubbles": "Gemas e bolhas",
     fog: "Neblina",
     snow: "Neve e nevascas",
+    fire: "Fogo e fumaça",
+    "rain-glass": "Chuva no vidro",
     stylized: "Toon, dissolve e holograma",
     raymarching: "Raymarching",
     "black-hole": "Buracos negros: a luz que se curva",

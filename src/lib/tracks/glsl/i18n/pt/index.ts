@@ -6,6 +6,7 @@ import blackhole from "./blackhole";
 import builtinVars from "./builtin-vars";
 import builtins from "./builtins";
 import effects from "./effects";
+import fire from "./fire";
 import fragcoord from "./fragcoord";
 import gems from "./gems";
 import glass from "./glass";
@@ -13,6 +14,7 @@ import noise from "./noise";
 import ocean from "./ocean";
 import playground from "./playground";
 import pool from "./pool";
+import rain from "./rain";
 import raymarching from "./raymarching";
 import river from "./river";
 import raytracing from "./raytracing";
@@ -24,7 +26,7 @@ import types from "./types";
 import underwater from "./underwater";
 
 const bundle: LessonText = {
-  strings: { ...blackhole, ...builtinVars, ...builtins, ...effects, ...fragcoord, ...gems, ...glass, ...noise, ...ocean, ...playground, ...pool, ...raymarching, ...river, ...raytracing, ...sdf, ...shaderClass, ...shapes, ...snow, ...types, ...underwater },
+  strings: { ...blackhole, ...builtinVars, ...builtins, ...effects, ...fire, ...fragcoord, ...gems, ...glass, ...noise, ...ocean, ...playground, ...pool, ...rain, ...raymarching, ...river, ...raytracing, ...sdf, ...shaderClass, ...shapes, ...snow, ...types, ...underwater },
   titles: track.titles,
   sections: track.sections,
 };

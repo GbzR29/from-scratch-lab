@@ -14,6 +14,23 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-19
 
+- **Trilha de GLSL: capítulo novo "Chuva no vidro" (`/GLSL/rain-glass`), em Receitas de efeitos, logo depois de Fogo e fumaça.**
+  - **Por que as gotas grudam e depois escorrem:** tensão superficial, ângulo de contato e histerese; dedução do raio a partir do qual uma gota escorre (r_c ≈ 1,7 mm numa janela) com fórmula ao vivo; stick-slip, gotas que se engolem e seguem rastros molhados.
+  - **Cada gota é uma lente:** f = R/(n − 1) ≈ 3R e a imagem invertida dentro de cada gota; a refração como deslocamento do fundo pela inclinação da água, δ ≈ (n − 1)·∇h.
+  - **Gotas a partir de células com hash:** células altas para as gotas que escorrem (stick-slip numa linha de código, um caminho só para gota e rastro), gotinhas no rastro, gotas paradas varridas pelos rastros, normal pelo campo de alturas.
+  - **O embaçado no vidro:** ponto de orvalho pela fórmula de Magnus com fórmula ao vivo, desfoque grátis pelos mipmaps, e a máscara de limpeza em ping-pong que volta a embaçar com e^(−k·dt).
+  - **Widget `RainGlassFigure`:** janela à noite diante de uma rua com prédios, postes e carros; gotas escorrendo aos trancos com rastros, gotas paradas, imagem invertida nas gotas, vidro embaçado que se limpa com o ponteiro ou o dedo; vistas "altura da água" e "máscara limpa".
+  - Em EN e PT.
+
+- **Trilha de GLSL: capítulo novo "Fogo e fumaça" (`/GLSL/fire`), em Receitas de efeitos, logo depois de Neve.**
+  - **O que brilha numa chama:** fuligem incandescente (amarelo), quimioluminescência de CH e C₂ (azul da base) e fumaça; a lei de Planck com todos os termos, dedução da lei de Wien (λmax·T = 2898 µm·K) e Stefan–Boltzmann (T⁴), fórmula ao vivo do pico.
+  - **Widget `BlackbodyFigure`:** a curva de Planck para qualquer temperatura com a faixa visível pintada, a cor vista pelo olho (curvas CIE), a fração de luz visível e a potência; atalhos para brasas, vela, lâmpada, Sol e estrela azul.
+  - **Uma chama num shader:** por que a chama afina (empuxo, v = √(2g′y), ρvA constante), a receita do campo de temperatura com ruído subindo, a tabela de corpo negro, e a pulsação dos fogos grandes (f ≈ 1,5/√D) com fórmula ao vivo.
+  - **Widget `FlameFigure`:** vela, fogueira com toras e brasas, e boca de gás azul, todas da mesma função; temperatura da fuligem, fuligem, turbulência, corrente de ar e exposição em escala logarítmica; vista do campo de temperatura com isotermas.
+  - **Fumaça como volume:** dedução do laço de renderização de volume (equação de transferência, transmitância, integral exata por passo), marcha de luz para a sombra própria, albedo de fuligem a vapor, e a pluma que se alarga r ≈ 0,12·y.
+  - **Widget `SmokeFigure`:** pluma de fogueira por raymarching com vento, fogo emitindo luz, albedo, densidade e sol; vistas "sem sombra própria" e "transmitância".
+  - Em EN e PT.
+
 - **Trilha de GLSL: capítulo novo "Neve e nevascas" (`/GLSL/snow`), em Receitas de efeitos, logo depois de Neblina.** Primeira parte (cristal e neve caindo); a nevasca vem na próxima.
   - **Por que um floco tem seis braços:** a rede hexagonal do gelo, por que os cantos viram braços (crescem mais rápido no ar úmido) e as faces resistem, supersaturação alta faz ramos e baixa faz placas; tabela do diagrama de Nakaya (placas, colunas, agulhas, dendritos estelares por temperatura e umidade); os seis braços saem iguais porque registram a mesma história.
   - **Dobrando o plano:** dedução passo a passo de fold6 (mod 60°, espelho com abs), fórmula ao vivo de onde cai um ponto, a versão com três espelhos e sem atan; meio braço com ramos a 60° e a dedução do comprimento máximo de um ramo (ℓ < x), mais o contorno hexagonal das pontas num só produto escalar.

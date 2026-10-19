@@ -19,6 +19,7 @@ import cppGen from "./cppGen";
 import cppStd from "./cppStd";
 import cppSys from "./cppSys";
 import figures from "./figures";
+import fire from "./fire";
 import fog from "./fog";
 import gamedev from "./gamedev";
 import gems from "./gems";
@@ -57,6 +58,7 @@ import physicsLight from "./physicsLight";
 import physicsMech from "./physicsMech";
 import physicsRel from "./physicsRel";
 import pool from "./pool";
+import rainGlass from "./rainGlass";
 import river from "./river";
 import post from "./post";
 import practice from "./practice";
@@ -69,6 +71,6 @@ import underwater from "./underwater";
 import vulkan from "./vulkan";
 import water from "./water";
 
-const bundle: Record<string, string> = { ...advgl, ...ai, ...aiNeural, ...aiDeep, ...aiRl, ...asm, ...asmFlow, ...asmC, ...asmPerf, ...advlighting, ...blackhole, ...cLang, ...cppLang, ...cppOwn, ...cppObj, ...cppGen, ...cppStd, ...cppSys, ...figures, ...fog, ...gamedev, ...gems, ...glass, ...glintro, ...glsl, ...lighting, ...markov, ...math, ...mathAlgebra, ...mathGeometry, ...mathTrig, ...mathLinAlg, ...mathCalculus, ...mathProbability, ...mathPractice, ...mathLogic, ...mathDiscrete, ...mathAnalysis, ...music, ...musicScore, ...musicTuning, ...musicIntervals, ...musicScales, ...musicMinor, ...ocean, ...pbr, ...perf, ...physics, ...physicsDyn, ...physicsCons, ...physicsWave, ...physicsHeat, ...physicsElec, ...physicsLight, ...physicsMech, ...physicsRel, ...pool, ...post, ...practice, ...river, ...rt, ...sky, ...snow, ...special, ...tech, ...underwater, ...vulkan, ...water };
+const bundle: Record<string, string> = { ...advgl, ...ai, ...aiNeural, ...aiDeep, ...aiRl, ...asm, ...asmFlow, ...asmC, ...asmPerf, ...advlighting, ...blackhole, ...cLang, ...cppLang, ...cppOwn, ...cppObj, ...cppGen, ...cppStd, ...cppSys, ...figures, ...fire, ...fog, ...gamedev, ...gems, ...glass, ...glintro, ...glsl, ...lighting, ...markov, ...math, ...mathAlgebra, ...mathGeometry, ...mathTrig, ...mathLinAlg, ...mathCalculus, ...mathProbability, ...mathPractice, ...mathLogic, ...mathDiscrete, ...mathAnalysis, ...music, ...musicScore, ...musicTuning, ...musicIntervals, ...musicScales, ...musicMinor, ...ocean, ...pbr, ...perf, ...physics, ...physicsDyn, ...physicsCons, ...physicsWave, ...physicsHeat, ...physicsElec, ...physicsLight, ...physicsMech, ...physicsRel, ...pool, ...post, ...practice, ...rainGlass, ...river, ...rt, ...sky, ...snow, ...special, ...tech, ...underwater, ...vulkan, ...water };
 
 export default bundle;
