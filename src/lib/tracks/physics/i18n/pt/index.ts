@@ -26,9 +26,13 @@ import electricChargeField from "./electric-charge-field";
 import electricPotential from "./electric-potential";
 import circuits from "./circuits";
 import magnetism from "./magnetism";
+import induction from "./induction";
+import maxwellEmWaves from "./maxwell-em-waves";
+import geometricOptics from "./geometric-optics";
+import waveOptics from "./wave-optics";
 
 const bundle: LessonText = {
-  strings: { ...unitsMeasurement, ...kinematics1d, ...kinematics2d, ...relativeMotion, ...newtonsLaws, ...forces, ...circularMotion, ...workEnergy, ...momentumCollisions, ...rotation, ...angularMomentum, ...gravityOrbits, ...simpleHarmonic, ...dampingResonance, ...waves, ...sound, ...fluidStatics, ...fluidDynamics, ...temperatureHeat, ...thermodynamics, ...electricChargeField, ...electricPotential, ...circuits, ...magnetism },
+  strings: { ...unitsMeasurement, ...kinematics1d, ...kinematics2d, ...relativeMotion, ...newtonsLaws, ...forces, ...circularMotion, ...workEnergy, ...momentumCollisions, ...rotation, ...angularMomentum, ...gravityOrbits, ...simpleHarmonic, ...dampingResonance, ...waves, ...sound, ...fluidStatics, ...fluidDynamics, ...temperatureHeat, ...thermodynamics, ...electricChargeField, ...electricPotential, ...circuits, ...magnetism, ...induction, ...maxwellEmWaves, ...geometricOptics, ...waveOptics },
   titles: track.titles,
   sections: track.sections,
 };

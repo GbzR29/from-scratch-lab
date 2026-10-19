@@ -1287,6 +1287,22 @@
     "created": "2026-10-18",
     "updated": "2026-10-18"
   },
+  "physics/induction": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/maxwell-em-waves": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/geometric-optics": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/wave-optics": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
   "sdl3/whats-new": {
     "created": "2026-09-03",
     "updated": "2026-10-08"

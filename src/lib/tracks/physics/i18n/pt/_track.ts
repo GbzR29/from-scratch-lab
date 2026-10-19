@@ -26,6 +26,10 @@ const track = {
     "electric-potential": "Potencial elétrico e capacitores",
     "circuits": "Circuitos elétricos",
     "magnetism": "Magnetismo",
+    "induction": "Indução eletromagnética",
+    "maxwell-em-waves": "As equações de Maxwell e a luz",
+    "geometric-optics": "Espelhos, lentes e refração",
+    "wave-optics": "Interferência e difração",
   } as Record<string, string>,
   sections: {
     "Foundations & Motion": "Fundamentos e movimento",
@@ -34,6 +38,7 @@ const track = {
     "Oscillations & Waves": "Oscilações e ondas",
     "Fluids & Heat": "Fluidos e calor",
     "Electricity": "Eletricidade",
+    "Electromagnetism & Light": "Eletromagnetismo e luz",
   } as Record<string, string>,
 };
 

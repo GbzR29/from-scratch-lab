@@ -33,4 +33,8 @@ export const physicsChapters: Chapter[] = [
   { id: "electric-potential", section: "Electricity",         title: "Electric Potential & Capacitors", minRead: 22, load: () => import("./chapters/electric-potential").then((m) => m.ElectricPotentialContent) },
   { id: "circuits", section: "Electricity",                   title: "Electric Circuits",               minRead: 23, load: () => import("./chapters/circuits").then((m) => m.CircuitsContent) },
   { id: "magnetism", section: "Electricity",                  title: "Magnetism",                       minRead: 22, load: () => import("./chapters/magnetism").then((m) => m.MagnetismContent) },
+  { id: "induction", section: "Electromagnetism & Light",     title: "Electromagnetic Induction",       minRead: 23, load: () => import("./chapters/induction").then((m) => m.InductionContent) },
+  { id: "maxwell-em-waves", section: "Electromagnetism & Light", title: "Maxwell's Equations & Light", minRead: 23, load: () => import("./chapters/maxwell-em-waves").then((m) => m.MaxwellEmWavesContent) },
+  { id: "geometric-optics", section: "Electromagnetism & Light", title: "Mirrors, Lenses & Refraction", minRead: 24, load: () => import("./chapters/geometric-optics").then((m) => m.GeometricOpticsContent) },
+  { id: "wave-optics", section: "Electromagnetism & Light",   title: "Interference & Diffraction",      minRead: 23, load: () => import("./chapters/wave-optics").then((m) => m.WaveOpticsContent) },
 ];
