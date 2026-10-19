@@ -34,9 +34,13 @@ import lagrangian from "./lagrangian";
 import hamiltonianPhaseSpace from "./hamiltonian-phase-space";
 import chaos from "./chaos";
 import statisticalMechanics from "./statistical-mechanics";
+import specialRelativity from "./special-relativity";
+import spacetime from "./spacetime";
+import relativisticEnergy from "./relativistic-energy";
+import generalRelativity from "./general-relativity";
 
 const bundle: LessonText = {
-  strings: { ...unitsMeasurement, ...kinematics1d, ...kinematics2d, ...relativeMotion, ...newtonsLaws, ...forces, ...circularMotion, ...workEnergy, ...momentumCollisions, ...rotation, ...angularMomentum, ...gravityOrbits, ...simpleHarmonic, ...dampingResonance, ...waves, ...sound, ...fluidStatics, ...fluidDynamics, ...temperatureHeat, ...thermodynamics, ...electricChargeField, ...electricPotential, ...circuits, ...magnetism, ...induction, ...maxwellEmWaves, ...geometricOptics, ...waveOptics, ...lagrangian, ...hamiltonianPhaseSpace, ...chaos, ...statisticalMechanics },
+  strings: { ...unitsMeasurement, ...kinematics1d, ...kinematics2d, ...relativeMotion, ...newtonsLaws, ...forces, ...circularMotion, ...workEnergy, ...momentumCollisions, ...rotation, ...angularMomentum, ...gravityOrbits, ...simpleHarmonic, ...dampingResonance, ...waves, ...sound, ...fluidStatics, ...fluidDynamics, ...temperatureHeat, ...thermodynamics, ...electricChargeField, ...electricPotential, ...circuits, ...magnetism, ...induction, ...maxwellEmWaves, ...geometricOptics, ...waveOptics, ...lagrangian, ...hamiltonianPhaseSpace, ...chaos, ...statisticalMechanics, ...specialRelativity, ...spacetime, ...relativisticEnergy, ...generalRelativity },
   titles: track.titles,
   sections: track.sections,
 };

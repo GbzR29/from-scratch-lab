@@ -34,6 +34,10 @@ const track = {
     "hamiltonian-phase-space": "Mecânica hamiltoniana e espaço de fase",
     "chaos": "Caos",
     "statistical-mechanics": "Mecânica estatística",
+    "special-relativity": "Relatividade especial",
+    "spacetime": "Espaço-tempo",
+    "relativistic-energy": "Energia relativística: E = mc²",
+    "general-relativity": "Relatividade geral",
   } as Record<string, string>,
   sections: {
     "Foundations & Motion": "Fundamentos e movimento",
@@ -44,6 +48,7 @@ const track = {
     "Electricity": "Eletricidade",
     "Electromagnetism & Light": "Eletromagnetismo e luz",
     "Advanced Mechanics": "Mecânica avançada",
+    "Relativity": "Relatividade",
   } as Record<string, string>,
 };
 

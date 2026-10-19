@@ -41,4 +41,8 @@ export const physicsChapters: Chapter[] = [
   { id: "hamiltonian-phase-space", section: "Advanced Mechanics", title: "Hamiltonian Mechanics & Phase Space", minRead: 24, load: () => import("./chapters/hamiltonian-phase-space").then((m) => m.HamiltonianPhaseSpaceContent) },
   { id: "chaos", section: "Advanced Mechanics",               title: "Chaos",                           minRead: 23, load: () => import("./chapters/chaos").then((m) => m.ChaosContent) },
   { id: "statistical-mechanics", section: "Advanced Mechanics", title: "Statistical Mechanics",         minRead: 25, load: () => import("./chapters/statistical-mechanics").then((m) => m.StatisticalMechanicsContent) },
+  { id: "special-relativity", section: "Relativity",          title: "Special Relativity",              minRead: 23, load: () => import("./chapters/special-relativity").then((m) => m.SpecialRelativityContent) },
+  { id: "spacetime", section: "Relativity",                   title: "Spacetime",                       minRead: 24, load: () => import("./chapters/spacetime").then((m) => m.SpacetimeContent) },
+  { id: "relativistic-energy", section: "Relativity",         title: "Relativistic Energy: E = mc²",    minRead: 22, load: () => import("./chapters/relativistic-energy").then((m) => m.RelativisticEnergyContent) },
+  { id: "general-relativity", section: "Relativity",          title: "General Relativity",              minRead: 25, load: () => import("./chapters/general-relativity").then((m) => m.GeneralRelativityContent) },
 ];

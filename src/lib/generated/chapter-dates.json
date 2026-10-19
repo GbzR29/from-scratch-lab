@@ -1319,6 +1319,22 @@
     "created": "2026-10-18",
     "updated": "2026-10-18"
   },
+  "physics/special-relativity": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/spacetime": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/relativistic-energy": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/general-relativity": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
   "sdl3/whats-new": {
     "created": "2026-09-03",
     "updated": "2026-10-08"
