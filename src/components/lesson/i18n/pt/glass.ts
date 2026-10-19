@@ -1,6 +1,29 @@
 // PT text for the glass widgets. Keys match the tx() calls there; English is the fallback in the code.
 
 const text: Record<string, string> = {
+  // ── PrismBeamFigure (2026-10-19) ──
+  figPrism_title: "Um prisma num quarto escuro",
+  figPrism_w16: "16 comprimentos de onda",
+  figPrism_w3: "3, como um shader",
+  figPrism_m_crown: "vidro crown",
+  figPrism_m_flint: "vidro flint",
+  figPrism_m_water: "água",
+  figPrism_m_diamond: "diamante",
+  figPrism_turn: "girar o prisma",
+  figPrism_boost: "exagerar o leque ×",
+  figPrism_width: "largura do feixe",
+  figPrism_haze: "névoa",
+  figPrism_minDev: "desvio mínimo",
+  figPrism_sweep: "balançar o prisma",
+  figPrism_trapped: "— (reflexão total)",
+  figPrism_devRed: "vermelho virou",
+  figPrism_devViolet: "violeta virou",
+  figPrism_devBlue: "azul virou",
+  figPrism_spread: "leque",
+  figPrism_noteMouse: "Arraste para andar pelo quarto, role para dar zoom. ",
+  figPrism_noteTouch: "Arraste para andar pelo quarto, faça pinça para dar zoom. ",
+  figPrism_note: "Cada comprimento de onda é traçado sozinho, com o seu próprio n de Cauchy, então o violeta, que tem o maior n, sempre vira mais. Dentro do vidro os caminhos estão tão próximos que o feixe ainda parece branco; só depois da segunda face o leque abre. Balance o prisma: o espectro desce e volta a subir, e o ponto de virada é o desvio mínimo. O vidro flint, o padrão, espalha as cores cerca de três vezes mais que o vidro crown. O ângulo crítico de 24° do diamante prende a luz dentro de um prisma de 60°: ela quica na segunda face e sai pela base. Com 3 comprimentos de onda você vê o que um shader de três canais calcula de verdade: três feixes separados, com buracos entre eles onde um espectro real tem amarelo e ciano.",
+
   figWin_n0: "Limpe o vidro embaçado com o ponteiro (arraste); ele embaça de novo aos poucos. Através de uma gota a rua fica nítida e curvada: cada gota é uma lentezinha que também limpou seu próprio pedaço de condensação.",
   figWin_n1: "A máscara de gotas c: gotas paradas, gotas escorrendo e as gotículas que elas deixam, a partir de três camadas de células de grade.",
   figWin_n2: "O gradiente de c (x → vermelho, y → verde). É o deslocamento usado para ler o fundo, então a forma da gota decide como ela curva a imagem.",

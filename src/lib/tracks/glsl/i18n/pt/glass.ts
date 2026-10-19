@@ -82,6 +82,21 @@ const text: Record<string, string> = {
   glslGlass_cauchyWords: "O índice é uma constante mais um pequeno extra que cresce quando o comprimento de onda encurta, então o azul e o violeta enxergam um vidro um pouco mais denso que o vermelho.",
   glslGlass_cauchyNote: "Com esses valores, n = 1,531 em 400 nm, 1,517 em 589 nm e 1,513 em 700 nm. A diferença é menor que 0,02, e mesmo assim é ela que põe franjas coloridas nas bordas de um objeto de vidro e tira um arco-íris de um prisma.",
   glslGlass_dispShader: "Um shader tem só três canais de cor. A versão barata refrata três vezes, com η um pouco menor para o vermelho e um pouco maior para o azul, e fica com um canal de cada resultado. Isso é três vezes o trabalho nessa parte do shader. uDispersion no shader da bola abaixo é esse ±Δn. O padrão 0,03 é cerca do dobro do espalhamento real do vidro, o que deixa as franjas fáceis de ver.",
+
+  // ── The prism (2026-10-19) ──
+  glslGlass_prismTitle: "Um prisma num quarto escuro",
+  glslGlass_prismBody: "Um prisma transforma essa pequena diferença de n num leque largo porque a luz é desviada duas vezes, em duas faces inclinadas uma para a outra, e os dois desvios viram a luz para o mesmo lado. Quanto ela vira depende de como o prisma está de frente para o feixe. Gire o prisma e o feixe se move; numa certa posição ele para e volta. Essa posição, o desvio mínimo, é aquela em que o caminho lá dentro corre paralelo à base, e ela dá um jeito clássico de medir n:",
+  glslGlass_minDevDer: "O desvio mínimo de um prisma",
+  glslGlass_wApex: "ângulo do vértice do prisma, entre as duas faces que a luz atravessa: 60° no prisma equilátero comum",
+  glslGlass_wTh1Th2: "ângulos do raio fora do vidro, na primeira e na segunda face, medidos a partir da normal de cada face",
+  glslGlass_wRho: "os ângulos correspondentes dentro do vidro",
+  glslGlass_wDev: "desvio: o ângulo entre o feixe que entra e o feixe que sai",
+  glslGlass_m1: "as duas normais e o raio lá dentro formam um triângulo com o vértice. O ângulo dele no cruzamento das normais é 180° − A, então os outros dois, ρ₁ e ρ₂, somam A",
+  glslGlass_m2: "cada face vira o raio pela diferença entre o ângulo de fora e o de dentro, e as duas viradas vão em direção à base, então elas se somam",
+  glslGlass_m3: "caminhos de luz podem ser percorridos ao contrário: um raio que entra em θ₂ sai em θ₁ com o mesmo D. Então D assume cada valor duas vezes, uma para cada ordem, menos no ponto de virada, onde os dois precisam ser o mesmo caminho: o simétrico",
+  glslGlass_m4: "ponha θ₂ = θ₁ no desvio do passo 2 e isole θ₁",
+  glslGlass_m5: "a lei de Snell na primeira face, saindo do ar (índice 1). Meça D_min com um transferidor e você tem n: é assim que os índices das tabelas foram medidos, um comprimento de onda de cada vez",
+  glslGlass_prismNumbers: "No vidro crown, n = 1,531 em 400 nm dá D_min = 39,9° e n = 1,513 em 700 nm dá 38,3°: o violeta vira 1,6° a mais que o vermelho. Numa parede a 4 metros, isso é um espectro de uns 11 cm de altura. A figura abaixo é esse experimento; ela começa com vidro flint denso, cujo espalhamento é três vezes maior, dobrado mais uma vez para o leque ficar fácil de ver. O feixe dela é traçado em JavaScript, um comprimento de onda de cada vez, exatamente com os passos deste capítulo: Cauchy para o n, refract() em cada face, a perda exata de Fresnel e reflect() quando k < 0. O shader então desenha cada pedaço do caminho como um tubo brilhante de névoa e cada ponta como uma mancha de luz.",
   glslGlass_absTitle: "Absorção: por que vidro grosso tem cor",
   glslGlass_absBody: "Vidro transparente absorve um pouco de luz e vidro colorido absorve muito, mas nenhum dos dois absorve todas as cores igualmente. Dentro do material, cada camada fina remove a mesma fração da luz que chega até ela. Essa única regra dá a lei inteira:",
   glslGlass_beerDer: "De uma camada fina até Beer–Lambert",
@@ -146,10 +161,11 @@ const text: Record<string, string> = {
   glslGlass_key4: "Fresnel: F ≈ R₀ + (1 − R₀)(1 − cosθ)⁵; misture refração e reflexão com ele.",
   glslGlass_key5: "R₀ = ((n₁ − n₂)/(n₁ + n₂))²: 4% para o vidro, 2% para a água.",
   glslGlass_key6: "Dispersão: n(λ) ≈ A + B/λ²; um shader refrata R, G e B com três η um pouco diferentes.",
-  glslGlass_key7: "Absorção: T = e^(−σ·d) por canal; em GLSL pow(tint, d), com d o comprimento do caminho lá dentro.",
-  glslGlass_key8: "Chuva no vidro: as gotas são um campo de alturas c; leia a cena em uv + k·∇c.",
-  glslGlass_key9: "As gotas vêm de células de grade com hash; um dente de serra dá o movimento de grudar e escorrer; os rastros limpam a névoa.",
-  glslGlass_key10: "Desfoque = nível de mip ≈ log₂(raio); a condensação e o jateado escolhem o nível, as gotas o forçam a 0.",
+  glslGlass_key7: "Prisma: as duas refrações viram a luz para o mesmo lado; no desvio mínimo, n = sin((A + D)/2) / sin(A/2).",
+  glslGlass_key8: "Absorção: T = e^(−σ·d) por canal; em GLSL pow(tint, d), com d o comprimento do caminho lá dentro.",
+  glslGlass_key9: "Chuva no vidro: as gotas são um campo de alturas c; leia a cena em uv + k·∇c.",
+  glslGlass_key10: "As gotas vêm de células de grade com hash; um dente de serra dá o movimento de grudar e escorrer; os rastros limpam a névoa.",
+  glslGlass_key11: "Desfoque = nível de mip ≈ log₂(raio); a condensação e o jateado escolhem o nível, as gotas o forçam a 0.",
 };
 
 export default text;

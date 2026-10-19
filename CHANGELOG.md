@@ -14,6 +14,12 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-19
 
+- **Trilha de GLSL, "Vidro, refração e Fresnel": subseção nova "Um prisma num quarto escuro" (em Dispersão).** O widget novo `PrismBeamFigure` é a capa do "Dark Side of the Moon" em 3D: um feixe branco de fenda atravessa ar com névoa, entra num prisma de vidro e sai como um leque de cores que pinta um espectro no chão e na parede.
+  - **Física de verdade:** cada comprimento de onda é traçado sozinho em JavaScript (`prismOptics.ts`): n de Cauchy, refract() em cada face, perda exata de Fresnel, reflexão interna total e o reflexo fraco da primeira face. As cores vêm das funções de cor CIE 1931 (ajuste de Wyman, Sloan e Shirley) e somam branco.
+  - **Shader (`prismShader.ts`):** cada pedaço do caminho é uma folha de luz; a névoa é a integral da gaussiana ao longo do raio do olho (função erro), e as manchas na parede e no chão são a irradiância do feixe.
+  - **Interação:** câmera orbital, girar o prisma, botão "desvio mínimo", balançar o prisma, vidro crown, flint, água e diamante (que prende a luz), exagero do leque, largura do feixe, névoa, e "16 comprimentos de onda" × "3, como um shader" (três feixes separados, sem amarelo nem ciano).
+  - Texto novo com a dedução do desvio mínimo, n = sin((A + D)/2) / sin(A/2), os números do vidro crown e uma ideia-chave nova. Em EN e PT.
+
 - **Trilha de GLSL, "Vidro, refração e Fresnel": seção nova "Estúdio de vidro: tudo em 3D".** O widget novo `GlassStudioFigure` traça por raymarching, num shader só (`studioShader.ts`), um objeto de vidro debaixo de um céu de verdade (cube maps do site) e sobre um piso de ladrilhos.
   - **Objetos:** esfera, prisma, diamante lapidado (16 facetas na coroa, 8 no pavilhão), toro, cubo arredondado e taça de vinho.
   - **Interação:** câmera orbital com zoom, giro automático, índice n com atalhos para água, vidro e diamante, dispersão, absorção (Beer–Lambert com tinta escolhível), número de quiques internos e escolha do céu.

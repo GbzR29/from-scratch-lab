@@ -13,6 +13,7 @@ import { WindowLabFigure } from "@/components/lesson/figures/glass/WindowLabFigu
 import { GlassRayFigure } from "@/components/lesson/figures/glass/GlassRayFigure";
 import { AbsorptionFigure } from "@/components/lesson/figures/glass/AbsorptionFigure";
 import { GlassStudioFigure } from "@/components/lesson/figures/glass/GlassStudioFigure";
+import { PrismBeamFigure } from "@/components/lesson/figures/glass/PrismBeamFigure";
 import { FresnelFigure } from "@/components/lesson/glsl/FresnelFigure";
 import { GLASS_PRESETS } from "../../presets/glass";
 import { refractNumbers, schlickNumbers } from "../../live/glass";
@@ -54,6 +55,7 @@ export function GlassContent({ t }: { t: TrackTranslations }) {
         "Fresnel: F ≈ R₀ + (1 − R₀)(1 − cosθ)⁵; mix refraction and reflection with it.",
         "R₀ = ((n₁ − n₂)/(n₁ + n₂))²: 4% for glass, 2% for water.",
         "Dispersion: n(λ) ≈ A + B/λ²; a shader refracts R, G and B with three slightly different η.",
+        "Prism: both refractions turn the light the same way; at minimum deviation n = sin((A + D)/2) / sin(A/2).",
         "Absorption: T = e^(−σ·d) per channel; in GLSL pow(tint, d), with d the path length inside.",
         "Rain on glass: drops are a height field c; read the scene at uv + k·∇c.",
         "Drops come from hashed grid cells; a sawtooth gives the stick-then-slide motion; trails clear the fog.",
@@ -226,6 +228,45 @@ function DispersionSection({ t }: { t: TrackTranslations }) {
       <CodeBlock lang="glsl" filename="three refractions" t={t}>{`vec3 refr = vec3(through(ro, rd, uIOR - uDispersion).r,   // red: the smallest index
                  through(ro, rd, uIOR).g,
                  through(ro, rd, uIOR + uDispersion).b);  // blue: the largest index`}</CodeBlock>
+      <PrismSection t={t} />
+    </>
+  );
+}
+
+// ── The prism: a rainbow out of a white beam ──────────────────────────────────
+
+function PrismSection({ t }: { t: TrackTranslations }) {
+  return (
+    <>
+      <H3>{tx(t, "glslGlass_prismTitle", "A prism in a dark room")}</H3>
+      <p>
+        {tx(t, "glslGlass_prismBody",
+          "A prism turns that small spread of n into a wide fan because the light is bent twice, at two faces that are tilted towards each other, and both bends turn it the same way. How far it is turned depends on how the prism faces the beam. Turn the prism and the beam moves; at one position it stops and comes back. That position, the minimum deviation, is the one where the path inside runs parallel to the base, and it gives a classic way to measure n:")}
+      </p>
+      <Derivation t={t} label={tx(t, "glslGlass_minDevDer", "Minimum deviation of a prism")}
+        where={[
+          [r`A`, tx(t, "glslGlass_wApex", "apex angle of the prism, between the two faces the light crosses: 60° for the usual equilateral prism")],
+          [r`\theta_1,\ \theta_2`, tx(t, "glslGlass_wTh1Th2", "angles of the ray outside the glass, at the first and the second face, from each face's normal")],
+          [r`\rho_1,\ \rho_2`, tx(t, "glslGlass_wRho", "the matching angles inside the glass")],
+          [r`D`, tx(t, "glslGlass_wDev", "deviation: the angle between the beam that comes in and the beam that leaves")],
+        ]}
+        steps={[
+          { full: true, tex: r`\rho_1 + \rho_2 = A`,
+            why: tx(t, "glslGlass_m1", "the two normals and the ray inside form a triangle with the apex. Its angle at the normals' crossing is 180° − A, so the other two, ρ₁ and ρ₂, add up to A") },
+          { full: true, tex: r`D = (\theta_1 - \rho_1) + (\theta_2 - \rho_2) = \theta_1 + \theta_2 - A`,
+            why: tx(t, "glslGlass_m2", "each face turns the ray by the difference between its outside and inside angles, and both turns go towards the base, so they add") },
+          { full: true, tex: r`\theta_1 = \theta_2, \qquad \rho_1 = \rho_2 = \tfrac{A}{2}`,
+            why: tx(t, "glslGlass_m3", "light paths can be run backwards: a ray entering at θ₂ leaves at θ₁ with the same D. So D takes each value twice, once for each order, except at its turning point, where the two must be the same path: the symmetric one") },
+          { full: true, tex: r`D_{\min} = 2\theta_1 - A \;\Rightarrow\; \theta_1 = \frac{A + D_{\min}}{2}`,
+            why: tx(t, "glslGlass_m4", "put θ₂ = θ₁ in the deviation of step 2 and solve for θ₁") },
+          { full: true, tex: r`n = \frac{\sin\theta_1}{\sin\rho_1} = \frac{\sin\big(\tfrac{A + D_{\min}}{2}\big)}{\sin\tfrac{A}{2}}`,
+            why: tx(t, "glslGlass_m5", "Snell's law at the first face, from air (index 1). Measure D_min with a protractor and you have n: this is how the indices in tables were measured, one wavelength at a time") },
+        ]} />
+      <p>
+        {tx(t, "glslGlass_prismNumbers",
+          "For crown glass, n = 1.531 at 400 nm gives D_min = 39.9° and n = 1.513 at 700 nm gives 38.3°: violet is turned 1.6° more than red. On a wall 4 metres away that is a spectrum about 11 cm tall. The figure below is that experiment; it starts with dense flint glass, whose spread is three times larger, doubled again so the fan is easy to see. Its beam is traced in JavaScript, one wavelength at a time, with exactly the steps of this chapter: Cauchy for n, refract() at each face, the exact Fresnel loss, and reflect() when k < 0. The shader then draws each piece of the path as a glowing tube of haze and each end as a spot of light.")}
+      </p>
+      <PrismBeamFigure t={t} />
     </>
   );
 }
