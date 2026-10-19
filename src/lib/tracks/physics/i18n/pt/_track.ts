@@ -30,6 +30,10 @@ const track = {
     "maxwell-em-waves": "As equações de Maxwell e a luz",
     "geometric-optics": "Espelhos, lentes e refração",
     "wave-optics": "Interferência e difração",
+    "lagrangian": "Mecânica lagrangiana",
+    "hamiltonian-phase-space": "Mecânica hamiltoniana e espaço de fase",
+    "chaos": "Caos",
+    "statistical-mechanics": "Mecânica estatística",
   } as Record<string, string>,
   sections: {
     "Foundations & Motion": "Fundamentos e movimento",
@@ -39,6 +43,7 @@ const track = {
     "Fluids & Heat": "Fluidos e calor",
     "Electricity": "Eletricidade",
     "Electromagnetism & Light": "Eletromagnetismo e luz",
+    "Advanced Mechanics": "Mecânica avançada",
   } as Record<string, string>,
 };
 

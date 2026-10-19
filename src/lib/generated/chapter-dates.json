@@ -1303,6 +1303,22 @@
     "created": "2026-10-18",
     "updated": "2026-10-18"
   },
+  "physics/lagrangian": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/hamiltonian-phase-space": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/chaos": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
+  "physics/statistical-mechanics": {
+    "created": "2026-10-18",
+    "updated": "2026-10-18"
+  },
   "sdl3/whats-new": {
     "created": "2026-09-03",
     "updated": "2026-10-08"

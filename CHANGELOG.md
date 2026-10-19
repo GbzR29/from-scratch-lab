@@ -14,6 +14,22 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-18
 
+- **Trilha de Física, seção nova "Mecânica avançada" (lote 8 de 12).** Quatro capítulos, com cada termo explicado, deduções passo a passo, exemplos resolvidos, erros comuns e metas, em EN e PT:
+  - **Mecânica lagrangiana:** coordenadas generalizadas e graus de liberdade, a ação S = ∫(T − V) dt e o princípio da ação estacionária, a equação de Euler–Lagrange deduzida (e conferida contra Newton), a receita em cinco passos, o pêndulo, a máquina de Atwood, a conta num aro girando (com a bifurcação em ω_c = √(g/R)), momento generalizado e coordenadas cíclicas (o planeta em coordenadas polares e a segunda lei de Kepler), o teorema de Noether (simetria ↔ conservação) e a função energia.
+  - **Mecânica hamiltoniana e espaço de fase:** a hamiltoniana pela transformada de Legendre e por que ela costuma ser T + V, as equações de Hamilton deduzidas, a conservação da energia numa linha, o espaço de fase, a elipse da mola com área 2πE/ω, o retrato de fase do pêndulo (centro, sela, separatriz), o teorema de Liouville deduzido (fluxo sem divergência) e suas consequências (sem atratores, integradores simpléticos, mecânica estatística), recorrência de Poincaré, parênteses de Poisson e o caminho para a quântica, e uma tabela Newton × Lagrange × Hamilton.
+  - **Caos:** o demônio de Laplace e o arredondamento de Lorenz, o pêndulo duplo, o expoente de Lyapunov e o horizonte de previsão t = ln(Δ/δ₀)/λ deduzido, previsão do tempo, o que o caos exige (não linearidade e três dimensões, Poincaré–Bendixson), esticar e dobrar, atratores estranhos (Lorenz), o mapa logístico (ponto fixo e estabilidade deduzidos, duplicação de período, δ de Feigenbaum, λ = ln 2 em r = 4), seções de Poincaré e o caos no Sistema Solar, em Hipérion, no tempo e nos dados.
+  - **Mecânica estatística:** microestados e macroestados com moedas, a hipótese fundamental, o sólido de Einstein contado por pontos e barras, dois sólidos em contato e a segunda lei, a entropia S = k ln Ω, a temperatura a partir da contagem (1/T = ∂S/∂E e kT = ε/ln(1 + N/q) deduzidos), equipartição e Dulong–Petit, o fator de Boltzmann deduzido de um reservatório, a função de partição, usos (atmosfera, Arrhenius, evaporação, semicondutores, estrelas), a distribuição de velocidades de Maxwell–Boltzmann e a energia livre F = E − TS com a fusão do gelo.
+  - **Oito widgets novos:**
+    - **A ação de uma bola lançada** (`ActionFigure`): caminho arrastável e a ação S(ε) com o mínimo no caminho real; quebrar usa T + V e a bola "cai para cima".
+    - **Conta num aro girando** (`BeadHoopFigure`): potencial efetivo cujo vale se divide em dois; quebrar esquece o movimento do aro.
+    - **O pêndulo no espaço de fase** (`PhasePortraitFigure`): curvas de nível de H, setas das equações de Hamilton, clique para escolher o estado inicial.
+    - **Uma nuvem de pêndulos mantém a área** (`LiouvilleFigure`): borda refinada sozinha e área medida; quebrar usa passos de Euler e a nuvem incha.
+    - **Dois pêndulos duplos** (`DoublePendulumFigure`): distância em escala log, λ e horizonte medidos; quebrar usa as equações lineares e o caos some.
+    - **Mapa logístico** (`LogisticMapFigure`): teia de aranha, séries a partir de dois começos e o diagrama de bifurcação.
+    - **Dois sólidos dividindo energia** (`EinsteinSolidFigure`): quanta pulando ao acaso, histograma contra a contagem exata, temperaturas e a chance de voltar tudo para A.
+    - **Distribuição de Boltzmann** (`BoltzmannFigure`): 400 átomos trocando quanta, histograma contra a teoria em escala log e ln W; quebrar divide "com justiça".
+  - Textos dos widgets em `components/lesson/i18n/pt/physicsMech.ts`. A trilha passa a ter 32 de 48 capítulos.
+
 - **Página inicial: figuras sorteadas.** A figura viva ao lado do título deixa de ser sempre o pêndulo: cada visita sorteia uma de seis (pêndulo simples, um círculo desenhando uma senoide, lançamento oblíquo, a luz entrando na água, curva de Bézier, descida do gradiente), sem repetir a da visita anterior, e o botão "outra" passa para a próxima. Todas no mesmo traço, com um controle e a fórmula ao vivo, em EN e PT.
 - **Ideias-chave da Matemática em português.** 51 capítulos mostravam a caixa de ideias-chave em inglês em `/pt`; as 340 frases foram traduzidas. Uma auditoria de todas as trilhas mostrou que a trilha de Algoritmos ainda não tem texto de lição em PT (só os títulos).
 

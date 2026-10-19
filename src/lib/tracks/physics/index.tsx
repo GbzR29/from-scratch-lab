@@ -37,4 +37,8 @@ export const physicsChapters: Chapter[] = [
   { id: "maxwell-em-waves", section: "Electromagnetism & Light", title: "Maxwell's Equations & Light", minRead: 23, load: () => import("./chapters/maxwell-em-waves").then((m) => m.MaxwellEmWavesContent) },
   { id: "geometric-optics", section: "Electromagnetism & Light", title: "Mirrors, Lenses & Refraction", minRead: 24, load: () => import("./chapters/geometric-optics").then((m) => m.GeometricOpticsContent) },
   { id: "wave-optics", section: "Electromagnetism & Light",   title: "Interference & Diffraction",      minRead: 23, load: () => import("./chapters/wave-optics").then((m) => m.WaveOpticsContent) },
+  { id: "lagrangian", section: "Advanced Mechanics",          title: "Lagrangian Mechanics",            minRead: 24, load: () => import("./chapters/lagrangian").then((m) => m.LagrangianContent) },
+  { id: "hamiltonian-phase-space", section: "Advanced Mechanics", title: "Hamiltonian Mechanics & Phase Space", minRead: 24, load: () => import("./chapters/hamiltonian-phase-space").then((m) => m.HamiltonianPhaseSpaceContent) },
+  { id: "chaos", section: "Advanced Mechanics",               title: "Chaos",                           minRead: 23, load: () => import("./chapters/chaos").then((m) => m.ChaosContent) },
+  { id: "statistical-mechanics", section: "Advanced Mechanics", title: "Statistical Mechanics",         minRead: 25, load: () => import("./chapters/statistical-mechanics").then((m) => m.StatisticalMechanicsContent) },
 ];

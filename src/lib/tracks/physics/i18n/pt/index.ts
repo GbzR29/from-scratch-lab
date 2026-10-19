@@ -30,9 +30,13 @@ import induction from "./induction";
 import maxwellEmWaves from "./maxwell-em-waves";
 import geometricOptics from "./geometric-optics";
 import waveOptics from "./wave-optics";
+import lagrangian from "./lagrangian";
+import hamiltonianPhaseSpace from "./hamiltonian-phase-space";
+import chaos from "./chaos";
+import statisticalMechanics from "./statistical-mechanics";
 
 const bundle: LessonText = {
-  strings: { ...unitsMeasurement, ...kinematics1d, ...kinematics2d, ...relativeMotion, ...newtonsLaws, ...forces, ...circularMotion, ...workEnergy, ...momentumCollisions, ...rotation, ...angularMomentum, ...gravityOrbits, ...simpleHarmonic, ...dampingResonance, ...waves, ...sound, ...fluidStatics, ...fluidDynamics, ...temperatureHeat, ...thermodynamics, ...electricChargeField, ...electricPotential, ...circuits, ...magnetism, ...induction, ...maxwellEmWaves, ...geometricOptics, ...waveOptics },
+  strings: { ...unitsMeasurement, ...kinematics1d, ...kinematics2d, ...relativeMotion, ...newtonsLaws, ...forces, ...circularMotion, ...workEnergy, ...momentumCollisions, ...rotation, ...angularMomentum, ...gravityOrbits, ...simpleHarmonic, ...dampingResonance, ...waves, ...sound, ...fluidStatics, ...fluidDynamics, ...temperatureHeat, ...thermodynamics, ...electricChargeField, ...electricPotential, ...circuits, ...magnetism, ...induction, ...maxwellEmWaves, ...geometricOptics, ...waveOptics, ...lagrangian, ...hamiltonianPhaseSpace, ...chaos, ...statisticalMechanics },
   titles: track.titles,
   sections: track.sections,
 };
