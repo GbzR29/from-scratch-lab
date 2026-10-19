@@ -29,6 +29,21 @@ export const foldNumbers = (t: TrackTranslations) => ({ theta, rad }: V) => {
   };
 };
 
+/** Snowy air with 10^logN grains per m³ of radius rmm: extinction and visibility. */
+export const visibilityNumbers = (t: TrackTranslations) => ({ logN, rmm }: V) => {
+  const n = 10 ** logN, rad = rmm * 1e-3;
+  const sigma = n * 2 * Math.PI * rad * rad, vis = 3.912 / sigma;
+  const nTex = n >= 1e4 ? r`${num(n / 10 ** Math.floor(logN), 2)} \times 10^{${Math.floor(logN)}}` : num(n, 0);
+  return {
+    tex: r`\begin{aligned}
+      &\sigma = n\,Q\,\pi r^2 = ${nTex} \cdot 2 \cdot \pi \cdot (${num(rmm, 2)} \times 10^{-3})^2 = ${num(sigma, sigma < 0.01 ? 5 : 3)}\ \text{m}^{-1} \\[4pt]
+      &V = \frac{3.912}{\sigma} = \amber{${vis >= 10000 ? r`> 10\ \text{km}` : r`${num(vis, 0)}\ \text{m}`}} \qquad \text{${tx(t, "glslSnow_livePoles", "poles 10 m apart")}: } ${num(Math.min(vis / 10, 999), 0)}
+    \end{aligned}`,
+    meter: Math.min(1, Math.log10(Math.max(vis, 10)) / 4),
+    meterLabel: vis >= 10000 ? "> 10 km" : `${num(vis, 0)} m`,
+  };
+};
+
 /** A ball of radius rho sunk delta into the snow: where its print ends. Both in cm. */
 export const ballPrintNumbers = (t: TrackTranslations) => ({ rho, delta }: V) => {
   const d = Math.min(delta, 2 * rho), c = rho - d;

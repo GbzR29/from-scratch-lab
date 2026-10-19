@@ -13,6 +13,7 @@ import { SnowflakeFigure } from "@/components/lesson/figures/snow/SnowflakeFigur
 import { SnowfallFigure } from "@/components/lesson/figures/snow/SnowfallFigure";
 import { SNOW_PRESETS } from "../../presets/snow";
 import { DeformSnowFigure } from "@/components/lesson/figures/snow/DeformSnowFigure";
+import { BlizzardSection, SettleSection } from "./snowStorm";
 import { foldNumbers, parallaxNumbers, ballPrintNumbers } from "../../live/snow";
 
 const r = String.raw;
@@ -26,7 +27,7 @@ export function SnowContent({ t }: { t: TrackTranslations }) {
     <Article>
       <Lead>
         {tx(t, "glslSnow_intro",
-          "Snow is two effects at two sizes. Up close it is a crystal, a six-armed piece of ice whose shape records the air it grew in. From a distance it is a crowd, thousands of white dots drifting down at different depths. This chapter builds both with very little code: one twelfth of a crystal, folded into the whole flake, and a grid of cells that falls past the camera, where each cell holds at most one flake. Last, the snow on the ground: a texture that remembers every footprint pressed into it.")}
+          "Snow is two effects at two sizes. Up close it is a crystal, a six-armed piece of ice whose shape records the air it grew in. From a distance it is a crowd, thousands of white dots drifting down at different depths. This chapter builds both with very little code: one twelfth of a crystal, folded into the whole flake, and a grid of cells that falls past the camera, where each cell holds at most one flake. Then the storm, where the snow becomes streaks and fog, and finally the snow on the ground: a layer that settles on everything, and a texture that remembers every footprint pressed into it.")}
       </Lead>
 
       <Goals t={t} id="glslSnow" items={[
@@ -35,11 +36,15 @@ export function SnowContent({ t }: { t: TrackTranslations }) {
         "Grow a flake procedurally: an arm, side branches at 60° and plates, from a growth record.",
         "Fill the screen with falling snow from hashed cells on a stack of sheets, with parallax, sway and depth of field.",
         "Make snow keep footprints: a height texture, stamps with min, a displaced mesh and a refill over time.",
+        "Turn falling snow into a blizzard: streaks, curl-noise swirls, and a visibility worked out from the grains.",
+        "Settle snow on a scene, either as a mask in the material or as real shape built from the scene's SDF.",
       ]} />
 
       <CrystalSection t={t} />
       <FoldSection t={t} />
       <FallSection t={t} />
+      <BlizzardSection t={t} />
+      <SettleSection t={t} />
       <DeformSection t={t} />
 
       <KeyIdeas t={t} id="glslSnow" items={[
@@ -53,6 +58,9 @@ export function SnowContent({ t }: { t: TrackTranslations }) {
         "Defocus grows with |1/z − 1/z_f|; spreading the same light over a bigger disc dims it by (r / (r + c))².",
         "Deformable snow is a height texture seen from above: stamp with h = min(h, underside), ping-pong between two textures, and sink a dense mesh in the vertex shader.",
         "A sphere sunk δ leaves a print of radius √(2ρδ − δ²). Fresh snow refills with h += (1 − h)(1 − e^(−kΔt)), which gives the same result at any frame rate.",
+        "A flake moving at v during an exposure Δt is a streak of length v·Δt; turning and stretching the cells along the motion keeps each streak in its cell.",
+        "Curl noise, v = (∂ψ/∂y, −∂ψ/∂x), has zero divergence, so swirling snow never clumps or empties. Snowy air is fog with σ = n·Q·πr² (Q ≈ 2), and visibility V = 3.912/σ.",
+        "Snow as shape: max(s(p) − T, (solid found below p within T) + M) keeps only the part of an inflated shell that sits on something, so tops get a rounded cap and walls stay bare.",
       ]} />
     </Article>
   );
