@@ -269,6 +269,33 @@ const text: Record<string, string> = {
   figCMem_sc2: "pp aponta para o struct inteiro. O endereço dele também é o endereço do primeiro campo.",
   figCMem_sc3: "pp->x quer dizer \"o campo x do struct para o qual pp aponta\".",
   figCMem_sc4: "(*pp).y é a mesma coisa por extenso: desreferencia e depois escolhe o campo. -> é a forma curta.",
+
+  // PointerExplorerFigure
+  figCPtrX_null: "p guarda o endereço 0 (NULL). Nenhuma caixa mora lá: o programa trava (falha de segmentação)",
+  figCPtrX_junk: "p nunca recebeu valor, então guarda os bits que sobraram na sua caixa. *p lê um endereço aleatório: lixo, ou uma trava. Comportamento indefinido",
+  figCPtrX_eX: "a própria caixa x, lida como número",
+  figCPtrX_eAx: "o endereço de x: onde a sua caixa começa. Não é uma caixa, só um número que você pode guardar",
+  figCPtrX_eP: "a caixa p, que guarda um endereço",
+  figCPtrX_ePP2: "siga pp até p, depois p até",
+  figCPtrX_eSp: "siga o endereço guardado em p até",
+  figCPtrX_eAp: "o endereço de p: um ponteiro também tem caixa e endereço",
+  figCPtrX_ePp: "a caixa pp, que guarda o endereço de p",
+  figCPtrX_eSpp: "siga pp: você chega na caixa p",
+  figCPtrX_title: "O que cada expressão nomeia? & e * em caixas de verdade",
+  figCPtrX_reset: "reiniciar",
+  figCPtrX_bNull: "quebre aqui: p = NULL",
+  figCPtrX_bJunk: "quebre aqui: p sem valor",
+  figCPtrX_type: "tipo",
+  figCPtrX_note: "Toda variável é uma caixa num endereço. & pede a uma caixa o seu endereço; * faz o caminho inverso, de um endereço para a caixa que mora lá. Então p é a caixa que guarda um endereço, *p é a caixa nesse endereço, e &p é onde o próprio p mora, porque um ponteiro é uma variável com caixa como qualquer outra. Cada & acrescenta uma estrela ao tipo e cada * tira uma: x é int, &x é int *, &p é int **. Clique em p = &y e depois em *p = 99: a mesma linha de código agora escreve em y. É para isso que servem os ponteiros: código que trabalha em qualquer caixa que você entregar. Agora quebre. Um ponteiro igual a NULL guarda o endereço 0, onde nenhuma caixa mora, e *p trava na hora. Um ponteiro sem valor guarda bits que sobraram, e *p lê ou escreve num lugar aleatório: às vezes trava, às vezes estraga algo em silêncio. Sempre dê um valor a um ponteiro antes de usá-lo.",
+  figCPtrX_toNowhere: "→ endereço 0: não há nada lá",
+  figCPtrX_toJunk: "→ algum endereço aleatório",
+
+  // PointerStepFigure
+  figCPtrS_title: "p + i anda i elementos: aritmética de ponteiros por tipo",
+  figCPtrS_edge: "um depois do fim: pode comparar (p != a + n), nunca ler",
+  figCPtrS_out: "fora dos limites: ler aqui é comportamento indefinido (lixo, uma trava ou dano silencioso)",
+  figCPtrS_note: "Os mesmos 16 bytes, vistos por quatro tipos. Escolha int: a + 1 fica 4 bytes depois de a, porque um int ocupa 4 bytes. Escolha double: a + 1 fica 8 bytes adiante, e o array só tem dois elementos. Escolha char: um byte por passo. Você nunca multiplica pelo tamanho; o tipo do ponteiro diz ao compilador o tamanho de um passo, e é por isso que a[i] e *(a + i) são a mesma coisa. Repare também que os números são guardados com o byte mais baixo primeiro (little-endian): o int 3 são os bytes 03 00 00 00. Deslize i até n: esse endereço, um depois do fim, pode ser formado e comparado, e é assim que os laços param. Vá além e você está lendo memória que pertence a outra coisa. O C não confere: ficar dentro é trabalho seu.",
+  figCPtrS_bytes: "16 bytes de memória, em hexadecimal; o sombreado alterna elemento a elemento",
 };
 
 export default text;

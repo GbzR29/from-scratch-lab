@@ -12,6 +12,8 @@ import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
 import { Article, Goals, KeyIdeas, Lead } from "@/components/lesson/Prose";
 import { MemoryBoxFigure } from "@/components/lesson/figures/c/MemoryBoxFigure";
+import { PointerExplorerFigure } from "@/components/lesson/figures/c/PointerExplorerFigure";
+import { PointerStepFigure } from "@/components/lesson/figures/c/PointerStepFigure";
 
 export function CPointersContent({ t }: { t: TrackTranslations }) {
   return (
@@ -55,6 +57,7 @@ printf("d is %f and lives at %p\\n", d, (void *)&d);   // e.g. 0x7ffe40`}</CodeB
         ]}
       />
       <MemoryBoxFigure t={t} programs={["pointer"]} />
+      <PointerExplorerFigure t={t} />
       <Callout type="warn" t={t}>
         {tx(t, "cPtr_starWarn",
           "In int *a, b; only a is a pointer. b is a plain int: the * belongs to the name, not to the type. Declare one pointer per line and the problem never comes up.")}
@@ -95,6 +98,7 @@ minmax(data, 4, &lo, &hi);   // lo = 1, hi = 9`}</CodeBlock>
           ["a + 5", tx(t, "cPtr_a6", "one past the end: allowed as a stop marker, but must never be read")],
         ]}
       />
+      <PointerStepFigure t={t} />
       <CodeBlock lang="c" filename="walk.c" t={t}>{`int a[5] = {3, 1, 4, 1, 5};
 
 // Indexing
