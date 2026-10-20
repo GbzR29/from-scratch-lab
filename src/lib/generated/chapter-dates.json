@@ -1355,6 +1355,22 @@
     "created": "2026-10-18",
     "updated": "2026-10-18"
   },
+  "physics/birth-of-quantum": {
+    "created": "2026-10-19",
+    "updated": "2026-10-19"
+  },
+  "physics/wave-particle": {
+    "created": "2026-10-19",
+    "updated": "2026-10-19"
+  },
+  "physics/schrodinger": {
+    "created": "2026-10-19",
+    "updated": "2026-10-19"
+  },
+  "physics/hydrogen-atom": {
+    "created": "2026-10-19",
+    "updated": "2026-10-19"
+  },
   "sdl3/whats-new": {
     "created": "2026-09-03",
     "updated": "2026-10-08"

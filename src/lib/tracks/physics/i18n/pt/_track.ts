@@ -38,6 +38,10 @@ const track = {
     "spacetime": "Espaço-tempo",
     "relativistic-energy": "Energia relativística: E = mc²",
     "general-relativity": "Relatividade geral",
+    "birth-of-quantum": "O nascimento da física quântica",
+    "wave-particle": "Ondas, partículas e incerteza",
+    "schrodinger": "A equação de Schrödinger",
+    "hydrogen-atom": "O átomo de hidrogênio",
   } as Record<string, string>,
   sections: {
     "Foundations & Motion": "Fundamentos e movimento",
@@ -49,6 +53,7 @@ const track = {
     "Electromagnetism & Light": "Eletromagnetismo e luz",
     "Advanced Mechanics": "Mecânica avançada",
     "Relativity": "Relatividade",
+    "Quantum Foundations": "Fundamentos da quântica",
   } as Record<string, string>,
 };
 

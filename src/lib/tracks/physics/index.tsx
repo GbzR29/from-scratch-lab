@@ -45,4 +45,8 @@ export const physicsChapters: Chapter[] = [
   { id: "spacetime", section: "Relativity",                   title: "Spacetime",                       minRead: 24, load: () => import("./chapters/spacetime").then((m) => m.SpacetimeContent) },
   { id: "relativistic-energy", section: "Relativity",         title: "Relativistic Energy: E = mc²",    minRead: 22, load: () => import("./chapters/relativistic-energy").then((m) => m.RelativisticEnergyContent) },
   { id: "general-relativity", section: "Relativity",          title: "General Relativity",              minRead: 25, load: () => import("./chapters/general-relativity").then((m) => m.GeneralRelativityContent) },
+  { id: "birth-of-quantum", section: "Quantum Foundations",   title: "The Birth of Quantum Physics",    minRead: 24, load: () => import("./chapters/birth-of-quantum").then((m) => m.BirthOfQuantumContent) },
+  { id: "wave-particle", section: "Quantum Foundations",      title: "Waves, Particles & Uncertainty",  minRead: 23, load: () => import("./chapters/wave-particle").then((m) => m.WaveParticleContent) },
+  { id: "schrodinger", section: "Quantum Foundations",        title: "The Schrödinger Equation",        minRead: 25, load: () => import("./chapters/schrodinger").then((m) => m.SchrodingerContent) },
+  { id: "hydrogen-atom", section: "Quantum Foundations",      title: "The Hydrogen Atom",               minRead: 24, load: () => import("./chapters/hydrogen-atom").then((m) => m.HydrogenAtomContent) },
 ];
