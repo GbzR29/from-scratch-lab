@@ -53,4 +53,8 @@ export const physicsChapters: Chapter[] = [
   { id: "entanglement", section: "Quantum Deeper",           title: "Entanglement & Bell's Theorem",   minRead: 24, load: () => import("./chapters/entanglement").then((m) => m.EntanglementContent) },
   { id: "many-particles", section: "Quantum Deeper",         title: "Many Particles: Pauli, Atoms & Lasers", minRead: 25, load: () => import("./chapters/many-particles").then((m) => m.ManyParticlesContent) },
   { id: "solids", section: "Quantum Deeper",                 title: "Solids: Bands, Metals & Semiconductors", minRead: 25, load: () => import("./chapters/solids").then((m) => m.SolidsContent) },
+  { id: "nuclear", section: "Nuclear, Particles & Cosmos",   title: "The Nucleus: Radioactivity, Fission & Fusion", minRead: 26, load: () => import("./chapters/nuclear").then((m) => m.NuclearContent) },
+  { id: "particle-physics", section: "Nuclear, Particles & Cosmos", title: "Particle Physics: The Standard Model", minRead: 26, load: () => import("./chapters/particle-physics").then((m) => m.ParticlePhysicsContent) },
+  { id: "quantum-fields", section: "Nuclear, Particles & Cosmos", title: "Quantum Fields & Feynman Diagrams", minRead: 26, load: () => import("./chapters/quantum-fields").then((m) => m.QuantumFieldsContent) },
+  { id: "cosmology", section: "Nuclear, Particles & Cosmos", title: "Cosmology: The Expanding Universe", minRead: 27, load: () => import("./chapters/cosmology").then((m) => m.CosmologyContent) },
 ];

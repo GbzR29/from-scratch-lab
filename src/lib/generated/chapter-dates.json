@@ -1387,6 +1387,22 @@
     "created": "2026-10-19",
     "updated": "2026-10-19"
   },
+  "physics/nuclear": {
+    "created": "2026-10-20",
+    "updated": "2026-10-20"
+  },
+  "physics/particle-physics": {
+    "created": "2026-10-20",
+    "updated": "2026-10-20"
+  },
+  "physics/quantum-fields": {
+    "created": "2026-10-20",
+    "updated": "2026-10-20"
+  },
+  "physics/cosmology": {
+    "created": "2026-10-20",
+    "updated": "2026-10-20"
+  },
   "sdl3/whats-new": {
     "created": "2026-09-03",
     "updated": "2026-10-08"

@@ -46,6 +46,10 @@ const track = {
     "entanglement": "Emaranhamento e o teorema de Bell",
     "many-particles": "Muitas partículas: Pauli, átomos e lasers",
     "solids": "Sólidos: bandas, metais e semicondutores",
+    "nuclear": "O núcleo: radioatividade, fissão e fusão",
+    "particle-physics": "Física de partículas: o Modelo Padrão",
+    "quantum-fields": "Campos quânticos e diagramas de Feynman",
+    "cosmology": "Cosmologia: o universo em expansão",
   } as Record<string, string>,
   sections: {
     "Foundations & Motion": "Fundamentos e movimento",
@@ -59,6 +63,7 @@ const track = {
     "Relativity": "Relatividade",
     "Quantum Foundations": "Fundamentos da quântica",
     "Quantum Deeper": "Quântica a fundo",
+    "Nuclear, Particles & Cosmos": "Núcleo, partículas e cosmos",
   } as Record<string, string>,
 };
 
