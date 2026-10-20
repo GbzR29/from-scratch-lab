@@ -42,6 +42,10 @@ const track = {
     "wave-particle": "Ondas, partículas e incerteza",
     "schrodinger": "A equação de Schrödinger",
     "hydrogen-atom": "O átomo de hidrogênio",
+    "spin-qubits": "Spin e qubits",
+    "entanglement": "Emaranhamento e o teorema de Bell",
+    "many-particles": "Muitas partículas: Pauli, átomos e lasers",
+    "solids": "Sólidos: bandas, metais e semicondutores",
   } as Record<string, string>,
   sections: {
     "Foundations & Motion": "Fundamentos e movimento",
@@ -54,6 +58,7 @@ const track = {
     "Advanced Mechanics": "Mecânica avançada",
     "Relativity": "Relatividade",
     "Quantum Foundations": "Fundamentos da quântica",
+    "Quantum Deeper": "Quântica a fundo",
   } as Record<string, string>,
 };
 

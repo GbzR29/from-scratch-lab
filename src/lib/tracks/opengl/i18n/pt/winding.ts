@@ -1,4 +1,4 @@
-// PT text for src/lib/tracks/opengl/chapters/winding.tsx. Keys match the tx() calls there; English is the fallback in the code.
+// PT text for src/lib/tracks/opengl/chapters/perf/winding.tsx and live/winding.ts. Keys match the tx() calls there; English is the fallback in the code.
 
 const text: Record<string, string> = {
   ch10_goal0: "Distinguir a frente de um triângulo das costas pela ordem dos seus vértices.",
@@ -47,6 +47,31 @@ const text: Record<string, string> = {
   ch10_key1: "glEnable(GL_CULL_FACE) remove faces traseiras antes da rasterização, cortando mais ou menos pela metade o trabalho de fragmento em malhas fechadas.",
   ch10_key2: "O vertex shading ainda roda; o culling por cone de cluster pula grupos inteiros antes dele.",
   ch10_key3: "Escala negativa e reflexos invertem o winding; materiais de dois lados desligam o culling e usam gl_FrontFacing.",
+
+  // ── Live formulas, "in words", derivations (2026-10-19) ──
+  ch10_wNext: "o próximo vértice, dando a volta: depois do vértice 2 vem o vértice 0 de novo",
+  ch10_wA: "a área com sinal: o tamanho dela é a área do triângulo em pixels, o sinal é o winding",
+  ch10_areaWords: "Percorra as três arestas do triângulo e some um pequeno termo cruzado para cada uma. Metade do total é a área, positiva se você andou no sentido anti-horário na tela e negativa se andou no horário.",
+  ch10_areaDer: "Do produto vetorial à soma",
+  ch10_ad1: "as duas arestas que saem do vértice 0 formam um paralelogramo; o z do produto vetorial delas é a área dele, com o sinal dado pela regra da mão direita. O triângulo é metade disso",
+  ch10_ad2: "multiplique os dois produtos; x₀y₀ aparece uma vez com cada sinal e se cancela",
+  ch10_ad3: "reagrupe os seis termos por aresta: 0→1, 1→2 e 2→0. Cada parêntese é o termo xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ da soma",
+  ch10_ad4: "as coordenadas de janela têm y para cima, como o plano x–y de sempre, então virar à esquerda (anti-horário) da aresta 1 para a aresta 2 dá um z positivo",
+  ch10_coneWords: "Aponte da câmera para o cluster. Se essa direção estiver alinhada o bastante com o eixo do cone, todo triângulo do cluster está virado para longe da câmera, e nenhum deles pode ser visto.",
+  ch10_coneDer: "Por que o limiar é sen α",
+  ch10_cd1: "um triângulo está de costas quando a normal n aponta no mesmo sentido da direção de visão v̂ (da câmera até ele), ou seja, o ângulo entre os dois é no máximo 90°. O cluster é pequeno, então o v̂ até o centro dele vale para todos os triângulos",
+  ch10_cd2: "θ é o ângulo entre v̂ e o eixo a. Toda normal está a até α do eixo, então a pior normal fica a θ + α de v̂",
+  ch10_cd3: "se até a pior normal está de costas, todas estão",
+  ch10_cd4: "o cosseno diminui de 0° a 180°, então um ângulo menor tem cosseno maior: θ ≤ 90° − α vira cos θ ≥ cos(90° − α). E cos θ é só v̂·a, um produto escalar de vetores unitários: nenhum ângulo chega a ser calculado",
+  ch10_coneLive: "Experimente: um cluster, uma câmera",
+  ch10_wTh: "ângulo entre a direção de visão e o eixo do cone: 0° quer dizer que as normais do cluster apontam direto para longe da câmera, 180° direto para ela",
+  ch10_wAl: "o meio-ângulo do cone: 0° para um pedaço plano, maior para um curvo",
+  ch10_coneLiveNote: "Um pedaço plano (α = 0°) é descartado para qualquer θ até 90°: metade de todas as vistas. Com α = 45°, só as vistas a até 45° do eixo o descartam. Com α = 90° só θ = 0° ainda passa, e um cone mais largo nunca poderia ser descartado, porque alguma normal sempre estaria virada para a câmera: é por isso que os clusters são montados com triângulos que apontam mais ou menos para o mesmo lado.",
+  ch10_liveCull: "descartar o cluster inteiro",
+  ch10_liveKeep: "manter: algum triângulo pode estar de frente",
+  ch10_liveWorst: "pior triângulo",
+  ch10_adOnScreen: "na tela",
+  ch10_coneLiveCull: "descartar",
 };
 
 export default text;

@@ -4,6 +4,9 @@
 
 import { CodeBlock, Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
+import { Derivation } from "@/components/lesson/Derivation";
+import { LiveFormula } from "@/components/lesson/LiveFormula";
+import { lambdaNumbers, memNumbers } from "@/lib/tracks/opengl/live/texture-compression";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
@@ -34,15 +37,33 @@ export function TextureCompressionContent({ t }: { t: TrackTranslations }) {
 
       <H2>{tx(t, "oglTexc_mipTitle", "Mipmaps")}</H2>
       <Equation label={tx(t, "oglTexc_chainLabel", "The mip chain and its memory cost")}
-        where={[[r`N`, tx(t, "oglTexc_wN", "the base size; level k has size N / 2ᵏ, down to 1×1")]]}
+        where={[
+          [r`N`, tx(t, "oglTexc_wN", "the base size; level k has size N / 2ᵏ, down to 1×1")],
+          [r`\lfloor\ \rfloor`, tx(t, "oglTexc_wFloor", "round down: a 300-texel texture halves to 150, 75, 37, 18, 9, 4, 2, 1")],
+          [r`(\tfrac14)^k`, tx(t, "oglTexc_wQuarter", "the memory of level k relative to the base: half the width times half the height, k times")],
+        ]}
+        words={tx(t, "oglTexc_chainWords", "Halve the texture until it is one texel: that gives the number of levels. Each level takes a quarter of the memory of the one before, and all of them together add only one third to the base.")}
         note={tx(t, "oglTexc_chainNote", "Each level is a quarter of the previous one, so the whole chain adds only a third to the memory: 1 + ¼ + ¹⁄₁₆ + … = 4/3. \"Mip\" is Latin multum in parvo, \"much in little\" (Williams, 1983).")}>
         {r`\text{levels} = \lfloor \log_2 N \rfloor + 1 \qquad \sum_{k=0}^{\infty} \left(\tfrac14\right)^k = \tfrac43`}
       </Equation>
+      <Derivation t={t} label={tx(t, "oglTexc_chainDer", "Why the whole chain costs only 4/3")}
+        steps={[
+          { tex: r`S = 1 + \tfrac14 + \tfrac1{16} + \tfrac1{64} + \cdots`,
+            why: tx(t, "oglTexc_cd1", "the base counts as 1; every level below it is a quarter of the one above") },
+          { tex: r`\tfrac14 S = \tfrac14 + \tfrac1{16} + \tfrac1{64} + \cdots`,
+            why: tx(t, "oglTexc_cd2", "a quarter of the whole sum is the same list without its first term") },
+          { tex: r`S - \tfrac14 S = 1`,
+            why: tx(t, "oglTexc_cd3", "subtract the two lines: every term after the first cancels") },
+          { tex: r`\tfrac34 S = 1 \;\Rightarrow\; S = \tfrac43`,
+            why: tx(t, "oglTexc_cd4", "a real chain stops at 1×1, so its sum is a hair below 4/3: for 4096² it is 1.33333331") },
+        ]} />
       <Equation label={tx(t, "oglTexc_lodLabel", "Which level: λ from the pixel's footprint")}
         where={[
           [r`\frac{\partial(u,v)}{\partial x}, \frac{\partial(u,v)}{\partial y}`, tx(t, "oglTexc_wDeriv", "how much the texture coordinate changes to the neighbouring pixel, scaled to texels (the GPU gets them from the 2×2 pixel quad)")],
           [r`P_{max}, P_{min}`, tx(t, "oglTexc_wP", "the longer and shorter side of the pixel's footprint in texture space")],
+          [r`\lambda`, tx(t, "oglTexc_wLambda", "the mip level to read, fractional: 2.3 means mostly level 2 with 30% of level 3. Below 0 the texture is magnified and level 0 is used")],
         ]}
+        words={tx(t, "oglTexc_lodWords", "Measure how many texels the pixel spans in each screen direction and take the larger. Each level halves the texel count, so the level where one texel fits the pixel is the base-2 logarithm of that span.")}
         note={tx(t, "oglTexc_lodNote", "Trilinear filtering picks λ from the longer side and blends the two nearest levels by the fractional part of λ, so there are no visible seams between levels. Using the longer side guarantees no aliasing, but blurs the other direction whenever the footprint is stretched.")}>
         {r`P_x = \left\lVert \frac{\partial(u,v)}{\partial x} \right\rVert \quad P_y = \left\lVert \frac{\partial(u,v)}{\partial y} \right\rVert \qquad \lambda = \log_2 \max(P_x, P_y)`}
       </Equation>
@@ -52,9 +73,22 @@ export function TextureCompressionContent({ t }: { t: TrackTranslations }) {
           "On a floor seen at a grazing angle, a pixel's footprint is a long thin ellipse: maybe 16 texels along the view, 1 across. Trilinear uses the long side and blurs everything. Anisotropic filtering picks the mip level from the short side instead and takes several samples along the long side:")}
       </p>
       <Equation label={tx(t, "oglTexc_anisoLabel", "Anisotropic sample count and level")}
-        where={[[r`A_{max}`, tx(t, "oglTexc_wA", "the anisotropy limit you set (GL_TEXTURE_MAX_ANISOTROPY, typically 16)")]]}>
+        where={[
+          [r`A_{max}`, tx(t, "oglTexc_wA", "the anisotropy limit you set (GL_TEXTURE_MAX_ANISOTROPY, typically 16)")],
+          [r`n`, tx(t, "oglTexc_wNs", "how many trilinear samples are taken, spread along the long side of the footprint")],
+        ]}
+        words={tx(t, "oglTexc_anisoWords", "Count how many times the short side fits into the long side: that many samples, up to the limit, cover the long side. Each sample then only has to cover a piece P_max / n long, so a sharper level is enough.")}>
         {r`n = \min\!\left(\left\lceil \frac{P_{max}}{P_{min}} \right\rceil,\ A_{max}\right) \qquad \lambda = \log_2 \frac{P_{max}}{n}`}
       </Equation>
+      <LiveFormula label={tx(t, "oglTexc_lambdaLive", "Try it: one pixel's footprint on a floor")}
+        tex={r`\begin{gathered} \lambda_{tri} = \log_2 P_{max} \\[6pt] n = \min\!\left(\left\lceil \frac{P_{max}}{P_{min}} \right\rceil,\ A_{max}\right) \qquad \lambda_{aniso} = \log_2 \frac{P_{max}}{n} \end{gathered}`}
+        vars={[
+          { id: "px", label: <>P<sub>x</sub></>, min: 0.5, max: 64, step: 0.5, value: 16, fmt: v => `${v}` },
+          { id: "py", label: <>P<sub>y</sub></>, min: 0.5, max: 64, step: 0.5, value: 1, fmt: v => `${v}` },
+          { id: "A", label: <>A<sub>max</sub></>, min: 1, max: 16, step: 1, value: 16, fmt: v => `×${v}` },
+        ]}
+        compute={lambdaNumbers(t)}
+        note={tx(t, "oglTexc_lambdaLiveNote", "A pixel 16 texels long and 1 wide, as on a floor at a grazing angle: trilinear reads level 4, where 16 texels are averaged into one in both directions, so the 1-texel side is blurred 16 times too much. Anisotropic ×16 takes 16 samples along the long side from level 0: full sharpness. Set A_max to 4 and it reads level 2, 4 times sharper than trilinear. With P_x = P_y the footprint is round and both give the same level.")} />
       <MipAnisoFigure t={t} />
       <CodeBlock lang="cpp" filename="mips_and_aniso.cpp" t={t}>{`glTextureStorage2D(tex, levels, GL_SRGB8_ALPHA8, w, h);      // allocate all levels
 glTextureSubImage2D(tex, 0, 0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
@@ -76,8 +110,9 @@ glTextureParameterf(tex, GL_TEXTURE_MAX_ANISOTROPY, 16.0f);  // core in GL 4.6 (
           [r`c_0, c_1`, tx(t, "oglTexc_wC", "two endpoint colours stored as RGB565 (5 bits red, 6 green, 5 blue: 16 bits each)")],
           [r`i_p \in \{0,1,2,3\}`, tx(t, "oglTexc_wI", "a 2-bit index per pixel: 16 × 2 = 32 bits")],
         ]}
+        words={tx(t, "oglTexc_bc1Words", "Each 4×4 block stores two colours and builds two more evenly spaced between them. Every pixel then stores only which of the four it is closest to.")}
         note={tx(t, "oglTexc_bc1Note", "32 + 32 = 64 bits for 16 pixels: 4 bits per pixel against 24 for RGB8, 6:1. Every block's colours lie on a line segment in RGB space, which is why BC1 handles gradients well but struggles with blocks containing three unrelated colours. When c₀ ≤ c₁ the block switches to 3 colours plus transparent black, BC1's 1-bit alpha.")}>
-        {r`\text{palette} = \Big\{\, c_0,\ \ c_1,\ \ \tfrac23 c_0 + \tfrac13 c_1,\ \ \tfrac13 c_0 + \tfrac23 c_1 \,\Big\} \qquad \text{pixel}_p = \text{palette}[\,i_p\,]`}
+        {r`\begin{gathered} \text{palette} = \Big\{\, c_0,\ \ c_1,\ \ \tfrac23 c_0 + \tfrac13 c_1,\ \ \tfrac13 c_0 + \tfrac23 c_1 \,\Big\} \\[6pt] \text{pixel}_p = \text{palette}[\,i_p\,] \end{gathered}`}
       </Equation>
       <Bc1Figure t={t} />
       <LessonTable
@@ -110,6 +145,19 @@ for (int level = 0; level < levels; ++level)
         ]}>
         {r`\text{bytes} = W \cdot H \cdot \frac{\text{bpp}}{8} \cdot \frac43`}
       </Equation>
+      <LiveFormula label={tx(t, "oglTexc_memLive", "Try it: one square texture")}
+        tex={r`\text{bytes} = N^2 \cdot \frac{\text{bpp}}{8} \cdot \frac43`}
+        vars={[
+          { id: "k", label: "N", min: 6, max: 13, step: 1, value: 12, fmt: v => `${2 ** v}` },
+          { id: "f", label: tx(t, "oglTexc_memLiveFmt", "format"), min: 0, max: 2, step: 1, value: 0, fmt: v => ["RGBA8", "BC7", "BC1"][v] },
+          { id: "mips", label: "mips", min: 0, max: 1, step: 1, value: 1, fmt: v => (v ? tx(t, "oglTexc_memLiveYes", "yes") : tx(t, "oglTexc_memLiveNo", "no")) },
+        ]}
+        where={[
+          [r`\text{bpp}`, tx(t, "oglTexc_wBpp", "bits per texel: 32 for RGBA8, 8 for BC7, 4 for BC1. Dividing by 8 gives bytes")],
+          [r`\tfrac43`, tx(t, "oglTexc_wFour3", "the mip chain, from the derivation above")],
+        ]}
+        compute={memNumbers}
+        note={tx(t, "oglTexc_memLiveNote", "MiB = 2²⁰ bytes. Each doubling of N quadruples the memory, so 8192² RGBA8 with mips is 341 MiB, more than many phones give a whole game. Switching it to BC7 saves the same factor of 4 as halving its resolution, but keeps every texel: the loss is in colour precision, which is much harder to see.")} />
       <Callout type="info" t={t}>
         {tx(t, "oglTexc_basisNote", "Every platform has different formats (BCn on desktop and consoles, ASTC/ETC2 on mobile), so shipping one file per platform multiplies downloads. KTX2 with Basis Universal stores a compact intermediate format, supercompressed for downloading, that is transcoded at load time into whatever the GPU supports. That is how glTF and WebGL applications ship compressed textures.")}
       </Callout>

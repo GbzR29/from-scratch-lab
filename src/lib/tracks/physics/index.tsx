@@ -49,4 +49,8 @@ export const physicsChapters: Chapter[] = [
   { id: "wave-particle", section: "Quantum Foundations",      title: "Waves, Particles & Uncertainty",  minRead: 23, load: () => import("./chapters/wave-particle").then((m) => m.WaveParticleContent) },
   { id: "schrodinger", section: "Quantum Foundations",        title: "The Schrödinger Equation",        minRead: 25, load: () => import("./chapters/schrodinger").then((m) => m.SchrodingerContent) },
   { id: "hydrogen-atom", section: "Quantum Foundations",      title: "The Hydrogen Atom",               minRead: 24, load: () => import("./chapters/hydrogen-atom").then((m) => m.HydrogenAtomContent) },
+  { id: "spin-qubits", section: "Quantum Deeper",            title: "Spin & Qubits",                   minRead: 24, load: () => import("./chapters/spin-qubits").then((m) => m.SpinQubitsContent) },
+  { id: "entanglement", section: "Quantum Deeper",           title: "Entanglement & Bell's Theorem",   minRead: 24, load: () => import("./chapters/entanglement").then((m) => m.EntanglementContent) },
+  { id: "many-particles", section: "Quantum Deeper",         title: "Many Particles: Pauli, Atoms & Lasers", minRead: 25, load: () => import("./chapters/many-particles").then((m) => m.ManyParticlesContent) },
+  { id: "solids", section: "Quantum Deeper",                 title: "Solids: Bands, Metals & Semiconductors", minRead: 25, load: () => import("./chapters/solids").then((m) => m.SolidsContent) },
 ];

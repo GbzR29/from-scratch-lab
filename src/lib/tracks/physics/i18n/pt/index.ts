@@ -42,9 +42,13 @@ import birthOfQuantum from "./birth-of-quantum";
 import waveParticle from "./wave-particle";
 import schrodinger from "./schrodinger";
 import hydrogenAtom from "./hydrogen-atom";
+import spinQubits from "./spin-qubits";
+import entanglement from "./entanglement";
+import manyParticles from "./many-particles";
+import solids from "./solids";
 
 const bundle: LessonText = {
-  strings: { ...unitsMeasurement, ...kinematics1d, ...kinematics2d, ...relativeMotion, ...newtonsLaws, ...forces, ...circularMotion, ...workEnergy, ...momentumCollisions, ...rotation, ...angularMomentum, ...gravityOrbits, ...simpleHarmonic, ...dampingResonance, ...waves, ...sound, ...fluidStatics, ...fluidDynamics, ...temperatureHeat, ...thermodynamics, ...electricChargeField, ...electricPotential, ...circuits, ...magnetism, ...induction, ...maxwellEmWaves, ...geometricOptics, ...waveOptics, ...lagrangian, ...hamiltonianPhaseSpace, ...chaos, ...statisticalMechanics, ...specialRelativity, ...spacetime, ...relativisticEnergy, ...generalRelativity, ...birthOfQuantum, ...waveParticle, ...schrodinger, ...hydrogenAtom },
+  strings: { ...unitsMeasurement, ...kinematics1d, ...kinematics2d, ...relativeMotion, ...newtonsLaws, ...forces, ...circularMotion, ...workEnergy, ...momentumCollisions, ...rotation, ...angularMomentum, ...gravityOrbits, ...simpleHarmonic, ...dampingResonance, ...waves, ...sound, ...fluidStatics, ...fluidDynamics, ...temperatureHeat, ...thermodynamics, ...electricChargeField, ...electricPotential, ...circuits, ...magnetism, ...induction, ...maxwellEmWaves, ...geometricOptics, ...waveOptics, ...lagrangian, ...hamiltonianPhaseSpace, ...chaos, ...statisticalMechanics, ...specialRelativity, ...spacetime, ...relativisticEnergy, ...generalRelativity, ...birthOfQuantum, ...waveParticle, ...schrodinger, ...hydrogenAtom, ...spinQubits, ...entanglement, ...manyParticles, ...solids },
   titles: track.titles,
   sections: track.sections,
 };

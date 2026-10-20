@@ -1,4 +1,4 @@
-// PT text for src/lib/tracks/opengl/chapters/clustered.tsx. Keys match the tx() calls there; English is the fallback in the code.
+// PT text for src/lib/tracks/opengl/chapters/perf/clustered.tsx and live/clustered.ts. Keys match the tx() calls there; English is the fallback in the code.
 
 const text: Record<string, string> = {
   oglClus_goal0: "Explicar por que cada luz custa tempo em todo pixel que ela pode tocar.",
@@ -50,6 +50,29 @@ const text: Record<string, string> = {
   oglClus_key2: "Descontinuidades de profundidade incham as listas dos tiles; o clustered shading também fatia a profundidade, de forma exponencial.",
   oglClus_key3: "Um pixel encontra o seu cluster por (tile, fatia(z)) e só percorre aquela lista.",
   oglClus_key4: "As listas são construídas a cada frame num compute shader, num único buffer de índices plano com deslocamentos atômicos.",
+
+  // ── Live formulas, "in words", derivations (2026-10-19) ──
+  oglClus_costWords: "O forward simples roda o laço de luzes uma vez por luz em cada pixel que sombreia. Fazer o culling antes encurta esse laço para as poucas luzes que de fato alcançam o pixel.",
+  oglClus_costLive: "Experimente: iterações do laço de luzes por frame em 1080p",
+  oglClus_costLiveCov: "cobertura",
+  oglClus_costLiveCovLbl: "cobertura",
+  oglClus_wCov: "a fração da tela que a esfera de uma luz média cobre depois de projetada; uma lâmpada com raio de 5 m vista a 20 m cobre uns poucos por cento",
+  oglClus_wOd: "quantas vezes cada pixel é sombreado em média, porque as superfícies se sobrepõem",
+  oglClus_costLiveNote: "Com 256 luzes cobrindo 2% da tela cada uma, um pixel é alcançado por umas 5 delas, então o culling faz 50 vezes menos trabalho no laço, e o ganho não depende de L: só da cobertura. As listas reais dos tiles são um pouco maiores que ℓ̄, porque os testes são conservadores, e a passada que monta as listas tem o seu pequeno custo.",
+  oglClus_liveLess: "menos",
+  oglClus_wAnd: "\"e\" sobre os quatro planos: todas as condições precisam valer",
+  oglClus_tileTestWords: "Mantenha uma luz num tile se a esfera dela não estiver totalmente fora de nenhum dos quatro planos laterais do tile, e se a faixa de profundidade dela tocar as profundidades que de fato existem no tile.",
+  oglClus_wZk: "a profundidade onde começa a fatia k: z₀ = n e z_S = f",
+  oglClus_wFloor: "arredondar para baixo: os números das fatias são inteiros",
+  oglClus_sliceWords: "Cada fatia é a mesma porcentagem fixa mais funda que a anterior. O logaritmo transforma isso em passos iguais, então o número da fatia é só um logaritmo da profundidade, escalado.",
+  oglClus_sliceDer: "De \"mesma forma em toda profundidade\" ao logaritmo",
+  oglClus_sd1: "a largura de um tile no espaço de visão cresce em proporção a z. Para os clusters continuarem mais ou menos cúbicos, a espessura de cada fatia precisa crescer do mesmo jeito: cada fronteira fica um fator fixo q além da anterior",
+  oglClus_sd2: "comece em z₀ = n e multiplique por q, k vezes",
+  oglClus_sd3: "a última fronteira precisa cair no plano far; tire a raiz S-ésima",
+  oglClus_sd4: "isole o número da fatia s com um logaritmo e troque ln q por ln(f/n)/S. Arredondar s para baixo dá a fatia",
+  oglClus_sd5: "separe ln(z/n) em ln z − ln n: tudo menos ln z é constante no frame, então o shader faz um log e uma multiplicação-soma",
+  oglClus_sliceLive: "Experimente: n = 0,1, f = 1000",
+  oglClus_sliceLiveNote: "Seja qual for a fatia de z, a última razão é a mesma: toda fatia é a mesma fração mais espessa que a sua profundidade. Com S = 16 são 78%: a fatia que contém 12 m vai de 10 a 17,8 m (7,8 m de espessura), e a que contém 600 m vai de 562 a 1000 m (438 m). Fatias uniformes de 1000/16 ≈ 62 m poriam tudo de 0,1 a 62 m, quase a cena visível inteira, na primeira fatia.",
 };
 
 export default text;

@@ -98,14 +98,14 @@ export const openGLChapters: Chapter[] = [
   { id: "terrain",         section: TECH,            title: "Terrain Rendering",         minRead: 15, load: () => import("./chapters/terrain").then((m) => m.TerrainContent) },
 
   // ── Performance ──────────────────────────────────────────────────────────
-  { id: "profiling",       section: PERF,            title: "Measuring Performance",     minRead: 13, load: () => import("./chapters/performance").then((m) => m.ProfilingContent) },
-  { id: "winding",         section: PERF,            title: "Face Winding & Culling",    minRead: 11, load: () => import("./chapters/winding").then((m) => m.WindingContent) },
-  { id: "frustum-culling", section: PERF,            title: "Frustum & Occlusion Culling", minRead: 14, load: () => import("./chapters/performance").then((m) => m.FrustumCullingContent) },
-  { id: "draw-calls",      section: PERF,            title: "Draw Calls & State",        minRead: 13, load: () => import("./chapters/performance").then((m) => m.DrawCallsContent) },
-  { id: "clustered-shading", section: PERF,          title: "Forward+ & Clustered Shading", minRead: 14, load: () => import("./chapters/clustered").then((m) => m.ClusteredContent) },
-  { id: "lod",             section: PERF,            title: "Level of Detail",           minRead: 12, load: () => import("./chapters/performance").then((m) => m.LodContent) },
-  { id: "texture-compression", section: PERF,        title: "Mipmapping & Texture Compression", minRead: 14, load: () => import("./chapters/texturecompression").then((m) => m.TextureCompressionContent) },
-  { id: "streaming",       section: PERF,            title: "Buffer Streaming & Sync",   minRead: 12, load: () => import("./chapters/performance").then((m) => m.StreamingContent) },
+  { id: "profiling",       section: PERF,            title: "Measuring Performance",     minRead: 13, load: () => import("./chapters/perf/profiling").then((m) => m.ProfilingContent) },
+  { id: "winding",         section: PERF,            title: "Face Winding & Culling",    minRead: 11, load: () => import("./chapters/perf/winding").then((m) => m.WindingContent) },
+  { id: "frustum-culling", section: PERF,            title: "Frustum & Occlusion Culling", minRead: 14, load: () => import("./chapters/perf/frustum-culling").then((m) => m.FrustumCullingContent) },
+  { id: "draw-calls",      section: PERF,            title: "Draw Calls & State",        minRead: 13, load: () => import("./chapters/perf/draw-calls").then((m) => m.DrawCallsContent) },
+  { id: "clustered-shading", section: PERF,          title: "Forward+ & Clustered Shading", minRead: 14, load: () => import("./chapters/perf/clustered").then((m) => m.ClusteredContent) },
+  { id: "lod",             section: PERF,            title: "Level of Detail",           minRead: 12, load: () => import("./chapters/perf/lod").then((m) => m.LodContent) },
+  { id: "texture-compression", section: PERF,        title: "Mipmapping & Texture Compression", minRead: 14, load: () => import("./chapters/perf/texture-compression").then((m) => m.TextureCompressionContent) },
+  { id: "streaming",       section: PERF,            title: "Buffer Streaming & Sync",   minRead: 12, load: () => import("./chapters/perf/streaming").then((m) => m.StreamingContent) },
 
   // ── Modern OpenGL & Tooling ──────────────────────────────────────────────
   { id: "dsa",             section: MODERN,          title: "Direct State Access (DSA)", minRead: 9,  load: () => import("./chapters/dsa").then((m) => m.DSAContent) },

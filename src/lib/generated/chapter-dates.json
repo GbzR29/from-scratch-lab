@@ -1169,35 +1169,35 @@
   },
   "opengl/profiling": {
     "created": "2026-09-24",
-    "updated": "2026-10-08"
+    "updated": "2026-10-19"
   },
   "opengl/winding": {
     "created": "2026-05-30",
-    "updated": "2026-10-08"
+    "updated": "2026-10-19"
   },
   "opengl/frustum-culling": {
     "created": "2026-09-24",
-    "updated": "2026-10-08"
+    "updated": "2026-10-19"
   },
   "opengl/draw-calls": {
     "created": "2026-09-24",
-    "updated": "2026-10-08"
+    "updated": "2026-10-19"
   },
   "opengl/clustered-shading": {
     "created": "2026-09-24",
-    "updated": "2026-10-08"
+    "updated": "2026-10-19"
   },
   "opengl/lod": {
     "created": "2026-09-24",
-    "updated": "2026-10-08"
+    "updated": "2026-10-19"
   },
   "opengl/texture-compression": {
     "created": "2026-09-24",
-    "updated": "2026-10-08"
+    "updated": "2026-10-19"
   },
   "opengl/streaming": {
     "created": "2026-09-24",
-    "updated": "2026-10-08"
+    "updated": "2026-10-19"
   },
   "opengl/dsa": {
     "created": "2026-05-30",
@@ -1368,6 +1368,22 @@
     "updated": "2026-10-19"
   },
   "physics/hydrogen-atom": {
+    "created": "2026-10-19",
+    "updated": "2026-10-19"
+  },
+  "physics/spin-qubits": {
+    "created": "2026-10-19",
+    "updated": "2026-10-19"
+  },
+  "physics/entanglement": {
+    "created": "2026-10-19",
+    "updated": "2026-10-19"
+  },
+  "physics/many-particles": {
+    "created": "2026-10-19",
+    "updated": "2026-10-19"
+  },
+  "physics/solids": {
     "created": "2026-10-19",
     "updated": "2026-10-19"
   },

@@ -1,4 +1,4 @@
-// PT text for src/lib/tracks/opengl/chapters/texturecompression.tsx. Keys match the tx() calls there; English is the fallback in the code.
+// PT text for src/lib/tracks/opengl/chapters/perf/texture-compression.tsx and live/texture-compression.ts. Keys match the tx() calls there; English is the fallback in the code.
 
 const text: Record<string, string> = {
   oglTexc_goal0: "Explicar por que texturas distantes cintilam.",
@@ -48,6 +48,32 @@ const text: Record<string, string> = {
   oglTexc_key2: "Reduza os mips de cor em espaço linear; trate os mips de normal maps de forma especial.",
   oglTexc_key3: "Formatos de bloco são codecs 4×4 de taxa fixa decodificados pelas unidades de textura: menos memória e menos largura de banda.",
   oglTexc_key4: "BC1: duas pontas RGB565 + índices de 2 bits = 4 bpp; BC5 para normais, BC7 para qualidade, BC6H para HDR, ASTC/ETC2 no mobile.",
+
+  // ── Live formulas, "in words", derivations (2026-10-19) ──
+  oglTexc_wFloor: "arredondar para baixo: uma textura de 300 texels se divide em 150, 75, 37, 18, 9, 4, 2, 1",
+  oglTexc_wQuarter: "a memória do nível k em relação à base: metade da largura vezes metade da altura, k vezes",
+  oglTexc_chainWords: "Divida a textura pela metade até ela ter um texel: isso dá o número de níveis. Cada nível ocupa um quarto da memória do anterior, e todos juntos acrescentam só um terço à base.",
+  oglTexc_chainDer: "Por que a cadeia inteira custa só 4/3",
+  oglTexc_cd1: "a base conta como 1; cada nível abaixo dela é um quarto do de cima",
+  oglTexc_cd2: "um quarto da soma inteira é a mesma lista sem o primeiro termo",
+  oglTexc_cd3: "subtraia as duas linhas: todo termo depois do primeiro se cancela",
+  oglTexc_cd4: "uma cadeia real para em 1×1, então a soma fica um fio abaixo de 4/3: para 4096² ela é 1,33333331",
+  oglTexc_wLambda: "o nível de mip a ler, fracionário: 2,3 quer dizer quase tudo do nível 2 com 30% do nível 3. Abaixo de 0 a textura está ampliada e o nível 0 é usado",
+  oglTexc_lodWords: "Meça quantos texels o pixel abrange em cada direção da tela e pegue o maior. Cada nível divide essa contagem por dois, então o nível em que um texel cabe no pixel é o logaritmo na base 2 dessa extensão.",
+  oglTexc_wNs: "quantas amostras trilineares são tiradas, espalhadas ao longo do lado comprido da pegada",
+  oglTexc_anisoWords: "Conte quantas vezes o lado curto cabe no lado comprido: essa quantidade de amostras, até o limite, cobre o lado comprido. Cada amostra então só precisa cobrir um pedaço de comprimento P_max / n, e um nível mais nítido basta.",
+  oglTexc_lambdaLive: "Experimente: a pegada de um pixel num chão",
+  oglTexc_lambdaLiveNote: "Um pixel com 16 texels de comprimento e 1 de largura, como num chão visto de raspão: a trilinear lê o nível 4, onde 16 texels viram um nas duas direções, então o lado de 1 texel fica 16 vezes borrado demais. A anisotrópica ×16 tira 16 amostras ao longo do lado comprido a partir do nível 0: nitidez total. Ponha A_max em 4 e ela lê o nível 2, 4 vezes mais nítido que a trilinear. Com P_x = P_y a pegada é redonda e as duas dão o mesmo nível.",
+  oglTexc_liveTri: "trilinear",
+  oglTexc_liveAniso: "anisotrópica",
+  oglTexc_bc1Words: "Cada bloco 4×4 guarda duas cores e monta mais duas igualmente espaçadas entre elas. Cada pixel então guarda só de qual das quatro ele está mais perto.",
+  oglTexc_memLive: "Experimente: uma textura quadrada",
+  oglTexc_memLiveFmt: "formato",
+  oglTexc_memLiveYes: "sim",
+  oglTexc_memLiveNo: "não",
+  oglTexc_wBpp: "bits por texel: 32 no RGBA8, 8 no BC7, 4 no BC1. Dividir por 8 dá bytes",
+  oglTexc_wFour3: "a cadeia de mips, da dedução acima",
+  oglTexc_memLiveNote: "MiB = 2²⁰ bytes. Cada vez que N dobra, a memória quadruplica, então 8192² em RGBA8 com mips são 341 MiB, mais do que muitos celulares dão para um jogo inteiro. Passar essa textura para BC7 economiza o mesmo fator 4 que cortar a resolução pela metade, mas mantém todos os texels: a perda é na precisão das cores, bem mais difícil de notar.",
 };
 
 export default text;

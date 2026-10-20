@@ -4,6 +4,9 @@
 
 import { CodeBlock, Callout, H2, LessonTable } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
+import { Derivation } from "@/components/lesson/Derivation";
+import { LiveFormula } from "@/components/lesson/LiveFormula";
+import { coneNumbers } from "@/lib/tracks/opengl/live/winding";
 import { WindingFigure } from "@/components/lesson/figures/WindingFigure";
 import { KeyIdeas, Goals } from "@/components/lesson/Prose";
 import { tx } from "@/lib/tracks/tx";
@@ -103,10 +106,24 @@ glm::vec3 normal = glm::normalize(glm::cross(edge1, edge2));
       <Equation label={tx(t, "ch10_areaLabel", "Signed area in window coordinates")}
         where={[
           [String.raw`(x_i, y_i)`, tx(t, "ch10_wXY", "the three vertices in window coordinates, in submission order")],
+          [String.raw`i \oplus 1`, tx(t, "ch10_wNext", "the next vertex, wrapping around: after vertex 2 comes vertex 0 again")],
+          [String.raw`a`, tx(t, "ch10_wA", "the signed area: its size is the triangle's area in pixels, its sign the winding")],
         ]}
+        words={tx(t, "ch10_areaWords", "Walk around the triangle's three edges and add up a small cross term for each. Half of the total is the area, positive if you walked counter-clockwise on screen and negative if clockwise.")}
         note={tx(t, "ch10_areaNote", "With glFrontFace(GL_CCW), a > 0 means front-facing. It is the z component of the cross product of two screen-space edges, the same test as in the figure above, done once per triangle. Zero-area (degenerate) triangles are discarded here too, which is why they are a cheap way to stitch strips.")}>
         {String.raw`a = \frac{1}{2}\sum_{i=0}^{2} \left(x_i\, y_{i \oplus 1} - x_{i \oplus 1}\, y_i\right) \qquad i \oplus 1 = (i + 1) \bmod 3`}
       </Equation>
+      <Derivation t={t} label={tx(t, "ch10_areaDer", "From the cross product to the sum")}
+        steps={[
+          { full: true, tex: String.raw`\begin{aligned} a &= \tfrac12\,\big[(\mathbf v_1 - \mathbf v_0) \times (\mathbf v_2 - \mathbf v_0)\big]_z \\ &= \tfrac12\,\big[(x_1 - x_0)(y_2 - y_0) - (x_2 - x_0)(y_1 - y_0)\big] \end{aligned}`,
+            why: tx(t, "ch10_ad1", "the two edges leaving vertex 0 span a parallelogram; the z of their cross product is its area, with a sign from the right-hand rule. The triangle is half of it") },
+          { full: true, tex: String.raw`\begin{aligned} = \tfrac12\,\big[&x_1 y_2 - x_1 y_0 - x_0 y_2 + \cancel{x_0 y_0} \\ &- x_2 y_1 + x_2 y_0 + x_0 y_1 - \cancel{x_0 y_0}\big] \end{aligned}`,
+            why: tx(t, "ch10_ad2", "multiply out both products; x₀y₀ appears once with each sign and cancels") },
+          { full: true, tex: String.raw`= \tfrac12\,\big[(x_0 y_1 - x_1 y_0) + (x_1 y_2 - x_2 y_1) + (x_2 y_0 - x_0 y_2)\big]`,
+            why: tx(t, "ch10_ad3", "regroup the six terms by edge: 0→1, 1→2 and 2→0. Each bracket is the term xᵢ·yᵢ₊₁ − xᵢ₊₁·yᵢ of the sum") },
+          { full: true, tex: String.raw`\text{CCW ${tx(t, "ch10_adOnScreen", "on screen")}} \;\Rightarrow\; a > 0 \qquad \text{CW} \;\Rightarrow\; a < 0`,
+            why: tx(t, "ch10_ad4", "window coordinates have y pointing up, like the usual x–y plane, so turning left (counter-clockwise) from edge 1 to edge 2 gives a positive z") },
+        ]} />
 
       <H2>{tx(t, "ch10_savesTitle", "What culling saves, and what it does not")}</H2>
       <p>
@@ -119,9 +136,33 @@ glm::vec3 normal = glm::normalize(glm::cross(edge1, edge2));
           [String.raw`\mathbf a,\ \alpha`, tx(t, "ch10_wCone", "cone axis and half-angle containing every triangle normal of the cluster")],
           [String.raw`\mathbf c,\ \mathbf e`, tx(t, "ch10_wCE", "cluster centre and camera position")],
         ]}
+        words={tx(t, "ch10_coneWords", "Point from the camera to the cluster. If that direction lines up closely enough with the cone's axis, every triangle in the cluster is turned away from the camera, so none of them can be seen.")}
         note={tx(t, "ch10_coneNote", "If the direction to the cluster is within 90° − α of the axis, every triangle faces away and the whole cluster can be skipped. In practice this removes 10–25% of the triangles before any vertex shading (meshoptimizer's meshopt_computeClusterBounds computes the cone).")}>
         {String.raw`\text{cull cluster} \iff \frac{\mathbf c - \mathbf e}{\lVert \mathbf c - \mathbf e \rVert}\cdot \mathbf a \;\ge\; \sin\alpha`}
       </Equation>
+      <Derivation t={t} label={tx(t, "ch10_coneDer", "Why the threshold is sin α")}
+        steps={[
+          { tex: String.raw`\hat{\mathbf v}\cdot\mathbf n \ge 0`,
+            why: tx(t, "ch10_cd1", "one triangle faces away when its normal n points along the view direction v̂ (from the camera toward it), that is, the angle between them is at most 90°. The cluster is small, so v̂ toward its centre stands in for every triangle") },
+          { tex: String.raw`\angle(\hat{\mathbf v}, \mathbf n) \le \theta + \alpha`,
+            why: tx(t, "ch10_cd2", "θ is the angle between v̂ and the axis a. Every normal is within α of the axis, so the worst normal is θ + α away from v̂") },
+          { tex: String.raw`\theta + \alpha \le 90^\circ \iff \theta \le 90^\circ - \alpha`,
+            why: tx(t, "ch10_cd3", "if even the worst normal faces away, all of them do") },
+          { tex: String.raw`\cos\theta \ge \cos(90^\circ - \alpha) = \sin\alpha`,
+            why: tx(t, "ch10_cd4", "cosine decreases from 0° to 180°, so a smaller angle has a larger cosine: θ ≤ 90° − α becomes cos θ ≥ cos(90° − α). And cos θ is just v̂·a, a dot product of unit vectors: no angle is ever computed") },
+        ]} />
+      <LiveFormula label={tx(t, "ch10_coneLive", "Try it: one cluster, one camera")}
+        tex={String.raw`\text{${tx(t, "ch10_coneLiveCull", "cull")}} \iff \hat{\mathbf v}\cdot\mathbf a = \cos\theta \;\ge\; \sin\alpha`}
+        vars={[
+          { id: "th", label: "θ", min: 0, max: 180, step: 1, value: 30, fmt: v => `${v}°` },
+          { id: "al", label: "α", min: 0, max: 90, step: 1, value: 45, fmt: v => `${v}°` },
+        ]}
+        where={[
+          [String.raw`\theta`, tx(t, "ch10_wTh", "angle between the view direction and the cone axis: 0° means the cluster's normals point straight away from the camera, 180° straight at it")],
+          [String.raw`\alpha`, tx(t, "ch10_wAl", "the cone's half-angle: 0° for a flat patch, wider for a curved one")],
+        ]}
+        compute={coneNumbers(t)}
+        note={tx(t, "ch10_coneLiveNote", "A flat patch (α = 0°) is culled for any θ up to 90°: half of all views. At α = 45° only views within 45° of the axis cull it. At α = 90° only θ = 0° still passes, and a wider cone could never be culled, since some normal would always face the camera: that is why clusters are built from triangles that point roughly the same way.")} />
 
       <H2>{tx(t, "ch10_casesTitle", "Special cases")}</H2>
       <LessonTable
