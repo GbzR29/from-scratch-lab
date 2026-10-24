@@ -12,6 +12,13 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ## Outubro de 2026
 
+### 2026-10-24
+
+- **Lacunas encontradas em 2026-10-21, EN e PT.**
+  - **Matemática: capítulo novo "Caixa de ferramentas das equações: movimentos seguros e truques" (`/Math/equation-toolkit`), em Álgebra, depois de Expoentes e logaritmos.** Setas ⇔ e ⇒, tabela de movimentos (seguro, pode criar soluções falsas, pode perder soluções), multiplicação em cruz com os valores proibidos, colocar em evidência em vez de dividir pela incógnita, equações com raiz (isolar, elevar ao quadrado, conferir), multiplicar pelo conjugado (racionalizar 1/(3 − √2), √(x + 5) − √x = 1, ligações para números complexos, limites e a derivada de √x), substituição (u = x², u = 2ˣ), a caixa de ferramentas num relance e erros comuns. Widget `EquationMovesFigure` (os dois lados como curvas; elevar ao quadrado, dividir por x, multiplicar por x − 2 e tirar raiz quadrada, cada um com o jeito seguro ao lado; cada candidato é testado na equação original: verdadeiro, falso ou perdido) e uma rodada de prática nova (`practice/toolkit.ts`: multiplicação em cruz, raízes com solução falsa, conjugado, substituição).
+  - **C/C++: seção nova "Criando objetos, e onde eles vivem" em Classes, construtores e destrutores (`/C++/cpp-classes`).** Pilha, `new`/`delete`, `std::make_unique`, temporários, armazenamento estático e contêineres, com quando cada um é destruído; ponto e seta (`p->x` é `(*p).x`); qual usar; avisos sobre new/delete e Noisy a(). Dois programas novos na `LifetimeFigure`: "quatro jeitos de criar" e "delete esquecido" (o vazamento aparece no resumo).
+  - **OpenGL: seção nova "Abrindo a janela no meio da tela" em Window & Context (`/OpenGL/setup`).** Fórmula da centralização na área de trabalho do monitor, `glfwGetMonitorWorkarea` e as hints `GLFW_POSITION_X/Y` do GLFW 3.4, `glfwSetWindowPos` com janela escondida no GLFW 3.3, a linha do SDL3, a barra de título e o Wayland.
+
 ### 2026-10-20
 
 - **Trilha de C/C++: dois widgets novos de ponteiros em Pointers (`/C++/c-pointers`), EN e PT.** `PointerExplorerFigure` (x, y, p e pp como caixas com endereço; escolha x, &x, p, *p, &p, pp, *pp ou **pp e veja o que cada um nomeia, o tipo e o valor; p = &y e *p = 99 escrevem pelo ponteiro; quebre: p = NULL e p sem valor) e `PointerStepFigure` (os mesmos 16 bytes como char, short, int ou double, p + i anda sizeof(T) × i bytes, a[i] = *(a + i), bytes little-endian, um depois do fim e fora dos limites).

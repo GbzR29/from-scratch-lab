@@ -19,6 +19,7 @@ import { fouCoef, fouOrtho, fouParseval } from "./fourier";
 import { varAction, varEL, varJ } from "./variations";
 import { pdeGrid, pdeHeat, pdeWave } from "./pde";
 import { binomialChoose, binomialCoef, collect, evaluate, explog, linear, quadratic, sequences, system } from "./algebra";
+import { conjugate, crossMul, radical, substitution } from "./toolkit";
 
 export type Kind = { id: string; label: [string, string]; make: Gen };
 export type PracticeSet = { title: [string, string]; kinds: Kind[] };
@@ -46,6 +47,12 @@ export const SETS = {
   binomial:   { title: ["mpr_tBinomial", "Practice: the binomial theorem"], kinds: [
     { id: "coef", label: ["mpr_kBinCoef", "coefficients"], make: binomialCoef },
     { id: "choose", label: ["mpr_kBinChoose", "C(n, k)"], make: binomialChoose },
+  ] },
+  toolkit:    { title: ["mpr_tToolkit", "Practice: the equation toolkit"], kinds: [
+    { id: "cross", label: ["mpr_kCross", "cross-multiplying"], make: crossMul },
+    { id: "radical", label: ["mpr_kRadical", "square roots"], make: radical },
+    { id: "conjugate", label: ["mpr_kConj", "conjugate"], make: conjugate },
+    { id: "subst", label: ["mpr_kSubst", "substitution"], make: substitution },
   ] },
   explog:     { title: ["mpr_tExpLog", "Practice: exponents and logarithms"], kinds: [{ id: "explog", label: ["mpr_kExpLog", "exponents and logs"], make: explog }] },
   sequences:  { title: ["mpr_tSequences", "Practice: sequences"], kinds: [{ id: "sequences", label: ["mpr_kSequences", "sequences"], make: sequences }] },

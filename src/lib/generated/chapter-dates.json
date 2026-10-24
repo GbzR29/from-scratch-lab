@@ -301,7 +301,7 @@
   },
   "cpp/cpp-classes": {
     "created": "2026-10-14",
-    "updated": "2026-10-14"
+    "updated": "2026-10-24"
   },
   "cpp/cpp-strings-vectors": {
     "created": "2026-10-14",
@@ -610,6 +610,10 @@
   "math/exponents": {
     "created": "2026-09-25",
     "updated": "2026-10-13"
+  },
+  "math/equation-toolkit": {
+    "created": "2026-10-24",
+    "updated": "2026-10-24"
   },
   "math/sequences": {
     "created": "2026-09-25",
@@ -933,7 +937,7 @@
   },
   "opengl/setup": {
     "created": "2026-09-03",
-    "updated": "2026-10-08"
+    "updated": "2026-10-24"
   },
   "opengl/pipeline": {
     "created": "2026-03-18",

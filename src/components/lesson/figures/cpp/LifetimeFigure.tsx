@@ -154,4 +154,6 @@ const NAMES: Record<LifeProgramId, string> = {
   shared: "shared_ptr",
   cycle: "cycle",
   weak: "weak_ptr",
+  create: "four ways to create",
+  leak: "forgotten delete",
 };

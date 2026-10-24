@@ -7,13 +7,18 @@ import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { StateMachineFigure } from "@/components/lesson/figures/glintro/StateMachineFigure";
 import { DoubleBufferFigure } from "@/components/lesson/figures/glintro/DoubleBufferFigure";
+import { Equation } from "@/components/lesson/Tex";
+
+const r = String.raw;
 
 // ── Window & Context ──────────────────────────────────────────────────────────
 // The three pieces (window library, loader, maths); what a context is and the
 // state machine (bind points, object names, the forgotten-bind bug, figure);
 // generating GLAD; the CMake file; creating a 4.6 Core context (hints, order
 // rules, macOS 4.1); double buffering and vsync (figure); the render loop,
-// line by line; resizing and high-DPI; the whole file and a sanity check;
+// line by line; resizing and high-DPI; centring the window on the monitor's
+// work area (GLFW 3.4 hints, glfwSetWindowPos, SDL3, Wayland); the whole file
+// and a sanity check;
 // the same program with SDL3, SFML and LWJGL; the code-along roadmap of the
 // next chapters; common mistakes.
 
@@ -242,6 +247,53 @@ glfwTerminate();`}</CodeBlock>
         {tx(t, "oglSetup_dpiTip",
           "Use the FRAMEBUFFER size callback, not the window size callback. On a high-DPI display the framebuffer is larger than the window in logical units — a 1280x720 window can have a 2560x1440 framebuffer — and glViewport works in pixels. Getting this wrong renders your scene into the bottom-left quarter of the screen on a Retina Mac."
         )}
+      </Callout>
+
+      <H2>{tx(t, "oglSetup_centerTitle", "Opening the window in the middle of the screen")}</H2>
+      <p>
+        {tx(t, "oglSetup_centerBody",
+          "GLFW lets the operating system choose where a new window appears, which is often the top-left corner. To centre it, ask the monitor how big it is and place the window so that the empty space is the same on both sides. The space to share is the monitor's work area: the screen minus the taskbar or dock, so the window never ends up behind them. The work area has a position as well as a size, because with two monitors the second one starts where the first ends (at x = 1920, say), not at 0.")}
+      </p>
+      <Equation label={tx(t, "oglSetup_eqCenter", "Centring a window in the work area")}
+        where={[
+          [r`\sym{ax}{a_x,\ a_y}`, tx(t, "oglSetup_wAxy", "the top-left corner of the monitor's work area, in screen coordinates")],
+          [r`\sym{aw}{a_w,\ a_h}`, tx(t, "oglSetup_wAwh", "the work area's width and height")],
+          [r`\sym{w}{w,\ h}`, tx(t, "oglSetup_wWh", "the window's width and height, the numbers given to glfwCreateWindow")],
+          [r`a_w - w`, tx(t, "oglSetup_wGap", "the empty space left over across; half of it goes on each side")],
+        ]}
+        words={tx(t, "oglSetup_centerWords", "Take the space the window does not use, give half of it to the left side, and start counting from where the work area begins.")}>
+        {r`x = \sym{ax}{a_x} + \frac{\sym{aw}{a_w} - \sym{w}{w}}{2} \qquad y = \sym{ax}{a_y} + \frac{\sym{aw}{a_h} - \sym{w}{h}}{2}`}
+      </Equation>
+      <p>
+        {tx(t, "oglSetup_centerEx",
+          "An example: a 1920 × 1080 monitor with a 40-pixel taskbar at the bottom has the work area (0, 0, 1920, 1040). For a 1280 × 720 window, x = 0 + (1920 − 1280)/2 = 320 and y = 0 + (1040 − 720)/2 = 160. GLFW 3.4, the version in our CMake file, takes the position as two window hints, so the window is created in the right place and never jumps:")}
+      </p>
+      <CodeBlock lang="cpp" filename="main.cpp" t={t}>{`// after glfwInit(), before glfwCreateWindow
+const int width = 1280, height = 720;
+
+int areaX, areaY, areaW, areaH;
+glfwGetMonitorWorkarea(glfwGetPrimaryMonitor(), &areaX, &areaY, &areaW, &areaH);
+
+glfwWindowHint(GLFW_POSITION_X, areaX + (areaW - width) / 2);
+glfwWindowHint(GLFW_POSITION_Y, areaY + (areaH - height) / 2);
+
+GLFWwindow* window = glfwCreateWindow(width, height, "GLApp", nullptr, nullptr);`}</CodeBlock>
+      <LessonTable
+        headers={[tx(t, "oglSetup_tCall", "Call"), tx(t, "oglSetup_tDoes", "What it does")]}
+        rows={[
+          ["glfwGetPrimaryMonitor()", tx(t, "oglSetup_c1", "returns the main monitor, the one with the taskbar or menu bar. It works right after glfwInit, before any window exists.")],
+          ["glfwGetMonitorWorkarea(m, &x, &y, &w, &h)", tx(t, "oglSetup_c2", "writes the work area of monitor m into the four ints: its corner and its size. Each & passes the address of a variable so the function can fill it in.")],
+          ["GLFW_POSITION_X / _Y", tx(t, "oglSetup_c3", "window hints (new in GLFW 3.4): where the next glfwCreateWindow puts the window's top-left corner.")],
+          ["(areaW - width) / 2", tx(t, "oglSetup_c4", "integer division: an odd leftover pixel goes to the right side, which nobody can see.")],
+        ]}
+      />
+      <p>
+        {tx(t, "oglSetup_centerOld",
+          "With GLFW 3.3 or older, which has no position hints, create the window first and then move it with glfwSetWindowPos(window, x, y), using the same x and y. To stop it from appearing in the corner for one frame and then jumping, create it hidden with glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE) and call glfwShowWindow(window) after moving it. In SDL3 the whole job is one call: SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED).")}
+      </p>
+      <Callout type="info" t={t}>
+        {tx(t, "oglSetup_centerFrame",
+          "Two details. First, the position is that of the drawing area, not of the title bar. The title bar sits above it, so a centred window looks slightly low; glfwGetWindowFrameSize tells you the bar's height if you want to correct for it. Second, on Linux with Wayland, programs are not allowed to place their own windows: the compositor decides, and GLFW ignores the position (it reports a GLFW_FEATURE_UNAVAILABLE error). Your code still runs; the window just goes wherever the desktop puts it.")}
       </Callout>
 
       <H2>{tx(t, "oglSetup_fullTitle", "The whole file")}</H2>

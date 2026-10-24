@@ -6,8 +6,10 @@
 // initialisers, explicit); const member functions; destructors and the exact
 // order of construction and destruction (lifetime figure: scopes, members,
 // early return); a ScopeTimer that works through its destructor; owning raw
-// memory needs copying switched off (taught fully in RAII / Move); splitting
-// a class into .h and .cpp.
+// memory needs copying switched off (taught fully in RAII / Move); creating
+// objects and where they live (stack, new/delete, make_unique, temporaries,
+// static, containers; lifetime figure: create, leak), . vs ->, which to use;
+// splitting a class into .h and .cpp.
 
 import { CodeBlock, Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
 import { tx } from "@/lib/tracks/tx";
@@ -28,6 +30,7 @@ export function CppClassesContent({ t }: { t: TrackTranslations }) {
         "Write a constructor with a member initialiser list, and a destructor.",
         "Predict the exact order in which objects and their members are built and destroyed.",
         "Split a class into a header and a source file.",
+        "Create objects on the stack, on the heap (new, make_unique) and as temporaries, and say when each one is destroyed.",
       ]} />
 
       <H2>{tx(t, "cppCls_structTitle", "The problem: a struct anyone can break")}</H2>
@@ -206,6 +209,69 @@ private:
           "new int[cap] is C++'s malloc for an array, and delete[] is its free. You will rarely write them yourself: the next chapter's std::vector is this class, finished, with copying, growth and bounds checks done properly.")}
       </p>
 
+      <H2>{tx(t, "cppCls_createTitle", "Creating objects, and where they live")}</H2>
+      <p>
+        {tx(t, "cppCls_createBody",
+          "A class is a blueprint. An object, also called an instance, is one actual thing built from it, with its own copy of every field: two Health objects keep two separate hp_ values. Creating an object always means two things: memory is found for it, and then its constructor runs in that memory. Where the memory comes from decides how long the object lives and who destroys it. There are four places.")}
+      </p>
+      <CodeBlock lang="cpp" filename="create.cpp" t={t}>{`#include <memory>
+#include <vector>
+
+Noisy g{"g"};                              // static: built before main starts, destroyed after it ends
+
+int main() {
+    Noisy a{"a"};                          // automatic: on the stack, dies at main's closing brace
+    Noisy* p = new Noisy{"p"};             // dynamic: on the heap, lives until you delete it
+    auto u = std::make_unique<Noisy>("u"); // dynamic and owned: deleted when u dies
+    Noisy{"tmp"};                          // a temporary: dies at the end of this line
+
+    std::vector<Noisy> crew;
+    crew.emplace_back("c");                // inside a container: lives as long as the vector keeps it
+
+    std::println("{} {} {}", a.name, p->name, u->name);
+    delete p;                              // made with new, so destroyed with delete
+}`}</CodeBlock>
+      <LessonTable
+        headers={[tx(t, "cppCls_hWritten", "Written as"), tx(t, "cppCls_hWhere", "Lives in"), tx(t, "cppCls_hDies", "Destroyed when")]}
+        rows={[
+          ["Noisy a{\"a\"};", tx(t, "cppCls_w1", "the stack (inside the function's frame)"), tx(t, "cppCls_w1d", "its scope ends: the closing brace, a return, an exception. Automatically.")],
+          ["new Noisy{\"p\"}", tx(t, "cppCls_w2", "the heap; you get back a Noisy*, its address"), tx(t, "cppCls_w2d", "you write delete p. Never, if you forget.")],
+          ["std::make_unique<Noisy>(\"u\")", tx(t, "cppCls_w3", "the heap; you get back a unique_ptr that owns it"), tx(t, "cppCls_w3d", "the unique_ptr dies. Automatically, as for a stack object.")],
+          ["Noisy{\"tmp\"}", tx(t, "cppCls_w4", "a temporary with no name"), tx(t, "cppCls_w4d", "the end of the statement (the semicolon).")],
+          ["Noisy g{\"g\"};",tx(t, "cppCls_w5", "static storage: outside every function, or marked static"), tx(t, "cppCls_w5d", "the program ends, after main returns.")],
+          ["crew.emplace_back(\"c\")", tx(t, "cppCls_w6", "inside the container's own heap block"), tx(t, "cppCls_w6d", "the element is removed, or the container itself dies.")],
+        ]}
+      />
+      <p>
+        {tx(t, "cppCls_createFig",
+          "Step through it. The first program creates an object each way and shows which ones the compiler cleans up by itself. The second forgets a delete: watch the summary under the drawing.")}
+      </p>
+      <LifetimeFigure t={t} programs={["create", "leak"]} title={tx(t, "cppCls_figCreateTitle", "Stack, heap and temporaries")} />
+      <H3>{tx(t, "cppCls_dotTitle", "Using an object: the dot and the arrow")}</H3>
+      <p>
+        {tx(t, "cppCls_dotBody",
+          "With an object in hand, reach a member with a dot: a.name, h.damage(5). With a pointer to an object, use an arrow: p->name, p->damage(5). The arrow is short for (*p).name: first follow the address to the object (the * from the pointers chapter), then take the member. A unique_ptr behaves like a pointer, so it uses the arrow too. Getting it wrong is a compile error, not a crash, so the compiler will tell you which one it wants.")}
+      </p>
+      <H3>{tx(t, "cppCls_whichTitle", "Which one to use")}</H3>
+      <LessonTable
+        headers={[tx(t, "cppCls_hNeed", "You need"), tx(t, "cppCls_hUse", "Write")]}
+        rows={[
+          [tx(t, "cppCls_n1", "An object for the rest of this function (most of the time)"), "Noisy a{\"a\"};"],
+          [tx(t, "cppCls_n2", "Many objects of the same kind"), "std::vector<Noisy> + emplace_back"],
+          [tx(t, "cppCls_n3", "One object that must outlive the function that makes it, is very large (megabytes: the stack is only about 1 to 8 MB), or whose exact type is chosen at run time (the inheritance chapter)"), "std::make_unique<Noisy>(…)"],
+          [tx(t, "cppCls_n4", "Several owners sharing one object"), tx(t, "cppCls_n4b", "std::make_shared, in the RAII chapter")],
+          [tx(t, "cppCls_n5", "Raw new and delete"), tx(t, "cppCls_n5b", "Almost never in new code: only inside a class that manages the memory, like IntVec above.")],
+        ]}
+      />
+      <Callout type="warn" t={t}>
+        {tx(t, "cppCls_newWarn",
+          "Every new needs exactly one delete, and every new[] exactly one delete[]. Forgetting it leaks, doing it twice is a double free, using the object after it is undefined behaviour, and mixing them up (delete on memory from new[]) is undefined behaviour too. make_unique does the bookkeeping for you, which is why it is the default. The RAII chapter explains how it works.")}
+      </Callout>
+      <Callout type="info" t={t}>
+        {tx(t, "cppCls_spellNote",
+          "Noisy a{\"a\"};, Noisy a(\"a\"); and Noisy a = Noisy{\"a\"}; all create one stack object (since C++17 the last one builds it directly, with no copy). The differences between braces, parentheses and = are the subject of the chapter Values, Copies & Initialization. One trap to know now: Noisy a(); with empty parentheses does not create an object at all, it declares a function. For a class with a default constructor, such as Sprite above, write Sprite s; or Sprite s{};.")}
+      </Callout>
+
       <H2>{tx(t, "cppCls_splitTitle", "Header and source file")}</H2>
       <p>
         {tx(t, "cppCls_splitBody",
@@ -235,6 +301,7 @@ void Health::damage(int n) { hp_ = std::clamp(hp_ - n, 0, max_); }`}</CodeBlock>
         <li>{tx(t, "cppCls_try2", "Give Noisy to a class Level as two members, then create a Level inside a block in main. Predict the output order before you run it.")}</li>
         <li>{tx(t, "cppCls_try3", "Put a ScopeTimer in a function with three different return statements. Check that it prints exactly once for each call, whichever return is taken.")}</li>
         <li>{tx(t, "cppCls_try4", "Remove the two = delete lines from IntVec, copy one (IntVec b = a;) and run with -fsanitize=address. Read the report.")}</li>
+        <li>{tx(t, "cppCls_try5", "Copy create.cpp, add the Noisy struct and run it. Predict the full output, including g, before you look. Then delete the line delete p; and run it again with -fsanitize=address: the report names the line of the forgotten new.")}</li>
       </ol>
 
       <KeyIdeas t={t} id="cppCls" items={[
@@ -244,6 +311,8 @@ void Health::damage(int n) { hp_ = std::clamp(hp_ - n, 0, max_); }`}</CodeBlock>
         "A destructor runs automatically at the end of the object's life, on every path out of the scope.",
         "Construction goes members-then-body; destruction is exactly the reverse.",
         "A class that frees a pointer in its destructor must not be copied naively: delete copying until you implement it.",
+        "Create objects on the stack by default; use std::make_unique when one must outlive its scope, and a container for many. Raw new needs a delete you write yourself.",
+        "Reach members with a dot on an object and an arrow on a pointer: p->x is (*p).x.",
       ]} />
     </Article>
   );

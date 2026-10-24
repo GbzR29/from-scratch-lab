@@ -35,6 +35,7 @@ const chapters: Chapter[] = [
   { id: "polynomial-division", section: ALGEBRA, title: "Polynomial Division & Ruffini's Rule", minRead: 22, load: () => import("./chapters/polynomial-division").then((m) => m.PolynomialDivisionContent) },
   { id: "binomial",       section: ALGEBRA, title: "The Binomial Theorem",      minRead: 20, load: () => import("./chapters/binomial").then((m) => m.BinomialContent) },
   { id: "exponents",       section: ALGEBRA, title: "Exponents & Logarithms",    minRead: 13, load: () => import("./chapters/exponents").then((m) => m.ExpLogContent) },
+  { id: "equation-toolkit", section: ALGEBRA, title: "Equation Toolkit: Safe Moves & Tricks", minRead: 22, load: () => import("./chapters/equation-toolkit").then((m) => m.EquationToolkitContent) },
   { id: "sequences",        section: ALGEBRA, title: "Sequences & Series",        minRead: 17, load: () => import("./chapters/sequences").then((m) => m.SequencesContent) },
 
   { id: "sets",             section: LOGIC, title: "Sets",                       minRead: 20, load: () => import("./chapters/sets").then((m) => m.SetsContent) },

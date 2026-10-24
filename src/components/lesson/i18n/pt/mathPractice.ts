@@ -230,6 +230,15 @@ const text: Record<string, string> = {
   mpr_recRoots: "Ache as duas raízes da equação característica",
   mpr_recAB: "Escreva aₙ = A·r₁ⁿ + B·r₂ⁿ com r₁ < r₂. Ache A e B",
   mpr_recDouble: "A equação característica tem uma raiz dupla r: aₙ = (A + Bn)·rⁿ. Ache A e B",
+
+  // ── Added 2026-10-24: the equation toolkit ──
+  mpr_tToolkit: "Pratique: a caixa de ferramentas das equações",
+  mpr_kCross: "multiplicação cruzada",
+  mpr_kRadical: "raízes quadradas",
+  mpr_kConj: "conjugado",
+  mpr_kSubst: "substituição",
+  mpr_tkReal: "Resolva e fique só com as soluções verdadeiras",
+  mpr_roots4: "Ache as quatro soluções",
 };
 
 export default text;

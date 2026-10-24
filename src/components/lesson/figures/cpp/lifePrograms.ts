@@ -85,5 +85,59 @@ const early: LifeProgram = {
   ],
 };
 
-export const LIFE_PROGRAMS = { scopes, members, early, ...COPY_MOVE_PROGRAMS, ...OWN_PROGRAMS } as const;
+// ── Creating objects: stack, new, make_unique, a temporary ──
+
+const create: LifeProgram = {
+  id: "create",
+  code: [
+    "int main() {",
+    "    Noisy a{\"a\"};",
+    "    Noisy* p = new Noisy{\"p\"};",
+    "    auto u = std::make_unique<Noisy>(\"u\");",
+    "    Noisy{\"tmp\"};",
+    "    std::println(\"{} {} {}\", a.name, p->name, u->name);",
+    "    delete p;",
+    "}",
+  ],
+  steps: [
+    { line: 0, key: "figCppLife_cr0", en: "main starts. Its local variables live on the stack, in main's frame.", run: m => m.enter("main()") },
+    { line: 1, key: "figCppLife_cr1", en: "a is built right here, on the stack. Its memory is part of main's frame: nobody has to ask for it or give it back.", run: m => m.make("a", "Noisy", { print: "+ a" }) },
+    { line: 2, key: "figCppLife_cr2", en: "new finds room on the heap, runs the constructor there (+ p) and returns the address. p is only a pointer, a local like any other; the Noisy it points at has no name and belongs to no scope.", run: m => { m.alloc("#1", "Noisy p"); m.make("p", "Noisy*", { ptr: "#1", print: "+ p" }); } },
+    { line: 3, key: "figCppLife_cr3", en: "make_unique does the same new for you and hands the address to u, a unique_ptr that owns the object: when u dies, it deletes it.", run: m => { m.alloc("#2", "Noisy u"); m.make("u", "unique_ptr<Noisy>", { ptr: "#2", print: "+ u" }); } },
+    { line: 4, key: "figCppLife_cr4", en: "A Noisy with no variable name: a temporary. It is built…", run: m => m.make("tmp", "Noisy", { print: "+ tmp" }) },
+    { line: 4, key: "figCppLife_cr5", en: "…and destroyed at the semicolon, the end of the statement that made it.", run: m => m.kill("tmp", "- tmp"), dtor: true },
+    { line: 5, key: "figCppLife_cr6", en: "An object is used with a dot: a.name. A pointer is used with an arrow: p->name means (*p).name, follow the address, then take the member. A unique_ptr behaves like a pointer, so it takes the arrow too.", run: m => { m.touch("a"); m.touch("p"); m.touch("u"); m.print("a p u"); } },
+    { line: 6, key: "figCppLife_cr7", en: "delete p runs the destructor (- p) and gives the memory back. p itself still holds the old address: a dangling pointer. Never use it again.", run: m => { m.print("- p"); m.free("#1"); m.point("p", undefined, "dangling"); } },
+    { line: 7, key: "figCppLife_cr8", en: "The closing brace destroys main's objects in reverse order. u first: its destructor deletes the Noisy it owns (- u).", run: m => { m.kill("u", "- u"); m.free("#2"); }, dtor: true },
+    { line: 7, key: "figCppLife_cr9", en: "Then p. A raw pointer has no destructor: dying deletes nothing. That is why the delete above had to be written by hand.", run: m => m.kill("p"), dtor: true },
+    { line: 7, key: "figCppLife_cr10", en: "Then a, the first one built. Every object was destroyed exactly once.", run: m => m.kill("a", "- a"), dtor: true },
+    { line: 7, key: "figCppLife_cr11", en: "main returns.", run: m => m.exit() },
+  ],
+};
+
+const leak: LifeProgram = {
+  id: "leak",
+  code: [
+    "void spawn() {",
+    "    Noisy* boss = new Noisy{\"boss\"};",
+    "    std::println(\"{} appears\", boss->name);",
+    "}",
+    "int main() {",
+    "    spawn();",
+    "    std::println(\"back in main\");",
+    "}",
+  ],
+  steps: [
+    { line: 4, key: "figCppLife_lk0", en: "main starts.", run: m => m.enter("main()") },
+    { line: 5, key: "figCppLife_lk1", en: "main calls spawn.", run: m => m.enter("spawn()") },
+    { line: 1, key: "figCppLife_lk2", en: "new builds a Noisy on the heap, and the local pointer boss holds its address.", run: m => { m.alloc("#1", "Noisy boss"); m.make("boss", "Noisy*", { ptr: "#1", print: "+ boss" }); } },
+    { line: 2, key: "figCppLife_lk3", en: "The object is used through the pointer.", run: m => { m.touch("boss"); m.print("boss appears"); } },
+    { line: 3, key: "figCppLife_lk4", en: "spawn ends and the pointer boss dies. A raw pointer's death deletes nothing, so the Noisy stays on the heap, and now nobody knows its address. - boss is never printed: that is a leak.", run: m => m.kill("boss"), dtor: true },
+    { line: 3, key: "figCppLife_lk5", en: "spawn returns. Look at the summary under the drawing: one block nobody can ever free.", run: m => m.exit() },
+    { line: 6, key: "figCppLife_lk6", en: "main carries on as if nothing happened. Call spawn in a loop and the program grows forever.", run: m => m.print("back in main") },
+    { line: 7, key: "figCppLife_lk7", en: "main ends. The operating system takes the memory back when the process exits, but the destructor never ran: if it had to save a file or close a connection, that never happened. The fix is one line: auto boss = std::make_unique<Noisy>(\"boss\");.", run: m => m.exit() },
+  ],
+};
+
+export const LIFE_PROGRAMS = { scopes, members, early, create, leak, ...COPY_MOVE_PROGRAMS, ...OWN_PROGRAMS } as const;
 export type LifeProgramId = keyof typeof LIFE_PROGRAMS;

@@ -131,6 +131,24 @@ const text: Record<string, string> = {
   oglSetup_key5: "Desenhe no back buffer e troque; o vsync (glfwSwapInterval(1)) espera o vertical blank, então os frames nunca rasgam e o laço acompanha o ritmo da tela.",
   oglSetup_key6: "A cada frame: medir dt, tratar a entrada, limpar, desenhar, trocar, processar eventos; defina o glViewport a partir do tamanho do framebuffer, em pixels.",
   oglSetup_key7: "Só o código da janela depende da biblioteca (GLFW, SDL, SFML, LWJGL); toda chamada gl… e todo shader são iguais em todas elas.",
+
+  // ── Added 2026-10-24: centring the window ──
+  oglSetup_centerTitle: "Abrindo a janela no meio da tela",
+  oglSetup_centerBody: "O GLFW deixa o sistema operacional escolher onde uma janela nova aparece, e muitas vezes é no canto superior esquerdo. Para centralizá-la, pergunte ao monitor o tamanho dele e posicione a janela de modo que o espaço vazio seja igual dos dois lados. O espaço a dividir é a área de trabalho do monitor: a tela menos a barra de tarefas ou o dock, para que a janela nunca fique atrás deles. A área de trabalho tem uma posição além do tamanho, porque com dois monitores o segundo começa onde o primeiro termina (em x = 1920, por exemplo), não em 0.",
+  oglSetup_eqCenter: "Centralizando uma janela na área de trabalho",
+  oglSetup_wAxy: "o canto superior esquerdo da área de trabalho do monitor, em coordenadas de tela",
+  oglSetup_wAwh: "a largura e a altura da área de trabalho",
+  oglSetup_wWh: "a largura e a altura da janela, os números passados a glfwCreateWindow",
+  oglSetup_wGap: "o espaço vazio que sobra na horizontal; metade vai para cada lado",
+  oglSetup_centerWords: "Pegue o espaço que a janela não usa, dê metade dele ao lado esquerdo e comece a contar de onde a área de trabalho começa.",
+  oglSetup_centerEx: "Um exemplo: um monitor de 1920 × 1080 com uma barra de tarefas de 40 pixels embaixo tem a área de trabalho (0, 0, 1920, 1040). Para uma janela de 1280 × 720, x = 0 + (1920 − 1280)/2 = 320 e y = 0 + (1040 − 720)/2 = 160. O GLFW 3.4, a versão do nosso arquivo CMake, recebe a posição como duas window hints, então a janela já é criada no lugar certo e nunca pula:",
+  oglSetup_tCall: "Chamada",
+  oglSetup_c1: "devolve o monitor principal, o que tem a barra de tarefas ou a barra de menus. Funciona logo depois de glfwInit, antes de existir qualquer janela.",
+  oglSetup_c2: "escreve a área de trabalho do monitor m nos quatro ints: o canto e o tamanho. Cada & passa o endereço de uma variável para a função poder preenchê-la.",
+  oglSetup_c3: "window hints (novas no GLFW 3.4): onde o próximo glfwCreateWindow põe o canto superior esquerdo da janela.",
+  oglSetup_c4: "divisão inteira: um pixel ímpar que sobra vai para o lado direito, e ninguém nota.",
+  oglSetup_centerOld: "Com o GLFW 3.3 ou mais antigo, que não tem as hints de posição, crie a janela primeiro e depois mova-a com glfwSetWindowPos(window, x, y), usando os mesmos x e y. Para ela não aparecer no canto por um frame e depois pular, crie-a escondida com glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE) e chame glfwShowWindow(window) depois de movê-la. No SDL3 o trabalho todo é uma chamada: SDL_SetWindowPosition(window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED).",
+  oglSetup_centerFrame: "Dois detalhes. Primeiro, a posição é a da área de desenho, não a da barra de título. A barra fica acima dela, então uma janela centralizada parece um pouco baixa; glfwGetWindowFrameSize informa a altura da barra se você quiser compensar. Segundo, no Linux com Wayland os programas não podem posicionar as próprias janelas: quem decide é o compositor, e o GLFW ignora a posição (ele reporta um erro GLFW_FEATURE_UNAVAILABLE). Seu código continua rodando; a janela só vai para onde o desktop a colocar.",
 };
 
 export default text;

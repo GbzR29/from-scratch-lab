@@ -20,6 +20,7 @@ const track = {
     "polynomial-division": "Divisão de polinômios e Briot-Ruffini",
     binomial: "Binômio de Newton",
     exponents: "Expoentes e logaritmos",
+    "equation-toolkit": "Caixa de ferramentas das equações: movimentos seguros e truques",
     sequences: "Sequências e séries",
     sets: "Conjuntos",
     logic: "Lógica e quantificadores",
