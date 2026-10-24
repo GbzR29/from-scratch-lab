@@ -16,6 +16,11 @@ const ELEMENTS_CMD = `struct DrawElementsIndirectCommand {
 export const drawingAdvancedEntries: RefEntry[] = [
   {
     name: "glDrawArraysInstancedBaseInstance",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "mode is not an accepted primitive type.", pt: "mode não é um tipo de primitiva aceito." } },
+      { code: "GL_INVALID_VALUE", when: { en: "count or instancecount is negative.", pt: "count ou instancecount é negativo." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "No vertex array object is bound in a core profile, or an enabled attribute's buffer is mapped.", pt: "Nenhum vertex array object está ligado no perfil core, ou o buffer de um atributo ativo está mapeado." } },
+    ],
     category: "drawing",
     since: "GL 4.2",
     signature: "void glDrawArraysInstancedBaseInstance(GLenum mode, GLint first, GLsizei count,\n                                       GLsizei instancecount, GLuint baseinstance);",

@@ -241,6 +241,10 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);`,
   },
   {
     name: "glTexParameterfv",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "target or pname is not accepted.", pt: "target ou pname não é aceito." } },
+      { code: "GL_INVALID_VALUE", when: { en: "The value is out of range, such as GL_TEXTURE_MAX_ANISOTROPY below 1.", pt: "O valor está fora do intervalo, como GL_TEXTURE_MAX_ANISOTROPY abaixo de 1." } },
+    ],
     category: "textures",
     since: "GL 1.0",
     signature: "void glTexParameterfv(GLenum target, GLenum pname, const GLfloat *params);",

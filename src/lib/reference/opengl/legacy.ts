@@ -9,6 +9,10 @@ const DEPRECATED = {
 export const legacyEntries: RefEntry[] = [
   {
     name: "glBegin",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "mode is not a primitive type.", pt: "mode não é um tipo de primitiva." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "Called again before the glEnd of the previous glBegin.", pt: "Chamada de novo antes do glEnd do glBegin anterior." } },
+    ],
     category: "legacy",
     since: "GL 1.0",
     deprecated: DEPRECATED,
@@ -34,6 +38,9 @@ glEnd();`,
   },
   {
     name: "glEnd",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "Called without a glBegin before it.", pt: "Chamada sem um glBegin antes." } },
+    ],
     category: "legacy",
     since: "GL 1.0",
     deprecated: DEPRECATED,
@@ -124,6 +131,9 @@ glEnd();`,
   },
   {
     name: "glEnableClientState",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "cap is not one of the client array names, such as GL_VERTEX_ARRAY or GL_COLOR_ARRAY.", pt: "cap não é um dos nomes de array do cliente, como GL_VERTEX_ARRAY ou GL_COLOR_ARRAY." } },
+    ],
     category: "legacy",
     since: "GL 1.1",
     deprecated: DEPRECATED,
@@ -146,6 +156,10 @@ glDrawArrays(GL_TRIANGLES, 0, 3);`,
   },
   {
     name: "glVertexPointer",
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "size is not 2, 3 or 4, or stride is negative.", pt: "size não é 2, 3 nem 4, ou stride é negativo." } },
+      { code: "GL_INVALID_ENUM", when: { en: "type is not an accepted data type.", pt: "type não é um tipo de dado aceito." } },
+    ],
     category: "legacy",
     since: "GL 1.1",
     deprecated: DEPRECATED,
@@ -169,6 +183,10 @@ glDrawArrays(GL_TRIANGLES, 0, 3);`,
   },
   {
     name: "glMatrixMode",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "mode is not GL_MODELVIEW, GL_PROJECTION, GL_TEXTURE or GL_COLOR.", pt: "mode não é GL_MODELVIEW, GL_PROJECTION, GL_TEXTURE nem GL_COLOR." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "Called between glBegin and glEnd.", pt: "Chamada entre glBegin e glEnd." } },
+    ],
     category: "legacy",
     since: "GL 1.0",
     deprecated: DEPRECATED,

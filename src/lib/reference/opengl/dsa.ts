@@ -11,6 +11,9 @@ export const DSA_NOTE = {
 export const dsaEntries: RefEntry[] = [
   {
     name: "glCreateBuffers",
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "n is negative.", pt: "n é negativo." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glCreateBuffers(GLsizei n, GLuint *buffers);",
@@ -35,6 +38,12 @@ glNamedBufferStorage(vbo, sizeof(vertices), vertices, 0);`,
   },
   {
     name: "glNamedBufferData",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "buffer is not an existing buffer, or it has immutable storage (from glNamedBufferStorage).", pt: "buffer não é um buffer existente, ou tem armazenamento imutável (vindo de glNamedBufferStorage)." } },
+      { code: "GL_INVALID_VALUE", when: { en: "size is negative.", pt: "size é negativo." } },
+      { code: "GL_INVALID_ENUM", when: { en: "usage is not one of the nine usage hints.", pt: "usage não é um dos nove usage hints." } },
+      { code: "GL_OUT_OF_MEMORY", when: { en: "The GPU could not allocate size bytes.", pt: "A GPU não conseguiu alocar size bytes." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glNamedBufferData(GLuint buffer, GLsizeiptr size, const void *data, GLenum usage);",
@@ -96,6 +105,10 @@ glNamedBufferStorage(ubo, sizeof(CameraData), nullptr, GL_DYNAMIC_STORAGE_BIT);`
   },
   {
     name: "glNamedBufferSubData",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "buffer is not an existing buffer; it is mapped without GL_MAP_PERSISTENT_BIT; or it is immutable and was created without GL_DYNAMIC_STORAGE_BIT.", pt: "buffer não é um buffer existente; está mapeado sem GL_MAP_PERSISTENT_BIT; ou é imutável e foi criado sem GL_DYNAMIC_STORAGE_BIT." } },
+      { code: "GL_INVALID_VALUE", when: { en: "offset or size is negative, or offset + size is past the end of the buffer.", pt: "offset ou size é negativo, ou offset + size passa do fim do buffer." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glNamedBufferSubData(GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data);",
@@ -123,6 +136,9 @@ glNamedBufferStorage(ubo, sizeof(CameraData), nullptr, GL_DYNAMIC_STORAGE_BIT);`
   },
   {
     name: "glCreateVertexArrays",
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "n is negative.", pt: "n é negativo." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glCreateVertexArrays(GLsizei n, GLuint *arrays);",
@@ -148,6 +164,10 @@ glVertexArrayElementBuffer(vao, ebo);`,
   },
   {
     name: "glVertexArrayVertexBuffer",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "vaobj is not an existing vertex array, or buffer is not 0 and not an existing buffer.", pt: "vaobj não é um vertex array existente, ou buffer não é 0 nem um buffer existente." } },
+      { code: "GL_INVALID_VALUE", when: { en: "bindingindex ≥ GL_MAX_VERTEX_ATTRIB_BINDINGS, offset or stride is negative, or stride > GL_MAX_VERTEX_ATTRIB_STRIDE.", pt: "bindingindex ≥ GL_MAX_VERTEX_ATTRIB_BINDINGS, offset ou stride é negativo, ou stride > GL_MAX_VERTEX_ATTRIB_STRIDE." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glVertexArrayVertexBuffer(GLuint vaobj, GLuint bindingindex, GLuint buffer,\n                               GLintptr offset, GLsizei stride);",
@@ -173,6 +193,11 @@ glVertexArrayElementBuffer(vao, ebo);`,
   },
   {
     name: "glVertexArrayAttribFormat",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "vaobj is not an existing vertex array.", pt: "vaobj não é um vertex array existente." } },
+      { code: "GL_INVALID_VALUE", when: { en: "attribindex ≥ GL_MAX_VERTEX_ATTRIBS, size is not 1, 2, 3, 4 (or GL_BGRA), or relativeoffset > GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET.", pt: "attribindex ≥ GL_MAX_VERTEX_ATTRIBS, size não é 1, 2, 3, 4 (ou GL_BGRA), ou relativeoffset > GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET." } },
+      { code: "GL_INVALID_ENUM", when: { en: "type is not an accepted data type.", pt: "type não é um tipo de dado aceito." } },
+    ],
     category: "dsa",
     diagram: "vertexLayout",
     since: "GL 4.5",
@@ -201,6 +226,10 @@ glVertexArrayAttribFormat(vao, 1, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, uv));`
   },
   {
     name: "glVertexArrayAttribBinding",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "vaobj is not an existing vertex array.", pt: "vaobj não é um vertex array existente." } },
+      { code: "GL_INVALID_VALUE", when: { en: "attribindex ≥ GL_MAX_VERTEX_ATTRIBS, or bindingindex ≥ GL_MAX_VERTEX_ATTRIB_BINDINGS.", pt: "attribindex ≥ GL_MAX_VERTEX_ATTRIBS, ou bindingindex ≥ GL_MAX_VERTEX_ATTRIB_BINDINGS." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glVertexArrayAttribBinding(GLuint vaobj, GLuint attribindex, GLuint bindingindex);",
@@ -225,6 +254,10 @@ glVertexArrayAttribBinding(vao, 1, 0);`,
   },
   {
     name: "glEnableVertexArrayAttrib",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "vaobj is not an existing vertex array.", pt: "vaobj não é um vertex array existente." } },
+      { code: "GL_INVALID_VALUE", when: { en: "index ≥ GL_MAX_VERTEX_ATTRIBS.", pt: "index ≥ GL_MAX_VERTEX_ATTRIBS." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glEnableVertexArrayAttrib(GLuint vaobj, GLuint index);",
@@ -248,6 +281,10 @@ glEnableVertexArrayAttrib(vao, 1);`,
   },
   {
     name: "glCreateTextures",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "target is not a texture target.", pt: "target não é um target de textura." } },
+      { code: "GL_INVALID_VALUE", when: { en: "n is negative.", pt: "n é negativo." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glCreateTextures(GLenum target, GLsizei n, GLuint *textures);",
@@ -309,6 +346,11 @@ glTextureStorage2D(tex, levels, GL_SRGB8_ALPHA8, w, h);`,
   },
   {
     name: "glTextureSubImage2D",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "texture is not an existing texture, its storage was never allocated, or type does not match format (a packed type with the wrong number of components).", pt: "texture não é uma textura existente, seu armazenamento nunca foi alocado, ou type não combina com format (um tipo empacotado com o número errado de componentes)." } },
+      { code: "GL_INVALID_ENUM", when: { en: "format or type is not an accepted value.", pt: "format ou type não é um valor aceito." } },
+      { code: "GL_INVALID_VALUE", when: { en: "level is not a valid mip level, width or height is negative, or the rectangle goes outside the level (xoffset + width > its width, and so on).", pt: "level não é um nível de mipmap válido, width ou height é negativo, ou o retângulo sai do nível (xoffset + width > a largura dele, e assim por diante)." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glTextureSubImage2D(GLuint texture, GLint level, GLint xoffset, GLint yoffset,\n                         GLsizei width, GLsizei height,\n                         GLenum format, GLenum type, const void *pixels);",

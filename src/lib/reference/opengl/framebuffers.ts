@@ -43,6 +43,10 @@ glBindFramebuffer(GL_FRAMEBUFFER, fbo);`,
   },
   {
     name: "glBindFramebuffer",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "target is not GL_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER or GL_READ_FRAMEBUFFER.", pt: "target não é GL_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER nem GL_READ_FRAMEBUFFER." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "framebuffer is not 0 and not a name from glGenFramebuffers or glCreateFramebuffers.", pt: "framebuffer não é 0 nem um nome vindo de glGenFramebuffers ou glCreateFramebuffers." } },
+    ],
     category: "framebuffers",
     since: "GL 3.0",
     signature: "void glBindFramebuffer(GLenum target, GLuint framebuffer);",
@@ -119,6 +123,9 @@ glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colo
   },
   {
     name: "glCheckFramebufferStatus",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "target is not GL_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER or GL_READ_FRAMEBUFFER. The call then returns 0, which is not a status.", pt: "target não é GL_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER nem GL_READ_FRAMEBUFFER. A chamada então devolve 0, que não é um status." } },
+    ],
     category: "framebuffers",
     since: "GL 3.0",
     signature: "GLenum glCheckFramebufferStatus(GLenum target);",
@@ -145,6 +152,9 @@ glBindFramebuffer(GL_FRAMEBUFFER, 0);`,
   },
   {
     name: "glGenRenderbuffers",
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "n is negative.", pt: "n é negativo." } },
+    ],
     category: "framebuffers",
     since: "GL 3.0",
     signature: "void glGenRenderbuffers(GLsizei n, GLuint *renderbuffers);",
@@ -167,6 +177,10 @@ glGenRenderbuffers(1, &rbo);`,
   },
   {
     name: "glBindRenderbuffer",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "target is not GL_RENDERBUFFER.", pt: "target não é GL_RENDERBUFFER." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "renderbuffer is not 0 and not a name from glGenRenderbuffers or glCreateRenderbuffers.", pt: "renderbuffer não é 0 nem um nome vindo de glGenRenderbuffers ou glCreateRenderbuffers." } },
+    ],
     category: "framebuffers",
     since: "GL 3.0",
     signature: "void glBindRenderbuffer(GLenum target, GLuint renderbuffer);",
@@ -189,6 +203,12 @@ glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, w, h);`,
   },
   {
     name: "glRenderbufferStorage",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "target is not GL_RENDERBUFFER, or internalformat is not a colour-, depth- or stencil-renderable format.", pt: "target não é GL_RENDERBUFFER, ou internalformat não é um formato renderizável de cor, profundidade ou stencil." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "No renderbuffer is bound (the binding is 0).", pt: "Nenhum renderbuffer está ligado (o binding é 0)." } },
+      { code: "GL_INVALID_VALUE", when: { en: "width or height is negative or larger than GL_MAX_RENDERBUFFER_SIZE.", pt: "width ou height é negativo ou maior que GL_MAX_RENDERBUFFER_SIZE." } },
+      { code: "GL_OUT_OF_MEMORY", when: { en: "The GPU could not allocate the storage.", pt: "A GPU não conseguiu alocar o armazenamento." } },
+    ],
     category: "framebuffers",
     since: "GL 3.0",
     signature: "void glRenderbufferStorage(GLenum target, GLenum internalformat,\n                           GLsizei width, GLsizei height);",
@@ -225,6 +245,10 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDER
   },
   {
     name: "glFramebufferRenderbuffer",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "target is not a framebuffer target, renderbuffertarget is not GL_RENDERBUFFER, or attachment is not an attachment name.", pt: "target não é um target de framebuffer, renderbuffertarget não é GL_RENDERBUFFER, ou attachment não é um nome de anexo." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "Framebuffer 0 (the window) is bound to target, renderbuffer is not 0 and not an existing renderbuffer, or attachment is GL_COLOR_ATTACHMENTi with i ≥ GL_MAX_COLOR_ATTACHMENTS.", pt: "O framebuffer 0 (a janela) está ligado ao target, renderbuffer não é 0 nem um renderbuffer existente, ou attachment é GL_COLOR_ATTACHMENTi com i ≥ GL_MAX_COLOR_ATTACHMENTS." } },
+    ],
     category: "framebuffers",
     since: "GL 3.0",
     signature: "void glFramebufferRenderbuffer(GLenum target, GLenum attachment,\n                               GLenum renderbuffertarget, GLuint renderbuffer);",
@@ -248,6 +272,10 @@ glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDER
   },
   {
     name: "glDrawBuffer",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "buf is not one of the accepted values.", pt: "buf não é um dos valores aceitos." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "buf does not exist in the bound framebuffer: GL_BACK with an FBO bound, a GL_COLOR_ATTACHMENTi with the window bound, or i ≥ GL_MAX_COLOR_ATTACHMENTS.", pt: "buf não existe no framebuffer ligado: GL_BACK com um FBO ligado, um GL_COLOR_ATTACHMENTi com a janela ligada, ou i ≥ GL_MAX_COLOR_ATTACHMENTS." } },
+    ],
     category: "framebuffers",
     since: "GL 1.0",
     signature: "void glDrawBuffer(GLenum buf);",
@@ -282,6 +310,10 @@ glReadBuffer(GL_NONE);`,
   },
   {
     name: "glReadBuffer",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "src is not one of the accepted values.", pt: "src não é um dos valores aceitos." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "src does not exist in the bound read framebuffer: GL_BACK with an FBO bound, a GL_COLOR_ATTACHMENTi with the window bound, or i ≥ GL_MAX_COLOR_ATTACHMENTS.", pt: "src não existe no framebuffer de leitura ligado: GL_BACK com um FBO ligado, um GL_COLOR_ATTACHMENTi com a janela ligada, ou i ≥ GL_MAX_COLOR_ATTACHMENTS." } },
+    ],
     category: "framebuffers",
     since: "GL 1.0",
     signature: "void glReadBuffer(GLenum src);",

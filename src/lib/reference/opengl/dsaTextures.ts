@@ -51,6 +51,11 @@ glTextureParameteri(tex, GL_TEXTURE_MAG_FILTER, GL_LINEAR);`,
   },
   {
     name: "glTextureParameterf",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "texture is not an existing texture.", pt: "texture não é uma textura existente." } },
+      { code: "GL_INVALID_ENUM", when: { en: "pname is not an accepted parameter, or a parameter that expects a constant gets a value that is not one.", pt: "pname não é um parâmetro aceito, ou um parâmetro que espera uma constante recebe algo que não é." } },
+      { code: "GL_INVALID_VALUE", when: { en: "The value is out of range, such as GL_TEXTURE_MAX_ANISOTROPY below 1.", pt: "O valor está fora do intervalo, como GL_TEXTURE_MAX_ANISOTROPY abaixo de 1." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glTextureParameterf(GLuint texture, GLenum pname, GLfloat param);",
@@ -84,6 +89,10 @@ glTextureParameterf(tex, GL_TEXTURE_MAX_ANISOTROPY, std::min(16.0f, maxAniso));`
   },
   {
     name: "glTextureParameteriv",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "texture is not an existing texture.", pt: "texture não é uma textura existente." } },
+      { code: "GL_INVALID_ENUM", when: { en: "pname is not an accepted parameter, or a swizzle value is not GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA, GL_ZERO or GL_ONE.", pt: "pname não é um parâmetro aceito, ou um valor de swizzle não é GL_RED, GL_GREEN, GL_BLUE, GL_ALPHA, GL_ZERO nem GL_ONE." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glTextureParameteriv(GLuint texture, GLenum pname, const GLint *params);",

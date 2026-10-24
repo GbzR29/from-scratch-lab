@@ -38,6 +38,10 @@ glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, nullptr);`,
   },
   {
     name: "glVertexArrayBindingDivisor",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "vaobj is not an existing vertex array.", pt: "vaobj não é um vertex array existente." } },
+      { code: "GL_INVALID_VALUE", when: { en: "bindingindex ≥ GL_MAX_VERTEX_ATTRIB_BINDINGS.", pt: "bindingindex ≥ GL_MAX_VERTEX_ATTRIB_BINDINGS." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glVertexArrayBindingDivisor(GLuint vaobj, GLuint bindingindex, GLuint divisor);",

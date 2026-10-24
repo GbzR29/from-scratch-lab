@@ -15,6 +15,9 @@ const QUERY_TARGETS = [
 export const queryEntries: RefEntry[] = [
   {
     name: "glGenQueries",
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "n is negative.", pt: "n é negativo." } },
+    ],
     category: "sync",
     since: "GL 1.5",
     signature: "void glGenQueries(GLsizei n, GLuint *ids);",
@@ -118,6 +121,10 @@ glQueryCounter(t[1], GL_TIMESTAMP);
   },
   {
     name: "glGetQueryObjectuiv",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "pname is not an accepted value.", pt: "pname não é um valor aceito." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "id is not an existing query object, or it is still active (glEndQuery has not been called yet).", pt: "id não é um query object existente, ou ainda está ativo (glEndQuery ainda não foi chamado)." } },
+    ],
     category: "sync",
     since: "GL 1.5",
     signature: "void glGetQueryObjectuiv(GLuint id, GLenum pname, GLuint *params);",
@@ -153,6 +160,10 @@ if (ready) { /* read it with glGetQueryObjectui64v */ }`,
   },
   {
     name: "glGetQueryObjectui64v",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "pname is not an accepted value.", pt: "pname não é um valor aceito." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "id is not an existing query object, or it is still active (glEndQuery has not been called yet).", pt: "id não é um query object existente, ou ainda está ativo (glEndQuery ainda não foi chamado)." } },
+    ],
     category: "sync",
     since: "GL 3.3",
     signature: "void glGetQueryObjectui64v(GLuint id, GLenum pname, GLuint64 *params);",

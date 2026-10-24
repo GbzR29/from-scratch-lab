@@ -39,6 +39,9 @@ glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);`,
   },
   {
     name: "glMemoryBarrier",
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "barriers is not GL_ALL_BARRIER_BITS and contains a bit that is not an accepted barrier bit.", pt: "barriers não é GL_ALL_BARRIER_BITS e contém um bit que não é um bit de barreira aceito." } },
+    ],
     category: "compute",
     since: "GL 4.2",
     signature: "void glMemoryBarrier(GLbitfield barriers);",
@@ -73,6 +76,9 @@ glDrawArrays(GL_POINTS, 0, particleCount);`,
   },
   {
     name: "glBindImageTexture",
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "unit ≥ GL_MAX_IMAGE_UNITS, texture is not 0 and not an existing texture, level or layer is negative, or format is not a supported image format.", pt: "unit ≥ GL_MAX_IMAGE_UNITS, texture não é 0 nem uma textura existente, level ou layer é negativo, ou format não é um formato de imagem suportado." } },
+      { code: "GL_INVALID_ENUM", when: { en: "access is not GL_READ_ONLY, GL_WRITE_ONLY or GL_READ_WRITE.", pt: "access não é GL_READ_ONLY, GL_WRITE_ONLY nem GL_READ_WRITE." } },    ],
     category: "compute",
     since: "GL 4.2",
     signature: "void glBindImageTexture(GLuint unit, GLuint texture, GLint level, GLboolean layered,\n                        GLint layer, GLenum access, GLenum format);",

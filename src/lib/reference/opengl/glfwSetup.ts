@@ -1,12 +1,17 @@
 // src/lib/reference/opengl/glfwSetup.ts
 // GLFW 3.4: starting the library, creating the window + OpenGL context, the frame loop.
 import type { RefEntry } from "../types";
+import { INVALID_ENUM, INVALID_VALUE, NO_CURRENT_CONTEXT, NO_WINDOW_CONTEXT, NOT_INITIALIZED, PLATFORM_ERROR } from "./glfwErrors";
 
 const DOCS = "https://www.glfw.org/docs/3.4/";
 
 export const glfwSetupEntries: RefEntry[] = [
   {
     name: "glfwInit",
+    errors: [
+      { code: "GLFW_PLATFORM_UNAVAILABLE", when: { en: "No supported window system was found (for example, no display on a Linux server).", pt: "Nenhum sistema de janelas compatível foi encontrado (por exemplo, sem display num servidor Linux)." } },
+      PLATFORM_ERROR,
+    ],
     category: "glfw-setup",
     since: "GLFW 1.0",
     signature: "int glfwInit(void);",
@@ -40,6 +45,7 @@ glfwTerminate();`,
   },
   {
     name: "glfwTerminate",
+    errors: [PLATFORM_ERROR],
     category: "glfw-setup",
     since: "GLFW 1.0",
     signature: "void glfwTerminate(void);",
@@ -164,6 +170,7 @@ if (!window) {
   },
   {
     name: "glfwWindowHint",
+    errors: [NOT_INITIALIZED, INVALID_ENUM],
     category: "glfw-setup",
     since: "GLFW 3.0",
     signature: "void glfwWindowHint(int hint, int value);",
@@ -215,6 +222,15 @@ GLFWwindow* window = glfwCreateWindow(1280, 720, "Hello", nullptr, nullptr);`,
   },
   {
     name: "glfwCreateWindow",
+    errors: [
+      NOT_INITIALIZED,
+      INVALID_ENUM,
+      INVALID_VALUE,
+      { code: "GLFW_API_UNAVAILABLE", when: { en: "The driver does not support OpenGL at all, or not the API asked for.", pt: "O driver não suporta OpenGL, ou não a API pedida." } },
+      { code: "GLFW_VERSION_UNAVAILABLE", when: { en: "The requested context version (for example 4.6) is higher than the driver supports. On macOS the maximum is 4.1.", pt: "A versão de contexto pedida (por exemplo 4.6) é maior que a que o driver suporta. No macOS o máximo é 4.1." } },
+      { code: "GLFW_FORMAT_UNAVAILABLE", when: { en: "No pixel format matches the hints, for example too many MSAA samples.", pt: "Nenhum formato de pixel atende às hints, por exemplo amostras de MSAA demais." } },
+      PLATFORM_ERROR,
+    ],
     category: "glfw-setup",
     since: "GLFW 3.0",
     signature: "GLFWwindow* glfwCreateWindow(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);",
@@ -254,6 +270,7 @@ if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) return 1;`,
   },
   {
     name: "glfwDestroyWindow",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-setup",
     since: "GLFW 3.0",
     signature: "void glfwDestroyWindow(GLFWwindow* window);",
@@ -279,6 +296,7 @@ glfwTerminate();`,
   },
   {
     name: "glfwMakeContextCurrent",
+    errors: [NOT_INITIALIZED, NO_WINDOW_CONTEXT, PLATFORM_ERROR],
     category: "glfw-setup",
     since: "GLFW 3.0",
     signature: "void glfwMakeContextCurrent(GLFWwindow* window);",
@@ -305,6 +323,7 @@ glfwSwapInterval(1);              // needs a current context`,
   },
   {
     name: "glfwGetProcAddress",
+    errors: [NOT_INITIALIZED, NO_CURRENT_CONTEXT, PLATFORM_ERROR],
     category: "glfw-setup",
     since: "GLFW 1.0",
     signature: "GLFWglproc glfwGetProcAddress(const char* procname);",
@@ -338,6 +357,7 @@ std::printf("%s\\n", (const char*)glGetString(GL_VERSION));`,
   },
   {
     name: "glfwSwapBuffers",
+    errors: [NOT_INITIALIZED, NO_WINDOW_CONTEXT, PLATFORM_ERROR],
     category: "glfw-setup",
     since: "GLFW 1.0",
     signature: "void glfwSwapBuffers(GLFWwindow* window);",
@@ -367,6 +387,7 @@ std::printf("%s\\n", (const char*)glGetString(GL_VERSION));`,
   },
   {
     name: "glfwSwapInterval",
+    errors: [NOT_INITIALIZED, NO_CURRENT_CONTEXT, PLATFORM_ERROR],
     category: "glfw-setup",
     since: "GLFW 1.0",
     signature: "void glfwSwapInterval(int interval);",
@@ -401,6 +422,7 @@ glfwSwapInterval(1);   // vsync on`,
   },
   {
     name: "glfwPollEvents",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-setup",
     since: "GLFW 1.0",
     signature: "void glfwPollEvents(void);",
@@ -428,6 +450,7 @@ glfwSwapInterval(1);   // vsync on`,
   },
   {
     name: "glfwWaitEvents",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-setup",
     since: "GLFW 2.5",
     signature: "void glfwWaitEvents(void);",
@@ -451,6 +474,7 @@ while (!glfwWindowShouldClose(window)) {
   },
   {
     name: "glfwWindowShouldClose",
+    errors: [NOT_INITIALIZED],
     category: "glfw-setup",
     since: "GLFW 3.0",
     signature: "int glfwWindowShouldClose(GLFWwindow* window);",
@@ -484,6 +508,7 @@ while (!glfwWindowShouldClose(window)) {
   },
   {
     name: "glfwSetWindowShouldClose",
+    errors: [NOT_INITIALIZED],
     category: "glfw-setup",
     since: "GLFW 3.0",
     signature: "void glfwSetWindowShouldClose(GLFWwindow* window, int value);",

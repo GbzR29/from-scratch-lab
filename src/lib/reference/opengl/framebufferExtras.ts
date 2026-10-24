@@ -39,6 +39,11 @@ glDrawBuffers(3, attachments);`,
   },
   {
     name: "glFramebufferTexture",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "target is not a framebuffer target, or attachment is not an attachment name.", pt: "target não é um target de framebuffer, ou attachment não é um nome de anexo." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "Framebuffer 0 (the window) is bound to target, texture is not 0 and not an existing texture, or attachment is GL_COLOR_ATTACHMENTi with i ≥ GL_MAX_COLOR_ATTACHMENTS.", pt: "O framebuffer 0 (a janela) está ligado ao target, texture não é 0 nem uma textura existente, ou attachment é GL_COLOR_ATTACHMENTi com i ≥ GL_MAX_COLOR_ATTACHMENTS." } },
+      { code: "GL_INVALID_VALUE", when: { en: "level is not a valid mip level of texture.", pt: "level não é um nível de mipmap válido da textura." } },
+    ],
     category: "framebuffers",
     since: "GL 3.2",
     signature: "void glFramebufferTexture(GLenum target, GLenum attachment, GLuint texture, GLint level);",

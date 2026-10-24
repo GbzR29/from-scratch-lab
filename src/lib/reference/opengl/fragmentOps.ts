@@ -14,6 +14,9 @@ const BLEND_FACTORS = [
 export const fragmentOpEntries: RefEntry[] = [
   {
     name: "glDepthFunc",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "func is not one of the eight comparison functions.", pt: "func não é uma das oito funções de comparação." } },
+    ],
     category: "fragment-ops",
     since: "GL 1.0",
     signature: "void glDepthFunc(GLenum func);",
@@ -72,6 +75,9 @@ glDepthMask(GL_TRUE);`,
   },
   {
     name: "glBlendFunc",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "sfactor or dfactor is not an accepted blend factor.", pt: "sfactor ou dfactor não é um fator de blend aceito." } },
+    ],
     category: "fragment-ops",
     diagram: "blend",
     since: "GL 1.0",
@@ -99,6 +105,9 @@ glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);`,
   },
   {
     name: "glCullFace",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "mode is not GL_FRONT, GL_BACK or GL_FRONT_AND_BACK.", pt: "mode não é GL_FRONT, GL_BACK nem GL_FRONT_AND_BACK." } },
+    ],
     category: "fragment-ops",
     diagram: "winding",
     since: "GL 1.0",
@@ -130,6 +139,9 @@ glFrontFace(GL_CCW);`,
   },
   {
     name: "glFrontFace",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "mode is not GL_CW or GL_CCW.", pt: "mode não é GL_CW nem GL_CCW." } },
+    ],
     category: "fragment-ops",
     diagram: "winding",
     since: "GL 1.0",
@@ -161,6 +173,9 @@ glFrontFace(GL_CCW);`,
   },
   {
     name: "glPolygonMode",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "mode is not GL_POINT, GL_LINE or GL_FILL, or face is not GL_FRONT_AND_BACK (the only face the core profile accepts).", pt: "mode não é GL_POINT, GL_LINE nem GL_FILL, ou face não é GL_FRONT_AND_BACK (a única face que o perfil core aceita)." } },
+    ],
     category: "fragment-ops",
     since: "GL 1.0",
     signature: "void glPolygonMode(GLenum face, GLenum mode);",

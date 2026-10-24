@@ -125,6 +125,11 @@ glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);`,
   },
   {
     name: "glDrawElementsInstanced",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "mode is not a primitive type, or type is not GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT or GL_UNSIGNED_INT.", pt: "mode não é um tipo de primitiva, ou type não é GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT nem GL_UNSIGNED_INT." } },
+      { code: "GL_INVALID_VALUE", when: { en: "count or instancecount is negative.", pt: "count ou instancecount é negativo." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "No vertex array object is bound in a core profile, or the index buffer or an enabled attribute's buffer is mapped.", pt: "Nenhum vertex array object está ligado no perfil core, ou o buffer de índices ou o buffer de um atributo ativo está mapeado." } },
+    ],
     category: "drawing",
     since: "GL 3.1",
     signature: "void glDrawElementsInstanced(GLenum mode, GLsizei count, GLenum type,\n                             const void *indices, GLsizei instancecount);",

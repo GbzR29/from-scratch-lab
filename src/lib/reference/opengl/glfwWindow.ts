@@ -1,12 +1,14 @@
 // src/lib/reference/opengl/glfwWindow.ts
 // GLFW 3.4: window size and position, high-DPI, monitors, full screen, user pointer.
 import type { RefEntry } from "../types";
+import { FEATURE_UNAVAILABLE, NOT_INITIALIZED, PLATFORM_ERROR } from "./glfwErrors";
 
 const DOCS = "https://www.glfw.org/docs/3.4/";
 
 export const glfwWindowEntries: RefEntry[] = [
   {
     name: "glfwGetFramebufferSize",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-window",
     since: "GLFW 3.0",
     signature: "void glfwGetFramebufferSize(GLFWwindow* window, int* width, int* height);",
@@ -36,6 +38,7 @@ float aspect = fbH > 0 ? (float)fbW / fbH : 1.0f;`,
   },
   {
     name: "glfwSetFramebufferSizeCallback",
+    errors: [NOT_INITIALIZED],
     category: "glfw-window",
     since: "GLFW 3.0",
     signature: "GLFWframebuffersizefun glfwSetFramebufferSizeCallback(GLFWwindow* window, GLFWframebuffersizefun callback);",
@@ -70,6 +73,7 @@ glfwSetFramebufferSizeCallback(window, onFramebufferSize);`,
   },
   {
     name: "glfwGetWindowSize",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-window",
     since: "GLFW 1.0",
     signature: "void glfwGetWindowSize(GLFWwindow* window, int* width, int* height);",
@@ -96,6 +100,7 @@ float u = (float)(mx / ww), v = 1.0f - (float)(my / wh);`,
   },
   {
     name: "glfwSetWindowSizeCallback",
+    errors: [NOT_INITIALIZED],
     category: "glfw-window",
     since: "GLFW 1.0",
     signature: "GLFWwindowsizefun glfwSetWindowSizeCallback(GLFWwindow* window, GLFWwindowsizefun callback);",
@@ -120,6 +125,7 @@ float u = (float)(mx / ww), v = 1.0f - (float)(my / wh);`,
   },
   {
     name: "glfwGetWindowFrameSize",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-window",
     since: "GLFW 3.1",
     signature: "void glfwGetWindowFrameSize(GLFWwindow* window, int* left, int* top, int* right, int* bottom);",
@@ -150,6 +156,7 @@ int outerH = h + t + b;`,
   },
   {
     name: "glfwSetWindowPos",
+    errors: [NOT_INITIALIZED, FEATURE_UNAVAILABLE, PLATFORM_ERROR],
     category: "glfw-window",
     since: "GLFW 1.0",
     signature: "void glfwSetWindowPos(GLFWwindow* window, int xpos, int ypos);",
@@ -183,6 +190,7 @@ glfwShowWindow(window);`,
   },
   {
     name: "glfwShowWindow",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-window",
     since: "GLFW 3.0",
     signature: "void glfwShowWindow(GLFWwindow* window);",
@@ -209,6 +217,7 @@ glfwShowWindow(window);   // appears already in place`,
   },
   {
     name: "glfwSetWindowTitle",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-window",
     since: "GLFW 1.0",
     signature: "void glfwSetWindowTitle(GLFWwindow* window, const char* title);",
@@ -239,6 +248,7 @@ if (glfwGetTime() - last >= 0.5) {
   },
   {
     name: "glfwGetWindowContentScale",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-window",
     since: "GLFW 3.3",
     signature: "void glfwGetWindowContentScale(GLFWwindow* window, float* xscale, float* yscale);",
@@ -266,6 +276,7 @@ float fontPx = 16.0f * sy;   // same apparent size at 100%, 150%, 200%`,
   },
   {
     name: "glfwSetWindowUserPointer",
+    errors: [NOT_INITIALIZED],
     category: "glfw-window",
     since: "GLFW 3.0",
     signature: "void glfwSetWindowUserPointer(GLFWwindow* window, void* pointer);",
@@ -296,6 +307,7 @@ glfwSetScrollCallback(window, [](GLFWwindow* w, double, double dy) {
   },
   {
     name: "glfwGetWindowUserPointer",
+    errors: [NOT_INITIALIZED],
     category: "glfw-window",
     since: "GLFW 3.0",
     signature: "void* glfwGetWindowUserPointer(GLFWwindow* window);",
@@ -323,6 +335,7 @@ glfwSetScrollCallback(window, [](GLFWwindow* w, double, double dy) {
   },
   {
     name: "glfwGetPrimaryMonitor",
+    errors: [NOT_INITIALIZED],
     category: "glfw-window",
     since: "GLFW 3.0",
     signature: "GLFWmonitor* glfwGetPrimaryMonitor(void);",
@@ -350,6 +363,7 @@ std::printf("%dx%d @ %d Hz\\n", mode->width, mode->height, mode->refreshRate);`,
   },
   {
     name: "glfwGetMonitorWorkarea",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-window",
     since: "GLFW 3.3",
     signature: "void glfwGetMonitorWorkarea(GLFWmonitor* monitor, int* xpos, int* ypos, int* width, int* height);",
@@ -377,6 +391,7 @@ int cx = ax + aw / 2, cy = ay + ah / 2;`,
   },
   {
     name: "glfwGetVideoMode",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-window",
     since: "GLFW 3.0",
     signature: "const GLFWvidmode* glfwGetVideoMode(GLFWmonitor* monitor);",
@@ -402,6 +417,7 @@ double frameBudgetMs = 1000.0 / mode->refreshRate;   // 16.7 ms at 60 Hz`,
   },
   {
     name: "glfwSetWindowMonitor",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-window",
     since: "GLFW 3.2",
     signature: "void glfwSetWindowMonitor(GLFWwindow* window, GLFWmonitor* monitor, int xpos, int ypos, int width, int height, int refreshRate);",

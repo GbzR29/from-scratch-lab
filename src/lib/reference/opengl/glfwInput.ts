@@ -1,12 +1,14 @@
 // src/lib/reference/opengl/glfwInput.ts
 // GLFW 3.4: keyboard, mouse, scroll, cursor modes and the clock.
 import type { RefEntry } from "../types";
+import { FEATURE_UNAVAILABLE, INVALID_ENUM, NOT_INITIALIZED, PLATFORM_ERROR } from "./glfwErrors";
 
 const DOCS = "https://www.glfw.org/docs/3.4/";
 
 export const glfwInputEntries: RefEntry[] = [
   {
     name: "glfwGetKey",
+    errors: [NOT_INITIALIZED, INVALID_ENUM],
     category: "glfw-input",
     since: "GLFW 1.0",
     signature: "int glfwGetKey(GLFWwindow* window, int key);",
@@ -51,6 +53,7 @@ if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) camPos += speed * camRight;`,
   },
   {
     name: "glfwSetKeyCallback",
+    errors: [NOT_INITIALIZED],
     category: "glfw-input",
     since: "GLFW 1.0",
     signature: "GLFWkeyfun glfwSetKeyCallback(GLFWwindow* window, GLFWkeyfun callback);",
@@ -84,6 +87,7 @@ glfwSetKeyCallback(window, onKey);`,
   },
   {
     name: "glfwSetCharCallback",
+    errors: [NOT_INITIALIZED],
     category: "glfw-input",
     since: "GLFW 2.4",
     signature: "GLFWcharfun glfwSetCharCallback(GLFWwindow* window, GLFWcharfun callback);",
@@ -112,6 +116,7 @@ glfwSetCharCallback(window, [](GLFWwindow*, unsigned int cp) {
   },
   {
     name: "glfwGetMouseButton",
+    errors: [NOT_INITIALIZED, INVALID_ENUM],
     category: "glfw-input",
     since: "GLFW 1.0",
     signature: "int glfwGetMouseButton(GLFWwindow* window, int button);",
@@ -144,6 +149,7 @@ glfwSetCharCallback(window, [](GLFWwindow*, unsigned int cp) {
   },
   {
     name: "glfwSetMouseButtonCallback",
+    errors: [NOT_INITIALIZED],
     category: "glfw-input",
     since: "GLFW 1.0",
     signature: "GLFWmousebuttonfun glfwSetMouseButtonCallback(GLFWwindow* window, GLFWmousebuttonfun callback);",
@@ -172,6 +178,7 @@ glfwSetCharCallback(window, [](GLFWwindow*, unsigned int cp) {
   },
   {
     name: "glfwGetCursorPos",
+    errors: [NOT_INITIALIZED, PLATFORM_ERROR],
     category: "glfw-input",
     since: "GLFW 3.0",
     signature: "void glfwGetCursorPos(GLFWwindow* window, double* xpos, double* ypos);",
@@ -204,6 +211,7 @@ glReadPixels(px, py, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, rgba);`,
   },
   {
     name: "glfwSetCursorPosCallback",
+    errors: [NOT_INITIALIZED],
     category: "glfw-input",
     since: "GLFW 3.0",
     signature: "GLFWcursorposfun glfwSetCursorPosCallback(GLFWwindow* window, GLFWcursorposfun callback);",
@@ -239,6 +247,7 @@ glfwSetCursorPosCallback(window, onCursor);`,
   },
   {
     name: "glfwSetScrollCallback",
+    errors: [NOT_INITIALIZED],
     category: "glfw-input",
     since: "GLFW 3.0",
     signature: "GLFWscrollfun glfwSetScrollCallback(GLFWwindow* window, GLFWscrollfun callback);",
@@ -263,6 +272,7 @@ glfwSetCursorPosCallback(window, onCursor);`,
   },
   {
     name: "glfwSetInputMode",
+    errors: [NOT_INITIALIZED, INVALID_ENUM, PLATFORM_ERROR, FEATURE_UNAVAILABLE],
     category: "glfw-input",
     since: "GLFW 3.0",
     signature: "void glfwSetInputMode(GLFWwindow* window, int mode, int value);",
@@ -306,6 +316,7 @@ if (glfwGetKey(window, GLFW_KEY_TAB) == GLFW_PRESS)
   },
   {
     name: "glfwRawMouseMotionSupported",
+    errors: [NOT_INITIALIZED],
     category: "glfw-input",
     since: "GLFW 3.3",
     signature: "int glfwRawMouseMotionSupported(void);",
@@ -326,6 +337,7 @@ if (glfwGetKey(window, GLFW_KEY_TAB) == GLFW_PRESS)
   },
   {
     name: "glfwGetTime",
+    errors: [NOT_INITIALIZED],
     category: "glfw-input",
     since: "GLFW 1.0",
     signature: "double glfwGetTime(void);",

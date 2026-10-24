@@ -16,6 +16,9 @@ const ATTACHMENTS = [
 export const dsaFramebufferEntries: RefEntry[] = [
   {
     name: "glCreateFramebuffers",
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "n is negative.", pt: "n é negativo." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glCreateFramebuffers(GLsizei n, GLuint *framebuffers);",
@@ -40,6 +43,9 @@ glNamedFramebufferTexture(fbo, GL_COLOR_ATTACHMENT0, colorTex, 0);`,
   },
   {
     name: "glCreateRenderbuffers",
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "n is negative.", pt: "n é negativo." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glCreateRenderbuffers(GLsizei n, GLuint *renderbuffers);",
@@ -186,6 +192,10 @@ glNamedFramebufferDrawBuffers(oitFbo, 2, bufs);`,
   },
   {
     name: "glCheckNamedFramebufferStatus",
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "target is not GL_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER or GL_READ_FRAMEBUFFER. The call then returns 0.", pt: "target não é GL_FRAMEBUFFER, GL_DRAW_FRAMEBUFFER nem GL_READ_FRAMEBUFFER. A chamada então devolve 0." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "framebuffer is not 0 and not an existing framebuffer.", pt: "framebuffer não é 0 nem um framebuffer existente." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "GLenum glCheckNamedFramebufferStatus(GLuint framebuffer, GLenum target);",
@@ -213,6 +223,11 @@ glNamedFramebufferDrawBuffers(oitFbo, 2, bufs);`,
   },
   {
     name: "glClearNamedFramebufferfv",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "framebuffer is not 0 and not an existing framebuffer.", pt: "framebuffer não é 0 nem um framebuffer existente." } },
+      { code: "GL_INVALID_ENUM", when: { en: "buffer is not GL_COLOR or GL_DEPTH.", pt: "buffer não é GL_COLOR nem GL_DEPTH." } },
+      { code: "GL_INVALID_VALUE", when: { en: "buffer is GL_COLOR and drawbuffer is negative or ≥ GL_MAX_DRAW_BUFFERS, or buffer is GL_DEPTH and drawbuffer is not 0.", pt: "buffer é GL_COLOR e drawbuffer é negativo ou ≥ GL_MAX_DRAW_BUFFERS, ou buffer é GL_DEPTH e drawbuffer não é 0." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glClearNamedFramebufferfv(GLuint framebuffer, GLenum buffer, GLint drawbuffer,\n                               const GLfloat *value);",
@@ -250,6 +265,11 @@ glClearNamedFramebufferfv(oitFbo, GL_COLOR, 1, one);   // revealage`,
   },
   {
     name: "glClearNamedFramebufferuiv",
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "framebuffer is not 0 and not an existing framebuffer.", pt: "framebuffer não é 0 nem um framebuffer existente." } },
+      { code: "GL_INVALID_ENUM", when: { en: "buffer is not GL_COLOR (the uiv form clears only unsigned-integer colour attachments).", pt: "buffer não é GL_COLOR (a forma uiv só limpa anexos de cor de inteiro sem sinal)." } },
+      { code: "GL_INVALID_VALUE", when: { en: "drawbuffer is negative or ≥ GL_MAX_DRAW_BUFFERS.", pt: "drawbuffer é negativo ou ≥ GL_MAX_DRAW_BUFFERS." } },
+    ],
     category: "dsa",
     since: "GL 4.5",
     signature: "void glClearNamedFramebufferuiv(GLuint framebuffer, GLenum buffer, GLint drawbuffer,\n                                const GLuint *value);",
