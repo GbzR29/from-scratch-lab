@@ -22,22 +22,40 @@ function meta(title: string, description: string, url: string): Metadata {
 export function referenceMetadata(trackPath: string): Metadata {
   const ref = getReference(trackPath);
   if (!ref) return {};
-  const name = trackPath;
+  // "OpenGL 4.6 · GLFW 3.4" → "OpenGL 4.6 and GLFW 3.4"
+  const name = ref.title.replace(" · ", " and ");
   return meta(
-    `${name} Function Reference: all ${ref.entries.length} functions explained`,
+    `${ref.title} Function Reference: all ${ref.entries.length} functions explained`,
     `Every ${name} function used in the course, explained for beginners: parameters, accepted values, common errors and a short C++ example.`,
     referenceHref(ref),
   );
 }
 
+/** The library a function belongs to, by its prefix (GLFW pages live in the OpenGL reference). */
+function libraryOf(name: string, trackPath: string): string {
+  if (name.startsWith("glfw")) return "GLFW";
+  if (name.startsWith("SDL_")) return "SDL3";
+  return trackPath;
+}
+
+/** "glGetShaderiv: parameters, errors and example | OpenGL reference": the name first,
+ *  then what the page offers, since people search for the bare function name. */
 export function functionMetadata(trackPath: string, fn: string): Metadata {
   const ref = getReference(trackPath);
   const entry = ref && referenceIndex(ref).get(fn);
   if (!ref || !entry) return {};
   const name = displayName(entry);
+  const lib = libraryOf(entry.name, trackPath);
+  const offers = entry.family
+    ? "every variant explained"
+    : entry.errors?.length ? "parameters, errors and example" : "parameters and example";
+  const since = entry.since ? ` Available since ${entry.since}.` : "";
+  const contents = entry.family
+    ? "How to read the suffixes, every variant and a C++ example."
+    : `Parameters${entry.params.some((p) => p.values?.length) ? ", accepted values" : ""}${entry.errors?.length ? ", errors" : ""}${entry.notes?.length ? ", pitfalls" : ""} and a C++ example.`;
   return meta(
-    `${name} — ${trackPath} reference`,
-    `${name}: ${entry.summary.en} ${entry.family ? "How to read the names, every variant and a C++ example." : "Parameters, accepted values, common errors and a C++ example."}`,
+    `${name}: ${offers} | ${lib} reference`,
+    `${name}: ${entry.summary.en.replace(/\.?$/, ".")}${since} ${contents}`,
     referenceHref(ref, entry.name),
   );
 }

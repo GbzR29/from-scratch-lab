@@ -267,6 +267,11 @@ glUniformBlockBinding(program, idx, 0);`,
     errors: [
       { code: "GL_INVALID_VALUE", when: { en: "Index is not a valid block, or the binding is ≥ GL_MAX_UNIFORM_BUFFER_BINDINGS.", pt: "O índice não é um bloco válido, ou o binding é ≥ GL_MAX_UNIFORM_BUFFER_BINDINGS." } },
     ],
+    notes: [
+      { en: "Since GLSL 4.20 you can write the binding in the shader, layout(std140, binding = 0) uniform Matrices { … };, and skip both glGetUniformBlockIndex and this call.", pt: "Desde o GLSL 4.20 dá para escrever o binding no shader, layout(std140, binding = 0) uniform Matrices { … };, e pular glGetUniformBlockIndex e esta chamada." },
+      { en: "The binding is stored in the program and reset by glLinkProgram. Call it after every link, not once at startup before linking.", pt: "O binding fica guardado no programa e é zerado pelo glLinkProgram. Chame depois de cada link, não uma vez no início antes de linkar." },
+      { en: "glGetUniformBlockIndex returns GL_INVALID_INDEX when the block name is wrong or the block is unused and was removed. Passing that on is a GL_INVALID_VALUE.", pt: "glGetUniformBlockIndex devolve GL_INVALID_INDEX quando o nome do bloco está errado ou o bloco não é usado e foi removido. Passar isso adiante dá GL_INVALID_VALUE." },
+    ],
     example: `for (GLuint prog : { shaderRed, shaderGreen, shaderBlue }) {
     GLuint idx = glGetUniformBlockIndex(prog, "Matrices");
     glUniformBlockBinding(prog, idx, 0);

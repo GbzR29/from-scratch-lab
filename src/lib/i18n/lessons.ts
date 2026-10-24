@@ -11,7 +11,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import type { Language } from "./index";
 
 export type Dict = Record<string, string>;
@@ -82,11 +82,19 @@ export function useLessonText(trackId: string | undefined, lang: Language): Less
   const [state, setState] = useState<{ id: string; text: LessonText } | null>(null);
   const id = `${trackId}:${lang}`;
   useEffect(() => {
+    hydrated = true;
     if (!trackId) return;
     let alive = true;
     loadLessonText(trackId, lang).then((text) => { if (alive) setState({ id, text }); });
     return () => { alive = false; };
   }, [trackId, lang, id]);
   if (lang === "en") return EMPTY;
-  return state?.id === id ? state.text : null;
+  if (state?.id === id) return state.text;
+  // The page's first render (on the server, then hydration) waits for the
+  // text, so the server HTML already holds the translated lesson
+  if (!hydrated && trackId) return use(loadLessonText(trackId, lang));
+  return null;
 }
+
+/** Set once any reader has mounted in the browser; never on the server. */
+let hydrated = false;

@@ -7,7 +7,7 @@
 import type { Metadata } from "next";
 import { TRACK_CATALOG, type TrackInfo } from "./catalog";
 import { getTrack } from "./index";
-import type { Chapter, Track } from "./types";
+import type { Chapter, LessonDescriptions, Track } from "./types";
 import { SITE_URL, chapterHref, homeHref, languageAlternates, trackHref, type UrlLang } from "./urls";
 import { SEO_COPY, seoWording } from "./seoText";
 import { chapterDates } from "./dates";
@@ -24,6 +24,18 @@ import openglPt from "./opengl/i18n/pt/_track";
 import physicsPt from "./physics/i18n/pt/_track";
 import sdl3Pt from "./sdl3/i18n/pt/_track";
 import vulkanPt from "./vulkan/i18n/pt/_track";
+import { aiDescriptions } from "./ai/descriptions";
+import { algorithmsDescriptions } from "./algorithms/descriptions";
+import { asmDescriptions } from "./asm/descriptions";
+import { cppDescriptions } from "./cpp/descriptions";
+import { gamedevDescriptions } from "./gamedev/descriptions";
+import { glslDescriptions } from "./glsl/descriptions";
+import { mathDescriptions } from "./math/descriptions";
+import { musicDescriptions } from "./music/descriptions";
+import { openglDescriptions } from "./opengl/descriptions";
+import { physicsDescriptions } from "./physics/descriptions";
+import { sdl3Descriptions } from "./sdl3/descriptions";
+import { vulkanDescriptions } from "./vulkan/descriptions";
 
 export const SITE_NAME = "From Scratch Lab";
 const LOCALE: Record<UrlLang, string> = { en: "en_US", pt: "pt_BR" };
@@ -33,6 +45,13 @@ type TitleFile = { titles: Record<string, string>; sections: Record<string, stri
 const PT_TITLES: Record<string, TitleFile> = {
   ai: aiPt, algorithms: algorithmsPt, asm: asmPt, cpp: cppPt, gamedev: gamedevPt, glsl: glslPt,
   math: mathPt, music: musicPt, opengl: openglPt, physics: physicsPt, sdl3: sdl3Pt, vulkan: vulkanPt,
+};
+
+// Each lesson's own search-result text; a lesson without one gets SEO_COPY's generic line
+const DESCRIPTIONS: Record<string, LessonDescriptions> = {
+  ai: aiDescriptions, algorithms: algorithmsDescriptions, asm: asmDescriptions, cpp: cppDescriptions,
+  gamedev: gamedevDescriptions, glsl: glslDescriptions, math: mathDescriptions, music: musicDescriptions,
+  opengl: openglDescriptions, physics: physicsDescriptions, sdl3: sdl3Descriptions, vulkan: vulkanDescriptions,
 };
 
 // ── Lookups ────────────────────────────────────────────────────────────────
@@ -104,7 +123,7 @@ export function chapterMetadata(trackPath: string, chapterId: string, lang: UrlL
   const { chapter, index } = found;
   const name = chapterTitle(info.id, chapter, lang);
   const title = `${name} | ${seoWording(info.id, info.title, lang).short}`;
-  const description = SEO_COPY[lang].lesson(
+  const description = DESCRIPTIONS[info.id]?.[chapter.id]?.[lang] ?? SEO_COPY[lang].lesson(
     name, index + 1, track.chapters.length, trackName(info, lang), sectionName(info.id, chapter.section, lang),
   );
   return pageMeta(title, description, chapterHref(trackPath, chapterId), lang, "article");
@@ -170,6 +189,7 @@ export function chapterJsonLd(trackPath: string, chapterId: string, lang: UrlLan
       {
         "@type": "LearningResource",
         name,
+        description: DESCRIPTIONS[info.id]?.[chapter.id]?.[lang],
         url: SITE_URL + chapterHref(trackPath, chapter.id, lang),
         inLanguage: IN_LANGUAGE[lang],
         isAccessibleForFree: true,

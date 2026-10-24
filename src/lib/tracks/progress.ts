@@ -5,7 +5,7 @@
 // The home page reads both to show progress bars and "resume where you left off".
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const progressKey = (trackId: string) => `lesson:${trackId}:progress`;
 const LAST_KEY = "lesson:last";
@@ -45,13 +45,18 @@ export function rememberLastLesson(last: LastLesson) {
 }
 
 export function useLessonProgress(trackId: string) {
-  const [visited, setVisited] = useState<Set<string>>(() => readVisited(trackId));
+  // Empty on the first render, as on the server; the stored list arrives after mounting
+  const [visited, setVisited] = useState<Set<string>>(() => new Set());
+  useEffect(() => {
+    const stored = readVisited(trackId);
+    setVisited((prev) => (stored.size ? new Set([...stored, ...prev]) : prev));
+  }, [trackId]);
 
   const markVisited = useCallback(
     (chapterId: string) => {
       setVisited((prev) => {
         if (prev.has(chapterId)) return prev;
-        const next = new Set(prev);
+        const next = new Set([...readVisited(trackId), ...prev]);
         next.add(chapterId);
         try { localStorage.setItem(progressKey(trackId), JSON.stringify([...next])); } catch { /* storage blocked */ }
         return next;

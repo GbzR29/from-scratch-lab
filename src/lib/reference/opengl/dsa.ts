@@ -293,7 +293,15 @@ glGenerateTextureMipmap(tex);`,
       { name: "width", type: "GLsizei", desc: { en: "Width of level 0.", pt: "Largura do nível 0." } },
       { name: "height", type: "GLsizei", desc: { en: "Height of level 0.", pt: "Altura do nível 0." } },
     ],
-    notes: [DSA_NOTE],
+    notes: [
+      DSA_NOTE,
+      { en: "After filling level 0, call glGenerateTextureMipmap(tex) to build the other levels. Until then they hold undefined contents, and distant surfaces look black or noisy.", pt: "Depois de preencher o nível 0, chame glGenerateTextureMipmap(tex) para gerar os outros níveis. Até lá eles têm conteúdo indefinido, e superfícies distantes aparecem pretas ou com ruído." },
+    ],
+    errors: [
+      { code: "GL_INVALID_OPERATION", when: { en: "texture is not a texture name, already has immutable storage, or levels is more than 1 + floor(log2(max(width, height))).", pt: "texture não é um nome de textura, já tem armazenamento imutável, ou levels é maior que 1 + floor(log2(max(width, height)))." } },
+      { code: "GL_INVALID_ENUM", when: { en: "internalformat is not a sized format.", pt: "internalformat não é um formato com tamanho." } },
+      { code: "GL_INVALID_VALUE", when: { en: "width, height or levels is less than 1.", pt: "width, height ou levels é menor que 1." } },
+    ],
     example: `int levels = 1 + (int)std::floor(std::log2(std::max(w, h)));
 glTextureStorage2D(tex, levels, GL_SRGB8_ALPHA8, w, h);`,
     related: ["glTexStorage2D", "glTextureSubImage2D", "glCreateTextures"],

@@ -37,6 +37,14 @@ export const textureEntries: RefEntry[] = [
       { name: "n", type: "GLsizei", desc: { en: "How many IDs.", pt: "Quantos IDs." } },
       { name: "textures", type: "GLuint *", desc: { en: "Array receiving the IDs.", pt: "Array que recebe os IDs." } },
     ],
+    notes: [
+      { en: "0 is never returned: it means \"no texture\". If you read 0 back, the call did not run, usually because no context is current or GLAD was not loaded yet.", pt: "0 nunca é devolvido: ele significa \"nenhuma textura\". Se você lê 0, a chamada não rodou, normalmente porque não há contexto atual ou o GLAD ainda não foi carregado." },
+      { en: "Generating an ID allocates no image memory. That happens in glTexImage2D or glTexStorage2D. Free both the ID and the memory with glDeleteTextures.", pt: "Gerar um ID não aloca memória de imagem. Isso acontece em glTexImage2D ou glTexStorage2D. Libere o ID e a memória com glDeleteTextures." },
+      { en: "From OpenGL 4.5, glCreateTextures(target, n, ids) gives IDs that are already textures of a fixed type, ready for the DSA functions without any bind.", pt: "A partir do OpenGL 4.5, glCreateTextures(target, n, ids) dá IDs que já são texturas de um tipo fixo, prontas para as funções DSA sem bind." },
+    ],
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "n is negative.", pt: "n é negativo." } },
+    ],
     example: `GLuint tex;
 glGenTextures(1, &tex);
 glBindTexture(GL_TEXTURE_2D, tex);`,
@@ -60,7 +68,13 @@ glBindTexture(GL_TEXTURE_2D, tex);`,
       { name: "target", type: "GLenum", desc: { en: "Kind of texture. Fixed at the first bind — a texture cannot change type later.", pt: "Tipo de textura. Fica fixo no primeiro bind — a textura não pode mudar de tipo depois." }, values: TEX_TARGETS },
       { name: "texture", type: "GLuint", desc: { en: "Texture ID, or 0 to unbind.", pt: "ID da textura, ou 0 para desfazer o bind." } },
     ],
+    notes: [
+      { en: "The shader's sampler2D does not name a texture, it names a unit: glUniform1i(location, 1) means \"read unit 1\". Two textures that show up the same usually mean both samplers still point at unit 0.", pt: "O sampler2D do shader não aponta para uma textura, aponta para uma unit: glUniform1i(location, 1) quer dizer \"leia a unit 1\". Duas texturas que aparecem iguais normalmente significam que os dois samplers ainda apontam para a unit 0." },
+      { en: "Binding to configure can break a draw: calling glBindTexture to upload a texture while another unit is active replaces whatever that unit held. Set glActiveTexture first, or use DSA (glTextureSubImage2D, glBindTextureUnit).", pt: "Fazer bind para configurar pode estragar um draw: chamar glBindTexture para enviar uma textura com outra unit ativa substitui o que ela tinha. Defina glActiveTexture antes, ou use DSA (glTextureSubImage2D, glBindTextureUnit)." },
+    ],
     errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "target is not one of the texture targets.", pt: "target não é um dos targets de textura." } },
+      { code: "GL_INVALID_VALUE", when: { en: "texture is not 0 and not a name from glGenTextures or glCreateTextures.", pt: "texture não é 0 nem um nome vindo de glGenTextures ou glCreateTextures." } },
       { code: "GL_INVALID_OPERATION", when: { en: "texture was created with a different target.", pt: "texture foi criada com outro target." } },
     ],
     example: `glActiveTexture(GL_TEXTURE0);
@@ -179,9 +193,15 @@ stbi_image_free(pixels);`,
       { name: "width", type: "GLsizei", desc: { en: "Width of level 0.", pt: "Largura do nível 0." } },
       { name: "height", type: "GLsizei", desc: { en: "Height of level 0.", pt: "Altura do nível 0." } },
     ],
+    notes: [
+      { en: "It allocates but uploads nothing. The pixels come next with glTexSubImage2D; calling glTexImage2D on an immutable texture is an error.", pt: "Aloca mas não envia nada. Os pixels vêm depois com glTexSubImage2D; chamar glTexImage2D numa textura imutável é erro." },
+      { en: "With levels > 1 every level exists but only holds what you upload. Fill level 0 and call glGenerateMipmap, or the smaller levels stay undefined and distant surfaces look black or noisy.", pt: "Com levels > 1 todos os níveis existem, mas só guardam o que você envia. Preencha o nível 0 e chame glGenerateMipmap, ou os níveis menores ficam indefinidos e superfícies distantes aparecem pretas ou com ruído." },
+    ],
     errors: [
-      { code: "GL_INVALID_OPERATION", when: { en: "The bound texture already has immutable storage.", pt: "A textura ligada já tem armazenamento imutável." } },
-      { code: "GL_INVALID_ENUM", when: { en: "internalformat is unsized.", pt: "internalformat não tem tamanho." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "The bound texture already has immutable storage, or no texture (0) is bound.", pt: "A textura ligada já tem armazenamento imutável, ou nenhuma textura (0) está ligada." } },
+      { code: "GL_INVALID_ENUM", when: { en: "internalformat is unsized, or target is not a 2D-type target.", pt: "internalformat não tem tamanho, ou target não é um target do tipo 2D." } },
+      { code: "GL_INVALID_VALUE", when: { en: "width, height or levels is less than 1.", pt: "width, height ou levels é menor que 1." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "levels is more than 1 + floor(log2(max(width, height))).", pt: "levels é maior que 1 + floor(log2(max(width, height)))." } },
     ],
     example: `glBindTexture(GL_TEXTURE_2D, shadowMap);
 glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32F, 2048, 2048);`,

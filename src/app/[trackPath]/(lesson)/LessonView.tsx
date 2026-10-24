@@ -68,7 +68,12 @@ export default function LessonView() {
   const track     = getTrack(trackPath);
   const reference = getReference(trackPath);
 
-  const [activeChapterId, setActiveChapterId] = useState<string>("");
+  // Starts at the URL's chapter, so the server already renders the lesson
+  // (search engines and link previews read that HTML)
+  const [activeChapterId, setActiveChapterId] = useState<string>(() => {
+    if (!track) return "";
+    return track.chapters.some((c) => c.id === chapterParam) ? chapterParam! : track.chapters[0].id;
+  });
   const [headings, setHeadings]               = useState<TocHeading[]>([]);
   const [activeTocId, setActiveTocId]         = useState<string>("");
 

@@ -108,6 +108,15 @@ glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);`,
       { name: "count", type: "GLsizei", desc: { en: "Vertices per instance.", pt: "Vértices por instância." } },
       { name: "instancecount", type: "GLsizei", desc: { en: "How many instances to draw.", pt: "Quantas instâncias desenhar." } },
     ],
+    notes: [
+      { en: "gl_InstanceID starts at 0 in every call; it does not include a base instance. To offset the per-instance attributes, use glDrawArraysInstancedBaseInstance (GL 4.2); to read the offset in the shader, gl_BaseInstance (GLSL 4.60).", pt: "gl_InstanceID começa em 0 em toda chamada; ele não inclui uma instância base. Para deslocar os atributos por instância, use glDrawArraysInstancedBaseInstance (GL 4.2); para ler o deslocamento no shader, gl_BaseInstance (GLSL 4.60)." },
+      { en: "If every copy lands in the same place, the per-instance attribute is missing its glVertexAttribDivisor(index, 1), so it advances per vertex instead of per instance.", pt: "Se todas as cópias aparecem no mesmo lugar, falta o glVertexAttribDivisor(index, 1) no atributo por instância, e ele avança por vértice em vez de por instância." },
+    ],
+    errors: [
+      { code: "GL_INVALID_ENUM", when: { en: "mode is not an accepted primitive type.", pt: "mode não é um tipo de primitiva aceito." } },
+      { code: "GL_INVALID_VALUE", when: { en: "count or instancecount is negative.", pt: "count ou instancecount é negativo." } },
+      { code: "GL_INVALID_OPERATION", when: { en: "No vertex array object is bound in a core profile, or an enabled attribute's buffer is mapped.", pt: "Nenhum vertex array object está ligado no perfil core, ou o buffer de um atributo ativo está mapeado." } },
+    ],
     example: `// Vertex shader: vec2 offset = offsets[gl_InstanceID];
 glBindVertexArray(quadVAO);
 glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);`,

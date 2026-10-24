@@ -35,6 +35,13 @@ export interface Chapter {
   load: () => Promise<ChapterComponent>;
 }
 
+/**
+ * What search results show under each lesson's title (the meta description),
+ * by chapter id, in English and Portuguese. One file per track
+ * (<track>/descriptions.ts), read only on the server by ./seo.ts.
+ */
+export type LessonDescriptions = Record<string, { en: string; pt: string }>;
+
 export interface Track {
   id: string;
   title: string;

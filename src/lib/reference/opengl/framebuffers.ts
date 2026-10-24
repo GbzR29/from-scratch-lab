@@ -28,6 +28,13 @@ export const framebufferEntries: RefEntry[] = [
       { name: "n", type: "GLsizei", desc: { en: "How many IDs.", pt: "Quantos IDs." } },
       { name: "ids", type: "GLuint *", desc: { en: "Array receiving the IDs.", pt: "Array que recebe os IDs." } },
     ],
+    notes: [
+      { en: "An FBO is a container object: it is not shared between contexts, even when textures and buffers are. Create it on the context that draws with it.", pt: "Um FBO é um objeto contêiner: não é compartilhado entre contextos, mesmo quando texturas e buffers são. Crie-o no contexto que desenha com ele." },
+      { en: "After attaching, always check glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE. Drawing into an incomplete FBO is a GL_INVALID_FRAMEBUFFER_OPERATION.", pt: "Depois de anexar, sempre verifique glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE. Desenhar num FBO incompleto dá GL_INVALID_FRAMEBUFFER_OPERATION." },
+    ],
+    errors: [
+      { code: "GL_INVALID_VALUE", when: { en: "n is negative.", pt: "n é negativo." } },
+    ],
     example: `GLuint fbo;
 glGenFramebuffers(1, &fbo);
 glBindFramebuffer(GL_FRAMEBUFFER, fbo);`,
