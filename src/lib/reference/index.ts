@@ -3,10 +3,12 @@
 
 import type { RefEntry, Reference } from "./types";
 import { openGLReference } from "./opengl";
+import { sdl3Reference } from "./sdl3";
 import { trackHref } from "@/lib/tracks/urls";
 
 const ALL_REFERENCES: Record<string, Reference> = {
   OpenGL: openGLReference,
+  SDL3: sdl3Reference,
 };
 
 export function getReference(trackPath: string): Reference | undefined {

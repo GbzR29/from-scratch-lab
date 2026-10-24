@@ -42,7 +42,7 @@ export interface RefEntry {
   example?: string;
   /** Names of related entries. */
   related?: string[];
-  /** Link to the official Khronos page. */
+  /** Link to the official page (Khronos, GLFW docs or the SDL wiki; the link text follows the host). */
   khronos?: string;
   /** Present on a family page (glUniform*): the functions it groups and how to read their names. */
   family?: { members: string[]; suffixes?: { part: string; desc: Localized }[] };
@@ -70,9 +70,9 @@ export function displayName(entry: RefEntry): string {
   return entry.family ? `${entry.name}*` : entry.name;
 }
 
-/** "GL 4.5" → 4.5; undefined for entries without a version (families). */
+/** "GL 4.5" → 4.5; undefined for entries without an OpenGL version (families, GLFW, SDL). */
 export function sinceVersion(entry: RefEntry): number | undefined {
-  const m = entry.since?.match(/(\d+)\.(\d+)/);
+  const m = entry.since?.match(/^GL (\d+)\.(\d+)/);
   return m ? Number(m[1]) + Number(m[2]) / 10 : undefined;
 }
 

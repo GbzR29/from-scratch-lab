@@ -30,13 +30,19 @@ import { queryEntries } from "./queries";
 import { debugEntries } from "./debug";
 import { legacyEntries } from "./legacy";
 import { familyEntries } from "./families";
+import { glfwSetupEntries } from "./glfwSetup";
+import { glfwWindowEntries } from "./glfwWindow";
+import { glfwInputEntries } from "./glfwInput";
 
 export const openGLReference: Reference = {
   trackPath: "OpenGL",
-  title: "OpenGL 4.6",
-  tokenPattern: /\bgl[A-Z][A-Za-z0-9]*\b/g,
+  title: "OpenGL 4.6 · GLFW 3.4",
+  tokenPattern: /\b(?:gl|glfw)[A-Z][A-Za-z0-9]*\b/g,
   categories: [
     { id: "families",      title: { en: "Function families",         pt: "Famílias de funções" } },
+    { id: "glfw-setup",    title: { en: "GLFW: window & context",    pt: "GLFW: janela e contexto" } },
+    { id: "glfw-window",   title: { en: "GLFW: size, position & monitors", pt: "GLFW: tamanho, posição e monitores" } },
+    { id: "glfw-input",    title: { en: "GLFW: input & time",        pt: "GLFW: entrada e tempo" } },
     { id: "context",       title: { en: "Context & state",           pt: "Contexto e estado" } },
     { id: "buffers",       title: { en: "Buffers",                   pt: "Buffers" } },
     { id: "vertex-arrays", title: { en: "Vertex arrays",             pt: "Vertex arrays" } },
@@ -82,5 +88,8 @@ export const openGLReference: Reference = {
     ...debugEntries,
     ...legacyEntries,
     ...familyEntries,
+    ...glfwSetupEntries,
+    ...glfwWindowEntries,
+    ...glfwInputEntries,
   ],
 };

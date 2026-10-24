@@ -96,7 +96,12 @@ SDL_GPUCommandBuffer* cmd = SDL_AcquireGPUCommandBuffer(device);
 SDL_GPUTexture* swapchain = nullptr;
 Uint32 w = 0, h = 0;
 if (!SDL_WaitAndAcquireGPUSwapchainTexture(cmd, window, &swapchain, &w, &h)) {
-    SDL_SubmitGPUCommandBuffer(cmd);       // minimized or resizing — skip the frame
+    SDL_Log("acquire: %s", SDL_GetError()); // a real error
+    SDL_CancelGPUCommandBuffer(cmd);
+    return;
+}
+if (!swapchain) {                          // minimized: true + NULL, not an error
+    SDL_SubmitGPUCommandBuffer(cmd);       // skip the frame
     return;
 }
 

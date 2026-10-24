@@ -434,7 +434,11 @@ export default function ReferenceEntryPage() {
               className="mt-14 inline-flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors"
             >
               <ExternalLink size={14} />
-              {tt.refKhronos ?? "Official Khronos documentation"}
+              {entry.khronos.includes("glfw.org")
+                ? (tt.refDocsGlfw ?? "Official GLFW documentation")
+                : entry.khronos.includes("libsdl.org")
+                  ? (tt.refDocsSdl ?? "Official SDL wiki")
+                  : (tt.refKhronos ?? "Official Khronos documentation")}
             </a>
           )}
         </div>
