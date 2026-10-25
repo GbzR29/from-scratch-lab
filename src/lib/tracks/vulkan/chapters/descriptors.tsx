@@ -7,10 +7,14 @@
 // layout with a push-constant range, pool, allocation, vkUpdateDescriptorSets;
 // writing the uniform each frame; binding and pushing per draw (two quads);
 // the DescriptorChain "break it" figure; sets by frequency, dynamic offsets,
-// what comes later (bindless, push descriptors); mistakes.
+// what comes later (bindless, push descriptors); mistakes. Added 2026-10-25:
+// the worked std140 layout as a Derivation, the table of descriptor types,
+// a dynamic uniform buffer in code, pool strategies, related lessons.
 
 import { CodeBlock, Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
+import { Derivation } from "@/components/lesson/Derivation";
+import { Related } from "@/components/lesson/Related";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
@@ -33,6 +37,7 @@ export function DescriptorsContent({ t }: { t: TrackTranslations }) {
         "Lay out a uniform block by the std140 rules.",
         "Build the layout, pool and set that connect a shader to a buffer.",
         "Set up a camera's matrices for Vulkan's conventions.",
+        "Pick the descriptor type for a resource, and give many objects their own data with one dynamic uniform buffer.",
       ]} />
 
       <H2>{tx(t, "vkDesc_freqTitle", "How often does the data change?")}</H2>
@@ -138,16 +143,18 @@ void main() {
           ["o", tx(t, "vkDesc_wO", "the running offset: the first byte after the previous member")],
           [r`a_m,\ s_m`, tx(t, "vkDesc_wAs", "the member's base alignment and size from the table")],
           [r`\text{offset}_m`, tx(t, "vkDesc_wOff", "where the member starts; the shader reads it there")],
-        ]}>
+        ]}
+        words={tx(t, "vkDesc_offWords", "Move forward to the next multiple of the member's alignment, put the member there, and step past its size.")}>
         {r`\text{offset}_m = \text{alignUp}(o, a_m) \qquad o \leftarrow \text{offset}_m + s_m`}
       </Equation>
-      <ol className="list-decimal pl-6 space-y-1.5">
-        <li>{tx(t, "vkDesc_w1", "time: alignment 4, alignUp(0, 4) = 0. It occupies bytes 0–3, o = 4.")}</li>
-        <li>{tx(t, "vkDesc_w2", "dir: vec3, alignment 16, alignUp(4, 16) = 16. Bytes 4–15 are padding; dir occupies 16–27, o = 28.")}</li>
-        <li>{tx(t, "vkDesc_w3", "uv: vec2, alignment 8, alignUp(28, 8) = 32. Four bytes of padding; uv occupies 32–39, o = 40.")}</li>
-        <li>{tx(t, "vkDesc_w4", "w: array of 2 floats, std140 alignment 16 and element stride 16, alignUp(40, 16) = 48. w[0] is at 48, w[1] at 64, each followed by 12 bytes of padding; o = 48 + 2 · 16 = 80.")}</li>
-        <li>{tx(t, "vkDesc_w5", "Block size: 80, already a multiple of 16. The shader reads 80 bytes. A naive C++ struct with the same members puts dir at 4, uv at 16 and w at 24, 32 bytes in total: only time would be read correctly.")}</li>
-      </ol>
+      <Derivation t={t} label={tx(t, "vkDesc_workedDer", "The Params block, member by member")}
+        steps={[
+          { full: true, tex: r`\text{time:}\ \ \text{alignUp}(0, 4) = 0 \quad\Rightarrow\quad \text{bytes } 0\text{–}3,\ o = 4`, why: tx(t, "vkDesc_w1", "time: alignment 4, alignUp(0, 4) = 0. It occupies bytes 0–3, o = 4.") },
+          { full: true, tex: r`\text{dir:}\ \ \text{alignUp}(4, 16) = 16 \quad\Rightarrow\quad \text{bytes } 16\text{–}27,\ o = 28`, why: tx(t, "vkDesc_w2", "dir: vec3, alignment 16, alignUp(4, 16) = 16. Bytes 4–15 are padding; dir occupies 16–27, o = 28.") },
+          { full: true, tex: r`\text{uv:}\ \ \text{alignUp}(28, 8) = 32 \quad\Rightarrow\quad \text{bytes } 32\text{–}39,\ o = 40`, why: tx(t, "vkDesc_w3", "uv: vec2, alignment 8, alignUp(28, 8) = 32. Four bytes of padding; uv occupies 32–39, o = 40.") },
+          { full: true, tex: r`\text{w[2]:}\ \ \text{alignUp}(40, 16) = 48 \quad\Rightarrow\quad 48 + 2 \cdot 16,\ o = 80`, why: tx(t, "vkDesc_w4", "w: array of 2 floats, std140 alignment 16 and element stride 16, alignUp(40, 16) = 48. w[0] is at 48, w[1] at 64, each followed by 12 bytes of padding; o = 48 + 2 · 16 = 80.") },
+          { full: true, tex: r`\text{size} = \text{alignUp}(80, 16) = \amber{80\ \text{bytes}} \quad (\text{C++: } 32)`, why: tx(t, "vkDesc_w5", "Block size: 80, already a multiple of 16. The shader reads 80 bytes. A naive C++ struct with the same members puts dir at 4, uv at 16 and w at 24, 32 bytes in total: only time would be read correctly.") },
+        ]} />
       <p>
         {tx(t, "vkDesc_workedFix",
           "The matching C++ struct: float time; alignas(16) glm::vec3 dir; alignas(8) glm::vec2 uv; and for the array, a struct of one float padded to 16 bytes, or simply glm::vec4 w[2] with the shader reading w[i].x. A static_assert(offsetof(Params, uv) == 32) next to the struct turns a silent mismatch into a compile error.")}
@@ -161,6 +168,24 @@ void main() {
           ["VkPipelineLayout", tx(t, "vkDesc_o2", "the list of set layouts (set 0, set 1…) plus the push-constant ranges. The pipeline is compiled against it.")],
           ["VkDescriptorPool", tx(t, "vkDesc_o3", "the memory descriptor sets are allocated from, sized in advance: how many sets, and how many descriptors of each type in total.")],
           ["VkDescriptorSet", tx(t, "vkDesc_o4", "an allocated set with a layout, whose bindings are filled with vkUpdateDescriptorSets (this buffer, this range) and which is bound while recording.")],
+        ]}
+      />
+      <H3>{tx(t, "vkDesc_typesTitle", "Descriptor types")}</H3>
+      <p>
+        {tx(t, "vkDesc_typesBody",
+          "The camera needs a uniform buffer, but a descriptor can point at several kinds of resource. The type in the layout binding must match the declaration in the shader:")}
+      </p>
+      <LessonTable
+        headers={["VK_DESCRIPTOR_TYPE_…", tx(t, "vkDesc_tGlsl", "In GLSL"), tx(t, "vkDesc_tFor", "Used for")]}
+        rows={[
+          ["UNIFORM_BUFFER", "uniform Block { … }", tx(t, "vkDesc_d1", "small read-only data in std140: cameras, lights, material factors. At least 16 KB per binding (maxUniformBufferRange).")],
+          ["STORAGE_BUFFER", "buffer Block { … }", tx(t, "vkDesc_d2", "large data the shader reads and may write, in std430, with a runtime-sized last array. At least 128 MB per binding (maxStorageBufferRange).")],
+          [tx(t, "vkDesc_d3k", "…_DYNAMIC versions"), tx(t, "vkDesc_d3g", "the same declarations"), tx(t, "vkDesc_d3", "the buffer offset is given when binding the set, not when writing it: one set serves many objects.")],
+          ["COMBINED_IMAGE_SAMPLER", "uniform sampler2D tex;", tx(t, "vkDesc_d4", "an image view and a sampler together: the usual way to read a texture (the Textures & Samplers chapter).")],
+          ["SAMPLED_IMAGE + SAMPLER", "texture2D t; sampler s;", tx(t, "vkDesc_d5", "the same two kept apart and joined in the shader with sampler2D(t, s): one sampler for many images.")],
+          ["STORAGE_IMAGE", "layout(rgba8) uniform image2D img;", tx(t, "vkDesc_d6", "imageLoad and imageStore on single texels, without filtering: compute shaders writing images.")],
+          ["INPUT_ATTACHMENT", "subpassInput", tx(t, "vkDesc_d7", "the previous subpass's output at the same pixel, for render passes with several subpasses.")],
+          ["UNIFORM / STORAGE_TEXEL_BUFFER", "samplerBuffer, imageBuffer", tx(t, "vkDesc_d8", "a buffer read through a format, like a 1D texture without filtering or mipmaps.")],
         ]}
       />
       <CodeBlock lang="cpp" filename="descriptors.cpp" t={t}>{`// App gains: VkDescriptorSetLayout setLayout; VkDescriptorPool descriptorPool;
@@ -271,8 +296,44 @@ for (float x : {-0.7f, 0.7f}) {                     // two quads, side by side
         headers={[tx(t, "vkDesc_tFeature", "Feature"), tx(t, "vkDesc_tWhat", "What it does")]}
         rows={[
           [tx(t, "vkDesc_m1", "Dynamic uniform buffers"), tx(t, "vkDesc_m1b", "type UNIFORM_BUFFER_DYNAMIC: one descriptor points at a large buffer, and each bind passes an offset into it (the last two parameters of vkCmdBindDescriptorSets). Per-object data for thousands of objects in one buffer and one set. Each offset must be a multiple of minUniformBufferOffsetAlignment, at most 256 bytes.")],
-          [tx(t, "vkDesc_m2", "Push descriptors"), tx(t, "vkDesc_m2b", "VK_KHR_push_descriptor: the descriptor writes are recorded into the command buffer like push constants, with no pool or set to allocate.")],
+          [tx(t, "vkDesc_m2", "Push descriptors"), tx(t, "vkDesc_m2c", "vkCmdPushDescriptorSet records the descriptor writes into the command buffer like push constants, with no pool or set to allocate. An extension (VK_KHR_push_descriptor) in Vulkan 1.3, core since Vulkan 1.4.")],
           [tx(t, "vkDesc_m3", "Bindless (descriptor indexing)"), tx(t, "vkDesc_m3b", "one huge array of every texture and buffer, bound once per frame; shaders select elements by index, often passed in a push constant. Covered in the Modern Vulkan chapter.")],
+        ]}
+      />
+
+      <H3>{tx(t, "vkDesc_dynTitle", "A dynamic uniform buffer, in code")}</H3>
+      <CodeBlock lang="cpp" filename="dynamic_ubo.cpp" t={t}>{`// One buffer with a slice per object; every slice starts at a multiple of the alignment
+VkDeviceSize align  = physProps.limits.minUniformBufferOffsetAlignment;   // a power of two, at most 256
+VkDeviceSize stride = (sizeof(ObjectUbo) + align - 1) & ~(align - 1);     // sizeof rounded up to it
+// objectBuffer: stride * objectCount bytes, written with each object's data at i * stride
+
+// Layout binding:  descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC
+// Buffer info:     {objectBuffer.buffer, 0, sizeof(ObjectUbo)}   range = one slice, not the whole buffer
+
+for (uint32_t i = 0; i < objectCount; i++) {
+    uint32_t offset = uint32_t(i * stride);                 // added to the 0 written in the set
+    vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_GRAPHICS, app.pipelineLayout,
+                            2, 1, &objectSet,               // set 2: per object
+                            1, &offset);                    // one offset per dynamic binding in the set
+    vkCmdDrawIndexed(cmd, objects[i].indexCount, 1, objects[i].firstIndex, 0, 0);
+}`}</CodeBlock>
+      <p>
+        {tx(t, "vkDesc_dynBody",
+          "The mask trick works because the alignment is a power of two: adding align − 1 and clearing the low bits rounds up to the next multiple. With a 200-byte ObjectUbo and an alignment of 256, every slice takes 256 bytes and 56 are padding. The offsets are listed in binding order, one for each dynamic descriptor of the sets being bound; a device allows at least 8 dynamic uniform buffers per pipeline layout (maxDescriptorSetUniformBuffersDynamic). Rebinding the same set with a new offset is cheap, and nothing has to be allocated or written per object.")}
+      </p>
+
+      <H3>{tx(t, "vkDesc_poolTitle", "Sizing pools in a real program")}</H3>
+      <p>
+        {tx(t, "vkDesc_poolBody",
+          "This chapter's pool holds exactly one set. A real renderer allocates sets for materials that load and unload, and for data that lives one frame. Four strategies are common:")}
+      </p>
+      <LessonTable
+        headers={[tx(t, "vkDesc_tStrategy", "Strategy"), tx(t, "vkDesc_tHow", "How it works"), tx(t, "vkDesc_tWhen", "Good for")]}
+        rows={[
+          [tx(t, "vkDesc_p1", "one exact pool"), tx(t, "vkDesc_p1b", "count every set and descriptor up front, allocate once, never free"), tx(t, "vkDesc_p1c", "small programs and fixed scenes, like this track")],
+          [tx(t, "vkDesc_p2", "a pool per frame, reset"), tx(t, "vkDesc_p2b", "one pool per frame in flight; after waiting for that frame's fence, vkResetDescriptorPool frees all its sets at once, then allocate freely"), tx(t, "vkDesc_p2c", "sets that change every frame; the reset costs almost nothing")],
+          [tx(t, "vkDesc_p3", "freeing sets one by one"), tx(t, "vkDesc_p3b", "create the pool with VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT and call vkFreeDescriptorSets"), tx(t, "vkDesc_p3c", "long-lived sets; can fragment and fail with VK_ERROR_FRAGMENTED_POOL")],
+          [tx(t, "vkDesc_p4", "a growing list of pools"), tx(t, "vkDesc_p4b", "allocate from the newest pool; on VK_ERROR_OUT_OF_POOL_MEMORY create another, a bit larger"), tx(t, "vkDesc_p4c", "engines that cannot know the counts in advance")],
         ]}
       />
 
@@ -308,6 +369,15 @@ vkDestroyDescriptorSetLayout(app.device, app.setLayout, nullptr);
         "vkCmdBindDescriptorSets binds sets for the following draws; vkCmdPushConstants changes per-draw data between draws.",
         "At least 128 bytes of push constants are guaranteed on every device.",
         "Never write a buffer or update a set that a pending command buffer is using.",
+        "The descriptor type matches the shader's declaration: uniform buffer, storage buffer, combined image sampler, storage image…",
+        "A dynamic uniform buffer gives each draw its own slice of one buffer through an offset aligned to minUniformBufferOffsetAlignment.",
+      ]} />
+
+      <Related t={t} links={[
+        { track: "Vulkan", id: "textures", title: tx(t, "vkDesc_rel1", "Textures & Samplers"), why: tx(t, "vkDesc_rel1b", "the next descriptor: a combined image sampler in set 1, the material's set, beside the camera's set 0.") },
+        { track: "Vulkan", id: "frames-in-flight", title: tx(t, "vkDesc_rel2", "Frames in Flight & Resizing"), why: tx(t, "vkDesc_rel2b", "one uniform buffer and one set per frame, so the CPU never writes what the GPU is reading.") },
+        { track: "Vulkan", id: "modern", title: tx(t, "vkDesc_rel3", "Modern Vulkan"), why: tx(t, "vkDesc_rel3b", "bindless descriptor indexing, buffer device addresses and push descriptors in Vulkan 1.4.") },
+        { track: "OpenGL", id: "ubo", title: tx(t, "vkDesc_rel4", "OpenGL: Uniform Buffer Objects"), why: tx(t, "vkDesc_rel4b", "the same std140 rules from the OpenGL side, with binding points instead of descriptor sets.") },
       ]} />
     </Article>
   );

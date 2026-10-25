@@ -65,6 +65,24 @@ const text: Record<string, string> = {
   cpp26_key3: "Os contratos conferem pré e pós-condições com uma semântica escolhida na compilação: enforce, observe ou ignore.",
   cpp26_key4: "Ler uma variável não inicializada vira comportamento errôneo: continua sendo bug, mas deixa de ser licença para o otimizador supor qualquer coisa.",
   cpp26_key5: "Confira as macros de teste: o GCC 16.2 tem reflexão e contratos, mas ainda não std::execution nem std::simd.",
+
+  // ── 2026-10-25: mais linhas na tabela, aulas relacionadas ──
+  cpp26_f10k: "anotações para reflexão",
+  cpp26_f10: "Prende um valor constante a uma declaração, que a reflexão lê de volta com std::meta::annotations_of: faixas de validação, nomes de campos em JSON, dicas para um editor, junto do membro que descrevem.",
+  cpp26_f11k: "packs em structured bindings",
+  cpp26_f11: "Liga todos os membros de um agregado a um pack só, então (0 + ... + xs) soma os membros de qualquer struct sem nomeá-los.",
+  cpp26_f12: "Um contêiner que reaproveita as posições dos elementos apagados e nunca move os outros, então ponteiros para eles continuam válidos: tiros, partículas, entidades. O header <hive> ainda não está na biblioteca do GCC 16.2.",
+  cpp26_f13k: "aritmética de saturação",
+  cpp26_f13: "Aritmética que para nos limites do tipo em vez de dar a volta: 255 aqui, não 44. Útil para cores, amostras de áudio e contadores (em <numeric>).",
+  cpp26_f14: "Uma referência sem posse para qualquer chamável: tão barata quanto um ponteiro de função, aceita lambdas com captura e nunca aloca. O tipo certo de parâmetro para callbacks chamados só durante a chamada.",
+  cpp26_rel1: "C++ em tempo de compilação",
+  cpp26_rel1b: "constexpr, consteval e por que um vector montado em tempo de compilação não chega ao programa, a base sobre a qual a reflexão se apoia.",
+  cpp26_rel2: "Tratamento de erros",
+  cpp26_rel2b: "onde pre, post e contract_assert foram apresentados, ao lado de exceções e std::expected.",
+  cpp26_rel3: "Templates e código genérico",
+  cpp26_rel3b: "parameter packs e fold expressions, que pack indexing e packs em bindings deixam mais curtos.",
+  cpp26_rel4: "Ferramentas, build e sanitizers",
+  cpp26_rel4b: "a leitura não inicializada que o g++ -O2 transformou em 3, e os sanitizers que a pegam.",
 };
 
 export default text;

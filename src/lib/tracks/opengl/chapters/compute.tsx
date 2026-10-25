@@ -6,14 +6,21 @@
 // (DispatchFigure), limits, writing an image (glBindImageTexture argument by
 // argument), the 1921×1080 rounding worked through, memory barriers by
 // consumer, shared memory + barrier() with a parallel reduction, SSBOs drawn
-// as vertices, choices and mistakes.
+// as vertices, choices and mistakes. Added 2026-10-25: limits queried in
+// code, the reduction LiveFormula (the dispatch maths stays in DispatchFigure
+// and the worked example), atomics (histogram in shared
+// memory), indirect dispatch and GPU frustum culling into an indirect draw,
+// ping-pong buffers, exercises and related lessons.
 
 import { CodeBlock, Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
+import { LiveFormula } from "@/components/lesson/LiveFormula";
+import { Related } from "@/components/lesson/Related";
 import { DispatchFigure } from "@/components/lesson/figures/advgl/DispatchFigure";
+import { reduceNumbers } from "../live/compute";
 
 const r = String.raw;
 
@@ -32,6 +39,7 @@ export function ComputeContent({ t }: { t: TrackTranslations }) {
         "Write into a texture from a compute shader.",
         "Share data inside a workgroup with shared memory and barrier().",
         "Read and write large data with shader storage buffers.",
+        "Count and build lists with atomics, and let the GPU size the next draw or dispatch.",
       ]} />
 
       <H2>{tx(t, "oglCompute_modelTitle", "The execution model")}</H2>
@@ -48,8 +56,9 @@ export function ComputeContent({ t }: { t: TrackTranslations }) {
           [r`\text{gl\_WorkGroupID}`, tx(t, "oglCompute_wGroup", "which group, from (0,0,0) to the dispatch size − 1")],
           [r`\text{gl\_WorkGroupSize}`, tx(t, "oglCompute_wSize", "the local_size declared in the shader, e.g. (16, 16, 1)")],
           [r`\text{gl\_LocalInvocationID}`, tx(t, "oglCompute_wLocal", "the position inside the group, from (0,0,0) to the size − 1")],
-        ]}>
-        {r`\text{gl\_GlobalInvocationID} = \text{gl\_WorkGroupID} \cdot \text{gl\_WorkGroupSize} + \text{gl\_LocalInvocationID}`}
+        ]}
+        words={tx(t, "oglCompute_idWords", "Skip over all the groups before yours, each one group-size wide, then add your place inside your own group. With 16 × 16 groups, invocation (3, 5) of group (2, 1) is at (2·16 + 3, 1·16 + 5) = (35, 21).")}>
+        {r`\begin{gathered} \text{gl\_GlobalInvocationID} = \\ \text{gl\_WorkGroupID} \cdot \text{gl\_WorkGroupSize} + \text{gl\_LocalInvocationID} \end{gathered}`}
       </Equation>
 
       <LessonTable
@@ -69,6 +78,13 @@ export function ComputeContent({ t }: { t: TrackTranslations }) {
         {tx(t, "oglCompute_limitsBody",
           "The limits are generous but real. A group may hold at most GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS invocations, at least 1024, with per-axis maxima of at least 1024, 1024 and 64. A dispatch may launch at least 65 535 groups along each axis. Shared memory per group is at least 32 KB (GL_MAX_COMPUTE_SHARED_MEMORY_SIZE).")}
       </p>
+      <CodeBlock lang="cpp" filename="limits.cpp" t={t}>{`GLint maxInvocations, maxShared, size[3], count[3];
+glGetIntegerv(GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS, &maxInvocations);   // lx · ly · lz at most this
+glGetIntegerv(GL_MAX_COMPUTE_SHARED_MEMORY_SIZE, &maxShared);            // bytes of shared per group
+for (int i = 0; i < 3; i++) {                                            // indexed: one value per axis
+    glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_SIZE,  i, &size[i]);       // max local_size_x/y/z
+    glGetIntegeri_v(GL_MAX_COMPUTE_WORK_GROUP_COUNT, i, &count[i]);      // max groups per axis in one dispatch
+}`}</CodeBlock>
 
       <H2>{tx(t, "oglCompute_writeTitle", "Writing into a texture")}</H2>
       <CodeBlock lang="glsl" filename="gradient.comp" t={t}>{`#version 460 core
@@ -180,6 +196,18 @@ void main() {
         {tx(t, "oglCompute_reduceBody",
           "Step by step: after loading, the 256 values sit in tile. In the first step the lower 128 invocations each add the value 128 places above theirs, so tile[0..127] holds 128 sums of pairs. The next step halves again, 64 sums of four values, and so on: after log₂ 256 = 8 steps tile[0] holds the sum of the whole group, and invocation 0 writes it out. Summing 1 000 000 values takes ⌈1 000 000 / 256⌉ = 3907 groups, giving 3907 partial sums; a second dispatch reduces those to ⌈3907 / 256⌉ = 16, and a third to 1. Each loop iteration has a barrier, because step k reads values written by other invocations in step k − 1.")}
       </p>
+      <LiveFormula label={tx(t, "oglCompute_liveReduce", "Try it: dispatches needed to sum n values")}
+        tex={r`n_{k+1} = \left\lceil \frac{n_k}{G} \right\rceil, \qquad n_0 = n \ \to\ \dots\ \to\ 1`}
+        vars={[
+          { id: "e", label: "n", min: 1, max: 9, step: 0.05, value: 6, fmt: v => String(Math.round(10 ** v)).replace(/\B(?=(\d{3})+(?!\d))/g, " ") },
+          { id: "G", label: "G", min: 32, max: 1024, step: 32, value: 256, fmt: v => `${v}` },
+        ]}
+        compute={reduceNumbers(t)}
+        where={[
+          [r`n_k`, tx(t, "oglCompute_wNk", "how many values are left before dispatch k + 1")],
+          ["G", tx(t, "oglCompute_wG", "the group size: each group turns G values into one partial sum")],
+        ]}
+        note={tx(t, "oglCompute_liveReduceNote", "Each dispatch divides the count by G, so the number of dispatches grows with the logarithm of n: a billion values need four dispatches of 256, three of 1024. Between two dispatches goes a glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT), because the next one reads the partial sums as an SSBO.")} />
 
       <H2>{tx(t, "oglCompute_ssboTitle", "SSBOs — the real workhorse")}</H2>
       <p>
@@ -250,6 +278,9 @@ glDrawArrays(GL_POINTS, 0, particleCount);              // the data never leaves
           "Reading results back to the CPU with glGetBufferSubData stalls the pipeline: it waits for the GPU to finish everything. If you must read back, do it into a persistently mapped buffer and read it one or two frames later. Better still, keep the data on the GPU — the particle example above never touches the CPU after upload.")}
       </Callout>
 
+      <AtomicsSection t={t} />
+      <IndirectSection t={t} />
+
       <H2>{tx(t, "oglCompute_choicesTitle", "Choices in the code")}</H2>
       <LessonTable
         headers={[tx(t, "oglCompute_tChoice", "Choice"), tx(t, "oglCompute_tReason", "Reason")]}
@@ -272,8 +303,20 @@ glDrawArrays(GL_POINTS, 0, particleCount);              // the data never leaves
           [tx(t, "oglCompute_e4", "Image format qualifier different from the texture's format"), tx(t, "oglCompute_e4b", "values are encoded wrongly: garbage colours. Match rgba32f with GL_RGBA32F, rgba8 with GL_RGBA8.")],
           [tx(t, "oglCompute_e5", "vec3 in an std430 struct mirrored as glm::vec3"), tx(t, "oglCompute_e5b", "std430 aligns vec3 to 16, glm to 4; from the second member on, every particle is misread. Use vec4.")],
           [tx(t, "oglCompute_e6", "Mipmap filter on a 1-level texture used as an image"), tx(t, "oglCompute_e6b", "the texture is incomplete: stores have no effect and sampling returns black. Use immutable storage and a non-mipmap filter.")],
+          [tx(t, "oglCompute_e7", "counter += 1 instead of atomicAdd"), tx(t, "oglCompute_e7b", "thousands of invocations read the same old value and write the same new one: the count comes out far too low, and different every run. Use atomicAdd and keep the value it returns.")],
+          [tx(t, "oglCompute_e8", "Not resetting the indirect command's instanceCount"), tx(t, "oglCompute_e8b", "each frame adds to the last one's count: the list overflows and garbage instances appear. Write the command back with instanceCount = 0 before the culling dispatch.")],
+          [tx(t, "oglCompute_e9", "Reading and writing the same buffer when neighbours matter"), tx(t, "oglCompute_e9b", "some invocations read neighbours that were already updated this step, others the old ones, in an order that changes per GPU. Read from one buffer, write to another, swap.")],
         ]}
       />
+
+      <H2>{tx(t, "oglCompute_tryTitle", "Try it yourself")}</H2>
+      <ol className="list-decimal pl-6 space-y-2">
+        <li>{tx(t, "oglCompute_try1", "Change gradient.comp to 8 × 8 groups and fix the dispatch to match. Then remove the bounds check and run it on a 1921-pixel-wide texture: where do the extra invocations write?")}</li>
+        <li>{tx(t, "oglCompute_try2", "Finish the reduction: dispatch reduce.comp again on the partial sums until one value is left, read it back once, and compare it with a sum on the CPU.")}</li>
+        <li>{tx(t, "oglCompute_try3", "Use the histogram to auto-expose an HDR image: find the brightness below which 50% of the pixels lie and scale the exposure so that it maps to middle grey.")}</li>
+        <li>{tx(t, "oglCompute_try4", "Add a frame-time readout to the culling example and compare 100 000 instances drawn with and without the compute pass.")}</li>
+        <li>{tx(t, "oglCompute_try5", "Write Conway's Game of Life as a compute shader on two r8ui images, swapping them each frame, and draw the current one with a full-screen triangle.")}</li>
+      </ol>
 
       <KeyIdeas t={t} id="oglCompute" items={[
         "A dispatch launches groups; the shader fixes the group size with local_size.",
@@ -282,7 +325,163 @@ glDrawArrays(GL_POINTS, 0, particleCount);              // the data never leaves
         "glMemoryBarrier's bits name how the data is read next.",
         "shared memory plus barrier() lets a group cooperate; every invocation must reach each barrier().",
         "An SSBO can be written by compute and read as vertices without ever leaving the GPU.",
+        "Atomics make read-modify-write safe; do them in shared memory first and merge once per group.",
+        "A compute pass can write the parameters of the next draw or dispatch, so the GPU decides how much work follows.",
+      ]} />
+
+      <Related t={t} links={[
+        { track: "Vulkan", id: "compute", title: tx(t, "oglCompute_rel1", "Vulkan: Compute Shaders"), why: tx(t, "oglCompute_rel1b", "the same model with explicit pipelines, descriptor sets and pipeline barriers.") },
+        { track: "OpenGL", id: "particles", title: tx(t, "oglCompute_rel2", "Particles"), why: tx(t, "oglCompute_rel2b", "a whole particle system: emission, integration, instanced drawing, blending and sorting, then the move to the GPU.") },
+        { track: "OpenGL", id: "frustum-culling", title: tx(t, "oglCompute_rel3", "Frustum & Occlusion Culling"), why: tx(t, "oglCompute_rel3b", "where the six planes come from, sphere and box tests, and Hi-Z occlusion.") },
+        { track: "OpenGL", id: "draw-calls", title: tx(t, "oglCompute_rel4", "Draw Calls & State"), why: tx(t, "oglCompute_rel4b", "multi-draw indirect and the GPU-driven renderer built on it.") },
+        { track: "OpenGL", id: "ubo", title: tx(t, "oglCompute_rel5", "Uniform Buffer Objects"), why: tx(t, "oglCompute_rel5b", "std140 and std430 layout rules, member by member.") },
       ]} />
     </Article>
+  );
+}
+
+// ── Atomics ───────────────────────────────────────────────────────────────────
+
+function AtomicsSection({ t }: { t: TrackTranslations }) {
+  return (
+    <>
+      <H2>{tx(t, "oglCompute_atomicTitle", "Atomics: many invocations, one counter")}</H2>
+      <p>
+        {tx(t, "oglCompute_atomicBody",
+          "Every example so far had each invocation write its own element. Counting is different: when thousands of invocations do count = count + 1 on the same variable, most of them read the same old value before any has written, and the increments are lost. An atomic operation does the read, the change and the write as one step that no other invocation can interrupt, and returns the value from before the change.")}
+      </p>
+      <LessonTable
+        headers={[tx(t, "oglCompute_thAtomic", "Function"), tx(t, "oglCompute_thAtomicDoes", "Does, in one step")]}
+        rows={[
+          ["atomicAdd(mem, v)", tx(t, "oglCompute_a1", "mem += v; the returned old value is a unique slot when every invocation adds 1")],
+          ["atomicMin / atomicMax", tx(t, "oglCompute_a2", "keeps the smaller or larger: nearest hit, depth bounds of a tile")],
+          ["atomicAnd / atomicOr / atomicXor", tx(t, "oglCompute_a3", "sets or clears bits: occupancy masks, visited flags")],
+          ["atomicExchange(mem, v)", tx(t, "oglCompute_a4", "writes v and returns what was there: building linked lists")],
+          ["atomicCompSwap(mem, cmp, v)", tx(t, "oglCompute_a5", "writes v only if mem still equals cmp: the base of every lock-free trick")],
+          ["imageAtomicAdd(img, p, v)", tx(t, "oglCompute_a6", "the same on a texel of an r32ui or r32i image")],
+        ]}
+      />
+      <p>
+        {tx(t, "oglCompute_atomicTypes",
+          "They work on int and uint members of SSBOs and on shared variables. Float atomics are not core OpenGL (NV_shader_atomic_float adds them); the portable trick is to scale floats to integers, for example millimetres as uint. A brightness histogram shows the usual pattern: count in shared memory first, then merge once per group.")}
+      </p>
+      <CodeBlock lang="glsl" filename="histogram.comp" t={t}>{`#version 460 core
+layout (local_size_x = 16, local_size_y = 16) in;          // 256 invocations: one per bin
+
+layout (rgba8, binding = 0) uniform readonly image2D uImage;
+layout (std430, binding = 1) buffer Histogram { uint bins[256]; };
+
+shared uint localBins[256];                                 // this group's own histogram, 1 KB
+
+void main() {
+    uint lid = gl_LocalInvocationIndex;                     // 0..255
+    localBins[lid] = 0u;
+    memoryBarrierShared();
+    barrier();
+
+    ivec2 p = ivec2(gl_GlobalInvocationID.xy);
+    if (all(lessThan(p, imageSize(uImage)))) {             // no return: all must reach the next barrier
+        vec3 c = imageLoad(uImage, p).rgb;
+        float lum = dot(c, vec3(0.2126, 0.7152, 0.0722));   // Rec. 709 luminance
+        atomicAdd(localBins[uint(lum * 255.0 + 0.5)], 1u);  // fast: on-chip, contended by 256 at most
+    }
+    memoryBarrierShared();
+    barrier();
+
+    if (localBins[lid] != 0u)
+        atomicAdd(bins[lid], localBins[lid]);               // one global add per non-empty bin
+}`}</CodeBlock>
+      <p>
+        {tx(t, "oglCompute_histBody",
+          "Atomics on the same address are done one after another, so their cost grows with the number of invocations that collide. Adding every pixel of a 1920 × 1080 image straight into the global bins would be 2 million atomics fighting over 256 addresses in memory. The shared version collides only inside one 16 × 16 tile, in on-chip memory, and a tile usually covers a few dozen brightness levels, so the global adds drop to roughly one per bin that actually appears in each tile. The luminance weights are those of Rec. 709 (and sRGB): green counts most, because the eye is most sensitive to it. Clear bins with glClearNamedBufferData before each frame's dispatch.")}
+      </p>
+    </>
+  );
+}
+
+// ── Indirect dispatch, GPU culling and ping-pong ──────────────────────────────
+
+function IndirectSection({ t }: { t: TrackTranslations }) {
+  return (
+    <>
+      <H2>{tx(t, "oglCompute_indirectTitle", "Letting the GPU decide the work: indirect calls")}</H2>
+      <p>
+        {tx(t, "oglCompute_indirectBody",
+          "Often the result of one pass decides how much work the next one has: how many particles are alive, how many objects survived culling. Reading that count back to the CPU would stall the pipeline. Indirect calls read their parameters from a buffer instead, so a compute shader can write them and the next call uses them without the CPU ever seeing the number. glDispatchComputeIndirect(offset) reads three uints (groups in x, y, z) from the buffer bound to GL_DISPATCH_INDIRECT_BUFFER; glDrawElementsIndirect reads a whole draw command from GL_DRAW_INDIRECT_BUFFER. Both need GL_COMMAND_BARRIER_BIT after the shader that wrote them.")}
+      </p>
+      <p>
+        {tx(t, "oglCompute_cullBody",
+          "The classic use is culling on the GPU. One invocation per object tests its bounding sphere against the six planes of the camera's frustum; survivors claim a slot in a list with atomicAdd on the draw command's instanceCount, and write their index into that slot. The draw then runs exactly as many instances as survived:")}
+      </p>
+      <CodeBlock lang="glsl" filename="cull.comp" t={t}>{`#version 460 core
+layout (local_size_x = 64) in;
+
+struct Instance { vec4 sphere; mat4 model; };              // sphere: centre xyz, radius w (80 bytes)
+layout (std430, binding = 0) readonly  buffer All     { Instance all[]; };
+layout (std430, binding = 1) writeonly buffer Visible { uint visible[]; };
+layout (std430, binding = 2) buffer Command {              // a DrawElementsIndirectCommand
+    uint count, instanceCount, firstIndex;
+    int  baseVertex;
+    uint baseInstance;
+} cmd;
+
+uniform vec4 uPlanes[6];                                    // xyz: inward normal, w: distance
+
+void main() {
+    uint i = gl_GlobalInvocationID.x;
+    if (i >= all.length()) return;                          // no barrier(): returning is fine
+    vec4 s = all[i].sphere;
+    for (int k = 0; k < 6; k++)
+        if (dot(uPlanes[k].xyz, s.xyz) + uPlanes[k].w < -s.w) return;   // wholly outside one plane
+    uint slot = atomicAdd(cmd.instanceCount, 1u);           // the old value: this object's place
+    visible[slot] = i;
+}`}</CodeBlock>
+      <CodeBlock lang="cpp" filename="cull.cpp" t={t}>{`struct DrawElementsIndirectCommand {
+    GLuint count, instanceCount, firstIndex;
+    GLint  baseVertex;
+    GLuint baseInstance;
+};
+
+// Every frame. cmdBuf was created with GL_DYNAMIC_STORAGE_BIT so it can be rewritten.
+DrawElementsIndirectCommand reset{indexCount, 0, 0, 0, 0};       // instanceCount back to 0
+glNamedBufferSubData(cmdBuf, 0, sizeof(reset), &reset);
+
+glUseProgram(cullProgram);
+glProgramUniform4fv(cullProgram, planesLoc, 6, &planes[0].x);   // from the view-projection matrix
+glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, instanceBuf);
+glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, visibleBuf);
+glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, cmdBuf);
+glDispatchCompute((objectCount + 63) / 64, 1, 1);
+
+// The draw reads the command (COMMAND) and the vertex shader reads visible[] (SHADER_STORAGE)
+glMemoryBarrier(GL_COMMAND_BARRIER_BIT | GL_SHADER_STORAGE_BARRIER_BIT);
+
+glUseProgram(drawProgram);
+glBindVertexArray(meshVAO);
+glBindBuffer(GL_DRAW_INDIRECT_BUFFER, cmdBuf);
+glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_INT, nullptr);   // instance count chosen by the GPU
+
+// draw.vert:  mat4 model = all[visible[gl_InstanceID]].model;`}</CodeBlock>
+      <p>
+        {tx(t, "oglCompute_cullAfter",
+          "The order of the visible list changes from frame to frame, because atomicAdd hands out slots in whatever order the invocations happen to run. For opaque objects that does not matter. The test keeps any sphere that is not entirely behind one plane, so a few objects just outside a corner of the frustum are drawn anyway; that is conservative and cheap. The Frustum & Occlusion Culling chapter derives the six planes from the view-projection matrix, and Draw Calls & State extends this to many different meshes with glMultiDrawElementsIndirect.")}
+      </p>
+
+      <H3>{tx(t, "oglCompute_pingTitle", "Ping-pong: when invocations read their neighbours")}</H3>
+      <p>
+        {tx(t, "oglCompute_pingBody",
+          "The particle shader reads and writes only its own particle. A blur, a fluid or a Game of Life cell reads its neighbours, and if it writes its new value into the same buffer, neighbours that run later read a mix of old and new values. Invocations run in no fixed order, so the result is wrong in a different way on every GPU. Use two buffers or images: read the current state from one, write the next state to the other, and swap their bindings after each step, with a barrier between steps.")}
+      </p>
+      <CodeBlock lang="cpp" filename="pingpong.cpp" t={t}>{`GLuint state[2];                                   // two r8ui images of the same size
+int cur = 0;
+for (int step = 0; step < stepsPerFrame; step++) {
+    glBindImageTexture(0, state[cur],     0, GL_FALSE, 0, GL_READ_ONLY,  GL_R8UI);   // read
+    glBindImageTexture(1, state[1 - cur], 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_R8UI);   // write
+    glDispatchCompute((W + 15) / 16, (H + 15) / 16, 1);
+    glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);    // the next step reads it with imageLoad
+    cur = 1 - cur;                                           // swap
+}
+glMemoryBarrier(GL_TEXTURE_FETCH_BARRIER_BIT);              // then it is sampled for display`}</CodeBlock>
+    </>
   );
 }

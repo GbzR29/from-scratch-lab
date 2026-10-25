@@ -4,7 +4,8 @@
 // The track as a sheet: its code, glyph, name and description, a button to
 // continue (or start), the reader's progress, the tracks it builds on (taken
 // from the learning paths), a few facts, and the map of every section and
-// chapter. Progress comes from localStorage after mount.
+// chapter, and for tracks with an about.ts, a sheet of prose under the map.
+// Progress comes from localStorage after mount.
 // Styles: src/styles/trackPage.css.
 
 import "@/styles/trackPage.css";
@@ -14,6 +15,8 @@ import { useLanguage } from "@/components/providers/LanguageProvider";
 import { LearnTopBar } from "@/components/lesson/LearnTopBar";
 import { TrackGlyph } from "@/components/brand/TrackGlyph";
 import TrackMap, { mapSections } from "@/components/track/TrackMap";
+import TrackAbout from "@/components/track/TrackAbout";
+import { trackAbout } from "@/lib/tracks/about";
 import { getTrack } from "@/lib/tracks";
 import { TRACK_CATALOG, trackCode } from "@/lib/tracks/catalog";
 import { LEARNING_PATHS } from "@/lib/tracks/paths";
@@ -77,6 +80,7 @@ export default function TrackOverview({ trackPath }: { trackPath: string }) {
   const hours = Math.max(1, Math.round(minutes / 30) / 2);
   const reference = getReference(trackPath);
   const before = prerequisites(info.id);
+  const about = trackAbout(info.id, language);
 
   // Continue where the reader stopped, else the first unread chapter, else start
   const resume = lastId ?? (read > 0 ? chapters.find((c) => !visited.has(c.id))?.id ?? null : null);
@@ -170,6 +174,9 @@ export default function TrackOverview({ trackPath }: { trackPath: string }) {
             t={ui}
           />
         </section>
+
+        {/* ── About (tracks with an about.ts) ── */}
+        {about && <TrackAbout about={about} ui={ui} sheet={sheet} />}
       </main>
     </div>
   );

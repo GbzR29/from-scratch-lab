@@ -37,8 +37,8 @@ export const glslDescriptions: LessonDescriptions = {
     pt: "Cor em shaders: paletas de cosseno, matiz e saturação em HSV, misturar em luz linear vs sRGB, e os modos de mesclagem comuns em uma linha de GLSL cada.",
   },
   noise: {
-    en: "Noise in GLSL from scratch: hash functions, value noise, gradient (Perlin) and cell (Worley) noise, and fractal Brownian motion (fBm) with octaves.",
-    pt: "Ruído em GLSL do zero: funções hash, value noise, ruído de gradiente (Perlin) e celular (Worley), e movimento browniano fractal (fBm) com oitavas.",
+    en: "Noise in GLSL from scratch: sin and PCG hashes, value, Perlin, simplex and Worley noise, fBm without aliasing, domain warping and tileable noise.",
+    pt: "Ruído em GLSL do zero: hashes com sin e PCG, ruído de valor, Perlin, simplex e Worley, fBm sem aliasing, domain warping e ruído que repete sem emenda.",
   },
   texturing: {
     en: "GLSL texturing tricks: texture vs textureLod vs textureGrad vs texelFetch, noise distortion, scrolling layers, and triplanar mapping without UVs.",

@@ -55,6 +55,36 @@ float worley(vec2 p, float t) {
     return d;
 }`;
 
+// The hash section's own playground: sin hash and pcg2d far from the origin
+export const HASH_PRESET: PlaygroundPreset = {
+    id: "hash", label: "sin hash vs PCG at large coordinates",
+    note: "One random grey per cell. Left: fract(sin(dot(p, k)) · 43758.5453). Right: the integer hash pcg2d. uOffset adds 10^uOffset to every cell coordinate, as if the camera had travelled far away or the time had run for hours. Raise it step by step: the right half stays random, while the left one shows repeats, stripes or flat blocks at some point. Where it breaks depends on your GPU's sin().",
+    frag: `uniform float uOffset;   // @slider 0.0 6.0 0.0
+uniform float uCells;    // @slider 4.0 64.0 24.0
+
+float hashSin(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+
+uvec2 pcg2d(uvec2 v) {                     // Jarzynski & Olano 2020
+    v = v * 1664525u + 1013904223u;
+    v.x += v.y * 1664525u;  v.y += v.x * 1664525u;
+    v ^= v >> 16u;
+    v.x += v.y * 1664525u;  v.y += v.x * 1664525u;
+    v ^= v >> 16u;
+    return v;
+}
+float hashPcg(vec2 p) { return float(pcg2d(uvec2(ivec2(p))).x) * (1.0 / 4294967296.0); }
+
+void main() {
+    vec2 uv   = gl_FragCoord.xy / uResolution;
+    vec2 cell = floor(uv * vec2(uCells * uResolution.x / uResolution.y, uCells));
+    vec2 p    = cell + floor(pow(10.0, uOffset));               // far from the origin
+    float v   = uv.x < 0.5 ? hashSin(p) : hashPcg(p);
+    vec3 col  = vec3(v);
+    col = mix(vec3(0.9, 0.3, 0.1), col, smoothstep(0.0, 0.004, abs(uv.x - 0.5)));   // separator
+    FragColor = vec4(col, 1.0);
+}`,
+};
+
 export const NOISE_PRESETS: PlaygroundPreset[] = [
   {
     id: "compare", label: "value · gradient · simplex · Worley",

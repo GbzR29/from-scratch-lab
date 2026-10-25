@@ -12,6 +12,17 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ## Outubro de 2026
 
+### 2026-10-25
+
+- **As páginas mais clicadas no Search Console, melhoradas (EN e PT).**
+  - **GLSL → Ruído e padrões procedurais** (`noise`), reescrito no formato novo e focado na GPU; a teoria do Perlin passo a passo continua na Game Dev, e as bordas exatas de Voronoi em Rachaduras e estilhaços, com links para lá. Hash com sin desmontado passo a passo em float32 (LiveFormula: só 8 ou 9 bits de aleatoriedade), por que ele quebra longe da origem, hash de inteiros pcg2d explicado linha a linha e playground próprio (sin contra PCG com deslocamento de até 10⁶), ruído de valor, as três curvas de suavização com inclinação e curvatura (LiveFormula), ruído de gradiente com o código, simplex com os fatores de inclinação deduzidos, Worley com código e widget novo (busca 3 × 3 com ponto arrastável, F1, F2, F2 − F1 e id da célula; quebre: só a própria célula), fBm com a rotação explicada, quantas oitavas a tela mostra (LiveFormula) e fBm sem aliasing com fwidth, variantes (turbulência, cristas), domain warping com a fórmula, mover, repetir sem emenda e assar em textura, erros comuns, exercícios. Notas do playground traduzidas.
+  - **OpenGL → Compute shaders** (`compute`): limites consultados no código, "em palavras" no ID global, LiveFormula de quantos dispatches uma redução precisa, seções novas de atomics (tabela das funções, histograma em memória shared), chamadas indiretas com culling por frustum na GPU escrevendo um comando de draw indireto, e ping-pong; três erros novos, exercícios.
+  - **Vulkan → Descritores, uniforms e push constants** (`descriptors`): o exemplo de layout std140 virou uma Derivation passo a passo, tabela dos tipos de descritor com a declaração em GLSL, dynamic uniform buffer em código, estratégias de pool, push descriptors como core do Vulkan 1.4.
+  - **C/C++ → Novidades do C++26** (`cpp26`): mais cinco linhas na tabela (anotações para reflexão, packs em structured bindings, std::hive, aritmética de saturação, std::function_ref); conferido no GCC 16.2 que o `<hive>` ainda não existe.
+  - **Página da trilha Vulkan** (`/Vulkan`, `/pt/Vulkan`): bloco novo "Sobre esta trilha" abaixo do mapa (o que é, o que você vai construir, do que precisa), renderizado no servidor. Texto em `src/lib/tracks/vulkan/about.ts`; outras trilhas ganham o bloco com um arquivo `about.ts` registrado em `src/lib/tracks/about.ts`.
+  - Componente novo `Related` (aulas relacionadas, com links reais no idioma da página) no fim dos quatro capítulos.
+  - Descrições de busca atualizadas para noise, compute e descriptors; tempo de leitura ajustado.
+
 ### 2026-10-24
 
 - **Química, lote 2 de 12: seção "Ligações químicas" (4 capítulos), EN e PT.** A lei de Coulomb fica na Física (Carga e campo elétrico) e os capítulos só apontam para lá.

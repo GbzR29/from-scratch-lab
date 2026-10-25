@@ -8,11 +8,15 @@
 // erroneous behaviour for uninitialised reads, a table of the smaller
 // features, what GCC 16.2 supports (feature-test macros), and how to adopt.
 // Everything was compiled and run with g++ 16.2 on Compiler Explorer.
+// 2026-10-25: five more rows in the feature table (annotations, binding packs,
+// std::hive, saturation arithmetic, function_ref; <hive> checked missing in
+// GCC 16.2, the other rows make no compiler claim) and related lessons.
 
 import { CodeBlock, Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
 import { Article, Goals, KeyIdeas, Lead } from "@/components/lesson/Prose";
+import { Related } from "@/components/lesson/Related";
 import { ReflectFigure } from "@/components/lesson/figures/cpp/ReflectFigure";
 
 export function Cpp26Content({ t }: { t: TrackTranslations }) {
@@ -119,6 +123,11 @@ std::println("{}", lives); // C++23: undefined behaviour. C++26: erroneous behav
           ["std::simd", "simd<float>", tx(t, "cpp26_f7", "Portable vector types: one operation on several floats at once. Not in GCC 16.2's library yet.")],
           [tx(t, "cpp26_f8k", "more constexpr"), "std::sin in constexpr", tx(t, "cpp26_f8", "Most of <cmath>, exceptions and more containers usable at compile time.")],
           [tx(t, "cpp26_f9k", "hardened standard library"), "v[10] on a 3-element vector", tx(t, "cpp26_f9", "An optional mode in which operator[], front() and similar check their preconditions and stop the program instead of reading out of bounds.")],
+          [tx(t, "cpp26_f10k", "annotations for reflection"), "[[=Range{0, 100}]] int hp;", tx(t, "cpp26_f10", "Attaches a constant value to a declaration, which reflection reads back with std::meta::annotations_of: validation ranges, JSON field names, editor hints, next to the member they describe.")],
+          [tx(t, "cpp26_f11k", "structured binding packs"), "auto [...xs] = point;", tx(t, "cpp26_f11", "Binds every member of an aggregate to one pack, so (0 + ... + xs) sums the members of any struct without naming them.")],
+          ["std::hive", "hive<Bullet>", tx(t, "cpp26_f12", "A container that reuses the slots of erased elements and never moves the others, so pointers to them stay valid: bullets, particles, entities. The <hive> header is not in GCC 16.2's library yet.")],
+          [tx(t, "cpp26_f13k", "saturation arithmetic"), "add_sat<uint8_t>(200, 100)", tx(t, "cpp26_f13", "Arithmetic that stops at the type's limits instead of wrapping around: 255 here, not 44. Useful for colours, audio samples and counters (in <numeric>).")],
+          ["std::function_ref", "function_ref<int(int)>", tx(t, "cpp26_f14", "A non-owning reference to any callable: as cheap as a function pointer, accepts lambdas with captures, never allocates. The right parameter type for callbacks that are called during the call only.")],
         ]}
       />
 
@@ -168,6 +177,13 @@ std::println("{}", lives); // C++23: undefined behaviour. C++26: erroneous behav
         "Contracts check pre- and postconditions with a semantic chosen at build time: enforce, observe or ignore.",
         "Reading an uninitialised variable becomes erroneous behaviour: still a bug, but no longer licence for the optimiser to assume anything.",
         "Check feature-test macros: GCC 16.2 has reflection and contracts, but not yet std::execution or std::simd.",
+      ]} />
+
+      <Related t={t} links={[
+        { track: "C++", id: "constexpr", title: tx(t, "cpp26_rel1", "Compile-Time C++"), why: tx(t, "cpp26_rel1b", "constexpr, consteval and why a vector built at compile time cannot reach the program, the ground reflection stands on.") },
+        { track: "C++", id: "errors", title: tx(t, "cpp26_rel2", "Error Handling"), why: tx(t, "cpp26_rel2b", "where pre, post and contract_assert were introduced, next to exceptions and std::expected.") },
+        { track: "C++", id: "templates", title: tx(t, "cpp26_rel3", "Templates & Generic Code"), why: tx(t, "cpp26_rel3b", "parameter packs and fold expressions, which pack indexing and binding packs make shorter.") },
+        { track: "C++", id: "tooling", title: tx(t, "cpp26_rel4", "Tooling, Build & Sanitizers"), why: tx(t, "cpp26_rel4b", "the uninitialised read that g++ -O2 turned into a 3, and the sanitizers that catch it.") },
       ]} />
     </Article>
   );

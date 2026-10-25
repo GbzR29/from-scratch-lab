@@ -285,7 +285,7 @@ export const openglDescriptions: LessonDescriptions = {
     pt: "Depurar OpenGL: glDebugMessageCallback e suas mensagens, glGetError quando não há debug output, nomear objetos e um roteiro para tela preta.",
   },
   compute: {
-    en: "Compute shaders in OpenGL: workgroups and dispatch, writing images, shared memory and barrier(), and shader storage buffers (SSBO).",
-    pt: "Compute shaders em OpenGL: workgroups e dispatch, escrever em imagens, memória compartilhada e barrier(), e shader storage buffers (SSBO).",
+    en: "Compute shaders in OpenGL: workgroups and dispatch, image writes, shared memory and barrier(), SSBOs, atomics, indirect dispatch and GPU culling.",
+    pt: "Compute shaders em OpenGL: workgroups e dispatch, escrita em imagens, memória shared e barrier(), SSBOs, atomics, dispatch indireto e culling na GPU.",
   },
 };

@@ -206,6 +206,7 @@ const text: Record<string, string> = {
   // Chapter boxes shared by every track (lesson/Prose.tsx)
   goals: "Ao final você vai conseguir",
   keyIdeas: "Ideias-chave",
+  relatedLessons: "Aulas relacionadas",
 
   // Transport: the playback bar under an animated drawing (kit/Transport.tsx)
   figT_play: "rodar",

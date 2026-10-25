@@ -26,7 +26,7 @@ export const glslChapters: Chapter[] = [
   { id: "sdf",         section: SHAPES,  title: "Signed Distance Functions",   minRead: 15, load: () => import("./chapters/sdf").then((m) => m.SDFContent) },
   { id: "patterns",    section: SHAPES,  title: "Patterns & Transformations",  minRead: 11, load: () => import("./chapters/shapes").then((m) => m.PatternsContent) },
   { id: "color",       section: SHAPES,  title: "Colour",                      minRead: 12, load: () => import("./chapters/shapes").then((m) => m.ColorContent) },
-  { id: "noise",       section: SHAPES,  title: "Noise & Procedural Patterns", minRead: 16, load: () => import("./chapters/noise").then((m) => m.NoiseContent) },
+  { id: "noise",       section: SHAPES,  title: "Noise & Procedural Patterns", minRead: 28, load: () => import("./chapters/noise").then((m) => m.NoiseContent) },
   // ── Effect Recipes ──────────────────────────────────────────────────────
   { id: "texturing",   section: EFFECTS, title: "Texturing Tricks",            minRead: 12, load: () => import("./chapters/effects/texturing").then((m) => m.TexturingContent) },
   { id: "water",       section: EFFECTS, title: "Waves & Water",               minRead: 38, load: () => import("./chapters/effects/water").then((m) => m.WaterContent) },

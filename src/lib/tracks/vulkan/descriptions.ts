@@ -41,8 +41,8 @@ export const vulkanDescriptions: LessonDescriptions = {
     pt: "Staging buffers no Vulkan: por que os vértices vão para a memória local da GPU, envio com cópia na GPU, agrupar envios e filas de transferência.",
   },
   descriptors: {
-    en: "Vulkan descriptors, uniform buffers and push constants: when to use each, std140 layout, descriptor set layouts, pools and sets, and a camera.",
-    pt: "Descriptors, uniform buffers e push constants no Vulkan: quando usar cada um, layout std140, descriptor set layouts, pools e sets, e uma câmera.",
+    en: "Vulkan descriptor sets, uniform buffers and push constants: descriptor types, std140 layout, set layouts, pools, dynamic offsets and a camera.",
+    pt: "Descriptor sets, uniform buffers e push constants no Vulkan: tipos de descritor, layout std140, set layouts, pools, offsets dinâmicos e uma câmera.",
   },
   textures: {
     en: "Vulkan textures and samplers: images, memory and image views, uploading a PNG, layout transitions, sRGB vs linear formats, and binding a sampler.",

@@ -401,7 +401,7 @@
   },
   "cpp/cpp26": {
     "created": "2026-09-03",
-    "updated": "2026-10-14"
+    "updated": "2026-10-25"
   },
   "cpp/tooling": {
     "created": "2026-09-03",
@@ -489,7 +489,7 @@
   },
   "glsl/noise": {
     "created": "2026-05-30",
-    "updated": "2026-10-08"
+    "updated": "2026-10-25"
   },
   "glsl/texturing": {
     "created": "2026-09-24",
@@ -1245,7 +1245,7 @@
   },
   "opengl/compute": {
     "created": "2026-09-03",
-    "updated": "2026-10-08"
+    "updated": "2026-10-25"
   },
   "physics/units-measurement": {
     "created": "2026-10-16",
@@ -1517,7 +1517,7 @@
   },
   "vulkan/descriptors": {
     "created": "2026-09-30",
-    "updated": "2026-10-08"
+    "updated": "2026-10-25"
   },
   "vulkan/textures": {
     "created": "2026-09-30",
