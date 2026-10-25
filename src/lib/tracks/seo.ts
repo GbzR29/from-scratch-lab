@@ -15,6 +15,7 @@ import { learningTranslations } from "@/lib/i18n/learning/learningTranslantions"
 import aiPt from "./ai/i18n/pt/_track";
 import algorithmsPt from "./algorithms/i18n/pt/_track";
 import asmPt from "./asm/i18n/pt/_track";
+import chemistryPt from "./chemistry/i18n/pt/_track";
 import cppPt from "./cpp/i18n/pt/_track";
 import gamedevPt from "./gamedev/i18n/pt/_track";
 import glslPt from "./glsl/i18n/pt/_track";
@@ -27,6 +28,7 @@ import vulkanPt from "./vulkan/i18n/pt/_track";
 import { aiDescriptions } from "./ai/descriptions";
 import { algorithmsDescriptions } from "./algorithms/descriptions";
 import { asmDescriptions } from "./asm/descriptions";
+import { chemistryDescriptions } from "./chemistry/descriptions";
 import { cppDescriptions } from "./cpp/descriptions";
 import { gamedevDescriptions } from "./gamedev/descriptions";
 import { glslDescriptions } from "./glsl/descriptions";
@@ -43,13 +45,13 @@ const IN_LANGUAGE: Record<UrlLang, string> = { en: "en", pt: "pt-BR" };
 
 type TitleFile = { titles: Record<string, string>; sections: Record<string, string> };
 const PT_TITLES: Record<string, TitleFile> = {
-  ai: aiPt, algorithms: algorithmsPt, asm: asmPt, cpp: cppPt, gamedev: gamedevPt, glsl: glslPt,
+  ai: aiPt, algorithms: algorithmsPt, asm: asmPt, chemistry: chemistryPt, cpp: cppPt, gamedev: gamedevPt, glsl: glslPt,
   math: mathPt, music: musicPt, opengl: openglPt, physics: physicsPt, sdl3: sdl3Pt, vulkan: vulkanPt,
 };
 
 // Each lesson's own search-result text; a lesson without one gets SEO_COPY's generic line
 const DESCRIPTIONS: Record<string, LessonDescriptions> = {
-  ai: aiDescriptions, algorithms: algorithmsDescriptions, asm: asmDescriptions, cpp: cppDescriptions,
+  ai: aiDescriptions, algorithms: algorithmsDescriptions, asm: asmDescriptions, chemistry: chemistryDescriptions, cpp: cppDescriptions,
   gamedev: gamedevDescriptions, glsl: glslDescriptions, math: mathDescriptions, music: musicDescriptions,
   opengl: openglDescriptions, physics: physicsDescriptions, sdl3: sdl3Descriptions, vulkan: vulkanDescriptions,
 };

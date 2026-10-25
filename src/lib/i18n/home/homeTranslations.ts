@@ -71,7 +71,7 @@ export const homeTranslations = {
     pathMachineName: "Under the hood",
     pathMachineGoal: "What the computer does with your code, one instruction at a time.",
     pathScienceName: "Science from scratch",
-    pathScienceGoal: "The maths and physics that explain the world around you.",
+    pathScienceGoal: "The maths, physics and chemistry that explain the world around you.",
   },
   pt: {
     homeSheet: "Folha",
@@ -141,7 +141,7 @@ export const homeTranslations = {
     pathMachineName: "Por baixo do capô",
     pathMachineGoal: "O que o computador faz com o seu código, instrução por instrução.",
     pathScienceName: "Ciência do zero",
-    pathScienceGoal: "A matemática e a física que explicam o mundo à sua volta.",
+    pathScienceGoal: "A matemática, a física e a química que explicam o mundo à sua volta.",
   },
   es: {},
   zh: {},

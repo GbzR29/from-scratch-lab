@@ -29,8 +29,8 @@ export const LEARNING_PATHS: LearningPath[] = [
     goalKey: "pathMachineGoal", goalFallback: "What the computer does with your code, one instruction at a time.",
   },
   {
-    id: "science", tracks: ["math", "physics"],
+    id: "science", tracks: ["math", "physics", "chemistry"],
     nameKey: "pathScienceName", nameFallback: "Science from scratch",
-    goalKey: "pathScienceGoal", goalFallback: "The maths and physics that explain the world around you.",
+    goalKey: "pathScienceGoal", goalFallback: "The maths, physics and chemistry that explain the world around you.",
   },
 ];

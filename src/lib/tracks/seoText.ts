@@ -53,6 +53,10 @@ const SEO_TEXT: Record<string, Record<UrlLang, Wording>> = {
     en: { title: "Physics from Scratch: Mechanics, Waves, Electromagnetism, Relativity and Quantum", short: "Physics from Scratch" },
     pt: { title: "Física do zero: mecânica, ondas, eletromagnetismo, relatividade e quântica", short: "Física do zero" },
   },
+  chemistry: {
+    en: { title: "Chemistry from Scratch: Atoms, the Mole, the Periodic Table and Reactions", short: "Chemistry from Scratch" },
+    pt: { title: "Química do zero: átomos, mol, tabela periódica e reações", short: "Química do zero" },
+  },
   music: {
     en: { title: "Music Theory from Scratch: Notes, Intervals, Scales and Chords", short: "Music Theory" },
     pt: { title: "Teoria musical do zero: notas, intervalos, escalas e acordes", short: "Teoria musical" },

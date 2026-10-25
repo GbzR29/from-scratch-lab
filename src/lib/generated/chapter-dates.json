@@ -255,6 +255,22 @@
     "created": "2026-10-16",
     "updated": "2026-10-16"
   },
+  "chemistry/matter-measurement": {
+    "created": "2026-10-24",
+    "updated": "2026-10-24"
+  },
+  "chemistry/atoms-isotopes": {
+    "created": "2026-10-24",
+    "updated": "2026-10-24"
+  },
+  "chemistry/the-mole": {
+    "created": "2026-10-24",
+    "updated": "2026-10-24"
+  },
+  "chemistry/periodic-trends": {
+    "created": "2026-10-24",
+    "updated": "2026-10-24"
+  },
   "cpp/history": {
     "created": "2026-10-14",
     "updated": "2026-10-14"
