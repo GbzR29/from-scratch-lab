@@ -26,6 +26,7 @@ export const CATEGORY_COLOR: Record<Category, string> = {
 export const ATOM_COLOR: Record<string, string> = {
   H: "#f1f5f9", C: "#475569", N: "#3b82f6", O: "#ef4444", Cl: "#22c55e", He: "#06b6d4",
   Ne: "#f97316", Ar: "#a855f7", Na: "#8b5cf6", S: "#eab308", Fe: "#c2410c",
+  F: "#84cc16", B: "#fda4af", P: "#fb923c", Br: "#b91c1c", I: "#7e22ce", Xe: "#0891b2", Be: "#a3a3a3",
 };
 
 /** Superscript and subscript digits for formulas and nuclide symbols. */

@@ -15,4 +15,8 @@ export const chemistryChapters: Chapter[] = [
   { id: "atoms-isotopes", section: "Matter & Atoms",     title: "Atoms, Ions & Isotopes",                 minRead: 21, load: () => import("./chapters/atoms-isotopes").then((m) => m.AtomsIsotopesContent) },
   { id: "the-mole", section: "Matter & Atoms",           title: "The Mole: Counting Atoms by Weighing",   minRead: 22, load: () => import("./chapters/the-mole").then((m) => m.TheMoleContent) },
   { id: "periodic-trends", section: "Matter & Atoms",    title: "The Periodic Table & Its Trends",        minRead: 24, load: () => import("./chapters/periodic-trends").then((m) => m.PeriodicTrendsContent) },
+  { id: "valence-ions", section: "Bonding",              title: "Valence Electrons, the Octet & Ions",    minRead: 21, load: () => import("./chapters/valence-ions").then((m) => m.ValenceIonsContent) },
+  { id: "ionic-bonding", section: "Bonding",             title: "Ionic Bonds & Lattice Energy",           minRead: 23, load: () => import("./chapters/ionic-bonding").then((m) => m.IonicBondingContent) },
+  { id: "covalent-lewis", section: "Bonding",            title: "Covalent Bonds & Lewis Structures",      minRead: 25, load: () => import("./chapters/covalent-lewis").then((m) => m.CovalentLewisContent) },
+  { id: "molecular-shape", section: "Bonding",           title: "Molecular Shape: VSEPR & Polarity",      minRead: 23, load: () => import("./chapters/molecular-shape").then((m) => m.MolecularShapeContent) },
 ];

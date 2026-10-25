@@ -271,6 +271,22 @@
     "created": "2026-10-24",
     "updated": "2026-10-24"
   },
+  "chemistry/valence-ions": {
+    "created": "2026-10-24",
+    "updated": "2026-10-24"
+  },
+  "chemistry/ionic-bonding": {
+    "created": "2026-10-24",
+    "updated": "2026-10-24"
+  },
+  "chemistry/covalent-lewis": {
+    "created": "2026-10-24",
+    "updated": "2026-10-24"
+  },
+  "chemistry/molecular-shape": {
+    "created": "2026-10-24",
+    "updated": "2026-10-24"
+  },
   "cpp/history": {
     "created": "2026-10-14",
     "updated": "2026-10-14"

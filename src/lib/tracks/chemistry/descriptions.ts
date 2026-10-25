@@ -20,4 +20,20 @@ export const chemistryDescriptions: LessonDescriptions = {
     en: "The periodic table and its trends: groups, periods and blocks, valence electrons, effective nuclear charge, atomic radius, ionisation energy, electron affinity, electronegativity.",
     pt: "A tabela periódica e suas tendências: grupos, períodos e blocos, elétrons de valência, carga nuclear efetiva, raio atômico, energia de ionização, afinidade eletrônica, eletronegatividade.",
   },
+  "valence-ions": {
+    en: "Valence electrons and ions: Lewis dot symbols, the octet rule, predicting ion charges, electron configurations of ions, polyatomic ions and writing ionic formulas.",
+    pt: "Elétrons de valência e íons: símbolos de Lewis, regra do octeto, como prever a carga dos íons, configuração eletrônica de íons, íons poliatômicos e fórmulas iônicas.",
+  },
+  "ionic-bonding": {
+    en: "Ionic bonding explained: electron transfer, Coulomb energy of ion pairs, lattice energy, the Born–Landé equation, the Born–Haber cycle and properties of ionic compounds.",
+    pt: "Ligação iônica explicada: transferência de elétrons, energia de Coulomb de pares de íons, energia de rede, equação de Born–Landé, ciclo de Born–Haber e propriedades dos compostos iônicos.",
+  },
+  "covalent-lewis": {
+    en: "Covalent bonds and Lewis structures step by step: bond length and energy, double and triple bonds, formal charge, resonance, octet rule exceptions and bond polarity.",
+    pt: "Ligação covalente e estruturas de Lewis passo a passo: comprimento e energia de ligação, ligações duplas e triplas, carga formal, ressonância, exceções ao octeto e polaridade.",
+  },
+  "molecular-shape": {
+    en: "Molecular geometry with VSEPR: electron domains, bond angles, lone pairs, AXE shapes from linear to octahedral, dipole moments and polar vs nonpolar molecules.",
+    pt: "Geometria molecular pela VSEPR: domínios eletrônicos, ângulos de ligação, pares isolados, formas AXE de linear a octaédrica, momento de dipolo e moléculas polares e apolares.",
+  },
 };
