@@ -9,9 +9,9 @@ import type { Chapter } from "@/lib/tracks/types";
 // ── Exported track ────────────────────────────────────────────────────────────
 
 export const sdl3Chapters: Chapter[] = [
-  { id: "whats-new", section: "Foundations", title: "SDL3 vs SDL2",              minRead: 9,  load: () => import("./chapters/whats-new").then((m) => m.WhatsNewContent) },
-  { id: "setup", section: "Foundations",     title: "Setup & First Window",      minRead: 10, load: () => import("./chapters/setup").then((m) => m.SetupContent) },
-  { id: "main-loop", section: "Foundations", title: "The Main Loop",             minRead: 11, load: () => import("./chapters/main-loop").then((m) => m.MainLoopContent) },
+  { id: "whats-new", section: "Foundations", title: "SDL3 vs SDL2",              minRead: 12, load: () => import("./chapters/whats-new").then((m) => m.WhatsNewContent) },
+  { id: "setup", section: "Foundations",     title: "Setup & First Window",      minRead: 16, load: () => import("./chapters/setup").then((m) => m.SetupContent) },
+  { id: "main-loop", section: "Foundations", title: "The Main Loop",             minRead: 16, load: () => import("./chapters/main-loop").then((m) => m.MainLoopContent) },
   { id: "input", section: "Input & 2D",     title: "Events & Input",            minRead: 12, load: () => import("./chapters/input").then((m) => m.InputContent) },
   { id: "renderer", section: "Input & 2D",  title: "The 2D Renderer",           minRead: 10, load: () => import("./chapters/renderer").then((m) => m.RendererContent) },
   { id: "textures", section: "Input & 2D",  title: "Textures & Images",         minRead: 11, load: () => import("./chapters/textures").then((m) => m.TexturesContent) },
