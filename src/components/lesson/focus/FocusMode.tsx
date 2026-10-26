@@ -32,14 +32,14 @@ export function ModeToggle({ mode, onChange, labels }: {
   labels: { read: string; focus: string; title: string };
 }) {
   return (
-    <div role="group" aria-label={labels.title} className="inline-flex rounded-full border border-[var(--border-strong)] p-0.5 font-mono text-[12px]">
+    <div role="group" aria-label={labels.title} className="inline-flex border border-[var(--ink-line)] font-mono text-[12px]">
       {(["read", "focus"] as const).map((m) => (
         <button
           key={m}
           type="button"
           aria-pressed={mode === m}
           onClick={() => onChange(m)}
-          className={`px-3 py-0.5 rounded-full transition-colors ${
+          className={`px-3 py-1 transition-colors ${
             mode === m ? "bg-[var(--text-main)] text-[var(--bg)]" : "text-[var(--text-muted)] hover:text-[var(--primary)]"
           }`}
         >

@@ -57,9 +57,11 @@ function tag(root: HTMLElement, chapterNo: number): ChapterStep[] {
 const same = (a: ChapterStep[], b: ChapterStep[]) =>
   a.length === b.length && a.every((s, i) => s.title === b[i].title && s.id === b[i].id);
 
-/** Tags the chapter under `rootRef` and returns its steps; re-runs when the chapter changes. */
+/** Tags the chapter under `rootRef` and returns its steps and how many figures it has;
+ *  re-runs when the chapter changes. */
 export function useChapterSteps(rootRef: RefObject<HTMLElement | null>, chapterNo: number, chapterKey: string) {
   const [steps, setSteps] = useState<ChapterStep[]>([]);
+  const [figures, setFigures] = useState(0);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -68,6 +70,7 @@ export function useChapterSteps(rootRef: RefObject<HTMLElement | null>, chapterN
     const run = () => {
       const next = tag(root, chapterNo);
       setSteps((prev) => (same(prev, next) ? prev : next));
+      setFigures(root.querySelectorAll("[data-figure]").length);
     };
     const schedule = () => { clearTimeout(timer); timer = window.setTimeout(run, 50); };
     run();
@@ -77,5 +80,5 @@ export function useChapterSteps(rootRef: RefObject<HTMLElement | null>, chapterN
     return () => { clearTimeout(timer); mo.disconnect(); };
   }, [rootRef, chapterNo, chapterKey]);
 
-  return steps;
+  return { steps, figures };
 }

@@ -25,6 +25,7 @@ import { OnThisPage, type TocHeading } from "@/components/lesson/OnThisPage";
 import { ChapterPager } from "@/components/lesson/ChapterPager";
 import { LessonLookContext } from "@/components/lesson/look";
 import { SupportNote } from "@/components/lesson/SupportNote";
+import { FigureMark } from "@/components/lesson/FigureMark";
 import { BeforeYouStart, PrereqProvider } from "@/components/lesson/Prerequisites";
 import { ReferenceProvider } from "@/components/reference/RefToken";
 import { ChapterFunctions } from "@/components/reference/ChapterFunctions";
@@ -167,7 +168,7 @@ export default function LessonView() {
   const [mode, setMode] = useLessonMode();
   const focus = mode === "focus";
   const chapterNo = openIndex + 1;
-  const steps = useChapterSteps(contentRef, chapterNo, activeChapterId);
+  const { steps, figures } = useChapterSteps(contentRef, chapterNo, activeChapterId);
   const [step, setStep] = useState(0);
   const stepFromUrl = useRef<number | null>(readStepParam());
   const stepAnchorRef = useRef<HTMLDivElement>(null);
@@ -228,10 +229,9 @@ export default function LessonView() {
     ? steps.map((s, i) => (s.id && folded.has(s.id) ? `.lesson-body article>[data-step="${i}"]:not(h2){display:none}` : "")).join("")
     : "";
 
-  // "On this page": in focus mode open the heading's step; in reading mode
-  // unfold its section if it is folded; then scroll to it
-  const jumpToHeading = useCallback((id: string) => {
-    const el = document.getElementById(id);
+  // "On this page" and the header's figure count: in focus mode open the
+  // element's step; in reading mode unfold its section if it is folded; then scroll to it
+  const jumpTo = useCallback((el: HTMLElement | null) => {
     if (!el) return;
     const owner = el.closest<HTMLElement>("article > [data-step]");
     const s = Number(owner?.dataset.step ?? 0);
@@ -248,6 +248,8 @@ export default function LessonView() {
     }
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [focus, steps, folded, toggleFold]);
+  const jumpToHeading = useCallback((id: string) => jumpTo(document.getElementById(id)), [jumpTo]);
+  const jumpToFigure = () => jumpTo(contentRef.current?.querySelector<HTMLElement>("[data-figure]") ?? null);
 
   // Scroll spy — highlights ToC item as user scrolls
   useEffect(() => {
@@ -331,27 +333,33 @@ export default function LessonView() {
         )}
 
         {/* Chapter header */}
-        <header className="lb-head mb-10 pb-8 border-b border-[var(--border)] space-y-3">
+        <header className="lb-head mb-10 pb-6 border-b border-[var(--border)] space-y-3">
           <p className="lb-kicker">
             {currentChapter?.section ?? trackName} · {chapterOf}
           </p>
           <h1 className="font-display text-[2.4rem] md:text-[3.5rem] leading-[1.04] tracking-[-0.015em] [text-wrap:balance]">
             {currentChapter?.title}
           </h1>
-          <div className="lb-meta flex flex-wrap items-center gap-x-2 gap-y-2 pt-2">
-            {currentChapter?.minRead && (
-              <p className="lb-chip">
-                {currentChapter.minRead} {t.lessonMinRead ?? "min read"}
-              </p>
-            )}
-            {dates && (
-              <p className="lb-chip">
-                {t.lessonCreated ?? "created"} <time dateTime={dates.created}>{formatDate(dates.created, language)}</time>
-                {dates.updated !== dates.created && (
-                  <> · {t.lessonUpdated ?? "updated"} <time dateTime={dates.updated}>{formatDate(dates.updated, language)}</time></>
-                )}
-              </p>
-            )}
+          <div className="lb-meta">
+            <p className="lb-facts">
+              {currentChapter?.minRead && (
+                <span>{currentChapter.minRead} {t.lessonMinRead ?? "min read"}</span>
+              )}
+              {figures > 0 && (
+                <button type="button" className="lb-figs" onClick={jumpToFigure} title={ui.lessonFiguresJump ?? "Go to the first figure"}>
+                  <FigureMark />
+                  {(figures === 1 ? ui.lessonFigure ?? "1 figure" : ui.lessonFigures ?? "{n} figures").replace("{n}", String(figures))}
+                </button>
+              )}
+              {dates && (
+                <span className="lb-dates"><span>
+                  {t.lessonCreated ?? "created"} <time dateTime={dates.created}>{formatDate(dates.created, language)}</time>
+                  {dates.updated !== dates.created && (
+                    <> · {t.lessonUpdated ?? "updated"} <time dateTime={dates.updated}>{formatDate(dates.updated, language)}</time></>
+                  )}
+                </span></span>
+              )}
+            </p>
             <ModeToggle
               mode={mode}
               onChange={setMode}

@@ -16,13 +16,49 @@
   text-transform: uppercase;
   color: var(--primary);
 }
-.lb-chip {
-  font-family: var(--font-plex-mono), monospace;
-  font-size: 12px;
-  padding: 3px 8px;
-  border: 1px solid var(--border-strong);
+/* One quiet line under the title: reading time, figure count, dates, and the
+   reading/focus switch on the right */
+.lb-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 20px;
+  padding-top: 6px;
+}
+.lb-facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 0;
+  margin: 0;
+  font-size: 13.5px;
   color: var(--text-muted);
 }
+.lb-facts > * { display: inline-flex; align-items: center; gap: 6px; }
+.lb-facts > * + *::before {
+  content: "";
+  width: 1px;
+  height: 12px;
+  margin: 0 12px;
+  background: var(--border-strong);
+}
+/* Phones: the dates take their own line, without the divider */
+@media (max-width: 767px) {
+  .lb-facts .lb-dates { flex-basis: 100%; }
+  .lb-facts .lb-dates::before { display: none; }
+}
+.lb-figs {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--primary);
+  cursor: pointer;
+}
+.lb-figs:hover { text-decoration: underline; text-underline-offset: 3px; }
+.lb-figs svg { flex: none; }
+.learn [data-figure] { scroll-margin-top: calc(var(--nav-h) + 20px); }
 
 /* The lead paragraph reads like the opening of a book chapter */
 .learn .lb-lead {

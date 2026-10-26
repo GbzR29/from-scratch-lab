@@ -14,6 +14,12 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-25
 
+- **Topo das aulas mais limpo (EN e PT).** As três caixinhas debaixo do título (tempo de leitura, datas e leitura/foco) viraram uma linha discreta. Ela mostra o tempo, o **número de figuras da aula** e as duas datas, com o seletor leitura/foco à direita.
+  - Clicar em "3 figuras" leva à primeira figura. No modo foco ele abre o passo dela e, numa seção recolhida, abre a seção.
+  - No celular as datas vão para uma segunda linha, em vez de três caixas empilhadas.
+  - O seletor leitura/foco ficou quadrado como o resto do site (era o único elemento arredondado).
+  - Ícone novo desenhado à mão, `components/lesson/FigureMark.tsx`. `useChapterSteps` agora também devolve quantas figuras a aula tem.
+
 - **Busca no site (EN e PT).** Um botão "Buscar" na barra da página inicial e na barra das aulas, com atalho `/` ou Ctrl+K. Ele abre uma caixa que acha, enquanto você digita, as 13 trilhas, as 388 aulas e as ~350 funções da referência (OpenGL, GLFW, SDL3).
   - A busca ignora acentos e maiúsculas e aceita o radical da palavra ("funcao" acha "Funções"). Os acertos no título contam mais, depois a seção e depois a descrição. Em PT, o título em inglês também é encontrado.
   - ↑ ↓ escolhem o resultado, Enter abre e Esc fecha. No celular só aparece a lupa.

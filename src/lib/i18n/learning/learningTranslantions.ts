@@ -37,6 +37,9 @@ export const learningTranslations = {
     lessonMinRead:    "min read",
     lessonCreated:    "created",
     lessonUpdated:    "updated",
+    lessonFigure:     "1 figure",
+    lessonFigures:    "{n} figures",
+    lessonFiguresJump: "Go to the first figure",
     lessonProgress:   "Progress",
     lessonReadOf:     "{n} of {total} read",
 
@@ -177,6 +180,9 @@ export const learningTranslations = {
     lessonMinRead:     "min de leitura",
     lessonCreated:     "criado em",
     lessonUpdated:     "atualizado em",
+    lessonFigure:      "1 figura",
+    lessonFigures:     "{n} figuras",
+    lessonFiguresJump: "Ir para a primeira figura",
     lessonProgress:    "Progresso",
     lessonReadOf:      "{n} de {total} lidas",
 
