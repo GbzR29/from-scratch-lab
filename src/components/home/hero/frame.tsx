@@ -11,13 +11,15 @@ import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 
 export type Strings = Record<string, string | undefined>;
 
-/** What the hero picker hands every figure. */
+/** What the hero picker and the gallery hand every figure. */
 export type HeroProps = {
   ui: Strings;
   /** Locale-aware number with d decimals. */
   num: (v: number, d: number) => string;
-  /** Shows the next figure of the deck. */
-  onNext: () => void;
+  /** Shows the next figure of the deck (the hero only; gallery cards have no button). */
+  onNext?: () => void;
+  /** The number in the head: "0" in the hero, "3.1"… in the gallery. */
+  figNo?: string;
 };
 
 /** Font shorthands for SVG text in the drawings. */
@@ -51,10 +53,11 @@ export function useHeroClock(ref: RefObject<HTMLElement | null>, tick: (dt: numb
   }, [ref]);
 }
 
-export function HeroFrame({ figRef, ui, onNext, caption, aria, slider, formula, children }: {
+export function HeroFrame({ figRef, ui, onNext, figNo = "0", caption, aria, slider, formula, children }: {
   figRef: RefObject<HTMLElement | null>;
   ui: Strings;
-  onNext: () => void;
+  onNext?: () => void;
+  figNo?: string;
   caption: string;
   aria: string;
   /** The one control: label, shown value and the range input. */
@@ -65,12 +68,14 @@ export function HeroFrame({ figRef, ui, onNext, caption, aria, slider, formula, 
   return (
     <figure className="hm-figure" ref={figRef}>
       <div className="hm-fig-head">
-        <b>fig. 0</b>
+        <b>fig. {figNo}</b>
         <span>{caption}</span>
         <span className="hm-fig-hint"><i />{ui.homeFigHint ?? "move it"}</span>
-        <button type="button" className="hm-fig-next" onClick={onNext} aria-label={ui.homeFigNextAria ?? "Show another figure"}>
-          {ui.homeFigNext ?? "another"} →
-        </button>
+        {onNext && (
+          <button type="button" className="hm-fig-next" onClick={onNext} aria-label={ui.homeFigNextAria ?? "Show another figure"}>
+            {ui.homeFigNext ?? "another"} →
+          </button>
+        )}
       </div>
       <svg className="hm-fig-stage" viewBox="0 0 440 320" role="img" aria-label={aria}>
         {children}

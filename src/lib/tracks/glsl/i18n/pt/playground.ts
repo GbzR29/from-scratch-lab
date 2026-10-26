@@ -12,7 +12,6 @@ const text: Record<string, string> = {
   glslPg_st3: "mesmo significado do vec4",
   glslPg_st4: "slots de textura",
   glslPg_st5: "fragCoord é gl_FragCoord.xy",
-  glslPg_debugSteps: "Por que * 0,5 + 0,5 para direções: os componentes de uma normal unitária vão de −1 a 1, mas um canal de cor só mostra 0..1, então tudo que fosse negativo ficaria preto. Dividir pela metade e deslocar leva −1 → 0, 0 → 0,5 e 1 → 1. Uma normal apontando para cima, (0, 1, 0), aparece como (0,5; 1; 0,5), verde-claro; uma apontando para a câmera ao longo de +Z aparece como (0,5; 0,5; 1), o lilás de todo normal map. Com fract(worldPos), uma posição de 3,25 aparece como 0,25: cada unidade inteira vira uma faixa, então dá para contar unidades na tela. NaN (not a number) vem de 0/0, sqrt(−1) ou normalize(vec3(0)) e se espalha por toda conta que toca; o magenta o torna impossível de não ver.",
   glslPg_mistakesTitle: "Erros comuns",
   glslPg_thSymptom: "Sintoma",
   glslPg_thCause: "Causa",
@@ -35,7 +34,6 @@ const text: Record<string, string> = {
   glslPg_goal0: "Usar o que o playground entrega ao seu shader: resolução, tempo, mouse e texturas.",
   glslPg_goal1: "Escrever um primeiro shader, linha por linha.",
   glslPg_goal2: "Adicionar sliders, seletores de cor e chaves com um comentário.",
-  glslPg_goal3: "Depurar um shader transformando os seus valores em cores.",
   glslPg_intro: "Daqui em diante, quase todo capítulo tem um shader ao vivo que você pode editar. O código é GLSL ES 3.00 de verdade, a mesma linguagem do GLSL 3.30+ de desktop, a não ser por uma linha de precisão no topo, e ele recompila enquanto você digita. Este capítulo mostra o que o playground entrega ao seu shader, para você poder se concentrar na matemática no resto da trilha.",
   glslPg_uniformsTitle: "O que o seu shader recebe",
   glslPg_uniformsBody: "Tudo abaixo já está declarado para você, num prelúdio fixo acima do seu código. Os números de linha dos erros são ajustados para bater com o seu código, não com o prelúdio.",
@@ -52,13 +50,11 @@ const text: Record<string, string> = {
   glslPg_controlsTitle: "Controles a partir de comentários",
   glslPg_controlsBody: "Qualquer uniform seguido de um comentário de anotação ganha um controle. Mude os números no comentário, ou acrescente os seus próprios uniforms, e o painel de controles se atualiza enquanto você digita:",
   glslPg_toyTip: "Código do shadertoy.com roda sem alterações: quando o seu código define mainImage() e nenhum main(), o playground mapeia iTime, iResolution, iMouse e iChannel0..3 para os seus próprios uniforms e chama mainImage por você. Use ⛶ para tela cheia com o editor ao lado do canvas.",
-  glslPg_debugTitle: "Depurando um shader",
-  glslPg_debugBody: "Não existe printf na GPU. A técnica universal é mostrar como cor o valor de que você desconfia. Escreva FragColor = vec4(vec3(x), 1.0) para um escalar, ou vec4(v * 0.5 + 0.5, 1.0) para uma direção em [−1, 1]. Depois confira se ela tem a cara que você espera: preto onde deveria ser 0, branco onde deveria ser 1, uma rampa suave onde deveria ser contínua. Valores fora da faixa são cortados em preto e branco, então use fract(x) para ver valores grandes como faixas.",
+  glslPg_debugPointer: "Quando um shader compila mas desenha a coisa errada, pinte como cor o valor de que você desconfia: FragColor = vec4(vec3(x), 1.0). O capítulo Depurando shaders cobre isso e o resto do kit: logs de compilação, visões com a tela dividida, NaN e as ferramentas que executam um shader passo a passo.",
   glslPg_key0: "O playground compila GLSL ES 3.00 de verdade enquanto você digita; os erros apontam para as suas próprias linhas.",
   glslPg_key1: "Embutidos: uResolution, uTime, uMouse (semântica do ShaderToy), texturas uTex0..3, FragColor.",
   glslPg_key2: "// @slider, @color e @toggle depois de um uniform criam controles automaticamente.",
   glslPg_key3: "Presets de malha acrescentam um vertex shader editável e uma câmera orbital.",
-  glslPg_key4: "Depure pintando como cor o valor de que você desconfia.",
 };
 
 export default text;

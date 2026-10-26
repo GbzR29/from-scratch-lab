@@ -477,7 +477,7 @@
   },
   "glsl/playground": {
     "created": "2026-09-24",
-    "updated": "2026-10-08"
+    "updated": "2026-10-26"
   },
   "glsl/sdf": {
     "created": "2026-05-30",
@@ -498,6 +498,14 @@
   "glsl/noise": {
     "created": "2026-05-30",
     "updated": "2026-10-25"
+  },
+  "glsl/gpu-execution": {
+    "created": "2026-10-26",
+    "updated": "2026-10-26"
+  },
+  "glsl/debugging": {
+    "created": "2026-10-26",
+    "updated": "2026-10-26"
   },
   "glsl/texturing": {
     "created": "2026-09-24",

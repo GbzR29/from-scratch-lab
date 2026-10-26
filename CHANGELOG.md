@@ -14,6 +14,26 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-26
 
+- **GLSL: lacunas da linguagem, lote 2 (EN e PT).** Seção nova, "O lado da GPU", entre Formas e Receitas de efeitos, com duas aulas:
+  - **Como a GPU roda um shader** (`gpu-execution`): warps e lanes (tabela por fabricante), divergência no if / else e nos laços com fórmula de custo e exemplo resolvido, os três tipos de condição, if ou mix, atributos de controle de fluxo e subgroups, latência e ocupação (fórmulas de warps residentes e de uso da ALU com números da RTX 40), quanto custa cada operação e as regras para medir.
+    - **Widget "Uma instrução, um warp inteiro":** pixels em warps de 4 × 8 ou 8 × 8, condição uniforme, círculo, listras ou ruído, custo de cada warp e porcentagem de lanes úteis; o modo laço usa os passos de um sphere tracing de verdade para cada pixel.
+    - **Widget "Divergência, cronometrada na sua GPU":** mede na GPU do leitor (EXT_disjoint_timer_query_webgl2) um if / else com caminhos de mesmo custo, em xadrez e listras de 1 a 32 px, e deduz o formato do warp. Medido aqui numa RTX 4060: 0,246 ms uniforme, 0,479 ms divergente, warp de 4 × 8 pixels. Sem a extensão, mostra essa rodada gravada.
+    - **Widget "Escondendo uma leitura de textura":** simulação ciclo a ciclo de um escalonador, com registradores por lane, contas entre leituras e latência.
+  - **Depurando shaders** (`debugging`): ler o log de compilação (mensagens reais do ANGLE), `#line`, compilar offline com glslangValidator, valores como cores com tela dividida e checagem de faixa, cortar o problema ao meio, sonda de um pixel, resultados indefinidos e NaN, tabela de proteções, ferramentas (RenderDoc, debugPrintfEXT, Nsight, Xcode, Spector.js).
+    - **Widget "O que a especificação deixa em aberto":** 20 casos (sqrt(−1), pow de negativo, normalize(0), min/max com NaN, % negativo, variável não inicializada…) rodados como shaders de um pixel na GPU do leitor e lidos de volta como float. Mostra, por exemplo, que o compilador transforma x / x em 1 e NaN * 0 em 0, e que o ANGLE zera variáveis esquecidas.
+    - Dois playgrounds: visões de depuração com tela dividida e "ache o bug" (uma lua crescente preta causada por pow de um número negativo).
+  - A seção "Depurando um shader" do playground foi para a aula nova; no playground ficou uma frase que aponta para ela.
+
+- **Galeria de figuras na página inicial (EN e PT).** Folha nova, "Figuras que você mexe" (folha 03, entre o catálogo e "Por onde começar"). Ela mostra seis figuras vivas de seis trilhas diferentes. Cada uma tem controle e fórmula e leva à aula que explica o assunto ("ensinado em · Física — Movimento harmônico simples").
+  - **Quatro figuras novas**, que também entram no sorteio da figura do topo:
+    - **OpenGL:** um triângulo girando vira pixels, cada um misturando as cores dos cantos (c = αc₀ + βc₁ + γc₂), e o controle muda quantos pixels cabem na largura;
+    - **Música:** altura é frequência, f = 440 · 2^(n/12), com o período T marcado na onda e o nome da nota;
+    - **Química:** a curva de energia de dois átomos de H, com o ajuste de Morse da aula (D = 4,75 eV, r₀ = 74 pm);
+    - **Algoritmos:** a busca binária corta uma lista de 15 números ao meio, passo a passo, nunca mais de 4 olhadas.
+  - A galeria deixa de fora a figura que está no topo naquele momento. A curva de Bézier, que ainda não tem aula, aparece só no topo.
+  - No celular a galeria vira uma faixa que rola para o lado, um card por vez. As figuras só animam quando estão na tela.
+  - O deck das figuras foi para `components/home/hero/deck.ts`, com a aula de cada uma (títulos PT tirados dos `_track.ts` das trilhas). "Por onde começar" virou a folha 04 e "Como as aulas funcionam" a folha 05.
+
 - **Rótulos com letreiro de prancheta.** Os rótulos pequenos do site saíram da fonte mono em maiúsculas bem espaçadas, que lembrava muitos sites técnicos de 2025 e 2026. Agora usam a fonte condensada do logo (Archivo), em negrito, com pouco espaçamento, como as letras de uma folha de desenho técnico. Foi o estilo A da amostra (https://claude.ai/artifact/FTp79TjLZ4e7hg8f7YLvWg).
   - Onde mudou: kicker acima do título da aula, cabeçalho das caixas (objetivos, ideias-chave, antes de começar), legenda das figuras ("fig. 7.1 —"), seções da barra lateral, "nesta página", notas e dicas, "Aprofundar", página da trilha, página inicial (folhas, códigos dos cartões, rodapé, figura do topo) e referência de funções.
   - Os números (01, 1/9, 10m) continuam em mono.

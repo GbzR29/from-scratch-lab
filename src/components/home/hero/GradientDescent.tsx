@@ -30,7 +30,7 @@ function curvePath() {
 }
 const CURVE = curvePath();
 
-export default function GradientDescent({ ui, num, onNext }: HeroProps) {
+export default function GradientDescent({ ui, num, onNext, figNo }: HeroProps) {
   const [eta, setEta] = useState(0.2);
   const [clock, setClock] = useState(STEP_S * 3.5);
   const figRef = useRef<HTMLElement>(null);
@@ -56,7 +56,7 @@ export default function GradientDescent({ ui, num, onNext }: HeroProps) {
   const inside = Math.abs(w) <= 3.4 && fw <= 10;
 
   return (
-    <HeroFrame figRef={figRef} ui={ui} onNext={onNext}
+    <HeroFrame figRef={figRef} ui={ui} onNext={onNext} figNo={figNo}
       caption={ui.homeFigDescentCaption ?? "how a network learns"}
       aria={ui.homeFigDescentAria ?? "A ball steps down the curve f(w) = w² by gradient descent; the learning rate sets the step size"}
       slider={{ label: ui.homeFigDescentSlider ?? "learning rate η", value: num(eta, 2), min: 0.05, max: 1.05, step: 0.05, at: eta, set: setEta }}

@@ -13,6 +13,8 @@ const track = {
     patterns: "Padrões e transformações",
     color: "Cor",
     noise: "Ruído e padrões procedurais",
+    "gpu-execution": "Como a GPU roda um shader",
+    debugging: "Depurando shaders",
     texturing: "Truques de texturização",
     water: "Ondas e água",
     ocean: "Oceano: ondas por FFT",
@@ -37,6 +39,7 @@ const track = {
   sections: {
     "Language Basics": "Fundamentos da linguagem",
     "Shapes, Patterns & Colour": "Formas, padrões e cor",
+    "The GPU Side": "O lado da GPU",
     "Effect Recipes": "Receitas de efeitos",
     Raymarching: "Raymarching",
     "Ray & Path Tracing": "Ray tracing e path tracing",

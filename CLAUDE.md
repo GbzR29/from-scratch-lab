@@ -16,7 +16,8 @@ Record every change with its date at the top of `CHANGELOG.md` (Portuguese, newe
 
 ```
 src/components/home/hero/              the live figure beside the home title: HeroFigure picks one of a deck per visit (frame.tsx =
-                                       shared card + useHeroClock; one file per figure; add a figure = one file + one DECK entry)
+                                       shared card + useHeroClock; one file per figure; add a figure = one file + one entry in
+                                       deck.ts, with the lesson that teaches it); home/FigureGallery.tsx shows six others (sheet 03)
 src/app/page.tsx, src/components/home/ home page = the track list (TracksHome.tsx: cards from the catalog + progress, HomeNav,
                                        HomeFooter, Stars); styles in src/styles/home.css (--hm-* tokens, .home scope); app/not-found.tsx same look
 src/components/nav/                    SiteMenu (phone ☰ sheet, styles in src/styles/sitemenu.css) + siteLinks (BRAND, links, languages)

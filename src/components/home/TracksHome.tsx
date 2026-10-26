@@ -2,8 +2,8 @@
 "use client";
 
 // The home page (/ and /pt), drawn as a set of sheets: the title sheet with a
-// live figure, the track catalog, the suggested paths and how the lessons
-// work. Reading progress and "continue" come from localStorage.
+// live figure, the track catalog, a gallery of live figures, the suggested
+// paths and how the lessons work. Reading progress and "continue" come from localStorage.
 
 import "@/styles/home.css";
 import Link from "next/link";
@@ -11,8 +11,9 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import HomeNav from "@/components/home/HomeNav";
 import HomeFooter from "@/components/home/HomeFooter";
-import HeroFigure from "@/components/home/hero/HeroFigure";
+import HeroFigure, { useHeroDeck } from "@/components/home/hero/HeroFigure";
 import TrackCatalog from "@/components/home/TrackCatalog";
+import FigureGallery from "@/components/home/FigureGallery";
 import PathsSection from "@/components/home/PathsSection";
 import { TrackGlyph } from "@/components/brand/TrackGlyph";
 import { getTrack } from "@/lib/tracks";
@@ -38,6 +39,7 @@ export default function TracksHome() {
   const urlLang = useUrlLang();
   const ui = t as unknown as Strings;
   const sheet = ui.homeSheet ?? "Sheet";
+  const hero = useHeroDeck();
 
   // Progress lives in localStorage, so it is read after mount (the server has none)
   const [visited, setVisited] = useState<Record<string, number>>({});
@@ -79,7 +81,7 @@ export default function TracksHome() {
               )}
             </div>
           </div>
-          <HeroFigure />
+          <HeroFigure index={hero.index} onNext={hero.next} />
         </section>
 
         {/* ── Sheet 02: catalog ── */}
@@ -95,20 +97,30 @@ export default function TracksHome() {
           </div>
         </section>
 
-        {/* ── Sheet 03: paths ── */}
-        <section id="paths" className="hm-sec">
+        {/* ── Sheet 03: figures ── */}
+        <section id="figures" className="hm-sec">
           <div className="hm-in">
-            <div className="hm-kicker hm-label">{sheet} 03 · {ui.homeAssembly ?? "assembly"}</div>
+            <div className="hm-kicker hm-label">{sheet} 03 · {ui.homeGallery ?? "figures"}</div>
+            <h2>{ui.homeGalleryTitle ?? "Figures you can move"}</h2>
+            <p className="hm-sec-lead">{ui.homeGalleryLead}</p>
+            <FigureGallery heroIndex={hero.index} sheet={3} lang={urlLang} />
+          </div>
+        </section>
+
+        {/* ── Sheet 04: paths ── */}
+        <section id="paths" className="hm-sec alt">
+          <div className="hm-in">
+            <div className="hm-kicker hm-label">{sheet} 04 · {ui.homeAssembly ?? "assembly"}</div>
             <h2>{ui.homePathsTitle ?? "Where to start"}</h2>
             <p className="hm-sec-lead">{ui.homePathsLead}</p>
             <PathsSection t={ui} lang={urlLang} />
           </div>
         </section>
 
-        {/* ── Sheet 04: how the lessons work ── */}
+        {/* ── Sheet 05: how the lessons work ── */}
         <section className="hm-sec hm-band">
           <div className="hm-in">
-            <div className="hm-kicker hm-label">{sheet} 04 · {ui.homeSpec ?? "specification"}</div>
+            <div className="hm-kicker hm-label">{sheet} 05 · {ui.homeSpec ?? "specification"}</div>
             <h2>{ui.learnHowTitle ?? "How the lessons work"}</h2>
             <div className="hm-spec">
               {[
@@ -118,7 +130,7 @@ export default function TracksHome() {
                 [ui.learnHow3Title, ui.learnHow3Body],
               ].map(([h, p], i) => (
                 <div key={i}>
-                  <span>4.{i + 1}</span>
+                  <span>5.{i + 1}</span>
                   <h3>{h}</h3>
                   <p>{p}</p>
                 </div>

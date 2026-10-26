@@ -13,7 +13,7 @@ const G = 9.81, V = 20, PX = 9;
 const O = { x: 34, y: 286 };
 const PAUSE = 0.7;                   // s on the ground before the next throw
 
-export default function Projectile({ ui, num, onNext }: HeroProps) {
+export default function Projectile({ ui, num, onNext, figNo }: HeroProps) {
   const [deg, setDeg] = useState(55);
   const [t, setT] = useState(0.6);
   const figRef = useRef<HTMLElement>(null);
@@ -36,7 +36,7 @@ export default function Projectile({ ui, num, onNext }: HeroProps) {
   const arcEnd = { x: O.x + arcR * Math.cos(th), y: O.y - arcR * Math.sin(th) };
 
   return (
-    <HeroFrame figRef={figRef} ui={ui} onNext={onNext}
+    <HeroFrame figRef={figRef} ui={ui} onNext={onNext} figNo={figNo}
       caption={ui.homeFigThrowCaption ?? "throwing a ball"}
       aria={ui.homeFigThrowAria ?? "A ball thrown at an angle follows a parabola; the angle sets how far it lands"}
       slider={{ label: ui.homeFigThrowSlider ?? "launch angle θ", value: `${num(deg, 0)}°`, min: 10, max: 80, step: 1, at: deg, set: setDeg }}

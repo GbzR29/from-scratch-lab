@@ -12,7 +12,7 @@ const C = { x: 92, y: 160 }, R = 62;
 const X0 = 190, X1 = 425;            // the graph
 const SPEED = 70;                    // px of graph per second
 
-export default function SineWave({ ui, num, onNext }: HeroProps) {
+export default function SineWave({ ui, num, onNext, figNo }: HeroProps) {
   const [f, setF] = useState(0.3);
   const [phase, setPhase] = useState(0.9);
   const figRef = useRef<HTMLElement>(null);
@@ -27,7 +27,7 @@ export default function SineWave({ ui, num, onNext }: HeroProps) {
   const arcEnd = { x: C.x + 22 * Math.cos(phase), y: C.y - 22 * Math.sin(phase) };
 
   return (
-    <HeroFrame figRef={figRef} ui={ui} onNext={onNext}
+    <HeroFrame figRef={figRef} ui={ui} onNext={onNext} figNo={figNo}
       caption={ui.homeFigSineCaption ?? "a circle draws a wave"}
       aria={ui.homeFigSineAria ?? "A point going round a circle; its height traces a sine wave"}
       slider={{ label: ui.homeFigSineSlider ?? "turns per second f", value: `${num(f, 2)} Hz`, min: 0.05, max: 0.8, step: 0.05, at: f, set: setF }}

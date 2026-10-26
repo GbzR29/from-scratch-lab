@@ -13,7 +13,7 @@ const THETA0 = 0.36;     // rad, amplitude (small enough for the formula)
 const PIVOT = { x: 220, y: 26 };
 const lengthPx = (L: number) => 70 + L * 120; // 0.25 m → 100 px, 1.5 m → 250 px
 
-export default function Pendulum({ ui, num, onNext }: HeroProps) {
+export default function Pendulum({ ui, num, onNext, figNo }: HeroProps) {
   const [L, setL] = useState(1);
   const [phase, setPhase] = useState(Math.acos(0.8));
   const figRef = useRef<HTMLElement>(null);
@@ -30,7 +30,7 @@ export default function Pendulum({ ui, num, onNext }: HeroProps) {
   const arcEnd = { x: PIVOT.x + arcR * Math.sin(theta), y: PIVOT.y + arcR * Math.cos(theta) };
 
   return (
-    <HeroFrame figRef={figRef} ui={ui} onNext={onNext}
+    <HeroFrame figRef={figRef} ui={ui} onNext={onNext} figNo={figNo}
       caption={ui.homeFigCaption ?? "the simple pendulum"}
       aria={ui.homeFigAria ?? "A simple pendulum swinging; its length sets the period"}
       slider={{ label: ui.homeFigLength ?? "length L", value: `${num(L, 2)} m`, min: 0.25, max: 1.5, step: 0.05, at: L, set: setL }}

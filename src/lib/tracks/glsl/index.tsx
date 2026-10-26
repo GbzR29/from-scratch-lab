@@ -9,6 +9,7 @@ import type { Chapter } from "@/lib/tracks/types";
 
 const BASICS   = "Language Basics";
 const SHAPES   = "Shapes, Patterns & Colour";
+const GPU      = "The GPU Side";
 const EFFECTS  = "Effect Recipes";
 const RAYMARCH = "Raymarching";
 const RAYTRACE = "Ray & Path Tracing";
@@ -29,6 +30,9 @@ export const glslChapters: Chapter[] = [
   { id: "patterns",    section: SHAPES,  title: "Patterns & Transformations",  minRead: 11, load: () => import("./chapters/shapes").then((m) => m.PatternsContent) },
   { id: "color",       section: SHAPES,  title: "Colour",                      minRead: 12, load: () => import("./chapters/shapes").then((m) => m.ColorContent) },
   { id: "noise",       section: SHAPES,  title: "Noise & Procedural Patterns", minRead: 28, load: () => import("./chapters/noise").then((m) => m.NoiseContent) },
+  // ── The GPU Side ────────────────────────────────────────────────────────
+  { id: "gpu-execution", section: GPU,  title: "How the GPU Runs a Shader",   minRead: 20, load: () => import("./chapters/gpu").then((m) => m.GpuExecutionContent) },
+  { id: "debugging",   section: GPU,     title: "Debugging Shaders",           minRead: 18, load: () => import("./chapters/debugging").then((m) => m.DebuggingContent) },
   // ── Effect Recipes ──────────────────────────────────────────────────────
   { id: "texturing",   section: EFFECTS, title: "Texturing Tricks",            minRead: 12, load: () => import("./chapters/effects/texturing").then((m) => m.TexturingContent) },
   { id: "water",       section: EFFECTS, title: "Waves & Water",               minRead: 38, load: () => import("./chapters/effects/water").then((m) => m.WaterContent) },

@@ -282,6 +282,63 @@ html.dark:has(.home) body { background-color: #1a1c29; }
 .hm-fig-formula { font-family: var(--hm-serif); font-size: 19px; }
 .hm-fig-formula b { color: var(--hm-accent-text); }
 
+/* ── Figure gallery (sheet 03, FigureGallery.tsx) ───────── */
+
+.hm-gal {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 30px;
+}
+@media (max-width: 1100px) { .hm-gal { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* Phones: one strip that scrolls sideways, a card at a time */
+@media (max-width: 640px) {
+  .hm-gal {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 88%;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    padding-bottom: 12px;
+  }
+  .hm-gal-card { scroll-snap-align: start; }
+}
+.hm-gal-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1.5px solid var(--hm-line);
+  background: var(--hm-surface);
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--hm-ink) 10%, transparent);
+}
+.hm-gal-card .hm-figure { flex: none; border: 0; box-shadow: none; animation: none; }
+.hm-gal-card .hm-fig-formula { font-size: 16px; }
+.hm-gal-card .hm-fig-hint { display: none; }   /* the sheet's title already says "move" */
+.hm-gal-link {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-top: 1.5px solid var(--hm-line);
+}
+.hm-gal-link > span { display: grid; min-width: 0; }
+.hm-gal-link small {
+  font-family: var(--hm-display);
+  font-stretch: 75%;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  color: var(--hm-accent-text);
+}
+.hm-gal-link > span > span { font-family: var(--hm-serif); font-size: 17px; line-height: 1.25; }
+.hm-gal-link i { margin-left: auto; font-style: normal; color: var(--hm-muted); transition: translate 0.2s; }
+.hm-gal-link:hover > span > span { color: var(--hm-accent-text); }
+.hm-gal-link:hover i { color: var(--hm-accent-text); translate: 3px 0; }
+
 /* ── Sections ───────────────────────────────────────────── */
 
 .hm-sec { border-top: 1.5px solid var(--hm-line); scroll-margin-top: 16px; }

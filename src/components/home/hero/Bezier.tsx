@@ -13,7 +13,7 @@ type P = { x: number; y: number };
 const P0: P = { x: 46, y: 270 }, P2: P = { x: 394, y: 250 };
 const mix = (a: P, b: P, t: number): P => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
 
-export default function Bezier({ ui, num, onNext }: HeroProps) {
+export default function Bezier({ ui, num, onNext, figNo }: HeroProps) {
   const [pull, setPull] = useState(0.75);
   const [u, setU] = useState(0.55);              // 0 → 2: there and back
   const figRef = useRef<HTMLElement>(null);
@@ -33,7 +33,7 @@ export default function Bezier({ ui, num, onNext }: HeroProps) {
   );
 
   return (
-    <HeroFrame figRef={figRef} ui={ui} onNext={onNext}
+    <HeroFrame figRef={figRef} ui={ui} onNext={onNext} figNo={figNo}
       caption={ui.homeFigCurveCaption ?? "a Bézier curve"}
       aria={ui.homeFigCurveAria ?? "A quadratic Bézier curve drawn by mixing points between three control points"}
       slider={{ label: ui.homeFigCurveSlider ?? "pull of P₁", value: num(pull, 2), min: 0, max: 1, step: 0.05, at: pull, set: setPull }}

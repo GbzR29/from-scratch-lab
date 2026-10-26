@@ -21,7 +21,6 @@ export function PlaygroundContent({ t }: { t: TrackTranslations }) {
         "Use what the playground hands your shader: resolution, time, mouse and textures.",
         "Write a first shader, line by line.",
         "Add sliders, colour pickers and toggles with a comment.",
-        "Debug a shader by turning its values into colours.",
       ]} />
 
       <ShaderPlayground presets={INTRO_PRESETS} t={t} id="glslPgIntro" />
@@ -84,18 +83,6 @@ uniform float uRings;    // @toggle 1                  a checkbox: 0.0 or 1.0`}<
         ]}
       />
 
-      <H2>{tx(t, "glslPg_debugTitle", "Debugging a shader")}</H2>
-      <p>
-        {tx(t, "glslPg_debugBody",
-          "There is no printf on the GPU. The universal technique is to output the value you doubt as a colour. Write FragColor = vec4(vec3(x), 1.0) for a scalar, or vec4(v * 0.5 + 0.5, 1.0) for a direction in [−1, 1]. Then check that it looks the way you expect: black where it should be 0, white where 1, a smooth ramp where it should be continuous. Out-of-range values clip to black and white, so use fract(x) to see large values as bands.")}
-      </p>
-      <CodeBlock lang="glsl" filename="debug_views.glsl" t={t}>{`FragColor = vec4(vec3(d), 1.0);                   // a scalar
-FragColor = vec4(normal * 0.5 + 0.5, 1.0);        // a direction
-FragColor = vec4(fract(worldPos), 1.0);           // large coordinates as repeating bands
-FragColor = vec4(d < 0.0 ? vec3(1, 0, 0) : vec3(0, 0, 1), 1.0);  // a sign
-FragColor = vec4(isnan(x) || isinf(x) ? vec3(1, 0, 1) : vec3(0), 1.0);  // NaN hunting`}</CodeBlock>
-      <p>{tx(t, "glslPg_debugSteps", "Why * 0.5 + 0.5 for directions: a unit normal's components run −1..1, but a colour channel can only show 0..1, so everything negative would be black. Halving and shifting maps −1 → 0, 0 → 0.5 and 1 → 1. A normal pointing straight up, (0, 1, 0), shows as (0.5, 1, 0.5), light green; one pointing at the camera along +Z shows as (0.5, 0.5, 1), the lavender colour of every normal map. With fract(worldPos), a position of 3.25 shows as 0.25: each whole unit becomes one band, so you can count units on screen. NaN (not a number) comes from 0/0, sqrt(−1) or normalize(vec3(0)) and spreads through every calculation it touches; magenta makes it impossible to miss.")}</p>
-
       <H2>{tx(t, "glslPg_mistakesTitle", "Common mistakes")}</H2>
       <LessonTable
         headers={[tx(t, "glslPg_thSymptom", "Symptom"), tx(t, "glslPg_thCause", "Cause"), tx(t, "glslPg_thFix", "Fix")]}
@@ -107,13 +94,16 @@ FragColor = vec4(isnan(x) || isinf(x) ? vec3(1, 0, 1) : vec3(0), 1.0);  // NaN h
           [tx(t, "glslPg_m5a", "Slider missing"), tx(t, "glslPg_m5b", "Annotation not on the same line as the uniform, or a type the panel does not support (only float, int, vec3 and bool)"), tx(t, "glslPg_m5c", "Same line, right after the semicolon; split a vec2 into two floats")],
         ]}
       />
+      <p>
+        {tx(t, "glslPg_debugPointer",
+          "When a shader compiles but draws the wrong thing, paint the value you doubt as a colour: FragColor = vec4(vec3(x), 1.0). The Debugging Shaders chapter covers that and the rest of the toolkit: compile logs, split-screen views, NaN and the tools that step through a shader.")}
+      </p>
 
       <KeyIdeas t={t} id="glslPg" items={[
         "The playground compiles real GLSL ES 3.00 as you type; errors point at your own line numbers.",
         "Built-ins: uResolution, uTime, uMouse (ShaderToy semantics), uTex0..3 textures, FragColor.",
         "// @slider, @color and @toggle after a uniform create controls automatically.",
         "Mesh presets add an editable vertex shader and an orbit camera.",
-        "Debug by painting the value you doubt as a colour.",
       ]} />
     </Article>
   );

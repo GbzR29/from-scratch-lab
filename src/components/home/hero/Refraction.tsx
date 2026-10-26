@@ -30,7 +30,7 @@ function pulsePositions(t: number, src: P, end: P): P[] {
   return out;
 }
 
-export default function Refraction({ ui, num, onNext }: HeroProps) {
+export default function Refraction({ ui, num, onNext, figNo }: HeroProps) {
   const [deg, setDeg] = useState(50);
   const [t, setT] = useState(0);
   const figRef = useRef<HTMLElement>(null);
@@ -47,7 +47,7 @@ export default function Refraction({ ui, num, onNext }: HeroProps) {
   };
 
   return (
-    <HeroFrame figRef={figRef} ui={ui} onNext={onNext}
+    <HeroFrame figRef={figRef} ui={ui} onNext={onNext} figNo={figNo}
       caption={ui.homeFigLightCaption ?? "light bending into water"}
       aria={ui.homeFigLightAria ?? "A beam of light bends towards the normal as it enters water, where it travels more slowly"}
       slider={{ label: ui.homeFigLightSlider ?? "angle in air θ₁", value: `${num(deg, 0)}°`, min: 0, max: 80, step: 1, at: deg, set: setDeg }}
