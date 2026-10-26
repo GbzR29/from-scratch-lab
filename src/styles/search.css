@@ -1,0 +1,201 @@
+/* =========================================================
+   SITE SEARCH
+   The search button and the box of src/components/nav/SiteSearch.tsx.
+   Used by the Home bar and the lesson bar, and the box is portalled to
+   <body>, so it carries its own tokens: the Home palette (home.css),
+   light = "drawing board", dark = "dusk".
+========================================================= */
+
+.ss,
+.ss-open {
+  --ss-bg: #f7f6f0;
+  --ss-paper: #f2f0e8;
+  --ss-ink: #14304d;
+  --ss-soft: #3d5670;
+  --ss-muted: #66798c;
+  --ss-accent: #b3421a;
+  --ss-accent-low: rgba(217, 84, 30, 0.1);
+  --ss-line: #14304d;
+  --ss-line-soft: #c9cfd4;
+  --ss-row: #ecebe2;
+  --glyph-accent: #d9541e;
+  --glyph-bg: #f7f6f0;
+  --ss-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --ss-serif: var(--font-spectral), Georgia, serif;
+  --ss-body: var(--font-plex-sans), system-ui, sans-serif;
+}
+.dark .ss,
+.dark .ss-open {
+  --ss-bg: #212436;
+  --ss-paper: #1a1c29;
+  --ss-ink: #e7e3ef;
+  --ss-soft: #c5c1d3;
+  --ss-muted: #8f8ca6;
+  --ss-accent: #f1b39c;
+  --ss-accent-low: rgba(241, 179, 156, 0.12);
+  --ss-line: #55587a;
+  --ss-line-soft: #2f3247;
+  --ss-row: #2a2d42;
+  --glyph-accent: #f1b39c;
+  --glyph-bg: #212436;
+}
+
+/* ── Button ─────────────────────────────────────────────── */
+
+.ss-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  min-width: 32px;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--ss-line);
+  background: var(--ss-bg);
+  color: var(--ss-ink);
+  font-family: var(--ss-mono);
+  font-size: 12px;
+  cursor: pointer;
+}
+.ss-open:hover { border-color: var(--ss-accent); color: var(--ss-accent); }
+.ss-open:focus-visible { outline: 2px solid var(--ss-accent); outline-offset: 2px; }
+.ss-open-wide { padding: 0 6px 0 10px; justify-content: flex-start; }
+.ss-open-wide .ss-open-text { color: var(--ss-muted); margin-right: 18px; }
+.ss-open kbd {
+  font: inherit;
+  font-size: 11px;
+  line-height: 18px;
+  padding: 0 6px;
+  border: 1px solid var(--ss-line-soft);
+  color: var(--ss-muted);
+}
+
+/* Narrow screens: only the magnifier */
+@media (max-width: 899px) {
+  .ss-open-wide { width: 34px; padding: 0; justify-content: center; }
+  .ss-open-wide .ss-open-text, .ss-open-wide kbd { display: none; }
+}
+
+/* ── Box ────────────────────────────────────────────────── */
+
+.ss { position: fixed; inset: 0; z-index: 70; display: flex; justify-content: center; align-items: flex-start; }
+.ss-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 12, 20, 0.45);
+  animation: ss-fade 0.15s ease-out;
+}
+.ss-panel {
+  position: relative;
+  width: min(680px, calc(100vw - 32px));
+  max-height: min(640px, calc(100dvh - 120px));
+  margin-top: max(56px, 10vh);
+  display: flex;
+  flex-direction: column;
+  background: var(--ss-bg);
+  color: var(--ss-ink);
+  border: 1px solid var(--ss-line);
+  box-shadow: 6px 6px 0 rgba(20, 48, 77, 0.18);
+  font-family: var(--ss-body);
+  animation: ss-drop 0.16s ease-out;
+}
+.dark .ss-panel { box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35); }
+
+.ss-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px 0 18px;
+  border-bottom: 1px solid var(--ss-line);
+  color: var(--ss-muted);
+}
+.ss-field input {
+  flex: 1;
+  min-width: 0;
+  height: 56px;
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--ss-ink);
+  font-family: var(--ss-serif);
+  font-size: 21px;
+}
+.ss-field input::placeholder { color: var(--ss-muted); opacity: 0.8; }
+.ss-field input::-webkit-search-cancel-button { display: none; }
+.ss-esc {
+  font-family: var(--ss-mono);
+  font-size: 11px;
+  padding: 2px 7px;
+  border: 1px solid var(--ss-line-soft);
+  background: none;
+  color: var(--ss-muted);
+  cursor: pointer;
+}
+.ss-esc:hover { color: var(--ss-accent); border-color: var(--ss-accent); }
+
+.ss-status {
+  padding: 10px 18px 6px;
+  font-family: var(--ss-mono);
+  font-size: 11.5px;
+  color: var(--ss-muted);
+}
+
+.ss-results { list-style: none; margin: 0; padding: 0 8px 8px; overflow-y: auto; overscroll-behavior: contain; }
+.ss-results a {
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  gap: 12px;
+  align-items: start;
+  padding: 9px 10px;
+  color: inherit;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+.ss-results [aria-selected="true"] a { background: var(--ss-row); border-left-color: var(--ss-accent); }
+
+.ss-glyph {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--ss-line-soft);
+  color: var(--ss-ink);
+}
+.ss-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.ss-title { font-family: var(--ss-serif); font-size: 17px; line-height: 1.3; }
+.ss-title.ss-code { font-family: var(--ss-mono); font-size: 14.5px; }
+.ss-title mark { background: none; color: var(--ss-accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.ss-place { font-size: 12.5px; color: var(--ss-soft); }
+.ss-desc {
+  font-size: 13px;
+  color: var(--ss-muted);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ss-results [aria-selected="true"] .ss-desc { -webkit-line-clamp: 2; }
+.ss-kind { font-family: var(--ss-mono); font-size: 11px; color: var(--ss-muted); white-space: nowrap; padding-top: 3px; }
+
+.ss-foot {
+  padding: 8px 18px;
+  border-top: 1px solid var(--ss-line-soft);
+  font-family: var(--ss-mono);
+  font-size: 11px;
+  color: var(--ss-muted);
+}
+
+@media (max-width: 767px) {
+  .ss-panel { margin-top: 12px; max-height: calc(100dvh - 24px); }
+  .ss-field input { font-size: 18px; height: 52px; }
+  .ss-kind { display: none; }
+  .ss-results a { grid-template-columns: 32px 1fr; }
+  .ss-glyph { width: 32px; height: 32px; }
+  .ss-foot { display: none; }
+}
+@media (hover: none) { .ss-foot { display: none; } }
+
+@keyframes ss-fade { from { opacity: 0; } }
+@keyframes ss-drop { from { opacity: 0; transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .ss-backdrop, .ss-panel { animation: none; } }

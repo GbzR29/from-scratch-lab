@@ -14,6 +14,12 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-25
 
+- **Busca no site (EN e PT).** Um botão "Buscar" na barra da página inicial e na barra das aulas, com atalho `/` ou Ctrl+K. Ele abre uma caixa que acha, enquanto você digita, as 13 trilhas, as 388 aulas e as ~350 funções da referência (OpenGL, GLFW, SDL3).
+  - A busca ignora acentos e maiúsculas e aceita o radical da palavra ("funcao" acha "Funções"). Os acertos no título contam mais, depois a seção e depois a descrição. Em PT, o título em inglês também é encontrado.
+  - ↑ ↓ escolhem o resultado, Enter abre e Esc fecha. No celular só aparece a lupa.
+  - O índice (`/search-index.json`, gerado no build por `src/lib/search`) é baixado só na primeira vez que a caixa abre.
+  - Arquivos: `components/nav/SiteSearch.tsx`, `lib/search/` (index, match, types), `app/search-index.json/route.ts`, `styles/search.css`.
+
 - **GLSL, lacunas da linguagem: lote 1 (EN e PT).** Dois capítulos novos e um widget novo num capítulo existente, primeiro passo antes de uma trilha de HLSL.
   - **Versões e dialetos** (`versions`, em Fundamentos da linguagem). Conteúdo:
     - a linha #version, com uma tabela de 110 a 460 e de ES 100 a 320 es, os perfis core e compatibility, e a regra da primeira linha no WebGL (testada no navegador);

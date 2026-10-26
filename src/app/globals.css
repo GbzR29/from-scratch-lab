@@ -6,6 +6,7 @@
 @import "../styles/lessonChrome.css";
 @import "../styles/lessonBody.css";
 @import "../styles/sitemenu.css";
+@import "../styles/search.css";
 
 @tailwind base;
 @tailwind components;

@@ -157,7 +157,11 @@ html.dark:has(.home) body { background-color: #1a1c29; }
 }
 .home .hm-support:hover { filter: brightness(1.06); }
 
-/* Phones: name + ☰; the links and tools live in the sheet (sitemenu.css) */
+/* Search (search.css) sits on the right, before the tools */
+.hm-nav .hm-search { margin-left: auto; height: 34px; border-width: 1.5px; }
+.hm-nav .hm-search + .hm-tools { margin-left: 0; }
+
+/* Phones: name + search + ☰; the links and tools live in the sheet (sitemenu.css) */
 .hm-nav .hm-menu { display: none; }
 @media (max-width: 899px) {
   .hm-nav { justify-content: space-between; }

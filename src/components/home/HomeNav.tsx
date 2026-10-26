@@ -2,8 +2,8 @@
 
 // ── Home navigation ─────────────────────────────────────────────────────────
 // The bar on top of the home page (the track list) and the 404: the mark and
-// name, the main links, the language switch, the theme toggle and the Ko-fi
-// link. On phones the links and tools move into the ☰ sheet
+// name, the main links, the search box, the language switch, the theme toggle
+// and the Ko-fi link. On phones the links and tools (not the search) move into the ☰ sheet
 // (components/nav/SiteMenu). Styles: .hm-nav in home.css.
 
 import Link from "next/link";
@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { SiteMenu } from "@/components/nav/SiteMenu";
+import { SiteSearch } from "@/components/nav/SiteSearch";
 import { BRAND, LANGUAGES, useSiteLinks } from "@/components/nav/siteLinks";
 import { LINKS } from "@/components/nav/links";
 import { Mark } from "@/components/brand/Mark";
@@ -47,6 +48,7 @@ export default function HomeNav() {
             </Link>
           ))}
         </div>
+        <SiteSearch className="hm-search" wide />
         <div className="hm-tools">
           <div className="hm-langs" role="group" aria-label={t.navLanguage}>
             {LANGUAGES.map((code) => (

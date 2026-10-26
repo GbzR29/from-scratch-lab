@@ -90,6 +90,16 @@ export function sectionName(trackId: string, section: string | undefined, lang: 
   return (lang === "pt" && PT_TITLES[trackId]?.sections[section]) || section;
 }
 
+/** The lesson's own search-result line, if it has one. */
+export function lessonDescription(trackId: string, chapterId: string, lang: UrlLang): string | undefined {
+  return DESCRIPTIONS[trackId]?.[chapterId]?.[lang];
+}
+
+/** The track's card paragraph, for the site search. */
+export function trackBlurb(info: TrackInfo, lang: UrlLang): string {
+  return trackDescription(info, lang);
+}
+
 /** Shared head tags: canonical in this language + hreflang to both copies. */
 function pageMeta(title: string, description: string, enPath: string, lang: UrlLang, type: "website" | "article"): Metadata {
   const url = lang === "pt" ? (enPath === "/" ? "/pt" : `/pt${enPath}`) : enPath;
