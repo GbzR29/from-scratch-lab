@@ -25,8 +25,8 @@ export const sdl3Descriptions: LessonDescriptions = {
     pt: "O renderer 2D do SDL3: clear, draw e present, apresentação lógica independente da resolução, VSync e ritmo de quadros, e geometria própria.",
   },
   textures: {
-    en: "Textures and images in SDL3: surfaces vs textures, loading images and drawing sprites, render targets, and streaming textures updated every frame.",
-    pt: "Texturas e imagens no SDL3: surfaces vs texturas, carregar imagens e desenhar sprites, render targets e texturas de streaming atualizadas a cada quadro.",
+    en: "SDL3 textures step by step: surface vs texture, loading a PNG with SDL_LoadPNG, sprite sheets with src/dst rects, animation and flip, pixel-art scale modes, pitch.",
+    pt: "Texturas no SDL3 passo a passo: surface vs texture, carregar PNG com SDL_LoadPNG, sprite sheet com src/dst, animação e flip, modos de escala para pixel art, pitch.",
   },
   text: {
     en: "Draw text with SDL3_ttf: string to texture, rendering modes for crisp or fast text, the text engine for changing text, and measuring for layout.",

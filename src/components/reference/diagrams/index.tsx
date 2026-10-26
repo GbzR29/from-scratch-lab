@@ -9,6 +9,8 @@ import type { Language } from "@/lib/i18n";
 import { PrimitiveModesDiagram, VertexLayoutDiagram, ViewportDiagram, WindingDiagram } from "./geometry";
 import { BlendDiagram, StencilDiagram } from "./fragments";
 import { WrapModesDiagram } from "./wrap";
+import { ShaderCheckDiagram, UniformBlocksDiagram } from "./programs";
+import { ImmediateDiagram } from "./immediate";
 
 export type DiagramProps = { language: Language };
 
@@ -20,6 +22,9 @@ const DIAGRAMS: Record<string, (p: DiagramProps) => ReactNode> = {
   blend: BlendDiagram,
   stencil: StencilDiagram,
   wrapModes: WrapModesDiagram,
+  shaderCheck: ShaderCheckDiagram,
+  uniformBlocks: UniformBlocksDiagram,
+  immediate: ImmediateDiagram,
 };
 
 export function ReferenceDiagram({ id, language }: { id: string; language: Language }) {

@@ -124,9 +124,10 @@ if (!ok) {
       pt: "Consulta uma propriedade de um shader — principalmente se ele compilou.",
     },
     description: {
-      en: "glCompileShader never reports failure by itself: it returns nothing, and a shader that did not compile just makes the later link fail. So right after compiling, ask with GL_COMPILE_STATUS. If it is GL_FALSE, ask for GL_INFO_LOG_LENGTH and read the message with glGetShaderInfoLog; it names the line and the mistake.\n\nSkipping this check is the most common reason for a black screen with no error anywhere.",
-      pt: "glCompileShader nunca avisa da falha sozinha: não devolve nada, e um shader que não compilou só faz o link seguinte falhar. Então, logo depois de compilar, pergunte com GL_COMPILE_STATUS. Se vier GL_FALSE, peça GL_INFO_LOG_LENGTH e leia a mensagem com glGetShaderInfoLog; ela diz a linha e o erro.\n\nPular essa verificação é o motivo mais comum de uma tela preta sem erro nenhum.",
+      en: "glCompileShader never reports failure by itself: it returns nothing, and a shader that did not compile just makes the later link fail. So right after compiling, ask with GL_COMPILE_STATUS. If it is GL_FALSE, ask for GL_INFO_LOG_LENGTH and read the message with glGetShaderInfoLog; it names the line and the mistake.\n\nSkipping this check is the most common reason for a black screen with no error anywhere.\n\nThe function writes its answer through a pointer instead of returning it: you pass the address of a GLint and read the variable afterwards. The `iv` at the end of the name says exactly that, integer (`i`) through a pointer (`v`, for vector). The same pattern gives glGetProgramiv, glGetIntegerv and the other glGet* queries.\n\nThere are three separate checks, and each one catches different mistakes: GL_COMPILE_STATUS here for each shader, GL_LINK_STATUS with glGetProgramiv for the program, and glGetError (or a debug callback) for wrong calls. A shader can compile and still fail to link, for example when the vertex shader writes `out vec3 vNormal` and the fragment shader reads `in vec3 vNormals`.",
+      pt: "glCompileShader nunca avisa da falha sozinha: não devolve nada, e um shader que não compilou só faz o link seguinte falhar. Então, logo depois de compilar, pergunte com GL_COMPILE_STATUS. Se vier GL_FALSE, peça GL_INFO_LOG_LENGTH e leia a mensagem com glGetShaderInfoLog; ela diz a linha e o erro.\n\nPular essa verificação é o motivo mais comum de uma tela preta sem erro nenhum.\n\nA função escreve a resposta através de um ponteiro em vez de devolvê-la: você passa o endereço de um GLint e lê a variável depois. O `iv` no fim do nome diz exatamente isso, inteiro (`i`) através de um ponteiro (`v`, de vetor). O mesmo padrão dá glGetProgramiv, glGetIntegerv e as outras consultas glGet*.\n\nSão três verificações separadas, e cada uma pega erros diferentes: GL_COMPILE_STATUS aqui para cada shader, GL_LINK_STATUS com glGetProgramiv para o programa, e glGetError (ou um debug callback) para chamadas erradas. Um shader pode compilar e mesmo assim falhar no link, por exemplo quando o vertex shader escreve `out vec3 vNormal` e o fragment shader lê `in vec3 vNormals`.",
     },
+    diagram: "shaderCheck",
     params: [
       { name: "shader", type: "GLuint", desc: { en: "Shader to query.", pt: "Shader a consultar." } },
       {
@@ -138,13 +139,19 @@ if (!ok) {
           { name: "GL_SHADER_TYPE", desc: { en: "The stage given to glCreateShader.", pt: "O estágio passado para glCreateShader." } },
           { name: "GL_DELETE_STATUS", desc: { en: "GL_TRUE if flagged for deletion.", pt: "GL_TRUE se marcado para deleção." } },
           { name: "GL_SHADER_SOURCE_LENGTH", desc: { en: "Length of the source given with glShaderSource, null terminator included (0 if none).", pt: "Tamanho do código passado com glShaderSource, com o terminador nulo (0 se não houver)." } },
+          { name: "GL_SPIR_V_BINARY", desc: { en: "GL 4.6: GL_TRUE if the shader was loaded as SPIR-V with glShaderBinary instead of compiled from GLSL.", pt: "GL 4.6: GL_TRUE se o shader foi carregado como SPIR-V com glShaderBinary em vez de compilado de GLSL." } },
+          { name: "GL_COMPLETION_STATUS_KHR", desc: { en: "Only with the KHR_parallel_shader_compile extension: GL_TRUE once the compile has finished. Unlike GL_COMPILE_STATUS, asking does not wait for it.", pt: "Só com a extensão KHR_parallel_shader_compile: GL_TRUE quando a compilação terminou. Ao contrário de GL_COMPILE_STATUS, perguntar não espera por ela." } },
         ],
       },
-      { name: "params", type: "GLint *", desc: { en: "Where the result is written.", pt: "Onde o resultado é escrito." } },
+      { name: "params", type: "GLint *", desc: { en: "Address of a GLint that receives the answer: GL_TRUE (1) or GL_FALSE (0) for the status queries, a number of characters for the lengths.", pt: "Endereço de um GLint que recebe a resposta: GL_TRUE (1) ou GL_FALSE (0) nas consultas de status, um número de caracteres nos tamanhos." } },
     ],
     notes: [
       { en: "GL_INFO_LOG_LENGTH is 0 when there is no log. A shader that compiled can still have a log with warnings, so it is worth printing whenever the length is above 1.", pt: "GL_INFO_LOG_LENGTH é 0 quando não há log. Um shader que compilou ainda pode ter um log com avisos, então vale imprimir sempre que o tamanho for maior que 1." },
       { en: "For a program, use glGetProgramiv: GL_LINK_STATUS lives there, not here. Passing a program ID to glGetShaderiv is a GL_INVALID_OPERATION.", pt: "Para um programa, use glGetProgramiv: GL_LINK_STATUS fica lá, não aqui. Passar um ID de programa para glGetShaderiv dá GL_INVALID_OPERATION." },
+      { en: "Reading the line number: in `0:12(5)` or `0(12)`, the first number is which string of the glShaderSource array (0 when you pass one), the next is the line, counted from 1 with the #version line included, and Mesa adds the column. If you glue a header (#version plus some #defines) in front of the file as a separate string, the file's own errors are reported in string 1.", pt: "Lendo o número da linha: em `0:12(5)` ou `0(12)`, o primeiro número é qual string do array do glShaderSource (0 quando você passa uma), o seguinte é a linha, contada a partir de 1 com a linha do #version incluída, e o Mesa acrescenta a coluna. Se você cola um cabeçalho (#version e alguns #defines) na frente do arquivo como uma string separada, os erros do próprio arquivo aparecem na string 1." },
+      { en: "Asking for GL_COMPILE_STATUS makes the driver finish the compile right now, and the program waits. With dozens of shaders it is faster to compile and link all of them first and check afterwards; with KHR_parallel_shader_compile, poll GL_COMPLETION_STATUS_KHR, which never waits.", pt: "Perguntar GL_COMPILE_STATUS faz o driver terminar a compilação na hora, e o programa espera. Com dezenas de shaders é mais rápido compilar e linkar todos primeiro e verificar depois; com KHR_parallel_shader_compile, consulte GL_COMPLETION_STATUS_KHR, que nunca espera." },
+      { en: "The status is the GLint 1 or 0, so `if (!ok)` is the whole test. Initialise it (GLint ok = GL_FALSE): if the call itself fails, for example on an invalid shader name, it writes nothing and an uninitialised variable can read as success.", pt: "O status é o GLint 1 ou 0, então `if (!ok)` é o teste inteiro. Inicialize a variável (GLint ok = GL_FALSE): se a própria chamada falha, por exemplo com um nome de shader inválido, ela não escreve nada, e uma variável não inicializada pode parecer sucesso." },
+      { en: "WebGL and OpenGL ES 2.0 have the same check under other names: gl.getShaderParameter(shader, gl.COMPILE_STATUS) returns a boolean, and gl.getShaderInfoLog(shader) returns the text directly. See the last example.", pt: "WebGL e OpenGL ES 2.0 têm a mesma verificação com outros nomes: gl.getShaderParameter(shader, gl.COMPILE_STATUS) devolve um booleano, e gl.getShaderInfoLog(shader) devolve o texto direto. Veja o último exemplo." },
     ],
     errors: [
       { code: "GL_INVALID_VALUE", when: { en: "shader is not a name generated by OpenGL.", pt: "shader não é um nome gerado pelo OpenGL." } },
@@ -170,6 +177,69 @@ GLuint compile(GLenum type, const char* src) {
     }
     return s;
 }`,
+    examples: [
+      {
+        title: { en: "Compile and link, every check in place", pt: "Compilar e linkar, com todas as verificações" },
+        code: `// Prints the log of a shader or a program, if there is one
+static void printLog(GLuint obj, bool isProgram, const char* what) {
+    GLint len = 0;
+    if (isProgram) glGetProgramiv(obj, GL_INFO_LOG_LENGTH, &len);
+    else           glGetShaderiv(obj, GL_INFO_LOG_LENGTH, &len);
+    if (len <= 1) return;                       // 0 or just the '\\0': nothing to say
+
+    std::string log(len, '\\0');
+    if (isProgram) glGetProgramInfoLog(obj, len, nullptr, log.data());
+    else           glGetShaderInfoLog(obj, len, nullptr, log.data());
+    std::fprintf(stderr, "%s:\\n%s\\n", what, log.c_str());
+}
+
+GLuint makeProgram(const char* vsSrc, const char* fsSrc) {
+    GLuint vs = compile(GL_VERTEX_SHADER, vsSrc);     // the helper above
+    GLuint fs = compile(GL_FRAGMENT_SHADER, fsSrc);
+    if (!vs || !fs) { glDeleteShader(vs); glDeleteShader(fs); return 0; }
+
+    GLuint prog = glCreateProgram();
+    glAttachShader(prog, vs);
+    glAttachShader(prog, fs);
+    glLinkProgram(prog);
+    glDeleteShader(vs);                          // the program keeps what it needs
+    glDeleteShader(fs);
+
+    GLint linked = GL_FALSE;
+    glGetProgramiv(prog, GL_LINK_STATUS, &linked);
+    printLog(prog, true, linked ? "link warnings" : "link error");
+    if (!linked) { glDeleteProgram(prog); return 0; }
+    return prog;
+}`,
+      },
+      {
+        title: { en: "In C, without std::string", pt: "Em C, sem std::string" },
+        filename: "example.c",
+        lang: "c",
+        code: `GLint ok = GL_FALSE;
+glGetShaderiv(shader, GL_COMPILE_STATUS, &ok);
+if (!ok) {
+    GLint len = 0;
+    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &len);
+    char* log = malloc(len > 0 ? len : 1);
+    glGetShaderInfoLog(shader, len, NULL, log);
+    fprintf(stderr, "shader error:\\n%s\\n", len > 0 ? log : "(no log)");
+    free(log);
+}`,
+      },
+      {
+        title: { en: "The same check in WebGL", pt: "A mesma verificação em WebGL" },
+        filename: "example.js",
+        lang: "javascript",
+        code: `const s = gl.createShader(gl.FRAGMENT_SHADER);
+gl.shaderSource(s, source);
+gl.compileShader(s);
+if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+  console.error(gl.getShaderInfoLog(s));   // already a string, no length needed
+  gl.deleteShader(s);
+}`,
+      },
+    ],
     related: ["glGetShaderInfoLog", "glCompileShader", "glGetProgramiv"],
     khronos: `${KHR}glGetShader.xhtml`,
   },

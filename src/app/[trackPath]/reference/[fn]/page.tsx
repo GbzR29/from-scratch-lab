@@ -196,7 +196,7 @@ export default function ReferenceEntryPage() {
     { id: "returns",     title: tt.refReturns ?? "Return value",      show: !!entry.returns },
     { id: "notes",       title: tt.refNotes ?? "Tips & pitfalls",     show: !!entry.notes?.length },
     { id: "errors",      title: tt.refErrors ?? "Errors",             show: !!entry.errors?.length },
-    { id: "example",     title: tt.refExample ?? "Example",           show: !!entry.example },
+    { id: "example",     title: tt.refExample ?? "Example",           show: !!entry.example || !!entry.examples?.length },
     { id: "used-in",     title: tt.refUsedIn ?? "Used in lessons",    show: usedIn.length > 0 },
     { id: "related",     title: tt.refRelated ?? "Related",           show: related.length > 0 },
   ].filter((s) => s.show);
@@ -383,9 +383,15 @@ export default function ReferenceEntryPage() {
             </Section>
           )}
 
-          {entry.example && (
+          {(entry.example || entry.examples?.length) && (
             <Section id="example" title={title("example")}>
-              <CodeBlock lang="cpp" filename="example.cpp" t={t}>{entry.example}</CodeBlock>
+              {entry.example && <CodeBlock lang="cpp" filename="example.cpp" t={t}>{entry.example}</CodeBlock>}
+              {entry.examples?.map((ex) => (
+                <Fragment key={ex.title.en}>
+                  <h3 className="font-display text-[1.2rem] leading-tight text-[var(--text-main)] mt-10 mb-3">{loc(ex.title, language)}</h3>
+                  <CodeBlock lang={ex.lang ?? "cpp"} filename={ex.filename ?? "example.cpp"} t={t}>{ex.code}</CodeBlock>
+                </Fragment>
+              ))}
             </Section>
           )}
 

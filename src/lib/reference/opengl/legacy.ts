@@ -115,19 +115,101 @@ glEnd();`,
       pt: "glVertex3f em 2D: emite um vértice em (x, y) com z = 0.",
     },
     description: {
-      en: "The suffix tells the shape of the arguments, a naming scheme modern OpenGL kept: 2f = two floats, 3f = three floats, 3fv = a pointer to three floats. glUniform2f follows the same rule.",
-      pt: "O sufixo diz a forma dos argumentos, um padrão de nomes que o OpenGL moderno manteve: 2f = dois floats, 3f = três floats, 3fv = um ponteiro para três floats. glUniform2f segue a mesma regra.",
+      en: "The suffix tells the shape of the arguments, a naming scheme modern OpenGL kept: 2f = two floats, 3f = three floats, 3fv = a pointer to three floats. glUniform2f follows the same rule.\n\nWhere does (x, y) land? With no matrix set, the coordinates are already the final ones, normalized device coordinates: the window is the square from −1 to 1 on both axes, (0, 0) is its centre and y points up. So glVertex2f(0.0f, 0.5f) is halfway between the centre and the top edge, whatever the size of the window, and a value of 2 is off screen. To use pixels instead, old code set an orthographic projection first: glMatrixMode(GL_PROJECTION) and glOrtho(0, width, height, 0, -1, 1) put (0, 0) at the top-left corner with y pointing down.\n\nglVertex2f is the call that actually emits a vertex. Everything else (glColor3f, glTexCoord2f, glNormal3f) only changes the current value of one attribute, and each glVertex2f takes a copy of all of them at that moment. That is why the colour comes before the vertex it belongs to. glBegin(GL_TRIANGLES) then groups the vertices three by three.\n\nIt only exists in a compatibility context. Most windowing libraries give you one unless you ask otherwise: with GLFW it is the default, and it disappears as soon as you request GLFW_OPENGL_CORE_PROFILE. On macOS, a context of version 3.2 or later is always core; immediate mode is only there in the legacy 2.1 context. A loader such as glad generated for the core profile does not even declare the function, so the code fails to compile.",
+      pt: "O sufixo diz a forma dos argumentos, um padrão de nomes que o OpenGL moderno manteve: 2f = dois floats, 3f = três floats, 3fv = um ponteiro para três floats. glUniform2f segue a mesma regra.\n\nOnde o (x, y) cai? Sem nenhuma matriz definida, as coordenadas já são as finais, coordenadas normalizadas do dispositivo: a janela é o quadrado de −1 a 1 nos dois eixos, (0, 0) é o centro e o y aponta para cima. Então glVertex2f(0.0f, 0.5f) fica no meio do caminho entre o centro e a borda de cima, qualquer que seja o tamanho da janela, e um valor 2 fica fora da tela. Para usar pixels, o código antigo definia antes uma projeção ortográfica: glMatrixMode(GL_PROJECTION) e glOrtho(0, width, height, 0, -1, 1) põem o (0, 0) no canto de cima à esquerda, com o y para baixo.\n\nO glVertex2f é a chamada que de fato emite um vértice. Todo o resto (glColor3f, glTexCoord2f, glNormal3f) só muda o valor atual de um atributo, e cada glVertex2f leva uma cópia de todos eles naquele momento. Por isso a cor vem antes do vértice a que pertence. O glBegin(GL_TRIANGLES) então agrupa os vértices de três em três.\n\nEle só existe num contexto de compatibilidade. A maioria das bibliotecas de janela dá um, a menos que você peça outra coisa: no GLFW é o padrão, e ele some assim que você pede GLFW_OPENGL_CORE_PROFILE. No macOS, um contexto de versão 3.2 ou mais nova é sempre core; o immediate mode só existe no contexto legado 2.1. Um loader como o glad gerado para o core profile nem declara a função, então o código não compila.",
     },
+    diagram: "immediate",
     params: [
-      { name: "x", type: "GLfloat", desc: { en: "X coordinate.", pt: "Coordenada X." } },
-      { name: "y", type: "GLfloat", desc: { en: "Y coordinate.", pt: "Coordenada Y." } },
+      { name: "x", type: "GLfloat", desc: { en: "X coordinate. Without a projection matrix: −1 is the left edge of the window, 1 the right edge.", pt: "Coordenada X. Sem matriz de projeção: −1 é a borda esquerda da janela, 1 a direita." } },
+      { name: "y", type: "GLfloat", desc: { en: "Y coordinate. Without a projection matrix: −1 is the bottom edge, 1 the top. The z of the vertex is 0 and its w is 1.", pt: "Coordenada Y. Sem matriz de projeção: −1 é a borda de baixo, 1 a de cima. O z do vértice é 0 e o w é 1." } },
+    ],
+    notes: [
+      { en: "Only valid between glBegin and glEnd. Outside them the result is undefined (in practice, nothing is drawn) and no error is defined for it, so nothing tells you.", pt: "Só vale entre glBegin e glEnd. Fora deles o resultado é indefinido (na prática, nada é desenhado) e não há erro definido para isso, então nada avisa você." },
+      { en: "The integer version does not scale: glVertex2i(1, 0) is x = 1, the right edge, not one pixel. Pixel coordinates need glOrtho, with any suffix.", pt: "A versão inteira não converte escala: glVertex2i(1, 0) é x = 1, a borda direita, não um pixel. Coordenadas em pixels precisam do glOrtho, com qualquer sufixo." },
+      { en: "glVertex2fv(p) is the same call with a pointer to two floats, handy when the points are already in an array: for (auto& p : pts) glVertex2fv(&p.x);.", pt: "glVertex2fv(p) é a mesma chamada com um ponteiro para dois floats, útil quando os pontos já estão num array: for (auto& p : pts) glVertex2fv(&p.x);." },
+      { en: "One function call per vertex is the reason immediate mode was removed: a model of 100 000 vertices is 100 000 calls or more every frame. A vertex buffer sends them once and draws them with one glDrawArrays.", pt: "Uma chamada de função por vértice é o motivo de o immediate mode ter sido removido: um modelo de 100 000 vértices são 100 000 chamadas ou mais em todo quadro. Um vertex buffer os envia uma vez e os desenha com um glDrawArrays." },
+      { en: "Nothing appears on screen? Check, in this order: the context is compatibility, not core; the values are between −1 and 1 (or a glOrtho is set); glClear runs before drawing and not after; and the buffers are swapped (glfwSwapBuffers) at the end of the frame.", pt: "Nada aparece na tela? Confira, nesta ordem: o contexto é de compatibilidade, não core; os valores estão entre −1 e 1 (ou há um glOrtho); o glClear roda antes de desenhar e não depois; e os buffers são trocados (glfwSwapBuffers) no fim do quadro." },
     ],
     example: `glBegin(GL_TRIANGLES);
     glVertex2f(-0.5f, -0.5f);
     glVertex2f( 0.5f, -0.5f);
     glVertex2f( 0.0f,  0.5f);
 glEnd();`,
-    related: ["glVertex3f", "glBegin", "glUniform2f"],
+    examples: [
+      {
+        title: { en: "A complete program: a coloured triangle with GLFW", pt: "Um programa completo: um triângulo colorido com GLFW" },
+        filename: "main.cpp",
+        code: `#include <GLFW/glfw3.h>    // also includes the system's old <GL/gl.h>
+
+int main() {
+    if (!glfwInit()) return 1;
+    // No GLFW_OPENGL_PROFILE hint: the default context keeps immediate mode
+    GLFWwindow* window = glfwCreateWindow(640, 480, "glVertex2f", nullptr, nullptr);
+    if (!window) { glfwTerminate(); return 1; }
+    glfwMakeContextCurrent(window);
+
+    while (!glfwWindowShouldClose(window)) {
+        glClearColor(0.1f, 0.1f, 0.12f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        glBegin(GL_TRIANGLES);
+            glColor3f(1, 0, 0); glVertex2f(-0.5f, -0.5f);   // bottom left, red
+            glColor3f(0, 1, 0); glVertex2f( 0.5f, -0.5f);   // bottom right, green
+            glColor3f(0, 0, 1); glVertex2f( 0.0f,  0.5f);   // top, blue
+        glEnd();
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+    glfwTerminate();
+}
+// Linux: g++ main.cpp -lglfw -lGL     Windows: link glfw3.lib and opengl32.lib`,
+      },
+      {
+        title: { en: "Pixel coordinates with glOrtho", pt: "Coordenadas em pixels com glOrtho" },
+        code: `int w, h;
+glfwGetFramebufferSize(window, &w, &h);
+glViewport(0, 0, w, h);
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+glOrtho(0, w, h, 0, -1, 1);        // (0, 0) top-left, y down, units = pixels
+glMatrixMode(GL_MODELVIEW);
+glLoadIdentity();
+
+glBegin(GL_LINE_LOOP);             // a 200 × 100 rectangle outline at (50, 40)
+    glVertex2f( 50,  40);
+    glVertex2f(250,  40);
+    glVertex2f(250, 140);
+    glVertex2f( 50, 140);
+glEnd();`,
+      },
+      {
+        title: { en: "The same triangle in modern OpenGL", pt: "O mesmo triângulo no OpenGL moderno" },
+        code: `// Once, at startup: the three vertices go to the GPU a single time
+float verts[] = {
+//    x      y     r  g  b
+    -0.5f, -0.5f,  1, 0, 0,
+     0.5f, -0.5f,  0, 1, 0,
+     0.0f,  0.5f,  0, 0, 1,
+};
+GLuint vao, vbo;
+glGenVertexArrays(1, &vao);
+glBindVertexArray(vao);
+glGenBuffers(1, &vbo);
+glBindBuffer(GL_ARRAY_BUFFER, vbo);
+glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
+glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);                   // x y
+glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(2 * sizeof(float))); // r g b
+glEnableVertexAttribArray(0);
+glEnableVertexAttribArray(1);
+
+// Every frame: one call instead of six
+glUseProgram(program);             // a vertex + fragment shader pair, see glCreateShader
+glBindVertexArray(vao);
+glDrawArrays(GL_TRIANGLES, 0, 3);`,
+      },
+    ],
+    related: ["glVertex3f", "glBegin", "glColor3f", "glMatrixMode", "glVertexAttribPointer", "glUniform2f"],
   },
   {
     name: "glEnableClientState",

@@ -83,6 +83,37 @@ const text: Record<string, string> = {
   figSdlCb_frozen: "atualizado a cada volta, nunca mostrado",
   figSdlCb_ended: "fim",
   figSdlCb_none: "0 eventos",
+
+  // ── SpriteSheetFigure ──
+  figSdlSprite_title: "Uma sprite sheet: o src escolhe o quadro, o dst o posiciona",
+  figSdlSprite_pause: "pausar",
+  figSdlSprite_play: "tocar",
+  figSdlSprite_row: "linha",
+  figSdlSprite_idle: "0: parado",
+  figSdlSprite_walk: "1: andando",
+  figSdlSprite_mode: "escala",
+  figSdlSprite_scale: "escala",
+  figSdlSprite_angle: "ângulo",
+  figSdlSprite_window: "a janela",
+  figSdlSprite_mNearest: "NEAREST: cada pixel da tela pega o texel mais próximo. Nítido em escalas inteiras; em 3,5× alguns texels ganham 3 pixels e outros 4, então as linhas tremem enquanto o sprite se move.",
+  figSdlSprite_mLinear: "LINEAR (o padrão): cada pixel da tela mistura os quatro texels mais próximos. Certo para fotos e arte suave; pixel art fica borrada.",
+  figSdlSprite_mPixelart: "PIXELART (SDL 3.4): os texels continuam nítidos, e só o pixel da tela em que dois texels se encontram é misturado. A pixel art fica limpa em qualquer escala e rotação, sem o tremor do NEAREST.",
+  figSdlSprite_note: "À esquerda, a textura inteira: 128 × 64 pixels, quatro quadros em cada linha. A caixa âmbar é o src: x = quadro × 32 e y = linha × 32. Clique numa célula para escolhê-la. À direita, a janela: o quadro é desenhado no dst, a caixa azul tracejada, escalado para 32 × escala pixels. O ângulo o gira no sentido horário em torno do centro do dst (nullptr como centro), e o flip o espelha dentro do dst antes.",
+
+  // ── PitchFigure ──
+  figSdlPitch_title: "Pitch: o comprimento de linha que o driver escolheu",
+  figSdlPitch_w: "largura W",
+  figSdlPitch_align: "alinhamento",
+  figSdlPitch_index: "início da linha",
+  figSdlPitch_pad: "preenchimento",
+  figSdlPitch_perRow: "por linha",
+  figSdlPitch_ok: "Toda linha começa onde a GPU a lê. O preenchimento é pulado e nunca aparece.",
+  figSdlPitch_lucky: "Certo por sorte: nesta largura as linhas não precisam de preenchimento, então W × 4 é igual ao pitch. Mude a largura ou o alinhamento e o bug aparece; na GPU de quem escreveu o código ele pode nunca aparecer.",
+  figSdlPitch_bad: "Cada linha é escrita cedo demais: a linha y começa y × preenchimento bytes antes de onde a GPU a lê. A imagem entorta para a esquerda, pixels da linha seguinte aparecem no fim de cada linha, e o fundo da textura mostra o que já estava na memória, porque o loop parou de escrever cedo demais.",
+  figSdlPitch_note: "À esquerda: a memória travada, uma célula por pixel de 4 bytes, cada linha da memória com pitch bytes. As células hachuradas são preenchimento. À direita: a textura como a GPU a lê, com a linha y tirada do byte y × pitch. A CPU escreve uma diagonal branca sobre um degradê de azul para laranja. Troque o início da linha para y * W * 4 e mexa na largura.",
+  figSdlPitch_aria: "memória travada da textura e a textura que a GPU mostra",
+  figSdlPitch_memory: "memória",
+  figSdlPitch_gpu: "o que a GPU mostra",
 };
 
 export default text;

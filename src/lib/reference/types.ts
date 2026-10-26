@@ -40,6 +40,8 @@ export interface RefEntry {
   errors?: { code: string; when: Localized }[];
   /** Short, complete usage example. */
   example?: string;
+  /** More code under the example, each with a heading (a complete program, the GLSL side, the WebGL version…). */
+  examples?: { title: Localized; code: string; lang?: string; filename?: string }[];
   /** Names of related entries. */
   related?: string[];
   /** Link to the official page (Khronos, GLFW docs or the SDL wiki; the link text follows the host). */
