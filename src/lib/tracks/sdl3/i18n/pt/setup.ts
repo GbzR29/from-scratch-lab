@@ -74,7 +74,7 @@ const text: Record<string, string> = {
   sdl02_rm2: "O loop principal",
   sdl02_rm2b: "os quatro main callbacks, um quadrado que se move com delta time, VSync",
   sdl02_rm3: "Eventos e entrada",
-  sdl02_rm3b: "o quadrado guiado pelo teclado, pelo mouse e por um gamepad",
+  sdl02_rm3b: "o quadrado guiado pelas setas ou WASD em qualquer layout de teclado; Esc fecha",
   sdl02_rm4: "O renderer 2D",
   sdl02_rm4b: "uma resolução de jogo fixa de 640×360 em qualquer tamanho de janela, formas e blending",
   sdl02_rm5: "Texturas e imagens",

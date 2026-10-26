@@ -160,7 +160,7 @@ SDL_SetDefaultTextureScaleMode(app->renderer, SDL_SCALEMODE_NEAREST); // SDL 3.4
       <H2>{tx(t, "sdl06_projectTitle", "The project: an animated character")}</H2>
       <p>
         {tx(t, "sdl06_startBody",
-          "The project starts as the Events & Input chapter left it: the square moves with the arrow keys or WASD at 120 pixels per second, in a 640 × 360 logical screen. Four changes turn it into the character. First, the state gets the texture and two animation values:")}
+          "The project starts as the 2D Renderer chapter left it: the square moves with the arrow keys or WASD at 120 pixels per second, in a 640 × 360 logical screen. Four changes turn it into the character. First, the state gets the texture and two animation values:")}
       </p>
       <CodeBlock lang="cpp" filename="src/main.cpp" t={t}>{`struct AppState {
     SDL_Window*   window     = nullptr;

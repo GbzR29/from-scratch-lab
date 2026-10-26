@@ -17,12 +17,12 @@ export const sdl3Descriptions: LessonDescriptions = {
     pt: "O loop principal no SDL3: por que um while simples quebra na web e no celular, os quatro callbacks SDL_App e passo fixo em qualquer frame rate.",
   },
   input: {
-    en: "SDL3 events and input: the SDL_Event union, events vs keyboard state, scancodes vs keycodes, mouse modes, gamepads, and text input.",
-    pt: "Eventos e input no SDL3: a union SDL_Event, eventos vs estado do teclado, scancodes vs keycodes, modos do mouse, controles e entrada de texto.",
+    en: "SDL3 keyboard input, step by step: events vs SDL_GetKeyboardState, key repeat, scancode vs keycode (AZERTY, Dvorak), WASD movement with diagonals, mouse, gamepad dead zone, text input.",
+    pt: "Teclado no SDL3, passo a passo: eventos vs SDL_GetKeyboardState, repetição de teclas, scancode vs keycode (AZERTY, Dvorak), movimento WASD com diagonais, mouse, zona morta do gamepad, texto.",
   },
   renderer: {
-    en: "The SDL3 2D renderer: clear, draw and present, logical presentation for resolution independence, VSync and frame pacing, and custom geometry.",
-    pt: "O renderer 2D do SDL3: clear, draw e present, apresentação lógica independente da resolução, VSync e ritmo de quadros, e geometria própria.",
+    en: "The SDL3 2D renderer: drawing shapes, SDL_SetRenderLogicalPresentation modes (letterbox, integer scale) with the scale math, mouse to game coordinates, blend modes, VSync, geometry.",
+    pt: "O renderer 2D do SDL3: formas, os modos do SDL_SetRenderLogicalPresentation (letterbox, escala inteira) com a conta da escala, mouse em coordenadas do jogo, modos de blend, VSync, geometria.",
   },
   textures: {
     en: "SDL3 textures step by step: surface vs texture, loading a PNG with SDL_LoadPNG, sprite sheets with src/dst rects, animation and flip, pixel-art scale modes, pitch.",

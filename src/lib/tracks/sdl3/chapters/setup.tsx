@@ -210,7 +210,7 @@ int main(int argc, char* argv[]) {
         rows={[
           [tx(t, "sdl02_rm1", "Setup & First Window"), tx(t, "sdl02_rm1b", "a window that closes properly")],
           [tx(t, "sdl02_rm2", "The Main Loop"), tx(t, "sdl02_rm2b", "the four main callbacks, a square moving with delta time, VSync")],
-          [tx(t, "sdl02_rm3", "Events & Input"), tx(t, "sdl02_rm3b", "the square steered with the keyboard, the mouse and a gamepad")],
+          [tx(t, "sdl02_rm3", "Events & Input"), tx(t, "sdl02_rm3b", "the square steered with the arrows or WASD on any keyboard layout; Escape quits")],
           [tx(t, "sdl02_rm4", "The 2D Renderer"), tx(t, "sdl02_rm4b", "a fixed 640×360 game resolution in any window size, shapes and blending")],
           [tx(t, "sdl02_rm5", "Textures & Images"), tx(t, "sdl02_rm5b", "the square becomes an animated sprite")],
           [tx(t, "sdl02_rm6", "Text with SDL3_ttf"), tx(t, "sdl02_rm6b", "a score and a frame counter on screen")],

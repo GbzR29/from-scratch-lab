@@ -64,7 +64,7 @@ const text: Record<string, string> = {
   sdl06_scaleBody2: "O projeto usa NEAREST. A resolução lógica dele é 640 × 360 com escala inteira (da aula do renderer), então uma janela de 1280 × 720 mostra cada pixel lógico como exatamente 2 × 2 pixels da tela, e a amostragem nearest é exata. Mais uma regra a mantém exata: desenhe em pixels lógicos inteiros. Um sprite em x = 100,5 fica na fronteira entre dois pixels, e as colunas dele são cortadas de forma desigual. A posição continua float, para o movimento ser suave; só o desenho arredonda.",
 
   sdl06_projectTitle: "O projeto: um personagem animado",
-  sdl06_startBody: "O projeto começa como a aula de Eventos e Input o deixou: o quadrado anda com as setas ou WASD a 120 pixels por segundo, numa tela lógica de 640 × 360. Quatro mudanças o transformam no personagem. Primeiro, o estado ganha a textura e dois valores da animação:",
+  sdl06_startBody: "O projeto começa como a aula O renderer 2D o deixou: o quadrado anda com as setas ou WASD a 120 pixels por segundo, numa tela lógica de 640 × 360. Quatro mudanças o transformam no personagem. Primeiro, o estado ganha a textura e dois valores da animação:",
   sdl06_step2: "Segundo, carregue a sheet no fim do SDL_AppInit, depois que o renderer existe:",
   sdl06_step3: "Terceiro, no SDL_AppIterate, escolha o quadro. A linha depende de o personagem estar se mexendo; o quadro dentro da linha vem do tempo tocado. A 8 quadros por segundo, uma caminhada de quatro quadros se repete duas vezes por segundo:",
   sdl06_eqFrame: "Qual quadro mostrar",
