@@ -108,7 +108,7 @@ export function Recall({ to, children }: { to: string; children: ReactNode }) {
           role="dialog"
           className="absolute left-0 top-full z-30 mt-2 block w-max max-w-[min(20rem,calc(100vw-2rem))] rounded-xl border border-[var(--border)] bg-[var(--card)] px-4 py-3 text-left shadow-lg"
         >
-          <span className="block font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--primary)]">
+          <span className="block lettering text-[13px] text-[var(--primary)]">
             ↺ {ctx.labels.review} · {hit.n}
           </span>
           <span className="mt-1 block font-display text-[17px] leading-snug text-[var(--text-main)]">{hit.chapter.title}</span>

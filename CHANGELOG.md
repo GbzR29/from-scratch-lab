@@ -12,6 +12,14 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ## Outubro de 2026
 
+### 2026-10-26
+
+- **Rótulos com letreiro de prancheta.** Os rótulos pequenos do site saíram da fonte mono em maiúsculas bem espaçadas, que lembrava muitos sites técnicos de 2025 e 2026. Agora usam a fonte condensada do logo (Archivo), em negrito, com pouco espaçamento, como as letras de uma folha de desenho técnico. Foi o estilo A da amostra (https://claude.ai/artifact/FTp79TjLZ4e7hg8f7YLvWg).
+  - Onde mudou: kicker acima do título da aula, cabeçalho das caixas (objetivos, ideias-chave, antes de começar), legenda das figuras ("fig. 7.1 —"), seções da barra lateral, "nesta página", notas e dicas, "Aprofundar", página da trilha, página inicial (folhas, códigos dos cartões, rodapé, figura do topo) e referência de funções.
+  - Os números (01, 1/9, 10m) continuam em mono.
+  - Rótulos de fórmula e cabeçalhos de tabela mantêm as maiúsculas e minúsculas do autor (`.lettering.keep-case`). Antes, "x²" aparecia como "X²" e "h" como "H".
+  - Classe nova `.lettering` em `styles/theme.css`. Os rótulos internos dos widgets (cerca de 240) ainda não mudaram.
+
 ### 2026-10-25
 
 - **Topo das aulas mais limpo (EN e PT).** As três caixinhas debaixo do título (tempo de leitura, datas e leitura/foco) viraram uma linha discreta. Ela mostra o tempo, o **número de figuras da aula** e as duas datas, com o seletor leitura/foco à direita.

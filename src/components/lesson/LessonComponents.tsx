@@ -178,7 +178,7 @@ export function Callout({
 
   return (
     <div className="!my-8 py-4 px-5 border-l-2" style={{ borderColor: config.tone, background: config.tint }}>
-      <span className="font-mono text-[11px] uppercase tracking-[0.08em] block mb-1.5" style={{ color: config.tone }}>
+      <span className="lettering text-[13.5px] block mb-1.5" style={{ color: config.tone }}>
         {tx(t, config.labelKey, config.fallback)}
       </span>
       <div className="text-[var(--text-main)] opacity-90 text-[15px] leading-relaxed">{children}</div>
@@ -414,7 +414,7 @@ export function LessonTable({
         <thead>
           <tr className="border-b border-[var(--border-strong)]">
             {headers.map((h, i) => (
-              <th key={i} className="text-left pl-0 pr-4 pt-2.5 pb-2 font-mono font-medium text-[11px] text-[var(--text-muted)] uppercase tracking-[0.06em]">
+              <th key={i} className="text-left pl-0 pr-4 pt-2.5 pb-2 lettering keep-case text-[13.5px] text-[var(--text-muted)]">
                 {h}
               </th>
             ))}
@@ -455,7 +455,7 @@ export function MathBlock({
       <div className="flex items-start gap-3 px-5 py-4">
         <div className="min-w-0 flex-1">
           {label && (
-            <div className="text-[11px] font-mono uppercase tracking-[0.08em] text-[var(--text-muted)] mb-2">{label}</div>
+            <div className="lettering keep-case text-[13.5px] text-[var(--text-muted)] mb-2">{label}</div>
           )}
           <div className="font-mono text-[var(--text-main)] text-sm leading-loose">{children}</div>
         </div>

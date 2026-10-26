@@ -61,7 +61,7 @@ export function Derivation({ label, steps, where, note, t }: {
   return (
     <div ref={links.ref} {...links.handlers} className="eq-card my-6 rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-[var(--shadow-sm)] overflow-hidden">
       {label && (
-        <div className="px-4 pt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)]">{label}</div>
+        <div className="px-4 pt-3 lettering keep-case text-[13.5px] text-[var(--text-muted)]">{label}</div>
       )}
       <div className="px-4 pt-4 pb-2 overflow-x-auto">
         <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-1.5 gap-y-1 w-max min-w-full text-[var(--text-main)] text-[length:calc(1.05rem*var(--tex-scale))]">

@@ -104,7 +104,7 @@ export function MatrixProduct({ t, label, presets, note }: {
 
   return (
     <div className="eq-card my-6 rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-[var(--shadow-sm)] overflow-hidden">
-      {label && <div className="px-4 pt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)]">{label}</div>}
+      {label && <div className="px-4 pt-3 lettering keep-case text-[13.5px] text-[var(--text-muted)]">{label}</div>}
       <div className="px-4 pt-3 flex flex-wrap gap-1.5">
         {presets.map((pr, idx) => (
           <button key={idx} type="button" onClick={() => load(idx)} aria-pressed={preset === idx}

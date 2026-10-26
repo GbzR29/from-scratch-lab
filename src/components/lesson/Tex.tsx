@@ -141,7 +141,7 @@ export const WhereList = memo(function WhereList({ where, colors }: { where?: [s
   if (!where?.length) return null;
   return (
     <div className="px-4 pb-3.5 pt-1 border-t border-[var(--separator)] grid gap-x-4 gap-y-1.5 grid-cols-[auto_1fr] items-baseline text-[13px]">
-      <span className="col-span-2 font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)] pt-2">{WHERE[language] ?? WHERE.en}</span>
+      <span className="col-span-2 lettering text-[13px] text-[var(--text-muted)] pt-2">{WHERE[language] ?? WHERE.en}</span>
       {where.map(([sym, meaning], i) => (
         <div key={i} className="contents">
           <span className="text-[var(--primary)] whitespace-nowrap" dangerouslySetInnerHTML={{ __html: render(sym, false, colors) }} />
@@ -183,7 +183,7 @@ export function Equation({ children, label, where, note, notes, glsl, glm, words
     <div ref={links.ref} {...links.handlers} className="eq-card my-6 rounded-xl border border-[var(--border)] bg-[var(--card)] shadow-[var(--shadow-sm)] overflow-hidden">
       {(label || words) && (
         <div className="px-4 pt-3 flex items-center gap-3">
-          {label && <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)]">{label}</span>}
+          {label && <span className="lettering keep-case text-[13.5px] text-[var(--text-muted)]">{label}</span>}
           {words && (
             <button type="button" onClick={() => setInWords(w => !w)} aria-pressed={inWords}
               className="ml-auto flex-shrink-0 px-2 py-0.5 rounded-md border border-[var(--border)] text-[10.5px] font-mono text-[var(--text-muted)] hover:text-[var(--primary)] hover:border-[var(--primary)]/40 transition-colors">

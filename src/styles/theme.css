@@ -105,3 +105,20 @@
   --scrollbar-thumb-hover: #4B5563;
   --scrollbar-thumb-active: #3B82F6;
 }
+
+/* ── Lettering (labels) ─────────────────────────────────────
+   Small labels across the site (kickers, plate heads, captions,
+   sidebar sections, "on this page") are drawn like the lettering
+   on a drafting sheet: the brand face, condensed and bold, with a
+   little tracking. Chosen 2026-10-26 in place of spaced-out mono
+   capitals. CSS rules repeat these lines; markup uses the class. */
+.lettering {
+  font-family: var(--font-archivo), "Arial Narrow", sans-serif;
+  font-stretch: 75%;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+/* Labels that may hold math or code (formula cards, table heads) keep their
+   own case, so x² is not drawn as X² */
+.lettering.keep-case { text-transform: none; letter-spacing: 0.01em; font-stretch: 90%; font-weight: 600; }

@@ -21,7 +21,7 @@ export function OnThisPage({ headings, activeId, label, onJump }: {
 
   return (
     <div className="lb-toc">
-      <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)] mb-3">{label}</p>
+      <p className="lettering text-[13.5px] text-[var(--text-muted)] mb-3">{label}</p>
       <nav>
         {headings.map((h) => (
           <a

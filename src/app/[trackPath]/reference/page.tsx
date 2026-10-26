@@ -72,7 +72,7 @@ export default function ReferenceIndexPage() {
       left={<ReferenceSidebar reference={reference} />}
       right={
         <div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)] mb-4">
+          <p className="lettering text-[13px] text-[var(--text-muted)] mb-4">
             {tt.refCategories ?? "Categories"}
           </p>
           <nav className="space-y-0.5 border-l border-[var(--border)]">
@@ -121,7 +121,7 @@ export default function ReferenceIndexPage() {
         {hasVersions && (
           <div className="mt-4">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)] mr-1">
+              <span className="lettering text-[13px] text-[var(--text-muted)] mr-1">
                 {tt.refVersion ?? "Available in"}
               </span>
               {[0, ...VERSIONS].map((v) => (

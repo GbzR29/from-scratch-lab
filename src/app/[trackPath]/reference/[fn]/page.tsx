@@ -130,7 +130,7 @@ function ParamCard({ param, language, reference }: { param: RefParam; language: 
       </div>
       {param.values && param.values.length > 0 && (
         <div className="mt-4">
-          <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)] mb-2">
+          <p className="lettering text-[13px] text-[var(--text-muted)] mb-2">
             {tt.refAcceptedValues ?? "Common values"}
           </p>
           <dl className="divide-y divide-[var(--separator)] rounded-lg border border-[var(--border)] overflow-hidden">
@@ -217,7 +217,7 @@ export default function ReferenceEntryPage() {
         left={<ReferenceSidebar reference={reference} activeName={entry.name} />}
         right={
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)] mb-4 flex items-center gap-1.5">
+            <p className="lettering text-[13px] text-[var(--text-muted)] mb-4 flex items-center gap-1.5">
               <AlignLeft size={11} />
               {tt.refOnThisPage ?? "On this page"}
             </p>

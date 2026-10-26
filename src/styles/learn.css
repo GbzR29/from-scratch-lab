@@ -245,9 +245,12 @@ html:not(.dark) .learn {
   align-items: center;
   gap: 0.6rem;
   margin-bottom: 0.6rem;
-  font-size: 11px;
+  font-family: var(--font-archivo), "Arial Narrow", sans-serif;
+  font-stretch: 75%;
+  font-weight: 700;
+  font-size: 13.5px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.035em;
   color: var(--tone);
 }
 .callout-badge {
@@ -288,9 +291,12 @@ html:not(.dark) .learn {
   border: 1px solid color-mix(in srgb, var(--tone) 32%, transparent);
   background: var(--tint);
   color: var(--tone);
-  font-size: 11px;
+  font-family: var(--font-archivo), "Arial Narrow", sans-serif;
+  font-stretch: 75%;
+  font-weight: 700;
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.035em;
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease, translate 0.2s ease;
 }
@@ -356,9 +362,12 @@ html:not(.dark) .learn {
   align-items: center;
   gap: 0.55rem;
   margin-bottom: 0.55rem;
-  font-size: 11px;
+  font-family: var(--font-archivo), "Arial Narrow", sans-serif;
+  font-stretch: 75%;
+  font-weight: 700;
+  font-size: 13.5px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.035em;
   color: var(--tone);
 }
 .callout-pop-head .callout-badge { opacity: 1; transform: none; }
@@ -444,9 +453,12 @@ button.deeper-head { cursor: pointer; }
 .deeper-head:hover .deeper-icon { translate: 0 2px; }
 .deeper-titles { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; flex: 1; }
 .deeper-label {
-  font-size: 10.5px;
+  font-family: var(--font-archivo), "Arial Narrow", sans-serif;
+  font-stretch: 75%;
+  font-weight: 700;
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.035em;
   color: var(--primary);
 }
 .deeper-title { font-size: 1.12rem; line-height: 1.35; color: var(--text-main); }
@@ -485,9 +497,12 @@ button.deeper-head { cursor: pointer; }
   margin: 0.6rem 1.5rem 1.1rem;
   padding: 0.25rem 0.7rem 0.25rem 0.5rem;
   border-radius: 999px;
-  font-size: 11px;
+  font-family: var(--font-archivo), "Arial Narrow", sans-serif;
+  font-stretch: 75%;
+  font-weight: 700;
+  font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.035em;
   color: var(--text-muted);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
