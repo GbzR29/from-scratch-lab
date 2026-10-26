@@ -119,7 +119,7 @@ float pulse = sin(uTime * 3.14159) * 0.5 + 0.5;`}</CodeBlock>
         ]}
       />
       <Callout type="info" t={t}>
-        {tx(t, "glsl02_derivNote", "dFdx(v), dFdy(v) and fwidth(v) = |dFdx(v)| + |dFdy(v)| tell you how much any value changes to the next pixel. The GPU shades pixels in 2×2 quads and simply subtracts neighbours. They exist only in fragment shaders, and they are how texture() picks mip levels and how every edge in this track is anti-aliased.")}
+        {tx(t, "glsl02_derivNote", "dFdx(v), dFdy(v) and fwidth(v) = |dFdx(v)| + |dFdy(v)| tell you how much any value changes to the next pixel. The GPU shades pixels in 2×2 quads and simply subtracts neighbours. They exist only in fragment shaders, and they are how texture() picks mip levels and how every edge in this track is anti-aliased. The Derivatives & Anti-aliasing chapter shows where the numbers come from.")}
       </Callout>
 
       <H2>{tx(t, "glsl02_mistakesTitle", "Common mistakes")}</H2>

@@ -20,6 +20,14 @@ export const glslDescriptions: LessonDescriptions = {
     en: "GLSL built-in variables: gl_Position, gl_PointSize and gl_PointCoord, gl_ClipDistance, gl_FragCoord and gl_FrontFacing, interpolation qualifiers.",
     pt: "Variáveis embutidas do GLSL: gl_Position, gl_PointSize e gl_PointCoord, gl_ClipDistance, gl_FragCoord e gl_FrontFacing, qualificadores de interpolação.",
   },
+  versions: {
+    en: "GLSL versions and dialects: the #version line, OpenGL vs GLSL ES vs Vulkan GLSL, porting attribute and varying, precision, glslc and SPIR-V, the preprocessor.",
+    pt: "Versões e dialetos do GLSL: a linha #version, OpenGL vs GLSL ES vs GLSL do Vulkan, portar attribute e varying, precisão, glslc e SPIR-V, o pré-processador.",
+  },
+  derivatives: {
+    en: "dFdx, dFdy and fwidth in GLSL: 2×2 pixel quads, anti-aliased edges and thin lines at any zoom, moiré, the atan texture seam, and flat normals from derivatives.",
+    pt: "dFdx, dFdy e fwidth em GLSL: quads de 2×2 pixels, bordas e linhas finas sem serrilhado em qualquer zoom, moiré, a costura do atan e normais planas por derivadas.",
+  },
   playground: {
     en: "A free GLSL shader playground in the browser: write a fragment shader line by line, use time, mouse and textures, add sliders, and debug with colours.",
     pt: "Um playground de shaders GLSL grátis no navegador: escreva um fragment shader linha a linha, use tempo, mouse e texturas, crie sliders e depure com cores.",

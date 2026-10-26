@@ -6,6 +6,10 @@ import type { TrackTranslations } from "@/lib/tracks/types";
 import { tx } from "@/lib/tracks/tx";
 import { Goals } from "@/components/lesson/Prose";
 import { CodeBlock, Callout, H2, LessonTable } from "@/components/lesson/LessonComponents";
+import { Derivation } from "@/components/lesson/Derivation";
+import { InterpolationFigure } from "@/components/lesson/glsl/InterpolationFigure";
+
+const r = String.raw;
 
 export function BuiltinVarsContent({ t }: { t: TrackTranslations }) {
   return (
@@ -176,6 +180,30 @@ smooth        out vec2 vUV;          // 'smooth' is the default and is usually l
 flat          in int  vMaterialId;
 noperspective in vec3 vEdgeDist;
 in vec2 vUV;`}</CodeBlock>
+      <p>
+        {tx(t, "glslBv_whyPersp",
+          "Why does smooth need to know about perspective at all? A triangle seen at an angle has its far half squeezed into fewer pixels than its near half. Blending the vertex values evenly across the screen (noperspective) spreads the far half of a texture over too many pixels and the near half over too few. The rasteriser corrects for this with each vertex's w, which for a perspective projection is its distance in front of the camera."
+        )}
+      </p>
+      <InterpolationFigure t={t} />
+      <p>
+        {tx(t, "glslBv_emuBody",
+          "GLSL ES 3.00, and so WebGL 2, has no noperspective. The figure above builds it from two smooth varyings, and the trick shows exactly what smooth does:"
+        )}
+      </p>
+      <Derivation t={t} label={tx(t, "glslBv_emuLabel", "noperspective from two smooth varyings")}
+        where={[
+          [r`\lambda_i`, tx(t, "glslBv_ewL", "the pixel's screen-space weights for the three vertices, adding up to 1")],
+          [r`v_i`, tx(t, "glslBv_ewV", "the varying's value at vertex i")],
+          [r`w_i`, tx(t, "glslBv_ewW", "gl_Position.w of vertex i, its distance in front of the camera")],
+        ]}
+        steps={[
+          { full: true, tex: r`\text{smooth}(v) = \frac{\sum_i \lambda_i\, v_i / w_i}{\sum_i \lambda_i / w_i}`, why: tx(t, "glslBv_e1", "This is how smooth blends: v / w and 1 / w both vary linearly on screen, and dividing one by the other gives the perspective-correct value.") },
+          { full: true, tex: r`\text{smooth}(v\,w) = \frac{\sum_i \lambda_i\, v_i}{\sum_i \lambda_i / w_i}`, why: tx(t, "glslBv_e2", "Send v · w instead of v: the w inside cancels, and the top becomes the plain screen-space blend.") },
+          { full: true, tex: r`\text{smooth}(w) = \frac{1}{\sum_i \lambda_i / w_i}`, why: tx(t, "glslBv_e3", "Send w itself as a second varying. The top would be the sum of the weights, which is 1, so only the bottom is left.") },
+          { full: true, tex: r`\frac{\text{smooth}(v\,w)}{\text{smooth}(w)} = \sum_i \lambda_i\, v_i`, why: tx(t, "glslBv_e4", "Divide the two in the fragment shader: the bottoms cancel and what remains is the blend linear on screen, which is exactly noperspective(v).") },
+        ]}
+      />
 
       <H2>{tx(t, "glslBv_blockTitle", "Interface blocks")}</H2>
       <p>

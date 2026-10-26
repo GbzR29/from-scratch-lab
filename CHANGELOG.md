@@ -14,6 +14,29 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-10-25
 
+- **GLSL, lacunas da linguagem: lote 1 (EN e PT).** Dois capítulos novos e um widget novo num capítulo existente, primeiro passo antes de uma trilha de HLSL.
+  - **Versões e dialetos** (`versions`, em Fundamentos da linguagem). Conteúdo:
+    - a linha #version, com uma tabela de 110 a 460 e de ES 100 a 320 es, os perfis core e compatibility, e a regra da primeira linha no WebGL (testada no navegador);
+    - como portar shaders antigos (attribute, varying, gl_FragColor, texture2D);
+    - o GLSL ES: precisão obrigatória no fragment shader, nenhuma conversão automática de int para float, o que falta no WebGL 2;
+    - o GLSL do Vulkan: glslc, glslangValidator e SPIR-V, set e binding, push_constant, location obrigatório, gl_VertexIndex, texture e sampler separados, specialization constants;
+    - o pré-processador (`GL_ES`, `VULKAN`, `__VERSION__`, #version adicionado pelo carregador) e #extension;
+    - erros comuns com as mensagens reais dos compiladores.
+
+    Widget novo: um shader em cinco dialetos, com as linhas que mudam numeradas e explicadas, e um botão que compila o texto no compilador de GLSL do próprio navegador e mostra o log real.
+  - **Derivadas e antisserrilhado** (`derivatives`, em Formas, padrões e cor, depois de SDF). Conteúdo:
+    - quads de 2×2, dFdx, dFdy e fwidth, fine e coarse, pixels auxiliares;
+    - a cobertura a partir de uma distância (Derivation), linhas mais finas que um pixel e padrões finos que passam para a média (moiré);
+    - como o texture() usa as derivadas, e a costura do atan e do fract corrigida com textureGrad;
+    - normais planas por derivadas;
+    - onde as derivadas são indefinidas (desvios não uniformes, fora do fragment shader, valores que saltam, floats grandes).
+
+    Widgets novos:
+    - quads de 2×2 em SVG, com as subtrações de dFdx e dFdy, fine e coarse, borda de triângulo com pixels auxiliares e "dentro de um if";
+    - quatro jeitos de cortar uma borda em WebGL, desenhado em resolução baixa e ampliado sem filtro: step, smoothstep fixo, fwidth e fwidth com detalhe fino, nas cenas formas, grade no chão e anéis, com movimento;
+    - dois presets de playground: a costura do atan e as normais por derivadas numa esfera deslocada.
+  - **Variáveis embutidas** (`builtin-vars`): widget novo, "Três jeitos de interpolar uma varying" (smooth, noperspective e flat num ladrilho em perspectiva, com o w de cada canto). Também ganhou uma Derivation que mostra como montar o noperspective, que não existe no WebGL 2, a partir de duas varyings smooth.
+  - Funções embutidas agora aponta para o capítulo novo, e os dois capítulos novos têm descrições de busca.
 - **As páginas mais clicadas no Search Console, melhoradas (EN e PT).**
   - **GLSL → Ruído e padrões procedurais** (`noise`), reescrito no formato novo e focado na GPU; a teoria do Perlin passo a passo continua na Game Dev, e as bordas exatas de Voronoi em Rachaduras e estilhaços, com links para lá. Hash com sin desmontado passo a passo em float32 (LiveFormula: só 8 ou 9 bits de aleatoriedade), por que ele quebra longe da origem, hash de inteiros pcg2d explicado linha a linha e playground próprio (sin contra PCG com deslocamento de até 10⁶), ruído de valor, as três curvas de suavização com inclinação e curvatura (LiveFormula), ruído de gradiente com o código, simplex com os fatores de inclinação deduzidos, Worley com código e widget novo (busca 3 × 3 com ponto arrastável, F1, F2, F2 − F1 e id da célula; quebre: só a própria célula), fBm com a rotação explicada, quantas oitavas a tela mostra (LiveFormula) e fBm sem aliasing com fwidth, variantes (turbulência, cristas), domain warping com a fórmula, mover, repetir sem emenda e assar em textura, erros comuns, exercícios. Notas do playground traduzidas.
   - **OpenGL → Compute shaders** (`compute`): limites consultados no código, "em palavras" no ID global, LiveFormula de quantos dispatches uma redução precisa, seções novas de atomics (tabela das funções, histograma em memória shared), chamadas indiretas com culling por frustum na GPU escrevendo um comando de draw indireto, e ping-pong; três erros novos, exercícios.

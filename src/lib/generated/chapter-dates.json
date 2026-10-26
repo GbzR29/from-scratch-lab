@@ -461,7 +461,7 @@
   },
   "glsl/builtins": {
     "created": "2026-05-30",
-    "updated": "2026-10-08"
+    "updated": "2026-10-25"
   },
   "glsl/fragcoord": {
     "created": "2026-05-30",
@@ -469,7 +469,11 @@
   },
   "glsl/builtin-vars": {
     "created": "2026-09-27",
-    "updated": "2026-10-08"
+    "updated": "2026-10-25"
+  },
+  "glsl/versions": {
+    "created": "2026-10-25",
+    "updated": "2026-10-25"
   },
   "glsl/playground": {
     "created": "2026-09-24",
@@ -478,6 +482,10 @@
   "glsl/sdf": {
     "created": "2026-05-30",
     "updated": "2026-10-08"
+  },
+  "glsl/derivatives": {
+    "created": "2026-10-25",
+    "updated": "2026-10-25"
   },
   "glsl/patterns": {
     "created": "2026-09-24",

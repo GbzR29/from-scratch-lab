@@ -21,9 +21,11 @@ export const glslChapters: Chapter[] = [
   { id: "builtins",    section: BASICS,  title: "Built-in Functions",          minRead: 13, load: () => import("./chapters/builtins").then((m) => m.BuiltinsContent) },
   { id: "fragcoord",   section: BASICS,  title: "Fragment Coordinates & UV",   minRead: 9,  load: () => import("./chapters/fragcoord").then((m) => m.FragCoordContent) },
   { id: "builtin-vars", section: BASICS, title: "Built-in Variables",          minRead: 14, load: () => import("./chapters/builtin-vars").then((m) => m.BuiltinVarsContent) },
+  { id: "versions",    section: BASICS,  title: "Versions & Dialects",         minRead: 15, load: () => import("./chapters/versions").then((m) => m.VersionsContent) },
   { id: "playground",  section: BASICS,  title: "The Shader Playground",       minRead: 8,  load: () => import("./chapters/playground").then((m) => m.PlaygroundContent) },
   // ── Shapes, Patterns & Colour ───────────────────────────────────────────
   { id: "sdf",         section: SHAPES,  title: "Signed Distance Functions",   minRead: 15, load: () => import("./chapters/sdf").then((m) => m.SDFContent) },
+  { id: "derivatives", section: SHAPES,  title: "Derivatives & Anti-aliasing", minRead: 18, load: () => import("./chapters/derivatives").then((m) => m.DerivativesContent) },
   { id: "patterns",    section: SHAPES,  title: "Patterns & Transformations",  minRead: 11, load: () => import("./chapters/shapes").then((m) => m.PatternsContent) },
   { id: "color",       section: SHAPES,  title: "Colour",                      minRead: 12, load: () => import("./chapters/shapes").then((m) => m.ColorContent) },
   { id: "noise",       section: SHAPES,  title: "Noise & Procedural Patterns", minRead: 28, load: () => import("./chapters/noise").then((m) => m.NoiseContent) },

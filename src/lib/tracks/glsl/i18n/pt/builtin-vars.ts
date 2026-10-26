@@ -45,6 +45,17 @@ const text: Record<string, string> = {
   glslBv_i3u: "ids e índices; obrigatório para saídas int e uint",
   glslBv_blockTitle: "Interface blocks",
   glslBv_blockBody: "Quando um estágio passa muitos valores adiante, agrupá-los num interface block deixa os dois lados legíveis. Um bloco tem um nome de bloco, que é o que o próximo estágio casa, e um nome de instância, que é só como cada shader se refere a ele; os dois shaders podem usar nomes de instância diferentes. Os membros precisam bater em nome, tipo e ordem. Em geometry e tessellation shaders o bloco de entrada é um array, com uma entrada por vértice da primitiva.",
+  // ── interpolation figure + noperspective trick (2026-10-25) ──
+  glslBv_whyPersp: "Por que o smooth precisa saber de perspectiva? Um triângulo visto de lado tem a metade distante espremida em menos pixels que a metade próxima. Misturar os valores dos vértices por igual ao longo da tela (noperspective) espalha a metade distante de uma textura por pixels demais e a metade próxima por pixels de menos. O rasterizador corrige isso com o w de cada vértice, que numa projeção perspectiva é a distância dele à frente da câmera.",
+  glslBv_emuBody: "O GLSL ES 3.00, e portanto o WebGL 2, não tem noperspective. A figura acima o constrói a partir de duas varyings smooth, e o truque mostra exatamente o que o smooth faz:",
+  glslBv_emuLabel: "noperspective a partir de duas varyings smooth",
+  glslBv_ewL: "os pesos do pixel em espaço de tela para os três vértices, somando 1",
+  glslBv_ewV: "o valor da varying no vértice i",
+  glslBv_ewW: "o gl_Position.w do vértice i, a distância dele à frente da câmera",
+  glslBv_e1: "É assim que o smooth mistura: v / w e 1 / w variam linearmente na tela, e dividir um pelo outro dá o valor com perspectiva correta.",
+  glslBv_e2: "Envie v · w no lugar de v: o w de dentro se cancela, e o numerador vira a mistura simples em espaço de tela.",
+  glslBv_e3: "Envie o próprio w como segunda varying. O numerador seria a soma dos pesos, que é 1, então só sobra o denominador.",
+  glslBv_e4: "Divida as duas no fragment shader: os denominadores se cancelam e o que sobra é a mistura linear na tela, exatamente o noperspective(v).",
   glslBv_perVertexNote: "As variáveis embutidas seguem o mesmo padrão. gl_Position, gl_PointSize e gl_ClipDistance são membros de um bloco predefinido chamado gl_PerVertex, e é por isso que um geometry shader lê gl_in[i].gl_Position. Compute shaders têm suas próprias variáveis embutidas, como gl_GlobalInvocationID e gl_LocalInvocationID; o capítulo Compute Shaders da trilha de OpenGL as explica.",
 };
 

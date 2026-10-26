@@ -59,7 +59,7 @@ const text: Record<string, string> = {
   glsl02_s6u: "curvas de animação, decaimentos",
   glsl02_s7: "Borda da largura de um pixel",
   glsl02_s7u: "antisserrilhar qualquer limiar",
-  glsl02_derivNote: "dFdx(v), dFdy(v) e fwidth(v) = |dFdx(v)| + |dFdy(v)| dizem quanto qualquer valor muda até o próximo pixel. A GPU sombreia os pixels em quads de 2×2 e simplesmente subtrai os vizinhos. Elas só existem em fragment shaders, e são como o texture() escolhe os níveis de mip e como toda borda desta trilha é antisserrilhada.",
+  glsl02_derivNote: "dFdx(v), dFdy(v) e fwidth(v) = |dFdx(v)| + |dFdy(v)| dizem quanto qualquer valor muda até o próximo pixel. A GPU sombreia os pixels em quads de 2×2 e simplesmente subtrai os vizinhos. Elas só existem em fragment shaders, e são como o texture() escolhe os níveis de mip e como toda borda desta trilha é antisserrilhada. O capítulo Derivadas e antisserrilhado mostra de onde vêm os números.",
   glsl02_key0: "As funções embutidas agem componente a componente e são aceleradas por hardware: abs, fract, mod, clamp, mix, step, smoothstep…",
   glsl02_key1: "Pense em curvas: desenhe o gráfico da função, da entrada à saída, antes de escrevê-la.",
   glsl02_key2: "smoothstep é uma cúbica de Hermite limitada: transições sem costura e bordas antisserrilhadas.",
