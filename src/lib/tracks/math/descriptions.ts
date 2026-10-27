@@ -285,8 +285,28 @@ export const mathDescriptions: LessonDescriptions = {
     pt: "Estatística descritiva: histogramas, média, mediana e moda, quartis e desvio padrão, box plot, escore z, percentis e o paradoxo de Simpson.",
   },
   counting: {
-    en: "Counting principles: the multiplication principle, permutations vs combinations and when order matters, repetition, Pascal's triangle, inclusion–exclusion.",
-    pt: "Análise combinatória: princípio multiplicativo, arranjo, permutação e combinação e quando a ordem importa, repetição, triângulo de Pascal e inclusão–exclusão.",
+    en: "What combinatorics is and why it matters: trees of possibilities, the multiplication (fundamental counting) principle, restrictions first, and the addition principle.",
+    pt: "O que é análise combinatória e para que serve: árvore de possibilidades, princípio fundamental da contagem (multiplicativo), restrições primeiro e princípio aditivo.",
+  },
+  permutations: {
+    en: "Factorials and permutations: n!, why 0! = 1, simplifying factorials, items kept together or apart, anagrams with repeated letters, and circular permutations.",
+    pt: "Fatorial e permutações: n!, por que 0! = 1, simplificar fatoriais, itens juntos ou separados, anagramas com letras repetidas e permutação circular.",
+  },
+  arrangements: {
+    en: "Arrangements explained: the slot method, A(n, k) = n!/(n − k)!, arrangements with repetition, the swap test for order, and digit problems with restrictions.",
+    pt: "Arranjo simples e com repetição: método das casas, A(n, k) = n!/(n − k)!, o teste da troca para saber se a ordem importa e problemas de algarismos com restrições.",
+  },
+  combinations: {
+    en: "Combinations: C(n, k) from arrangements, computing it by hand, \"at least one\" by the complement, committees, diagonals and triangles, lotteries and card hands.",
+    pt: "Combinação simples: C(n, k) a partir do arranjo, cálculo à mão, \"pelo menos um\" pelo complementar, comissões, diagonais e triângulos, Mega-Sena e mãos de cartas.",
+  },
+  "counting-advanced": {
+    en: "Harder counting: stars and bars, whole-number solutions of equations, splitting into groups, inclusion–exclusion, derangements and the pigeonhole principle.",
+    pt: "Contagens avançadas: combinação com repetição (estrelas e barras), soluções inteiras, divisão em grupos, inclusão–exclusão, permutação caótica e casa dos pombos.",
+  },
+  "counting-tricks": {
+    en: "Combinatorics tricks and traps: the swap test, restricted first, cases, complement, block, gaps, dividing an overcount, and stars and bars, with practice.",
+    pt: "Macetes de análise combinatória: teste da troca, restrição primeiro, casos, complementar, bloco, espaços, dividir a contagem dupla e estrelas e barras, com prática.",
   },
   probability: {
     en: "Probability basics: outcomes and events, equally likely outcomes, the axioms, the complement trick, counting probabilities, and geometric probability.",

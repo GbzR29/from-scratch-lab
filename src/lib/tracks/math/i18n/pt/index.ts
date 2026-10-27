@@ -76,9 +76,15 @@ import greenStokes from "./green-stokes";
 import fourier from "./fourier";
 import calculusOfVariations from "./calculus-of-variations";
 import pde from "./pde";
+// ── Combinatorics ──
+import counting from "./counting";
+import permutations from "./permutations";
+import arrangements from "./arrangements";
+import combinations from "./combinations";
+import countingAdvanced from "./counting-advanced";
+import countingTricks from "./counting-tricks";
 // ── Probability & Statistics ──
 import descriptiveStats from "./descriptive-stats";
-import counting from "./counting";
 import probability from "./probability";
 import conditional from "./conditional";
 import randomVariables from "./random-variables";
@@ -104,7 +110,8 @@ const bundle: LessonText = {
     ...trig, ...unitCircle, ...triangleLaws, ...identities, ...trigEquations, ...polar, ...waves,
     ...vectors, ...matrices, ...determinant, ...inverse, ...eigen, ...complex, ...quaternions,
     ...limits, ...derivatives, ...derivativeRules, ...derivativeUses, ...integrals, ...ftc, ...integrationTechniques, ...series, ...partialDerivatives, ...multipleIntegrals, ...differentialEquations, ...vectorFields, ...lineIntegrals, ...greenStokes, ...fourier, ...calculusOfVariations, ...pde,
-    ...descriptiveStats, ...counting, ...probability, ...conditional, ...randomVariables, ...expectation, ...distributions, ...sampling, ...regression, ...markovChains, ...absorbingChains,
+    ...counting, ...permutations, ...arrangements, ...combinations, ...countingAdvanced, ...countingTricks,
+    ...descriptiveStats, ...probability, ...conditional, ...randomVariables, ...expectation, ...distributions, ...sampling, ...regression, ...markovChains, ...absorbingChains,
     ...graphsIntro, ...eulerPaths, ...treesMath, ...planarColoring, ...recurrences,
   },
   titles: track.titles,

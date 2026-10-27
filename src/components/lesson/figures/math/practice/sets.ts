@@ -21,6 +21,7 @@ import { pdeGrid, pdeHeat, pdeWave } from "./pde";
 import { binomialChoose, binomialCoef, collect, evaluate, explog, linear, quadratic, sequences, system } from "./algebra";
 import { conjugate, crossMul, radical, substitution } from "./toolkit";
 import { coefSum, notable, rationalise, reciprocal, vieta } from "./tricks";
+import { cntAdvanced, cntArr, cntComb, cntFactorial, cntPerm, cntPrinciple } from "./combinatorics";
 
 export type Kind = { id: string; label: [string, string]; make: Gen };
 export type PracticeSet = { title: [string, string]; kinds: Kind[] };
@@ -128,6 +129,21 @@ export const SETS = {
   recurrences: { title: ["mpr_tRec", "Practice: recurrences"], kinds: [
     { id: "terms", label: ["mpr_kRecTerms", "terms and fixed points"], make: recTerms },
     { id: "roots", label: ["mpr_kRecRoots", "characteristic roots"], make: recRoots },
+  ] },
+  countingPrinciples: { title: ["mpr_tCntPrinc", "Practice: the counting principles"], kinds: [{ id: "principle", label: ["mpr_kCntPrinc", "multiply or add"], make: cntPrinciple }] },
+  permutations: { title: ["mpr_tCntPerm", "Practice: factorials and permutations"], kinds: [
+    { id: "factorial", label: ["mpr_kCntFact", "factorials"], make: cntFactorial },
+    { id: "perm", label: ["mpr_kCntPerm", "permutations"], make: cntPerm },
+  ] },
+  arrangements: { title: ["mpr_tCntArr", "Practice: arrangements"], kinds: [{ id: "arr", label: ["mpr_kCntArr", "arrangements"], make: cntArr }] },
+  combinations: { title: ["mpr_tCntComb", "Practice: combinations"], kinds: [{ id: "comb", label: ["mpr_kCntComb", "combinations"], make: cntComb }] },
+  countingAdvanced: { title: ["mpr_tCntAdv", "Practice: harder counts"], kinds: [{ id: "adv", label: ["mpr_kCntAdv", "repetition, groups, derangements"], make: cntAdvanced }] },
+  countingMix: { title: ["mpr_tCntMix", "Practice: the whole Combinatorics section"], kinds: [
+    { id: "principle", label: ["mpr_kCntPrinc", "multiply or add"], make: cntPrinciple },
+    { id: "perm", label: ["mpr_kCntPerm", "permutations"], make: cntPerm },
+    { id: "arr", label: ["mpr_kCntArr", "arrangements"], make: cntArr },
+    { id: "comb", label: ["mpr_kCntComb", "combinations"], make: cntComb },
+    { id: "adv", label: ["mpr_kCntAdv", "repetition, groups, derangements"], make: cntAdvanced },
   ] },
 } satisfies Record<string, PracticeSet>;
 

@@ -106,5 +106,55 @@ const ALGEBRA2: TrickBank = {
   ],
 };
 
-export const BANKS = { algebra1: ALGEBRA1, algebra2: ALGEBRA2 } satisfies Record<string, TrickBank>;
+// Counting problems are mostly words, so the story sits in `goal` (translated)
+// and the TeX keeps only the numbers.
+const COMBINATORICS: TrickBank = {
+  title: ["figTk_cTitle", "Practice: which trick? (combinatorics)"],
+  tricks: [
+    { id: "order", name: ["figTk_nOrder", "ask whether order matters"] },
+    { id: "first", name: ["figTk_nFirst", "fill the restricted position first"] },
+    { id: "cases", name: ["figTk_nCases", "split into cases and add"] },
+    { id: "compl", name: ["figTk_nCompl", "count the complement: all minus none"] },
+    { id: "block", name: ["figTk_nBlock", "glue the items into one block"] },
+    { id: "gaps", name: ["figTk_nGaps", "place the others, then use the gaps"] },
+    { id: "divide", name: ["figTk_nDivide", "divide out what was counted twice"] },
+    { id: "stars", name: ["figTk_nStars", "stars and bars"] },
+  ],
+  items: [
+    { tex: r`n = 12,\quad k = 3`, goal: ["figTk_cg1", "12 candidates; 3 are elected to a council where all 3 seats are equal. How many councils?"], right: "order",
+      why: ["figTk_cw1", "Swapping two councillors gives the same council, so order does not matter: C(12, 3) = 220, not 12 · 11 · 10."] },
+    { tex: r`\_\,\_\,\_\,\_`, goal: ["figTk_cg2", "How many 4-digit numbers have all their digits different?"], right: "first",
+      why: ["figTk_cw2", "The first digit cannot be 0: fill it first with 9 options, then 9, 8, 7. Total 9 · 9 · 8 · 7 = 4536."] },
+    { tex: r`\_\,\_\,\_ \quad 2 \mid n`, goal: ["figTk_cg3", "How many even 3-digit numbers have all their digits different?"], right: "cases",
+      why: ["figTk_cw3", "Whether the last digit is 0 changes the options of the first digit. Case 0 at the end: 9 · 8 = 72. Case 2, 4, 6 or 8: 8 · 8 · 4 = 256. Add: 328."] },
+    { tex: r`2^{10}`, goal: ["figTk_cg4", "10 coins are tossed. In how many results is there at least one head?"], right: "compl",
+      why: ["figTk_cw4", "\"At least one\" has many cases; its opposite, \"no head at all\", has one. 2¹⁰ − 1 = 1023."] },
+    { tex: r`n = 6`, goal: ["figTk_cg5", "6 friends stand in a row for a photo, and the couple Ana and Bia want to be side by side. How many photos?"], right: "block",
+      why: ["figTk_cw5", "Glue the couple into one block: 5 things in a row, 5! = 120, times 2! for the order inside the block: 240."] },
+    { tex: r`5 + 3`, goal: ["figTk_cg6", "5 boys and 3 girls in a row, and no two girls may stand side by side. How many rows?"], right: "gaps",
+      why: ["figTk_cw6", "Seat the 5 boys: 5! = 120. They leave 6 gaps (ends included); the girls take 3 of them in order: 6 · 5 · 4 = 120. Total 14 400."] },
+    { tex: r`\mathrm{ARARA}`, goal: ["figTk_cg7", "How many different words can be made with the letters of ARARA?"], right: "divide",
+      why: ["figTk_cw7", "5! counts each word once for every order of its 3 A's and its 2 R's: 120/(3! · 2!) = 10."] },
+    { tex: r`x + y + z = 8`, goal: ["figTk_cg8", "How many solutions in whole numbers x, y, z ≥ 0?"], right: "stars",
+      why: ["figTk_cw8", "8 stars and 2 bars, 10 places: C(10, 2) = 45."] },
+    { tex: r`n = 7`, goal: ["figTk_cg9", "7 people sit around a round table. How many seatings, if turning everyone together changes nothing?"], right: "divide",
+      why: ["figTk_cw9", "Each seating was counted once for each of the 7 turns: 7!/7 = 6! = 720."] },
+    { tex: r`C_{9,4}`, goal: ["figTk_cg10", "A team of 4 from 5 women and 4 men, with at least one woman. How many teams?"], right: "compl",
+      why: ["figTk_cw10", "All teams minus the teams with no woman: C(9, 4) − C(4, 4) = 126 − 1 = 125."] },
+    { tex: r`\mathrm{LIVRO}`, goal: ["figTk_cg11", "How many anagrams of LIVRO start and end with a vowel?"], right: "first",
+      why: ["figTk_cw11", "The two ends are restricted: the vowels I and O take them in 2 ways. The 3 consonants fill the middle in 3! = 6 ways. Total 12."] },
+    { tex: r`n = 10`, goal: ["figTk_cg12", "10 points on a circle. How many quadrilaterals have their corners among them?"], right: "order",
+      why: ["figTk_cw12", "The 4 points fix the quadrilateral whatever order they are picked in: C(10, 4) = 210."] },
+    { tex: r`\mathrm{BRASIL}`, goal: ["figTk_cg13", "How many anagrams of BRASIL have the letters B, R, A together, in that order?"], right: "block",
+      why: ["figTk_cw13", "BRA becomes one block with its order fixed. Block, S, I, L: 4 things, 4! = 24."] },
+    { tex: r`k = 6,\ n = 4`, goal: ["figTk_cg14", "6 identical sweets are shared among 4 children; a child may get none. In how many ways?"], right: "stars",
+      why: ["figTk_cw14", "6 stars and 3 bars: C(9, 3) = 84. The sweets are identical, so only how many each child gets matters."] },
+    { tex: r`1 \le n \le 999`, goal: ["figTk_cg15", "How many whole numbers from 1 to 999 have at least one digit 7?"], right: "compl",
+      why: ["figTk_cw15", "Write every number with 3 digits, 000 to 999. With no 7 at all: 9³ = 729, and that includes 000. So 728 of the numbers 1 to 999 have no 7, and 999 − 728 = 271 have one."] },
+    { tex: r`\ell \in \{4, 5\}`, goal: ["figTk_cg16", "A PIN has 4 or 5 digits, repeats allowed. How many PINs are there?"], right: "cases",
+      why: ["figTk_cw16", "A PIN has 4 digits or 5, never both: two separate cases. 10⁴ + 10⁵ = 10 000 + 100 000 = 110 000."] },
+  ],
+};
+
+export const BANKS = { algebra1: ALGEBRA1, algebra2: ALGEBRA2, combinatorics: COMBINATORICS } satisfies Record<string, TrickBank>;
 export type BankId = keyof typeof BANKS;

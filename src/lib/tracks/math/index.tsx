@@ -11,6 +11,7 @@ const GEOMETRY = "Geometry";
 const TRIGONOMETRY = "Trigonometry";
 const LINEAR_ALGEBRA = "Linear Algebra";
 const CALCULUS = "Calculus";
+const COMBINATORICS = "Combinatorics";
 const PROBABILITY = "Probability & Statistics";
 const LOGIC = "Logic & Proof";
 const DISCRETE = "Discrete Mathematics";
@@ -92,8 +93,14 @@ const chapters: Chapter[] = [
   { id: "calculus-of-variations", section: CALCULUS, title: "The Calculus of Variations", minRead: 24, load: () => import("./chapters/calculus-of-variations").then((m) => m.CalculusOfVariationsContent) },
   { id: "pde",                    section: CALCULUS, title: "Partial Differential Equations: Heat & Waves", minRead: 25, load: () => import("./chapters/pde").then((m) => m.PdeContent) },
 
+  { id: "counting",          section: COMBINATORICS, title: "What Is Combinatorics? The Counting Principles", minRead: 18, load: () => import("./chapters/counting").then((m) => m.CountingContent) },
+  { id: "permutations",      section: COMBINATORICS, title: "Factorials & Permutations",                   minRead: 22, load: () => import("./chapters/permutations").then((m) => m.PermutationsContent) },
+  { id: "arrangements",      section: COMBINATORICS, title: "Arrangements: When Order Matters",            minRead: 20, load: () => import("./chapters/arrangements").then((m) => m.ArrangementsContent) },
+  { id: "combinations",      section: COMBINATORICS, title: "Combinations: When Order Does Not Matter",    minRead: 24, load: () => import("./chapters/combinations").then((m) => m.CombinationsContent) },
+  { id: "counting-advanced", section: COMBINATORICS, title: "Harder Counting: Repetition, Groups & Overlaps", minRead: 25, load: () => import("./chapters/counting-advanced").then((m) => m.CountingAdvancedContent) },
+  { id: "counting-tricks",   section: COMBINATORICS, title: "Combinatorics Tricks & Traps",                minRead: 22, load: () => import("./chapters/counting-tricks").then((m) => m.CountingTricksContent) },
+
   { id: "descriptive-stats", section: PROBABILITY, title: "Descriptive Statistics",          minRead: 20, load: () => import("./chapters/descriptive-stats").then((m) => m.DescriptiveStatsContent) },
-  { id: "counting",         section: PROBABILITY, title: "Counting: Permutations & Combinations", minRead: 20, load: () => import("./chapters/counting").then((m) => m.CountingContent) },
   { id: "probability",      section: PROBABILITY, title: "Probability Basics",              minRead: 19, load: () => import("./chapters/probability").then((m) => m.ProbabilityContent) },
   { id: "conditional",      section: PROBABILITY, title: "Conditional Probability & Bayes", minRead: 25, load: () => import("./chapters/conditional").then((m) => m.ConditionalContent) },
   { id: "random-variables", section: PROBABILITY, title: "Random Variables",                minRead: 20, load: () => import("./chapters/random-variables").then((m) => m.RandomVariablesContent) },
@@ -188,21 +195,27 @@ const requires: Record<string, string[]> = {
   "calculus-of-variations": ["derivative-uses", "partial-derivatives", "integration-techniques", "differential-equations"],
   "pde":                    ["fourier", "partial-derivatives", "differential-equations"],
 
+  "counting":          ["powers"],
+  "permutations":      ["counting"],
+  "arrangements":      ["permutations"],
+  "combinations":      ["arrangements", "binomial"],
+  "counting-advanced": ["combinations", "sets"],
+  "counting-tricks":   ["counting-advanced"],
+
   "descriptive-stats": ["ratios", "powers"],
-  "counting":          ["powers", "binomial"],
-  "probability":       ["counting", "fractions"],
+  "probability":       ["combinations", "fractions"],
   "conditional":       ["probability"],
   "random-variables":  ["conditional", "integrals", "ftc", "descriptive-stats"],
   "expectation":       ["random-variables", "conditional"],
-  "distributions":     ["expectation", "counting", "exponents"],
+  "distributions":     ["expectation", "combinations", "exponents"],
   "sampling":          ["distributions", "descriptive-stats"],
   "regression":        ["descriptive-stats", "partial-derivatives", "dot"],
   "markov-chains":     ["conditional", "random-variables", "matrices", "sequences"],
   "absorbing-chains":  ["markov-chains", "expectation", "inverse"],
 
-  "graphs-intro":    ["sets", "summation", "counting", "matrices"],
+  "graphs-intro":    ["sets", "summation", "combinations", "matrices"],
   "euler-paths":     ["graphs-intro", "proofs"],
-  "trees-math":      ["graphs-intro", "induction", "counting"],
+  "trees-math":      ["graphs-intro", "induction", "combinations"],
   "planar-coloring": ["trees-math", "euler-paths", "inequalities"],
   "recurrences":     ["sequences", "induction", "quadratics", "eigen"],
 };

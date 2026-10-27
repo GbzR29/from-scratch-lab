@@ -1,74 +1,80 @@
 "use client";
 
-// Probability & Statistics 2: counting — listing and tree diagrams; the
-// multiplication and addition principles; restrictions handled first;
-// factorials and permutations (0! = 1); combinations as permutations divided
-// by k!; symmetry; Pascal's rule and the binomial theorem; grid paths; the
-// order/repetition table; repetition: sequences, multisets (stars and bars),
-// words with repeated letters; circular arrangements; inclusion–exclusion.
+// Combinatorics 1: what combinatorics is and why it is studied; listing
+// carefully with a tree of possibilities (figure); the multiplication
+// principle and why it works; restrictions handled first; the addition
+// principle for alternatives that cannot both happen; "and then" against
+// "or"; cases first, then stages; the two questions (order? repetition?)
+// that sort every problem into the chapters that follow; worked examples;
+// mistakes; practice.
 
 import { Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
 import { Derivation } from "@/components/lesson/Derivation";
-import { LiveFormula } from "@/components/lesson/LiveFormula";
+import { Related } from "@/components/lesson/Related";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
-import { CountingFigure } from "@/components/lesson/figures/math/CountingFigure";
+import { ChoiceTreeFigure } from "@/components/lesson/figures/math/ChoiceTreeFigure";
+import { MathPracticeFigure } from "@/components/lesson/figures/math/MathPracticeFigure";
 
 const r = String.raw;
-
-// ── Live formulas: the numbers plugged in ─────────────────────────────────────
-
-/** 50063860 → 50\,063\,860 (thin spaces between groups of three). */
-const big = (v: number) => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, r`\,`);
-
-/** C(n, k) as k falling factors over k!, and the chance that one ticket wins. */
-function chooseNumbers(v: Record<string, number>) {
-  const n = v.n, k = Math.min(v.k, n);
-  let top = 1, bottom = 1;
-  for (let i = 0; i < k; i++) { top *= n - i; bottom *= i + 1; }
-  const c = Math.round(top / bottom);
-  const fall = Array.from({ length: k }, (_, i) => n - i).join(r` \cdot `);
-  const down = Array.from({ length: k }, (_, i) => k - i).join(r` \cdot `);
-  return {
-    tex: r`\binom{${n}}{${k}} = \frac{${fall}}{${down}} = \frac{${big(top)}}{${big(bottom)}} = \amber{${big(c)}}`,
-    meter: 1 / c,
-    meterLabel: `1 / ${c.toLocaleString("en").replace(/,/g, " ")}`,
-  };
-}
-
-const gcd = (a: number, b: number): number => (b ? gcd(b, a % b) : a);
-
-/** Numbers from 1 to N divisible by a or by b, by inclusion–exclusion. */
-function ieNumbers(v: Record<string, number>) {
-  const { N, a, b } = v, l = (a * b) / gcd(a, b);
-  const A = Math.floor(N / a), B = Math.floor(N / b), AB = Math.floor(N / l);
-  return {
-    tex: r`\begin{aligned} |A \cup B| &= \lfloor ${N}/${a} \rfloor + \lfloor ${N}/${b} \rfloor - \lfloor ${N}/${l} \rfloor \\ &= ${A} + ${B} - ${AB} = \amber{${A + B - AB}} \end{aligned}`,
-    meter: (A + B - AB) / N,
-  };
-}
 
 export function CountingContent({ t }: { t: TrackTranslations }) {
   return (
     <Article>
       <Lead>
         {tx(t, "mCnt_intro",
-          "Probability starts with counting. When every outcome of an experiment is equally likely, the probability of an event is the number of outcomes in it divided by the number of outcomes altogether. Counting a few outcomes is easy: just list them. But how many ways can a lottery draw six numbers from sixty, or ten people sit in a row? Listing fails long before those answers, which run into millions. This chapter builds the counting tools that the rest of the Probability & Statistics section uses: the multiplication principle, permutations, combinations, Pascal's triangle and inclusion–exclusion.")}
+          "Combinatorics is the part of mathematics that counts without listing. How many passwords of eight characters exist? In how many orders can ten people stand in a queue? How many different bets can be placed in a lottery? For small cases you could write every possibility down, but the answers grow so fast that listing soon becomes impossible: the queue alone has more than three and a half million orders. Combinatorics replaces the list with a few principles that give the number directly. This first chapter explains what the subject is, why it is worth learning, and the two principles that every other counting method in this section is built from.")}
       </Lead>
 
       <Goals t={t} id="mCnt" items={[
-        "Count choices made one after another with the multiplication principle.",
-        "Tell when order matters, and count permutations and combinations.",
-        "Use Pascal's triangle and the binomial theorem.",
-        "Count overlapping groups only once with inclusion–exclusion.",
+        "Say what combinatorics studies and name places where counting is needed.",
+        "Draw a tree of possibilities and read the number of results from it.",
+        "Count choices made one after another with the multiplication principle, handling restrictions first.",
+        "Count alternatives that cannot both happen with the addition principle, and tell \"and then\" from \"or\".",
+        "Sort a counting problem by its two key questions: does order matter, and may an item repeat?",
       ]} />
+
+      <H2>{tx(t, "mCnt_whatTitle", "What combinatorics is")}</H2>
+      <p>
+        {tx(t, "mCnt_whatBody",
+          "Combinatorics, also called the analysis of combinations, studies the ways in which objects can be chosen, arranged and grouped, and above all how many such ways there are. Its questions have the form \"in how many ways can…?\". The objects can be anything: people in a queue, digits in a password, numbers on a lottery ticket, colours on a flag, roads between cities. What matters is a precise rule saying which results are allowed and when two results count as the same.")}
+      </p>
+      <p>
+        {tx(t, "mCnt_whyBody",
+          "Why study it? First, because it is the foundation of probability: when every result of an experiment is equally likely, the probability of an event is the number of favourable results divided by the number of possible results, and both numbers come from counting. Second, because counting decides practical questions: whether a password is safe, how many licence plates a format allows, how many matches a tournament needs, how long a computer takes to try every option. Third, because it trains a way of thinking: splitting a big question into small decisions, and checking that nothing is counted twice or forgotten.")}
+      </p>
+      <LessonTable
+        headers={[tx(t, "mCnt_hWhere", "Where counting appears"), tx(t, "mCnt_hQuestion", "A typical question")]}
+        rows={[
+          [tx(t, "mCnt_w1", "Probability"), tx(t, "mCnt_w1q", "What is the chance that one lottery ticket wins? (one out of how many possible draws?)")],
+          [tx(t, "mCnt_w2", "Security"), tx(t, "mCnt_w2q", "How many PINs of 4 digits are there, and how long would it take to try them all?")],
+          [tx(t, "mCnt_w3", "Codes and identification"), tx(t, "mCnt_w3q", "How many licence plates, phone numbers or ID codes does a format allow?")],
+          [tx(t, "mCnt_w4", "Sport and planning"), tx(t, "mCnt_w4q", "How many matches are played if every team meets every other team once?")],
+          [tx(t, "mCnt_w5", "Computing"), tx(t, "mCnt_w5q", "How many orders must a program check to find the shortest delivery route?")],
+          [tx(t, "mCnt_w6", "Biology and chemistry"), tx(t, "mCnt_w6q", "How many different sequences can a short chain of DNA bases form?")],
+        ]}
+      />
+      <Callout type="info" t={t}>
+        {tx(t, "mCnt_mapInfo", "This section has six chapters. This one gives the two basic principles. Then come factorials and permutations (putting everything in order), arrangements (putting some items in order), combinations (choosing a group, order ignored), harder counts (repetition, groups, overlaps) and, to close, the tricks and traps that solve most exam problems.")}
+      </Callout>
+
+      <H2>{tx(t, "mCnt_treeTitle", "Listing carefully: the tree of possibilities")}</H2>
+      <p>
+        {tx(t, "mCnt_treeBody",
+          "Before any formula, the safest way to count is a list made in a fixed order, so that nothing is skipped and nothing is repeated. A tree of possibilities organises that list. You own 3 shirts and 4 pairs of trousers and want to know how many outfits you can make. Start from a single point. Draw one branch for each shirt. From the end of every shirt branch, draw one branch for each pair of trousers. Every path from the start to a tip is one outfit, and every outfit is exactly one path. Counting outfits has become counting tips.")}
+      </p>
+      <ChoiceTreeFigure t={t} />
+      <p>
+        {tx(t, "mCnt_treeRead",
+          "Look at the shape of the tree. The first level has 3 branches. Each of them splits into the same number of branches, 4, whatever shirt was chosen. So the tips come in 3 groups of 4: 3 · 4 = 12 outfits. Add a third level with 2 pairs of shoes and every one of the 12 tips splits again into 2: 24 outfits. The tree shows the principle, but it also shows why it soon stops being practical: with 10 levels of 10 branches it would need ten billion tips.")}
+      </p>
 
       <H2>{tx(t, "mCnt_multTitle", "The multiplication principle")}</H2>
       <p>
         {tx(t, "mCnt_multBody",
-          "You own 3 shirts and 4 pairs of trousers. How many outfits can you make? For each shirt there are 4 trousers to go with it, so 3 groups of 4: 3 · 4 = 12. A tree diagram shows why: the first level branches 3 ways (the shirt), and every branch splits again 4 ways (the trousers), so there are 12 leaves at the end. Add 2 pairs of shoes and every one of the 12 leaves splits into 2: 24 outfits.")}
+          "The tree turns into a rule. When a result is built by making several choices one after another, and the number of options at each stage does not depend on what was chosen before, the number of results is the product of the numbers of options. This rule is called the multiplication principle, or the fundamental counting principle.")}
       </p>
       <Equation label={tx(t, "mCnt_eqMult", "The multiplication principle")}
         where={[
@@ -76,221 +82,111 @@ export function CountingContent({ t }: { t: TrackTranslations }) {
           [r`n_i`, tx(t, "mCnt_wNi", "the number of options at stage i, which must be the same whatever was chosen at the earlier stages")],
           [r`N`, tx(t, "mCnt_wN", "the number of complete results: different sequences of choices")],
         ]}
-        note={tx(t, "mCnt_multNote", "The options at a stage may change with earlier choices, but their number must not. That is all the principle needs.")}
+        note={tx(t, "mCnt_multNote", "The options themselves may change with earlier choices; only their number must not. After the gold medal is given, the runners left for silver are different people each time, but there are always 7 of them.")}
         words={tx(t, "mCnt_multWords", "When choices are made one after another, multiply the number of options at each stage.")}>
         {r`N = n_1 \cdot n_2 \cdot \ldots \cdot n_k`}
       </Equation>
+      <Derivation t={t} label={tx(t, "mCnt_eqWhyMult", "Why multiplication and not addition")}
+        steps={[
+          { tex: r`n_1`, full: true, why: tx(t, "mCnt_wm1", "after the first choice there are n₁ partial results") },
+          { tex: r`\underbrace{n_2 + n_2 + \cdots + n_2}_{n_1} = n_1 \cdot n_2`, full: true, why: tx(t, "mCnt_wm2", "each of them is continued in n₂ ways, so there are n₁ groups of n₂: adding n₂ to itself n₁ times is multiplying") },
+          { tex: r`(n_1 \cdot n_2) \cdot n_3 \cdots n_k = \green{n_1 n_2 \cdots n_k}`, full: true, why: tx(t, "mCnt_wm3", "every further stage repeats the argument with the results so far as the groups") },
+        ]} />
       <p>
         {tx(t, "mCnt_plateBody",
-          "A code made of 3 letters followed by 4 digits: 26 options for each letter and 10 for each digit, so 26 · 26 · 26 · 10 · 10 · 10 · 10 = 26³ · 10⁴ = 17 576 · 10 000 = 175 760 000 codes. A four-digit PIN: 10⁴ = 10 000. The answer grows quickly because every new stage multiplies everything that came before.")}
+          "Two examples. A four-digit PIN: each digit has 10 options and digits may repeat, so 10 · 10 · 10 · 10 = 10⁴ = 10 000 PINs. A licence plate in the Mercosur format has three letters, one digit, one letter and two digits (like BRA2E19). With 26 letters and 10 digits: 26 · 26 · 26 · 10 · 26 · 10 · 10 = 26⁴ · 10³ = 456 976 000 plates. The number grows quickly because every new stage multiplies everything that came before.")}
       </p>
+
       <H3>{tx(t, "mCnt_restrTitle", "Restrictions: deal with the fussy stage first")}</H3>
       <p>
         {tx(t, "mCnt_restrBody",
-          "How many four-digit numbers have four different digits? A four-digit number cannot start with 0, so the first digit has 9 options (1 to 9). The second may be anything except the first: 10 − 1 = 9 options (0 is allowed now). The third avoids the two used digits: 8. The fourth: 7. Total 9 · 9 · 8 · 7 = 4536. Had we started with the last digit, its number of options would depend on whether 0 had been used already, and the principle would not apply directly. Rule of thumb: fill the most restricted position first.")}
+          "How many four-digit numbers have four different digits? A four-digit number cannot start with 0, so the first digit has 9 options (1 to 9). The second may be anything except the first digit: 10 − 1 = 9 options, because 0 is allowed now. The third avoids the two digits used: 8. The fourth: 7. Total 9 · 9 · 8 · 7 = 4536. Had we started with the last digit, the number of options for the first digit would depend on whether 0 had already been used, and the principle would no longer apply directly. Rule of thumb: fill the most restricted position first.")}
       </p>
-      <H3>{tx(t, "mCnt_addTitle", "The addition principle")}</H3>
+      <Derivation t={t} label={tx(t, "mCnt_eqFlag", "A flag of 3 stripes in 4 colours, neighbouring stripes different")}
+        steps={[
+          { tex: r`4`, full: true, why: tx(t, "mCnt_f1", "top stripe: no restriction yet, any of the 4 colours") },
+          { tex: r`4 - 1 = 3`, full: true, why: tx(t, "mCnt_f2", "middle stripe: anything except the colour just above it") },
+          { tex: r`4 - 1 = 3`, full: true, why: tx(t, "mCnt_f3", "bottom stripe: it only touches the middle stripe, so it may repeat the top colour") },
+          { tex: r`4 \cdot 3 \cdot 3 = \green{36}`, full: true, why: tx(t, "mCnt_f4", "each stage has a fixed number of options, so the principle applies") },
+        ]} />
+
+      <H2>{tx(t, "mCnt_addTitle", "The addition principle")}</H2>
       <p>
         {tx(t, "mCnt_addBody",
-          "If a task can be done in one way OR another, and no way belongs to both groups, add. To travel between two cities you can take one of 3 buses or one of 2 trains: 3 + 2 = 5 ways. \"And then\" (one choice followed by another) multiplies; \"or\" (one kind of choice instead of the other) adds. When the two groups overlap, adding counts the overlap twice; inclusion–exclusion, at the end of the chapter, repairs that.")}
+          "Sometimes a task is done in one way or in another, never both. To travel between two cities you can take one of 3 buses or one of 2 trains. Nothing branches here: you pick a bus or you pick a train, so there are 3 + 2 = 5 ways. This is the addition principle: when the possible results split into groups that have nothing in common, the total is the sum of the sizes of the groups.")}
       </p>
-
-      <H2>{tx(t, "mCnt_permTitle", "Permutations: arranging in order")}</H2>
-      <p>
-        {tx(t, "mCnt_factBody",
-          "In how many orders can 5 different books stand on a shelf? Any of the 5 can go first, then any of the remaining 4, then 3, then 2, then the last one: 5 · 4 · 3 · 2 · 1 = 120. This product has a name, n factorial, written n!. An ordering of all n items is a permutation, and there are n! of them.")}
-      </p>
+      <Equation label={tx(t, "mCnt_eqAdd", "The addition principle")}
+        where={[
+          [r`m_j`, tx(t, "mCnt_wMj", "the number of results in group j (case j)")],
+          [r`N`, tx(t, "mCnt_wNadd", "the total, valid only when no result belongs to two groups")],
+        ]}
+        note={tx(t, "mCnt_addNote", "If the groups overlap, adding counts the shared results twice. The chapter on harder counts shows how to repair that with inclusion–exclusion.")}
+        words={tx(t, "mCnt_addWords", "When a result belongs to exactly one of several separate cases, add the number of results of each case.")}>
+        {r`N = m_1 + m_2 + \cdots + m_r`}
+      </Equation>
       <LessonTable
-        headers={["n", "0", "1", "2", "3", "4", "5", "6", "7", "8", "10"]}
-        rows={[["n!", "1", "1", "2", "6", "24", "120", "720", "5040", "40 320", "3 628 800"]]}
-      />
-      <p>
-        {tx(t, "mCnt_zeroBody",
-          "Why is 0! = 1? Two reasons that agree. Going down the table, each factorial is the next one divided by its n: 3! = 4!/4, 2! = 3!/3, 1! = 2!/2, so 0! = 1!/1 = 1. And there is exactly one way to arrange nothing: do nothing. Factorials grow faster than any power: a deck of 52 cards can be shuffled into 52! ≈ 8.07 × 10⁶⁷ orders, so a well-shuffled deck is almost certainly in an order no deck has ever been in before.")}
-      </p>
-      <Derivation t={t} label={tx(t, "mCnt_eqZero", "Walking the factorials down to 0!")}
-        steps={[
-          { tex: r`n! = n \cdot (n-1)! \quad\Longrightarrow\quad (n-1)! = \frac{n!}{n}`, full: true, why: tx(t, "mCnt_z1", "every factorial is n times the one before it, so going down one step means dividing by n") },
-          { tex: r`3! = \frac{4!}{4} = \frac{24}{4} = 6 \qquad 2! = \frac{6}{3} = 2 \qquad 1! = \frac{2}{2} = 1`, full: true, why: tx(t, "mCnt_z2", "check the rule on the table: each step down divides by the n we are leaving") },
-          { tex: r`0! = \frac{1!}{1} = \green{1}`, full: true, why: tx(t, "mCnt_z3", "one more step down, from n = 1. It agrees with the count: there is exactly one way to arrange no items") },
-        ]} />
-      <p>
-        {tx(t, "mCnt_pnkBody",
-          "Often only some of the items are arranged. Eight runners race; how many ways can gold, silver and bronze be awarded? 8 options for gold, 7 for silver, 6 for bronze: 8 · 7 · 6 = 336. The product stops after k factors. Multiplying and dividing by the missing tail 5 · 4 · 3 · 2 · 1 = 5! writes it with factorials: 8!/5!.")}
-      </p>
-      <Equation label={tx(t, "mCnt_eqPerm", "Arrangements of k items out of n")}
-        where={[
-          [r`n`, tx(t, "mCnt_wNperm", "the number of different items available")],
-          [r`k`, tx(t, "mCnt_wKperm", "how many are placed in order, each at most once (k ≤ n)")],
-          [r`n!`, tx(t, "mCnt_wFact", "n factorial: n · (n − 1) · … · 2 · 1, with 0! = 1")],
-        ]}
-        note={tx(t, "mCnt_permNote", "With k = n this is n!/0! = n!, all the orders of all the items.")}
-        words={tx(t, "mCnt_permWords", "Multiply k factors counting down from n: n options for the first place, one fewer for each place after it.")}>
-        {r`P(n, k) = n\,(n-1)\cdots(n-k+1) = \frac{n!}{(n-k)!}`}
-      </Equation>
-      <p>
-        {tx(t, "mCnt_roundBody",
-          "Around a round table only the order around the table matters, not who sits \"first\": turning everyone one seat to the left changes nothing. Fix one person's seat to remove the turning; the other n − 1 are then arranged in a row. Six people around a table: 5! = 120 arrangements, not 720.")}
-      </p>
-
-      <H2>{tx(t, "mCnt_combTitle", "Combinations: choosing without order")}</H2>
-      <p>
-        {tx(t, "mCnt_combBody",
-          "Now choose a committee of 3 from the same 8 people. A committee has no gold or silver: the committee {Ana, Bruno, Carla} is the same whichever order they were picked in. The 336 ordered picks count each committee once for every order of its 3 members, which is 3! = 6 times. So there are 336 / 6 = 56 committees. That is the whole idea of a combination: count in order, then divide by the number of orders of each group.")}
-      </p>
-      <Equation label={tx(t, "mCnt_eqComb", "Combinations: subsets of size k")}
-        where={[
-          [r`\binom{n}{k}`, tx(t, "mCnt_wBinom", "read \"n choose k\", also written C(n, k): the number of groups of k items out of n, order ignored")],
-          [r`\frac{n!}{(n-k)!}`, tx(t, "mCnt_wOrdered", "the ordered picks, P(n, k)")],
-          [r`k!`, tx(t, "mCnt_wKfact", "the number of orders of one group, which were all counted separately")],
-        ]}
-        note={tx(t, "mCnt_combNote", "By hand, cancel before multiplying: C(8, 3) = (8 · 7 · 6)/(3 · 2 · 1) = 336/6 = 56. The top has k factors counting down from n, the bottom k factors counting down from k.")}
-        words={tx(t, "mCnt_combWords", "Count the ordered picks, then divide by the number of orders each group was counted in.")}>
-        {r`\binom{n}{k} = \frac{P(n,k)}{k!} = \frac{n!}{k!\,(n-k)!}`}
-      </Equation>
-      <p>
-        {tx(t, "mCnt_lottoBody",
-          "A lottery draws 6 numbers out of 60 and the order of the draw does not matter. C(60, 6) = (60 · 59 · 58 · 57 · 56 · 55)/(6 · 5 · 4 · 3 · 2 · 1) = 36 045 979 200/720 = 50 063 860. One ticket is one of about fifty million equally likely sets.")}
-      </p>
-      <LiveFormula label={tx(t, "mCnt_liveChoose", "Try it: n choose k, and the chance of one ticket")}
-        tex={r`\binom{n}{k} = \frac{n\,(n-1)\cdots(n-k+1)}{k\,(k-1)\cdots 1}`}
-        vars={[
-          { id: "n", label: "n", min: 1, max: 60, step: 1, value: 60, fmt: v => String(v) },
-          { id: "k", label: "k", min: 1, max: 8, step: 1, value: 6, fmt: v => String(v) },
-        ]}
-        compute={chooseNumbers}
-        note={tx(t, "mCnt_liveChooseNote", "Top and bottom both have k factors. The bar is 1 divided by the count: the chance that a single ticket holds the drawn set. At n = 60, k = 6 it is 1 in about fifty million, far too thin to see. Try n = 10, k = 3 (120), then k = 7: the same 120, by symmetry.")} />
-      <p>
-        {tx(t, "mCnt_symBody",
-          "Symmetry: C(n, k) = C(n, n − k). Choosing 3 people to go on a trip is the same as choosing the 5 who stay behind, so C(8, 3) = C(8, 5) = 56. The formula agrees: swapping k and n − k only swaps the two factorials in the denominator. This saves work: C(100, 98) = C(100, 2) = 100 · 99/2 = 4950. The end cases: C(n, 0) = C(n, n) = 1 (one way to choose nothing, one way to choose everything), and C(n, 1) = n.")}
-      </p>
-
-      <CountingFigure t={t} />
-
-      <H2>{tx(t, "mCnt_pascalTitle", "Pascal's triangle and the binomial theorem")}</H2>
-      <p>
-        {tx(t, "mCnt_binomBack",
-          "The Binomial Theorem chapter met these numbers as the coefficients of (a + b)ⁿ and built Pascal's triangle from the expansions. This section reads the same facts as counting.")}
-      </p>
-      <p>
-        {tx(t, "mCnt_ruleBody",
-          "Here is a way to find C(n, k) with additions only. Single out one of the n items, say Ana. Every group of k either contains Ana or not. Groups with Ana: choose her partners, k − 1 from the other n − 1: C(n − 1, k − 1). Groups without Ana: all k from the other n − 1: C(n − 1, k). The two kinds do not overlap, so add them. Write the numbers in rows, each row starting and ending with 1, and every inner number is the sum of the two above it: Pascal's triangle.")}
-      </p>
-      <Equation label={tx(t, "mCnt_eqPascal", "Pascal's rule")}
-        where={[
-          [r`\binom{n-1}{k-1}`, tx(t, "mCnt_wWith", "groups that contain the singled-out item")],
-          [r`\binom{n-1}{k}`, tx(t, "mCnt_wWithout", "groups that leave it out")],
-        ]}>
-        {r`\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}`}
-      </Equation>
-      <p>
-        {tx(t, "mCnt_binomBody",
-          "The same numbers appear when a sum is raised to a power. (a + b)³ = (a + b)(a + b)(a + b): multiplying out means picking a or b from each of the 3 brackets and multiplying the picks. The term a²b comes from choosing b in exactly 1 of the 3 brackets, which can be done in C(3, 1) = 3 ways, so its coefficient is 3. In general the coefficient of aⁿ⁻ᵏbᵏ counts the ways to choose which k brackets give b.")}
-      </p>
-      <Equation label={tx(t, "mCnt_eqBinom", "The binomial theorem")}
-        where={[
-          [r`\sum_{k=0}^{n}`, tx(t, "mCnt_wSum", "add the terms for k = 0, 1, …, n")],
-          [r`\binom{n}{k}`, tx(t, "mCnt_wCoef", "the binomial coefficient: entry k of row n of Pascal's triangle")],
-          [r`a^{n-k}\,b^{k}`, tx(t, "mCnt_wTerm", "b chosen from k brackets, a from the other n − k; the powers always add up to n")],
-        ]}
-        note={tx(t, "mCnt_binomNote", "Row 4 is 1 4 6 4 1, so (a + b)⁴ = a⁴ + 4a³b + 6a²b² + 4ab³ + b⁴. With a = 2x, b = 1 and n = 3: (2x + 1)³ = 8x³ + 3 · 4x² + 3 · 2x + 1 = 8x³ + 12x² + 6x + 1.")}
-        words={tx(t, "mCnt_binomWords", "Each term picks b from k of the n brackets and a from the rest; the number in front counts how many ways there are to pick those k brackets.")}>
-        {r`(a+b)^n = \sum_{k=0}^{n} \binom{n}{k}\,a^{\,n-k}\,b^{\,k}`}
-      </Equation>
-      <p>
-        {tx(t, "mCnt_rowSumBody",
-          "Put a = b = 1: 2ⁿ = C(n, 0) + C(n, 1) + … + C(n, n). Each row adds up to a power of 2. That is also a count: a subset of n items is built by deciding in or out for each item, 2 options n times, 2ⁿ subsets, and grouping them by size gives the row. And a counting puzzle in disguise: walking on a street grid from one corner to the corner 4 blocks east and 3 blocks north, always east or north, every route is a word of 7 moves with 3 N's, so there are C(7, 3) = 35 shortest routes.")}
-      </p>
-
-      <H2>{tx(t, "mCnt_repTitle", "When items may repeat")}</H2>
-      <p>
-        {tx(t, "mCnt_seqBody",
-          "With repetition allowed and order mattering, every one of the k positions has all n options again: nᵏ sequences, as with the PIN (10⁴). Order ignored with repetition allowed is less obvious. An ice-cream shop has 5 flavours and you want 3 scoops in a cup, repeats allowed, order irrelevant. Picture the flavours as boxes in a row, separated by 4 bars, and each scoop as a star in its box: ★★|★|||, for instance, is two scoops of flavour 1 and one of flavour 2. Every cup is exactly one row of 3 stars and 4 bars, 7 symbols in all, and the row is fixed by choosing which 3 of the 7 places hold stars: C(7, 3) = 35 cups.")}
-      </p>
-      <Equation label={tx(t, "mCnt_eqStars", "Stars and bars: multisets")}
-        where={[
-          [r`n`, tx(t, "mCnt_wNstars", "the number of kinds to choose from (boxes), which need n − 1 bars between them")],
-          [r`k`, tx(t, "mCnt_wKstars", "the number of items chosen (stars); any kind may be chosen many times or never")],
-        ]}
-        note={tx(t, "mCnt_starsNote", "The same count solves x + y + z = 10 in whole numbers x, y, z ≥ 0: 10 stars, 2 bars, C(12, 2) = 66 solutions.")}>
-        {r`\binom{n+k-1}{k}`}
-      </Equation>
-      <p>
-        {tx(t, "mCnt_wordBody",
-          "Words with repeated letters. BANANA has 6 letters, so 6! = 720 orders if all letters were different. But swapping the three A's among themselves gives the same word, and so does swapping the two N's; each distinct word was counted 3! · 2! · 1! = 12 times. So there are 720/12 = 60 distinct words. MISSISSIPPI: 11 letters with I four times, S four times, P twice and M once: 11!/(4! · 4! · 2! · 1!) = 39 916 800/1152 = 34 650.")}
-      </p>
-      <Derivation t={t} label={tx(t, "mCnt_eqBanana", "Counting the words of BANANA")}
-        steps={[
-          { tex: r`\text{B A}_1\text{ N}_1\text{ A}_2\text{ N}_2\text{ A}_3: \quad 6! = 720`, full: true, why: tx(t, "mCnt_n1", "pretend the repeated letters are different by numbering them: 6 different letters have 6! orders") },
-          { tex: r`\text{A}_1\text{A}_2\text{A}_3 \to 3! = 6 \qquad \text{N}_1\text{N}_2 \to 2! = 2 \qquad \text{B} \to 1! = 1`, full: true, why: tx(t, "mCnt_n2", "rubbing out the numbers, every real word appears once for each order of its A's, each order of its N's and each order of its single B") },
-          { tex: r`\frac{6!}{3! \cdot 2! \cdot 1!} = \frac{720}{12} = \green{60}`, full: true, why: tx(t, "mCnt_n3", "so each distinct word was counted 6 · 2 · 1 = 12 times: divide them out") },
-        ]} />
-      <p>{tx(t, "mCnt_tableBody", "Every problem in this chapter answers two questions: does the order matter, and may an item repeat? The four answers give four formulas:")}</p>
-      <LessonTable
-        headers={["", tx(t, "mCnt_tRep", "repetition allowed"), tx(t, "mCnt_tNoRep", "no repetition")]}
+        headers={[tx(t, "mCnt_hWord", "The situation"), tx(t, "mCnt_hDo", "What to do"), tx(t, "mCnt_hEx", "Example")]}
         rows={[
-          [tx(t, "mCnt_tOrder", "order matters"), tx(t, "mCnt_tSeq", "nᵏ (sequences: PIN codes)"), tx(t, "mCnt_tPerm", "n!/(n − k)! (arrangements: podiums)")],
-          [tx(t, "mCnt_tNoOrder", "order does not matter"), tx(t, "mCnt_tMulti", "C(n + k − 1, k) (multisets: ice cream)"), tx(t, "mCnt_tComb", "C(n, k) (subsets: committees)")],
+          [tx(t, "mCnt_r1", "one choice and then another (stages)"), tx(t, "mCnt_r1d", "multiply"), tx(t, "mCnt_r1e", "shirt and then trousers: 3 · 4 = 12")],
+          [tx(t, "mCnt_r2", "one choice or another (separate cases)"), tx(t, "mCnt_r2d", "add"), tx(t, "mCnt_r2e", "a bus or a train: 3 + 2 = 5")],
+          [tx(t, "mCnt_r3", "cases, each made of stages"), tx(t, "mCnt_r3d", "multiply inside each case, then add the cases"), tx(t, "mCnt_r3e", "a 1-letter or a 2-letter code: 26 + 26 · 26 = 702")],
         ]}
       />
-
-      <H2>{tx(t, "mCnt_ieTitle", "Inclusion–exclusion: counting overlaps once")}</H2>
       <p>
-        {tx(t, "mCnt_ieBody",
-          "How many whole numbers from 1 to 100 are divisible by 2 or by 3? There are 50 multiples of 2 and 33 multiples of 3 (100/3 = 33.3…, rounded down), but 50 + 33 = 83 is too many: the multiples of 6 (6, 12, …, 96, which is 16 numbers) are in both lists and were counted twice. Subtract them once: 50 + 33 − 16 = 67. With three sets, add the three sizes, subtract the three pairwise overlaps, and add back the triple overlap, which the subtraction removed once too often.")}
+        {tx(t, "mCnt_bothBody",
+          "Most real problems use both principles. A trip goes from city A to city C, either directly by one of 2 flights, or through city B, with 3 roads from A to B and 4 roads from B to C. The trips through B are made of two stages: 3 · 4 = 12. The direct trips are a separate case: 2. The two cases cannot both happen, so add them: 12 + 2 = 14 trips. The order of the work is always the same: split into cases, count each case with stages, add the cases.")}
       </p>
-      <Equation label={tx(t, "mCnt_eqIE", "Inclusion–exclusion")}
-        where={[
-          [r`|A|`, tx(t, "mCnt_wSize", "the number of elements of the set A")],
-          [r`A \cup B`, tx(t, "mCnt_wUnion", "the union: elements in A or in B (or both)")],
-          [r`A \cap B`, tx(t, "mCnt_wInter", "the intersection: elements in both A and B")],
-        ]}
-        note={tx(t, "mCnt_ieNote", "Divisible by 2, 3 or 5 among 1 to 100: 50 + 33 + 20 − 16 − 10 − 6 + 3 = 74. The 16, 10 and 6 are the multiples of 6, 10 and 15, and the 3 are the multiples of 30.")}
-        words={tx(t, "mCnt_ieWords", "Add the sizes of the sets, subtract what lies in two of them, add back what lies in all three: everything ends up counted exactly once.")}>
-        {r`\begin{aligned} |A \cup B| &= |A| + |B| - |A \cap B| \\ |A \cup B \cup C| &= |A| + |B| + |C| - |A\cap B| - |A \cap C| - |B \cap C| + |A \cap B \cap C| \end{aligned}`}
-      </Equation>
-      <LiveFormula label={tx(t, "mCnt_liveIE", "Try it: divisible by a or by b, from 1 to N")}
-        tex={r`|A \cup B| = \left\lfloor \tfrac{N}{a} \right\rfloor + \left\lfloor \tfrac{N}{b} \right\rfloor - \left\lfloor \tfrac{N}{\operatorname{lcm}(a,\,b)} \right\rfloor`}
-        vars={[
-          { id: "N", label: "N", min: 10, max: 200, step: 1, value: 100, fmt: v => String(v) },
-          { id: "a", label: "a", min: 2, max: 12, step: 1, value: 2, fmt: v => String(v) },
-          { id: "b", label: "b", min: 2, max: 12, step: 1, value: 3, fmt: v => String(v) },
-        ]}
-        compute={ieNumbers}
-        note={tx(t, "mCnt_liveIENote", "⌊N/a⌋ means N/a rounded down: the number of multiples of a up to N. A number divisible by both a and b is a multiple of their least common multiple, lcm(a, b), so that term removes the double count. Try a = 4, b = 6: the overlap is the multiples of 12, not of 24. The bar is the share of 1 … N that is counted.")} />
       <Callout type="tip" t={t}>
-        {tx(t, "mCnt_complTip", "\"At least one\" is usually easier through the complement: count everything, then subtract the cases with none. Committees of 5 from 6 women and 4 men with at least one man: C(10, 5) = 252 committees in all, of which C(6, 5) = 6 have no man, so 252 − 6 = 246.")}
+        {tx(t, "mCnt_andOrTip", "A test for \"and\" against \"or\": ask whether one complete result uses both choices. An outfit has a shirt and trousers, so multiply. A trip uses a bus or a train, not both, so add.")}
       </Callout>
 
+      <H2>{tx(t, "mCnt_twoQTitle", "The two questions that sort every problem")}</H2>
+      <p>
+        {tx(t, "mCnt_twoQBody",
+          "Every counting problem in the next chapters is the multiplication principle in some form, but four situations come up so often that they have their own names and formulas. To know which one you face, ask two questions about the result you are counting. First: does order matter, that is, if you swap two of the chosen items, do you get a different result? Second: may an item be used more than once? A podium is ordered and nobody wins two medals. A PIN is ordered and digits may repeat. A committee is not ordered and nobody sits twice. A cup of ice cream with three scoops is not ordered, and a flavour may repeat.")}
+      </p>
+      <LessonTable
+        headers={["", tx(t, "mCnt_tNoRep", "no repetition"), tx(t, "mCnt_tRep", "repetition allowed")]}
+        rows={[
+          [tx(t, "mCnt_tOrder", "order matters"), tx(t, "mCnt_tPerm", "arrangements and permutations (podium, a queue): chapters 2 and 3"), tx(t, "mCnt_tSeq", "sequences with repetition (PIN, plate): chapter 3")],
+          [tx(t, "mCnt_tNoOrder", "order does not matter"), tx(t, "mCnt_tComb", "combinations (committee, lottery): chapter 4"), tx(t, "mCnt_tMulti", "combinations with repetition (ice cream): chapter 5")],
+        ]}
+      />
+
       <H2>{tx(t, "mCnt_exTitle", "Worked examples")}</H2>
-      <p>{tx(t, "mCnt_ex1", "1. Passwords of 6 lowercase letters: 26⁶ = 308 915 776. With no letter repeated: 26 · 25 · 24 · 23 · 22 · 21 = 165 765 600, a bit more than half.")}</p>
-      <p>{tx(t, "mCnt_ex2", "2. A committee of 5 from 6 women and 4 men with exactly 3 women: choose the women, C(6, 3) = 20, and then the 2 men, C(4, 2) = 6. The two choices are stages, so multiply: 20 · 6 = 120.")}</p>
-      <p>{tx(t, "mCnt_ex3", "3. Five-card hands from a 52-card deck: C(52, 5) = (52 · 51 · 50 · 49 · 48)/120 = 311 875 200/120 = 2 598 960.")}</p>
-      <p>{tx(t, "mCnt_ex4", "4. Seven books on a shelf with two particular ones side by side: glue the two into one block. Now 6 things are arranged, 6! = 720 ways, and the block itself has 2! = 2 internal orders: 1440.")}</p>
-      <p>{tx(t, "mCnt_ex5", "5. Diagonals of an octagon: every pair of the 8 corners gives a segment, C(8, 2) = 28, and 8 of those segments are sides: 28 − 8 = 20 diagonals.")}</p>
-      <p>{tx(t, "mCnt_ex6", "6. Handshakes when 10 people all shake hands once: one handshake per pair, C(10, 2) = 45.")}</p>
+      <p>{tx(t, "mCnt_ex1", "1. A restaurant offers 4 starters, 5 main courses and 3 desserts. A full meal has one of each: 4 · 5 · 3 = 60 meals. A meal with a main course and either a starter or a dessert (not both): 5 · (4 + 3) = 35.")}</p>
+      <p>{tx(t, "mCnt_ex2", "2. Passwords of 6 lowercase letters: 26⁶ = 308 915 776. If no letter may repeat: 26 · 25 · 24 · 23 · 22 · 21 = 165 765 600, a little more than half.")}</p>
+      <p>{tx(t, "mCnt_ex3", "3. Three-digit numbers that use only the digits 1, 2, 3, 4 and 5, repeats allowed: 5 · 5 · 5 = 125. Of these, the odd ones end in 1, 3 or 5: 5 · 5 · 3 = 75. Here the restricted position is the last one, so count it first in your head and then multiply.")}</p>
+      <p>{tx(t, "mCnt_ex4", "4. A true-or-false test has 10 questions. Every way of answering all of them is a sequence of 10 choices of 2 options: 2¹⁰ = 1024. Guessing at random, the chance of a perfect score is 1 in 1024.")}</p>
+      <p>{tx(t, "mCnt_ex5", "5. Codes of 1, 2 or 3 letters (26 letters, repeats allowed): three separate cases. 26 + 26² + 26³ = 26 + 676 + 17 576 = 18 278. This is how many columns a spreadsheet can label with up to three letters (A to ZZZ).")}</p>
 
       <H2>{tx(t, "mCnt_mistakesTitle", "Common mistakes")}</H2>
       <LessonTable
         headers={[tx(t, "mCnt_tWrong", "Wrong"), tx(t, "mCnt_tRight", "Right"), tx(t, "mCnt_tWhy", "Why")]}
         rows={[
-          [tx(t, "mCnt_m1w", "committees of 3 from 8: 8 · 7 · 6 = 336"), "336/3! = 56", tx(t, "mCnt_m1", "a committee has no order; each one was counted 3! times")],
+          [tx(t, "mCnt_m1w", "3 shirts and 4 trousers: 3 + 4 = 7 outfits"), "3 · 4 = 12", tx(t, "mCnt_m1", "an outfit uses both choices, one after the other; each shirt combines with every pair of trousers")],
           [tx(t, "mCnt_m2w", "four-digit numbers with distinct digits: 10 · 9 · 8 · 7"), "9 · 9 · 8 · 7 = 4536", tx(t, "mCnt_m2", "the first digit cannot be 0; place the restricted digit first")],
-          ["0! = 0", "0! = 1", tx(t, "mCnt_m3", "one way to arrange nothing; it keeps n! = n · (n − 1)! true for n = 1")],
-          [tx(t, "mCnt_m4w", "\"at least one man\": C(4, 1) · C(9, 4) = 504"), "252 − 6 = 246", tx(t, "mCnt_m4", "choosing \"the\" man first counts a committee with two men twice; use the complement")],
-          [tx(t, "mCnt_m5w", "divisible by 2 or 3: 50 + 33 = 83"), "50 + 33 − 16 = 67", tx(t, "mCnt_m5", "the multiples of 6 were counted twice")],
-          [tx(t, "mCnt_m6w", "adding the options of stages done one after another"), tx(t, "mCnt_m6r", "multiply for \"and then\", add for \"or\""), tx(t, "mCnt_m6", "each option of stage 1 combines with every option of stage 2")],
+          [tx(t, "mCnt_m3w", "3 buses or 2 trains: 3 · 2 = 6 ways"), "3 + 2 = 5", tx(t, "mCnt_m3", "a trip uses one or the other, never both; separate cases add")],
+          [tx(t, "mCnt_m4w", "flag of 3 stripes, 4 colours, neighbours different: 4 · 3 · 2"), "4 · 3 · 3 = 36", tx(t, "mCnt_m4", "the bottom stripe only has to differ from its neighbour, so it may repeat the top colour")],
+          [tx(t, "mCnt_m5w", "starting a count with the free positions"), tx(t, "mCnt_m5r", "start with the restricted ones"), tx(t, "mCnt_m5", "otherwise the options of a later position depend on earlier choices and the product is wrong")],
         ]}
       />
 
+      <MathPracticeFigure t={t} set="countingPrinciples" />
+
+      <Related t={t} links={[
+        { track: "Math", id: "permutations", title: tx(t, "mCnt_rel1", "Factorials & Permutations"), why: tx(t, "mCnt_rel1b", "the next chapter: every item in order, repeated letters and round tables.") },
+        { track: "Math", id: "sets", title: tx(t, "mCnt_rel2", "Sets"), why: tx(t, "mCnt_rel2b", "unions, intersections and the size of a cartesian product, the language behind both principles.") },
+        { track: "Math", id: "probability", title: tx(t, "mCnt_rel3", "Probability Basics"), why: tx(t, "mCnt_rel3b", "where counting is used: favourable results over possible results.") },
+      ]} />
+
       <KeyIdeas t={t} id="mCnt" items={[
-        "Choices made one after another multiply; alternatives that cannot both happen add.",
-        "n different items can be ordered in n! ways; arranging k of them gives n!/(n − k)!.",
-        "Ignoring order divides by k!: C(n, k) = n!/(k!(n − k)!), and C(n, k) = C(n, n − k).",
-        "Pascal's rule C(n, k) = C(n − 1, k − 1) + C(n − 1, k) builds the triangle; its rows are the coefficients of (a + b)ⁿ and add up to 2ⁿ.",
-        "Order? Repetition? The four answers give nᵏ, n!/(n − k)!, C(n + k − 1, k) and C(n, k).",
-        "Repeated letters: divide n! by the factorial of each repeat count.",
-        "Inclusion–exclusion subtracts overlaps once; \"at least one\" is often easier as total minus none.",
+        "Combinatorics counts the ways to choose, arrange and group objects without listing them; it is the base of probability.",
+        "A tree of possibilities is an organised list: one level per choice, one tip per complete result.",
+        "Choices made one after another multiply, as long as the number of options at each stage is fixed.",
+        "Fill the most restricted position first, so that every later stage has a fixed number of options.",
+        "Separate cases that cannot both happen add; split into cases first, count each with stages, then add.",
+        "Two questions sort every problem: does order matter, and may an item repeat?",
       ]} />
     </Article>
   );

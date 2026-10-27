@@ -863,13 +863,33 @@
     "created": "2026-10-17",
     "updated": "2026-10-17"
   },
+  "math/counting": {
+    "created": "2026-09-26",
+    "updated": "2026-10-27"
+  },
+  "math/permutations": {
+    "created": "2026-10-27",
+    "updated": "2026-10-27"
+  },
+  "math/arrangements": {
+    "created": "2026-10-27",
+    "updated": "2026-10-27"
+  },
+  "math/combinations": {
+    "created": "2026-10-27",
+    "updated": "2026-10-27"
+  },
+  "math/counting-advanced": {
+    "created": "2026-10-27",
+    "updated": "2026-10-27"
+  },
+  "math/counting-tricks": {
+    "created": "2026-10-27",
+    "updated": "2026-10-27"
+  },
   "math/descriptive-stats": {
     "created": "2026-09-26",
     "updated": "2026-10-09"
-  },
-  "math/counting": {
-    "created": "2026-09-26",
-    "updated": "2026-10-14"
   },
   "math/probability": {
     "created": "2026-09-26",
