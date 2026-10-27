@@ -213,8 +213,8 @@ int main(int argc, char* argv[]) {
           [tx(t, "sdl02_rm3", "Events & Input"), tx(t, "sdl02_rm3b", "the square steered with the arrows or WASD on any keyboard layout; Escape quits")],
           [tx(t, "sdl02_rm4", "The 2D Renderer"), tx(t, "sdl02_rm4b", "a fixed 640×360 game resolution in any window size, shapes and blending")],
           [tx(t, "sdl02_rm5", "Textures & Images"), tx(t, "sdl02_rm5b", "the square becomes an animated sprite")],
-          [tx(t, "sdl02_rm6", "Text with SDL3_ttf"), tx(t, "sdl02_rm6b", "a score and a frame counter on screen")],
-          [tx(t, "sdl02_rm7", "Audio Streams"), tx(t, "sdl02_rm7b", "sound effects")],
+          [tx(t, "sdl02_rm6", "Text with SDL3_ttf"), tx(t, "sdl02_rm6b", "a gem to collect, a score and a frame counter on screen")],
+          [tx(t, "sdl02_rm7", "Audio Streams"), tx(t, "sdl02_rm7b", "a chime when a gem is collected, over a bass line generated in code")],
           [tx(t, "sdl02_rm8", "SDL_GPU"), tx(t, "sdl02_rm8b", "a separate small project: a triangle drawn with the GPU API")],
           [tx(t, "sdl02_rm9", "Time, Files & Shipping"), tx(t, "sdl02_rm9b", "a saved best score and a build you can give to someone")],
         ]}

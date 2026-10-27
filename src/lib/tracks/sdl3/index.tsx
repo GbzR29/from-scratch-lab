@@ -15,8 +15,8 @@ export const sdl3Chapters: Chapter[] = [
   { id: "input", section: "Input & 2D",     title: "Events & Input",            minRead: 17, load: () => import("./chapters/input").then((m) => m.InputContent) },
   { id: "renderer", section: "Input & 2D",  title: "The 2D Renderer",           minRead: 17, load: () => import("./chapters/renderer").then((m) => m.RendererContent) },
   { id: "textures", section: "Input & 2D",  title: "Textures & Images",         minRead: 17, load: () => import("./chapters/textures").then((m) => m.TexturesContent) },
-  { id: "text", section: "Input & 2D",      title: "Text with SDL3_ttf",        minRead: 9,  load: () => import("./chapters/text").then((m) => m.TextContent) },
-  { id: "audio", section: "Audio & Graphics",     title: "Audio Streams",             minRead: 10, load: () => import("./chapters/audio").then((m) => m.AudioContent) },
-  { id: "gpu", section: "Audio & Graphics",       title: "SDL_GPU — Modern Graphics", minRead: 14, load: () => import("./chapters/gpu").then((m) => m.GpuContent) },
+  { id: "text", section: "Input & 2D",      title: "Text with SDL3_ttf",        minRead: 19, load: () => import("./chapters/text").then((m) => m.TextContent) },
+  { id: "audio", section: "Audio & Graphics",     title: "Audio Streams",             minRead: 21, load: () => import("./chapters/audio").then((m) => m.AudioContent) },
+  { id: "gpu", section: "Audio & Graphics",       title: "SDL_GPU — Modern Graphics", minRead: 22, load: () => import("./chapters/gpu").then((m) => m.GpuContent) },
   { id: "platform", section: "Shipping",  title: "Time, Files & Shipping",    minRead: 11, load: () => import("./chapters/platform").then((m) => m.PlatformContent) },
 ];

@@ -29,16 +29,16 @@ export const sdl3Descriptions: LessonDescriptions = {
     pt: "Texturas no SDL3 passo a passo: surface vs texture, carregar PNG com SDL_LoadPNG, sprite sheet com src/dst, animação e flip, modos de escala para pixel art, pitch.",
   },
   text: {
-    en: "Draw text with SDL3_ttf: string to texture, rendering modes for crisp or fast text, the text engine for changing text, and measuring for layout.",
-    pt: "Texto com SDL3_ttf: de string para textura, modos de renderização para texto nítido ou rápido, o text engine para texto que muda e medir para layout.",
+    en: "SDL3_ttf step by step: CMake FetchContent, points vs pixels, glyph metrics (ascent, descent, advance) worked out, a sharp pixel font, the text engine atlas, a score and FPS counter.",
+    pt: "SDL3_ttf passo a passo: FetchContent no CMake, pontos vs pixels, métricas de glifo (ascent, descent, avanço) calculadas, fonte de pixel nítida, o atlas do text engine, placar e contador de FPS.",
   },
   audio: {
-    en: "SDL3 audio streams: devices and logical devices, automatic format conversion, generating sound in a callback, and mixing several sounds.",
-    pt: "Áudio no SDL3 com audio streams: dispositivos e dispositivos lógicos, conversão automática de formato, gerar som num callback e mixar vários sons.",
+    en: "SDL3 audio step by step: samples and bytes worked out, SDL_LoadWAV and audio streams, format conversion and resampling, two streams mixed with gains and clipping, music from a callback.",
+    pt: "Áudio no SDL3 passo a passo: amostras e bytes calculados, SDL_LoadWAV e audio streams, conversão de formato e reamostragem, dois streams mixados com ganho e clipping, música por callback.",
   },
   gpu: {
-    en: "SDL_GPU, SDL3's modern graphics API: where it sits next to OpenGL and Vulkan, one set of shaders on Vulkan, D3D12 and Metal, devices and uploads.",
-    pt: "SDL_GPU, a API gráfica moderna do SDL3: onde fica perto de OpenGL e Vulkan, os mesmos shaders em Vulkan, D3D12 e Metal, device e envio de dados.",
+    en: "SDL_GPU hello triangle, complete: CMake with glslc shaders, device, pipeline and vertex layout, transfer-buffer upload, recording and submitting a frame, cycling, and 3.4 render states.",
+    pt: "Triângulo com SDL_GPU, completo: CMake com shaders pelo glslc, device, pipeline e layout de vértices, envio por transfer buffer, gravar e enviar um quadro, cycling e render states da 3.4.",
   },
   platform: {
     en: "SDL3 time, files and shipping: clocks and timers, save files in the right folder on every platform, threads, hints and logging, and release builds.",

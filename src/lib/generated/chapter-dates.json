@@ -1481,15 +1481,15 @@
   },
   "sdl3/text": {
     "created": "2026-09-03",
-    "updated": "2026-10-08"
+    "updated": "2026-10-26"
   },
   "sdl3/audio": {
     "created": "2026-09-03",
-    "updated": "2026-10-08"
+    "updated": "2026-10-26"
   },
   "sdl3/gpu": {
     "created": "2026-09-03",
-    "updated": "2026-10-24"
+    "updated": "2026-10-26"
   },
   "sdl3/platform": {
     "created": "2026-09-03",
