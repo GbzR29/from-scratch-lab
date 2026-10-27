@@ -54,6 +54,7 @@ const chapters: Chapter[] = [
   { id: "similarity",      section: GEOMETRY, title: "Similarity & Scale",        minRead: 25, load: () => import("./chapters/similarity").then((m) => m.SimilarityContent) },
   { id: "circle",          section: GEOMETRY, title: "Circles & π",               minRead: 19, load: () => import("./chapters/circle").then((m) => m.CircleContent) },
   { id: "volumes",         section: GEOMETRY, title: "Volume & Surface Area",     minRead: 18, load: () => import("./chapters/volumes").then((m) => m.VolumesContent) },
+  { id: "polyhedra",       section: GEOMETRY, title: "Polyhedra: Faces, Edges, Vertices & Views", minRead: 22, load: () => import("./chapters/polyhedra").then((m) => m.PolyhedraContent) },
   { id: "analytic",        section: GEOMETRY, title: "Coordinate Geometry & Conics", minRead: 20, load: () => import("./chapters/analytic").then((m) => m.AnalyticContent) },
   { id: "transformations", section: GEOMETRY, title: "Transformations",           minRead: 17, load: () => import("./chapters/transformations").then((m) => m.TransformationsContent) },
 

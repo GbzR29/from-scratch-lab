@@ -2,6 +2,7 @@
 
 // Geometry 7: volume and surface area — unit cubes and units, prisms and
 // cylinders (base × height), Cavalieri's principle, pyramids and cones (⅓),
+// the frustum (big cone minus small cone, difference of cubes),
 // the sphere by slicing, surface area from nets (box, cylinder, cone, sphere),
 // k³ and the surface-to-volume ratio, and real objects built from simple solids.
 
@@ -26,6 +27,11 @@ function cylConeNumbers(v: Record<string, number>) {
   return { tex: r`V_\text{cyl} = \pi \cdot ${num(v.r)}^2 \cdot ${num(v.h)} \approx \green{${num(cyl)}} \qquad V_\text{cone} = \tfrac13 \cdot ${num(cyl)} \approx \green{${num(cyl / 3)}}` };
 }
 
+function frustNumbers(v: Record<string, number>) {
+  const V = (Math.PI * v.h / 3) * (v.R * v.R + v.R * v.r + v.r * v.r), m = (v.R + v.r) / 2;
+  return { tex: r`V = \frac{\pi \cdot ${num(v.h)}}{3}(${num(v.R)}^2 + ${num(v.R)} \cdot ${num(v.r)} + ${num(v.r)}^2) \approx \green{${num(V)}} \qquad \pi \cdot ${num(m)}^2 \cdot ${num(v.h)} \approx ${num(Math.PI * m * m * v.h)}` };
+}
+
 function ballNumbers(v: Record<string, number>) {
   const S = 4 * Math.PI * v.r * v.r, V = (4 / 3) * Math.PI * v.r ** 3;
   return { tex: r`S = 4\pi \cdot ${num(v.r)}^2 \approx ${num(S)} \qquad V = \tfrac43\pi \cdot ${num(v.r)}^3 \approx ${num(V)} \qquad \frac{S}{V} = \frac{3}{${num(v.r)}} = \green{${(3 / v.r).toFixed(2)}}` };
@@ -40,7 +46,7 @@ export function VolumesContent({ t }: { t: TrackTranslations }) {
       </Lead>
 
       <Goals t={t} id="mVol" items={[
-        "Find the volume of prisms, cylinders, pyramids, cones and spheres.",
+        "Find the volume of prisms, cylinders, pyramids, cones, frustums and spheres.",
         "Find a solid's surface area by unfolding it.",
         "Predict how surface and volume change with scale.",
         "Estimate real objects as combinations of simple solids.",
@@ -108,6 +114,39 @@ export function VolumesContent({ t }: { t: TrackTranslations }) {
         ]}
         compute={cylConeNumbers}
         note={tx(t, "mVol_liveConeNote", "Double the radius and both volumes grow 4 times (r is squared); double the height and they only double. The cone is always exactly a third.")} />
+
+      <H3>{tx(t, "mVol_frustTitle", "Cutting off the top: the frustum")}</H3>
+      <p>
+        {tx(t, "mVol_frustBody",
+          "A bucket, a lampshade, a flower pot and most drinking glasses are cones with the tip cut off by a plane parallel to the base. What is left is a frustum: two parallel circles of radii R (bottom) and r (top), h apart. Its volume is the big cone minus the small cone that was cut away. The small cone is a scaled copy of the big one, so similar triangles give its height, and a factorisation finishes the job.")}
+      </p>
+      <Derivation t={t} label={tx(t, "mVol_eqFrustDer", "Volume of a cone frustum")}
+        steps={[
+          { tex: r`V = \tfrac13 \pi R^2 H - \tfrac13 \pi r^2 (H - h)`, full: true, why: tx(t, "mVol_fr1", "big cone of height H minus the small cone on top, of height H − h") },
+          { tex: r`\frac{H - h}{H} = \frac{r}{R} \;\Rightarrow\; H = \frac{hR}{R - r},\quad H - h = \frac{hr}{R - r}`, full: true, why: tx(t, "mVol_fr2", "the small cone is the big one scaled by r/R, heights included; solve for H") },
+          { tex: r`V = \frac{\pi h}{3} \cdot \frac{R^3 - r^3}{R - r}`, full: true, why: tx(t, "mVol_fr3", "put both heights in: R² · hR − r² · hr = h(R³ − r³), over R − r") },
+          { tex: r`V = \green{\frac{\pi h}{3}\,(R^2 + Rr + r^2)}`, full: true, why: tx(t, "mVol_fr4", "difference of cubes: R³ − r³ = (R − r)(R² + Rr + r²), and R − r cancels") },
+        ]} />
+      <Equation label={tx(t, "mVol_eqFrust", "Frustum of a cone and of a pyramid")}
+        where={[
+          [r`R,\ r`, tx(t, "mVol_wRr", "the radii of the bottom and top circles")],
+          [r`B,\ b`, tx(t, "mVol_wBb", "the areas of the bottom and top bases of a pyramid frustum")],
+          [r`h`, tx(t, "mVol_wHf", "the perpendicular distance between the two bases")],
+          [r`\sqrt{Bb}`, tx(t, "mVol_wSqrt", "the middle term: for circles √(πR² · πr²) = πRr, which is the Rr term of the first formula")],
+        ]}
+        words={tx(t, "mVol_frustWords", "A third of the height times the sum of the bottom area, the top area and the geometric mean of the two.")}
+        note={tx(t, "mVol_frustNote", "With r = 0 the top shrinks to a point and the formula gives back the whole cone, ⅓πR²h. With r = R it gives πR²h, the cylinder: the frustum sits between the two.")}>
+        {r`V_\text{cone frustum} = \frac{\pi h}{3}(R^2 + Rr + r^2) \qquad V_\text{pyramid frustum} = \frac{h}{3}\left(B + \sqrt{B b} + b\right)`}
+      </Equation>
+      <LiveFormula label={tx(t, "mVol_liveFrust", "Try it: how much a bucket holds")}
+        tex={r`V = \frac{\pi h}{3}(R^2 + Rr + r^2)`}
+        vars={[
+          { id: "R", label: tx(t, "mVol_liveFR", "bottom radius R"), min: 1, max: 30, step: 1, value: 15, fmt: num },
+          { id: "r", label: tx(t, "mVol_liveFr", "top radius r"), min: 0, max: 30, step: 1, value: 10, fmt: num },
+          { id: "h", label: tx(t, "mVol_liveFh", "height h"), min: 1, max: 60, step: 1, value: 30, fmt: num },
+        ]}
+        compute={frustNumbers}
+        note={tx(t, "mVol_liveFrustNote", "It starts on a bucket 30 cm tall, 15 cm and 10 cm in radius: about 14 900 cm³, almost 15 litres (1 L = 1000 cm³). The second number uses the average radius as if the bucket were a cylinder: always a little too small, unless R = r.")} />
 
       <H2>{tx(t, "mVol_sphereTitle", "The sphere")}</H2>
       <p>
@@ -184,6 +223,7 @@ export function VolumesContent({ t }: { t: TrackTranslations }) {
           [tx(t, "mVol_r4", "cylinder"), "πr²h", "2πr² + 2πrh"],
           [tx(t, "mVol_r5", "pyramid"), "⅓Bh", tx(t, "mVol_r5s", "base + triangular sides")],
           [tx(t, "mVol_r6", "cone"), "⅓πr²h", "πr² + πrl"],
+          [tx(t, "mVol_r6f", "cone frustum, radii R and r"), "⅓πh(R² + Rr + r²)", "πR² + πr² + π(R + r)l"],
           [tx(t, "mVol_r7", "sphere"), "4/3 πr³", "4πr²"],
         ]}
       />
@@ -244,6 +284,7 @@ export function VolumesContent({ t }: { t: TrackTranslations }) {
         "Sphere: V = 4/3 πr³ by slicing, S = 4πr² from thin pyramids.",
         "Surface area is the area of the net; box 2(ab + bc + ca).",
         "Scaling by k: surface ×k², volume ×k³.",
+        "A frustum is the big cone minus the small one: V = πh/3 (R² + Rr + r²).",
       ]} />
     </Article>
   );

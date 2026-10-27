@@ -1,6 +1,6 @@
 "use client";
 
-// Geometry 9: transformations — translations, reflections and their effect on
+// Geometry 10: transformations — translations, reflections and their effect on
 // winding, quarter-turn rotations and rotating about a pivot, rigid motions
 // and congruence, scaling (uniform and not) and shear with their effect on
 // area, composition and why order matters, symmetry, and following a shape

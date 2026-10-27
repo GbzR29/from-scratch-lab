@@ -3,7 +3,8 @@
 // Trigonometry 6: waves and oscillation — circular motion seen from the side,
 // the sinusoid and its four parameters, period, frequency and phase, adding
 // waves (same frequency, beats, harmonics and Fourier), damped oscillation,
-// Lissajous figures, and reading and building waves by hand.
+// Lissajous figures, the tangent with parameters (period π/|c|, asymptotes),
+// and reading and building waves by hand.
 
 import { Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
@@ -14,6 +15,7 @@ import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { WaveFigure } from "@/components/lesson/figures/math/WaveFigure";
 import { HarmonicsFigure } from "@/components/lesson/figures/math/HarmonicsFigure";
+import { TanGraphFigure } from "@/components/lesson/figures/math/TanGraphFigure";
 
 const r = String.raw;
 
@@ -61,6 +63,7 @@ export function WavesContent({ t }: { t: TrackTranslations }) {
         "Combine a sine and a cosine of the same speed into a single wave.",
         "Explain why two close notes throb, and how adding waves builds a square wave.",
         "Describe motion that dies down, like a swing left alone or a plucked string.",
+        "Read the period, centre and asymptotes of a stretched and shifted tangent.",
       ]} />
 
       <H2>{tx(t, "mWv_circTitle", "A circle seen from the side")}</H2>
@@ -179,6 +182,32 @@ export function WavesContent({ t }: { t: TrackTranslations }) {
           "Give the x and the y of a point their own oscillations: x = sin(at), y = sin(bt + φ). With a = b the point goes round an ellipse, which becomes the unit circle when φ = π/2, because then y = cos(at) and the point is (sin, cos) again. Other whole-number ratios trace closed knots: 1 : 2 a figure eight, 3 : 2 a pretzel. The Lissajous mode of the figure draws them. They appear on an oscilloscope when two electrical signals are compared, and a pendulum free to swing in two directions draws them in sand. When the ratio is not a fraction of whole numbers the curve never closes and slowly fills a rectangle.")}
       </p>
 
+      <H2>{tx(t, "mWv_tanTitle", "The tangent graph, stretched and shifted")}</H2>
+      <p>
+        {tx(t, "mWv_tanBody",
+          "The same four moves that shape a sine wave work on the tangent, with one difference in each. The unit circle chapter showed the plain tangent: it repeats every π, not 2π, and it shoots off to ±∞ at the angles where the cosine is zero, π/2 + kπ, where the graph has vertical asymptotes (lines the curve gets ever closer to without reaching). In y = a + b tan(cx + d), a lifts the graph, as the offset C lifts a wave. The number b stretches it upright, but it is not an amplitude: a tangent has no highest point, so b only sets how steep the curve is where it crosses its centre, and a negative b turns it downhill. The number c squeezes it sideways, so the period becomes π/|c|. And d slides it, so its centre point, where the tangent is 0, moves to x = −d/c.")}
+      </p>
+      <Equation label={tx(t, "mWv_eqTan", "The tangent with parameters")}
+        where={[
+          [r`a`, tx(t, "mWv_wTa", "the vertical shift: the centre points sit at height a")],
+          [r`b`, tx(t, "mWv_wTb", "the vertical stretch; negative b flips the graph, but there is no amplitude")],
+          [r`c`, tx(t, "mWv_wTc", "the horizontal squeeze: c branches fit where one fitted before")],
+          [r`d`, tx(t, "mWv_wTd", "the slide: the argument cx + d is 0 at x = −d/c")],
+          [r`\tfrac{\pi}{|c|}`, tx(t, "mWv_wTp", "the period, the width of one branch, from asymptote to asymptote")],
+        ]}
+        words={tx(t, "mWv_tanWords", "The tangent repeats every π divided by c. Its walls stand where the inside of the tangent reaches a right angle plus a whole number of half turns.")}
+        note={tx(t, "mWv_tanNote", "Compare with the sine: y = A sin(cx + d) + C has period 2π/|c|. The tangent's period is half of that because the tangent already repeats after half a turn.")}>
+        {r`y = a + b\tan(c\,x + d) \qquad T = \frac{\pi}{|c|} \qquad \text{asymptotes: } c\,x + d = \frac{\pi}{2} + k\pi`}
+      </Equation>
+      <TanGraphFigure t={t} />
+      <Derivation t={t} label={tx(t, "mWv_eqTanEx", "Reading y = 1 + 2 tan(2x − π/2)")}
+        steps={[
+          { tex: r`T = \frac{\pi}{2}`, full: true, why: tx(t, "mWv_te1", "c = 2, so the period is π/2: four branches fit in 2π") },
+          { tex: r`2x - \tfrac{\pi}{2} = \tfrac{\pi}{2} + k\pi \;\Rightarrow\; x = \tfrac{\pi}{2} + \tfrac{k\pi}{2}`, full: true, why: tx(t, "mWv_te2", "the asymptotes: set the argument to π/2 + kπ and solve for x; k = −1 gives x = 0, then π/2, π, …") },
+          { tex: r`2x - \tfrac{\pi}{2} = 0 \;\Rightarrow\; x = \tfrac{\pi}{4},\ y = 1`, full: true, why: tx(t, "mWv_te3", "the centre point of a branch: the argument is 0, the tangent is 0, so y = a = 1") },
+          { tex: r`x = \tfrac{3\pi}{8}: \quad y = 1 + 2\tan\tfrac{\pi}{4} = \green{3}`, full: true, why: tx(t, "mWv_te4", "one more point a quarter period further on, halfway to the next asymptote: the argument is π/4, where tan = 1; b = 2 doubles it") },
+        ]} />
+
       <H2>{tx(t, "mWv_exTitle", "Worked examples")}</H2>
       <p>
         {tx(t, "mWv_ex1",
@@ -245,6 +274,7 @@ export function WavesContent({ t }: { t: TrackTranslations }) {
           [tx(t, "mWv_m3w", "A = max − min"), tx(t, "mWv_m3r", "A = (max − min)/2"), tx(t, "mWv_m3", "the amplitude is measured from the centre line, not from bottom to top")],
           [tx(t, "mWv_m4w", "phase in degrees"), tx(t, "mWv_m4r", "phase in radians"), tx(t, "mWv_m4", "sin takes radians, including the phase")],
           [tx(t, "mWv_m5w", "damping with e^(λt)"), tx(t, "mWv_m5r", "e^(−λt), with the minus sign"), tx(t, "mWv_m5", "without it the swing grows instead of dying away")],
+          [tx(t, "mWv_m6w", "period of tan(3x) is 2π/3"), "π/3", tx(t, "mWv_m6", "the tangent repeats every π, so its period is π/|c|")],
         ]}
       />
 
@@ -255,6 +285,7 @@ export function WavesContent({ t }: { t: TrackTranslations }) {
         "Close frequencies beat; harmonics added together build square and sawtooth waves.",
         "A e^(−λt) sin(…) dies away: swings, springs, plucked strings.",
         "From a graph: C = (max + min)/2, A = (max − min)/2, T = peak to peak.",
+        "y = a + b tan(cx + d): period π/|c|, asymptotes where cx + d = π/2 + kπ, no amplitude.",
       ]} />
     </Article>
   );

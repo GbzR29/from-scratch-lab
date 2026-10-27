@@ -1,7 +1,7 @@
 // PT text for src/lib/tracks/math/chapters/volumes.tsx. Keys match the tx() calls there; English is the fallback in the code.
 
 const text: Record<string, string> = {
-  mVol_goal0: "Achar o volume de prismas, cilindros, pirâmides, cones e esferas.",
+  mVol_goal0: "Achar o volume de prismas, cilindros, pirâmides, cones, troncos e esferas.",
   mVol_goal1: "Achar a área da superfície de um sólido desdobrando-o.",
   mVol_goal2: "Prever como a superfície e o volume mudam com a escala.",
   mVol_goal3: "Estimar objetos reais como combinações de sólidos simples.",
@@ -62,6 +62,7 @@ const text: Record<string, string> = {
   mVol_r5: "pirâmide",
   mVol_r5s: "base + laterais triangulares",
   mVol_r6: "cone",
+  mVol_r6f: "tronco de cone, raios R e r",
   mVol_r7: "esfera",
   mVol_exTitle: "Exemplos resolvidos",
   mVol_ex1: "1. Um bloco maciço de madeira tem 1 m × 0,8 m × 0,5 m e a madeira tem densidade 600 kg/m³ (cada metro cúbico pesa 600 kg). V = 1 · 0,8 · 0,5 = 0,4 m³, então sua massa é 600 · 0,4 = 240 kg. Massa = densidade × volume é como um construtor pesa uma carga sem balança.",
@@ -109,6 +110,26 @@ const text: Record<string, string> = {
   mVol_liveR: "raio r",
   mVol_liveH: "altura h",
   mVol_liveConeNote: "Dobre o raio e os dois volumes crescem 4 vezes (r está ao quadrado); dobre a altura e eles só dobram. O cone é sempre exatamente um terço.",
+
+  mVol_frustTitle: "Cortando a ponta: o tronco",
+  mVol_frustBody: "Um balde, uma cúpula de abajur, um vaso de planta e a maioria dos copos são cones com a ponta cortada por um plano paralelo à base. O que sobra é um tronco de cone: dois círculos paralelos de raios R (embaixo) e r (em cima), a uma distância h. O volume dele é o cone grande menos o cone pequeno que foi tirado. O cone pequeno é uma cópia em escala do grande, então a semelhança de triângulos dá a altura dele, e uma fatoração termina o serviço.",
+  mVol_eqFrustDer: "Volume do tronco de cone",
+  mVol_fr1: "cone grande de altura H menos o cone pequeno de cima, de altura H − h",
+  mVol_fr2: "o cone pequeno é o grande em escala r/R, alturas incluídas; isole H",
+  mVol_fr3: "substitua as duas alturas: R² · hR − r² · hr = h(R³ − r³), sobre R − r",
+  mVol_fr4: "diferença de cubos: R³ − r³ = (R − r)(R² + Rr + r²), e R − r se cancela",
+  mVol_eqFrust: "Tronco de cone e tronco de pirâmide",
+  mVol_wRr: "os raios do círculo de baixo e do de cima",
+  mVol_wBb: "as áreas da base maior e da base menor de um tronco de pirâmide",
+  mVol_wHf: "a distância perpendicular entre as duas bases",
+  mVol_wSqrt: "o termo do meio: para círculos √(πR² · πr²) = πRr, que é o termo Rr da primeira fórmula",
+  mVol_frustWords: "Um terço da altura vezes a soma da área de baixo, da área de cima e da média geométrica das duas.",
+  mVol_frustNote: "Com r = 0 o topo vira um ponto e a fórmula devolve o cone inteiro, ⅓πR²h. Com r = R ela dá πR²h, o cilindro: o tronco fica entre os dois.",
+  mVol_liveFrust: "Experimente: quanto cabe num balde",
+  mVol_liveFR: "raio de baixo R",
+  mVol_liveFr: "raio de cima r",
+  mVol_liveFh: "altura h",
+  mVol_liveFrustNote: "Começa num balde de 30 cm de altura, com raios de 15 cm e 10 cm: cerca de 14 900 cm³, quase 15 litros (1 L = 1000 cm³). O segundo número usa o raio médio, como se o balde fosse um cilindro: sempre um pouco pequeno demais, a não ser que R = r.",
   mVol_s1b: "os dois têm base de raio r e altura r",
   mVol_surfWords: "Desdobre cada sólido e some os pedaços planos: uma caixa são três pares de retângulos; um cilindro, dois discos e um retângulo desenrolado; um cone, um disco e uma fatia de pizza desenrolada.",
   mVol_ss1: "as pirâmides finas enchem a esfera exatamente",
@@ -126,6 +147,7 @@ const text: Record<string, string> = {
   mVol_key4: "Esfera: V = 4/3 πr³ por fatias, S = 4πr² por pirâmides finas.",
   mVol_key5: "A área da superfície é a área da planificação; caixa 2(ab + bc + ca).",
   mVol_key6: "Ampliar por k: superfície ×k², volume ×k³.",
+  mVol_key7: "Um tronco é o cone grande menos o pequeno: V = πh/3 (R² + Rr + r²).",
 };
 
 export default text;

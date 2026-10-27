@@ -140,6 +140,10 @@ export const mathDescriptions: LessonDescriptions = {
     en: "Volume and surface area of prisms, cylinders, pyramids, cones and spheres, Cavalieri's principle, unfolding solids, and how volume scales by k³.",
     pt: "Volume e área de superfície de prismas, cilindros, pirâmides, cones e esferas, princípio de Cavalieri, planificação e por que o volume escala com k³.",
   },
+  polyhedra: {
+    en: "Polyhedra explained: faces, edges and vertices, prisms and pyramids by formula, counting edges twice, Euler's relation V − E + F = 2, and top, front and side views.",
+    pt: "Poliedros: faces, arestas e vértices, prismas e pirâmides por fórmula, contar arestas duas vezes, relação de Euler V − A + F = 2 e vistas de cima, frontal e lateral.",
+  },
   analytic: {
     en: "Coordinate geometry: midpoint and section formula, equations of lines and circles, ellipses, parabolas and hyperbolas, and where a line meets a circle.",
     pt: "Geometria analítica: ponto médio e divisão de segmento, equações da reta e da circunferência, elipse, parábola e hipérbole, e reta vs circunferência.",

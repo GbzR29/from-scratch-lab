@@ -36,6 +36,7 @@ const track = {
     similarity: "Semelhança e escala",
     circle: "Círculos e π",
     volumes: "Volume e área de superfície",
+    polyhedra: "Poliedros: faces, arestas, vértices e vistas",
     analytic: "Geometria analítica e cônicas",
     transformations: "Transformações",
     trig: "Trigonometria no triângulo retângulo",

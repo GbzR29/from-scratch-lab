@@ -40,6 +40,7 @@ import pythagoras from "./pythagoras";
 import similarity from "./similarity";
 import circle from "./circle";
 import volumes from "./volumes";
+import polyhedra from "./polyhedra";
 import analytic from "./analytic";
 import transformations from "./transformations";
 // ── Trigonometry ──
@@ -106,7 +107,7 @@ const bundle: LessonText = {
     ...numberLine, ...orderOfOperations, ...fractions, ...ratios, ...divisibility, ...powers, ...bases, ...modular,
     ...expressions, ...linearEquations, ...inequalities, ...functions, ...linearSystems, ...quadratics, ...polynomials, ...polynomialDivision, ...binomial, ...exponents, ...equationToolkit, ...sequences, ...algebraTricks, ...algebraShortcuts,
     ...sets, ...logic, ...proofs, ...summation, ...induction,
-    ...angles, ...triangles, ...area, ...pythagoras, ...similarity, ...circle, ...volumes, ...analytic, ...transformations,
+    ...angles, ...triangles, ...area, ...pythagoras, ...similarity, ...circle, ...volumes, ...polyhedra, ...analytic, ...transformations,
     ...trig, ...unitCircle, ...triangleLaws, ...identities, ...trigEquations, ...polar, ...waves,
     ...vectors, ...matrices, ...determinant, ...inverse, ...eigen, ...complex, ...quaternions,
     ...limits, ...derivatives, ...derivativeRules, ...derivativeUses, ...integrals, ...ftc, ...integrationTechniques, ...series, ...partialDerivatives, ...multipleIntegrals, ...differentialEquations, ...vectorFields, ...lineIntegrals, ...greenStokes, ...fourier, ...calculusOfVariations, ...pde,

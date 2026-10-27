@@ -4,6 +4,23 @@ const text: Record<string, string> = {
   mRat_goal1: "Resolver uma proporção.",
   mRat_goal2: "Calcular porcentagens, variações percentuais e porcentagens de porcentagens.",
   mRat_goal3: "Achar o valor a uma fração dada do caminho entre dois outros.",
+  mRat_goal4: "Achar a concentração de uma mistura, e quanto acrescentar para chegar a uma meta.",
+
+  mRat_mixTitle: "Misturas: a porcentagem de um total",
+  mRat_mixBody: "Despeje 30 L de um combustível com 20 % de etanol num tanque com 10 L de outro com 60 % de etanol. A mistura não tem 40 % (a média de 20 e 60), porque há muito mais do primeiro combustível. Conte o etanol puro: 20 % de 30 L são 6 L, 60 % de 10 L são 6 L, então 12 L de etanol em 40 L de combustível, e 12/40 = 30 %. A concentração de uma mistura é sempre \"parte pura sobre total\", o que a torna uma média das duas concentrações ponderada pelas quantidades.",
+  mRat_eqMix: "Concentração de uma mistura",
+  mRat_wC12: "as concentrações das duas partes, em decimal (20 % → 0,2)",
+  mRat_wV12: "as quantidades de cada parte (litros, gramas, pessoas: qualquer unidade, a mesma para as duas)",
+  mRat_wPure: "a quantidade pura dentro da primeira parte",
+  mRat_wCmix: "a concentração da mistura",
+  mRat_mixWords: "Some as partes puras, some os totais, divida. O resultado fica sempre entre as duas concentrações, mais perto daquela de que há mais.",
+  mRat_mixNote: "Acrescentar água é o caso c₂ = 0: a quantidade pura c₁V₁ fica igual enquanto o total cresce, então c · V fica constante. Diluir 2 L de suco a 15 % até 5 L: c = 0,15 · 2 / 5 = 0,06 = 6 %.",
+  mRat_eqMixDer: "Quanto do combustível a 60 % transforma 30 L a 20 % em 30 %?",
+  mRat_mx1: "etanol de antes mais etanol acrescentado é igual a 30 % do novo total; x é a quantidade do combustível a 60 %",
+  mRat_mx2: "faça as multiplicações dos dois lados",
+  mRat_mx3: "junte x de um lado e divida por 0,3; bate com o exemplo acima",
+  mRat_liveMix: "Experimente: misturando duas soluções",
+  mRat_liveMixNote: "O medidor é a concentração da mistura. Faça V₂ muito maior que V₁ e ela vai para perto de c₂; ponha c₂ = 0 e você está acrescentando água. A média simples de c₁ e c₂ só acerta quando V₁ = V₂.",
   mRat_intro: "Uma fração responde “quanto de um todo?”. Uma razão responde “quanto de uma coisa para cada quantidade de outra?”: farinha por ovo numa receita, quilômetros por hora, largura por altura de uma tela. Porcentagens são razões com 100 como referência, e a ideia de “fração do caminho” por trás delas é a mesma por trás de converter uma temperatura de Celsius para Fahrenheit ou a pontuação de uma prova em nota. Este capítulo trata delas juntas porque são uma ideia só, vista de lados diferentes.",
   mRat_ratioTitle: "Razões",
   mRat_ratioBody: "Uma razão compara duas quantidades por divisão. Se uma turma tem 12 alunos e 4 computadores, a razão de alunos para computadores é 12 : 4, lida “12 para 4”, e quer dizer 12/4 = 3 alunos para cada computador. Como uma fração, uma razão pode ser simplificada dividindo os dois lados pelo mesmo número (12 : 4 = 3 : 1) sem mudar o que ela diz. A ordem importa: computadores para alunos é 4 : 12 = 1 : 3.",
@@ -87,6 +104,7 @@ const text: Record<string, string> = {
   mRat_key3: "p % = p/100. Parte = p × todo; porcentagem = parte / todo; todo = parte / p.",
   mRat_key4: "Uma variação de p multiplica por (1 + p); variações seguidas se multiplicam, não se somam.",
   mRat_key5: "t = (x − a)/(b − a) é a fração do caminho; a interpolação e as conversões de escala (°C para °F) se apoiam nisso.",
+  mRat_key6: "A concentração de uma mistura é parte pura sobre total, (c₁V₁ + c₂V₂)/(V₁ + V₂), não a média simples.",
 };
 
 export default text;

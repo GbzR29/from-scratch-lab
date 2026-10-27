@@ -5,6 +5,23 @@ const text: Record<string, string> = {
   mAn_goal1: "Escrever a equação de uma reta e de um círculo.",
   mAn_goal2: "Reconhecer elipses, parábolas e hipérboles pelas equações.",
   mAn_goal3: "Dizer se uma reta passa longe de um círculo, encosta nele ou o corta.",
+  mAn_goal4: "Achar os pontos que ficam à mesma distância de dois ou três pontos dados.",
+
+  mAn_bisTitle: "Pontos à mesma distância: a mediatriz",
+  mAn_bisBody: "Onde cavar um poço para que duas casas, A e B, fiquem à mesma distância dele? Não há uma resposta só, mas uma reta inteira delas. O conjunto de todos os pontos com uma propriedade se chama lugar geométrico: a circunferência é o lugar geométrico dos pontos à distância r de um centro, e o lugar geométrico dos pontos à mesma distância de A e de B é a mediatriz de AB, a reta que passa pelo ponto médio M e é perpendicular a AB. Há dois jeitos de achar a equação dela. Geometricamente: pegue M e o inverso oposto da inclinação de AB. Algebricamente: escreva \"distância até A = distância até B\", eleve os dois lados ao quadrado e veja os quadrados se cancelarem.",
+  mAn_eqBisDer: "À mesma distância de A = (1, 2) e B = (5, 4)",
+  mAn_bs1: "a distância ao quadrado de P = (x, y) até A é igual à distância ao quadrado até B (Pitágoras; distâncias nunca são negativas, então elevar ao quadrado não perde nada)",
+  mAn_bs2: "desenvolva os quatro quadrados",
+  mAn_bs3: "x² e y² estão dos dois lados e se cancelam: o que sobra é a equação de uma reta",
+  mAn_bs4: "junte x e y à esquerda e divida por 4",
+  mAn_bisCheck: "Confira do jeito geométrico. O ponto médio é M = (3, 3), e 2 · 3 + 3 = 9, então M está na reta. A inclinação de AB é (4 − 2)/(5 − 1) = ½ e a de y = 9 − 2x é −2: o produto dá −1, então a reta é perpendicular a AB.",
+  mAn_liveBis: "Experimente: a mediatriz de AB",
+  mAn_wBisAB: "os dois pontos A e B; a reta é tudo o que fica à mesma distância dos dois",
+  mAn_liveBisSame: "A e B são o mesmo ponto: todo ponto fica à mesma distância",
+  mAn_liveBisNote: "A equação geral é a dedução acima feita uma vez com letras. Começa em A = (1, 2), B = (5, 4): 8x + 4y = 36, a reta 2x + y = 9. Ponha A e B na mesma horizontal e a mediatriz fica vertical, x = constante: sem inclinação, o que esta forma aceita sem problema.",
+  mAn_ccTitle: "Três pontos, um centro: o circuncentro",
+  mAn_ccBody: "Três cidades A, B e C querem um hospital à mesma distância das três. Um ponto à mesma distância de A e B está na mediatriz de AB; à mesma distância de B e C, na mediatriz de BC. Onde as duas retas se cruzam, o ponto está à mesma distância das três, então está também na mediatriz de AC: as três mediatrizes de um triângulo se encontram num ponto só, o circuncentro. Ele é o centro da circunferência que passa pelos três vértices, e a distância até eles é o raio. Exemplo: A = (0, 0), B = (8, 0), C = (0, 6). A mediatriz de AB é x = 4 e a de AC é y = 3, então o hospital vai em (4, 3), à distância √(4² + 3²) = 5 de cada cidade.",
+  mAn_ccTip: "Num triângulo retângulo o circuncentro é sempre o ponto médio da hipotenusa: aqui (4, 3) fica no meio do caminho entre B = (8, 0) e C = (0, 6). Num triângulo obtusângulo ele cai fora do triângulo.",
   mAn_intro: "Em 1637 René Descartes juntou as duas metades da matemática: ponha uma grade no plano, e todo ponto vira um par de números e toda forma uma equação. Perguntas de geometria (estas retas se encontram? este ponto está dentro do círculo?) viram perguntas de álgebra que você resolve com um lápis, e a álgebra ganha imagens em troca. Este capítulo reúne as ferramentas: pontos entre pontos, retas e suas inclinações, a circunferência como equação e as quatro curvas que os gregos obtiveram cortando um cone.",
   mAn_midTitle: "Pontos entre pontos",
   mAn_midBody: "O ponto médio de um segmento de A = (x₁, y₁) a B = (x₂, y₂) se encontra uma coordenada de cada vez: seu x fica no meio entre x₁ e x₂, que é a média deles, e o mesmo para y. Mais geralmente, o ponto a uma fração t do caminho de A até B começa em A e soma t vezes o passo B − A; é a interpolação linear do capítulo de razões, aplicada às duas coordenadas. t = 0 dá A, t = 1 dá B, t = ½ dá o ponto médio.",
@@ -143,6 +160,7 @@ const text: Record<string, string> = {
   mAn_key4: "Reta contra circunferência dá uma equação do 2º grau; o discriminante conta os cruzamentos.",
   mAn_key5: "Parábola: distância ao foco = distância à diretriz; elipse: soma constante; hipérbole: diferença constante.",
   mAn_key6: "Excentricidade e = c/a: 0 circunferência, < 1 elipse, 1 parábola, > 1 hipérbole.",
+  mAn_key7: "Os pontos à mesma distância de A e B formam a mediatriz; duas mediatrizes de um triângulo se encontram no circuncentro.",
 };
 
 export default text;

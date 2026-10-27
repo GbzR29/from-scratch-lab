@@ -1,8 +1,9 @@
 "use client";
 
-// Geometry 8: coordinate geometry and conics — the midpoint and points along
+// Geometry 9: coordinate geometry and conics — the midpoint and points along
 // a segment, lines in point-slope and general form, parallel and
-// perpendicular slopes, the circle's equation and completing the square,
+// perpendicular slopes, the perpendicular bisector as a locus and the
+// circumcentre, the circle's equation and completing the square,
 // line against circle, and the conics (parabola, ellipse, hyperbola) from
 // their distance definitions, with eccentricity, and line against circle by hand.
 
@@ -30,6 +31,15 @@ function insideNumbers(v: Record<string, number>, t: TrackTranslations) {
   return { tex: r`(${sub(v.x, H)})^2 + (${sub(v.y, K)})^2 = ${num(lhs)} \;${rel}\; ${num(v.r)}^2 = ${num(rr)} \;\Rightarrow\; \green{\text{${where}}}` };
 }
 
+/** The perpendicular bisector of A(x1, y1) B(x2, y2), with its numbers plugged in. */
+function bisNumbers(v: Record<string, number>, t: TrackTranslations) {
+  const a = 2 * (v.x2 - v.x1), b = 2 * (v.y2 - v.y1), c = v.x2 ** 2 + v.y2 ** 2 - v.x1 ** 2 - v.y1 ** 2;
+  if (a === 0 && b === 0) return { tex: r`\red{\text{${tx(t, "mAn_liveBisSame", "A and B are the same point: every point is equally far")}}}` };
+  const mx = (v.x1 + v.x2) / 2, my = (v.y1 + v.y2) / 2;
+  const by = b < 0 ? r`- ${num(-b)}\,y` : r`+ ${num(b)}\,y`;
+  return { tex: r`\green{${num(a)}\,x ${by} = ${num(c)}} \qquad M = (${num(mx)},\ ${num(my)}):\ ${num(a)} \cdot ${num(mx)} ${b < 0 ? "-" : "+"} ${num(Math.abs(b))} \cdot ${num(my)} = ${num(a * mx + b * my)}\ \checkmark` };
+}
+
 export function AnalyticContent({ t }: { t: TrackTranslations }) {
   return (
     <Article>
@@ -43,6 +53,7 @@ export function AnalyticContent({ t }: { t: TrackTranslations }) {
         "Write the equation of a line and of a circle.",
         "Recognize ellipses, parabolas and hyperbolas from their equations.",
         "Tell whether a line misses a circle, touches it or cuts through it.",
+        "Find the points equally far from two or three given points.",
       ]} />
 
       <H2>{tx(t, "mAn_midTitle", "Points between points")}</H2>
@@ -92,6 +103,45 @@ export function AnalyticContent({ t }: { t: TrackTranslations }) {
         note={tx(t, "mAn_perpNote", "Example: a wall along y = ½x + 1 has slope ½, so a line straight out of the wall has slope −2. Check: ½ · (−2) = −1. Horizontal and vertical lines are perpendicular too, but the rule breaks there because a vertical line has no slope.")}>
         {r`\text{parallel: } m_1 = m_2 \qquad \text{perpendicular: } m_2 = -\frac{1}{m_1} \iff m_1\,m_2 = -1`}
       </Equation>
+
+      <H2>{tx(t, "mAn_bisTitle", "Points at equal distance: the perpendicular bisector")}</H2>
+      <p>
+        {tx(t, "mAn_bisBody",
+          "Where should a well go so that two houses, A and B, are equally far from it? There is not one answer but a whole line of them. The set of all points with some property is called a locus (Latin for \"place\"): the circle is the locus of the points at distance r from a centre, and the locus of the points equally far from A and from B is the perpendicular bisector of AB, the line through the midpoint M that is perpendicular to AB. There are two ways to get its equation. Geometrically: take M and the negative reciprocal of the slope of AB. Algebraically: write \"distance to A = distance to B\", square both sides, and watch the squares cancel.")}
+      </p>
+      <Derivation t={t} label={tx(t, "mAn_eqBisDer", "Equally far from A = (1, 2) and B = (5, 4)")}
+        steps={[
+          { tex: r`(x - 1)^2 + (y - 2)^2 = (x - 5)^2 + (y - 4)^2`, full: true, why: tx(t, "mAn_bs1", "the squared distance from P = (x, y) to A equals the squared distance to B (Pythagoras; distances are never negative, so squaring loses nothing)") },
+          { tex: r`x^2 - 2x + 1 + y^2 - 4y + 4 = x^2 - 10x + 25 + y^2 - 8y + 16`, full: true, why: tx(t, "mAn_bs2", "expand the four squares") },
+          { tex: r`-2x - 4y + 5 = -10x - 8y + 41`, full: true, why: tx(t, "mAn_bs3", "x² and y² are on both sides and cancel: what is left is the equation of a line") },
+          { tex: r`8x + 4y = 36 \;\Rightarrow\; \green{2x + y = 9}`, full: true, why: tx(t, "mAn_bs4", "collect x and y on the left and divide by 4") },
+        ]} />
+      <p>
+        {tx(t, "mAn_bisCheck",
+          "Check it the geometric way. The midpoint is M = (3, 3), and 2 · 3 + 3 = 9, so M is on the line. The slope of AB is (4 − 2)/(5 − 1) = ½ and the slope of y = 9 − 2x is −2: their product is −1, so the line is perpendicular to AB.")}
+      </p>
+      <LiveFormula label={tx(t, "mAn_liveBis", "Try it: the perpendicular bisector of AB")}
+        tex={r`2(x_2 - x_1)\,x + 2(y_2 - y_1)\,y = x_2^2 + y_2^2 - x_1^2 - y_1^2`}
+        where={[
+          [r`(x_1, y_1),\ (x_2, y_2)`, tx(t, "mAn_wBisAB", "the two points A and B; the line is everything equally far from both")],
+        ]}
+        vars={[
+          { id: "x1", label: "x₁", min: -6, max: 6, step: 1, value: 1, fmt: num },
+          { id: "y1", label: "y₁", min: -6, max: 6, step: 1, value: 2, fmt: num },
+          { id: "x2", label: "x₂", min: -6, max: 6, step: 1, value: 5, fmt: num },
+          { id: "y2", label: "y₂", min: -6, max: 6, step: 1, value: 4, fmt: num },
+        ]}
+        compute={v => bisNumbers(v, t)}
+        note={tx(t, "mAn_liveBisNote", "The general equation is the derivation above done once with letters. It starts on A = (1, 2), B = (5, 4): 8x + 4y = 36, the line 2x + y = 9. Put A and B on the same horizontal line and the bisector becomes vertical, x = constant: no slope, which this form handles without trouble.")} />
+
+      <H3>{tx(t, "mAn_ccTitle", "Three points, one centre: the circumcentre")}</H3>
+      <p>
+        {tx(t, "mAn_ccBody",
+          "Three towns A, B and C want a hospital equally far from all three. A point equally far from A and B lies on the bisector of AB; equally far from B and C, on the bisector of BC. Where the two lines cross, the point is equally far from all three, so it is on the bisector of AC as well: the three bisectors of a triangle meet at one point, the circumcentre. It is the centre of the circle through the three vertices, and its distance to them is the radius. Example: A = (0, 0), B = (8, 0), C = (0, 6). The bisector of AB is x = 4 and that of AC is y = 3, so the hospital goes at (4, 3), at distance √(4² + 3²) = 5 from each town.")}
+      </p>
+      <Callout type="tip" t={t}>
+        {tx(t, "mAn_ccTip", "In a right triangle the circumcentre is always the midpoint of the hypotenuse: here (4, 3) is halfway between B = (8, 0) and C = (0, 6). In an obtuse triangle it falls outside the triangle.")}
+      </Callout>
 
       <H2>{tx(t, "mAn_circTitle", "The circle as an equation")}</H2>
       <p>
@@ -263,6 +313,7 @@ export function AnalyticContent({ t }: { t: TrackTranslations }) {
         "Line against circle is a quadratic; the discriminant counts the crossings.",
         "Parabola: focus = directrix distance; ellipse: constant sum; hyperbola: constant difference.",
         "Eccentricity e = c/a: 0 circle, < 1 ellipse, 1 parabola, > 1 hyperbola.",
+        "Points equally far from A and B form the perpendicular bisector; two bisectors of a triangle meet at the circumcentre.",
       ]} />
     </Article>
   );

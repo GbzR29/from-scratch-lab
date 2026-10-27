@@ -7,6 +7,7 @@ const text: Record<string, string> = {
   mWv_goal2: "Juntar um seno e um cosseno de mesma rapidez numa única onda.",
   mWv_goal3: "Explicar por que duas notas próximas pulsam, e como somar ondas monta uma onda quadrada.",
   mWv_goal4: "Descrever um movimento que vai morrendo, como um balanço deixado sozinho ou uma corda tocada.",
+  mWv_goal5: "Ler o período, o centro e as assíntotas de uma tangente esticada e deslocada.",
   mWv_circTitle:"Um círculo visto de lado",
   mWv_circBody: "Deixe um ponto dar voltas no círculo unitário a uma velocidade angular constante ω (radianos por segundo, do capítulo do círculo unitário). Depois de t segundos seu ângulo é ωt, então sua posição é (cos ωt, sin ωt). Agora olhe o círculo de lado, de modo que só a altura seja visível: o ponto sobe e desce entre −1 e 1, rápido no meio e devagar nas pontas, onde dá meia-volta. Esse movimento, y = sin ωt, se chama movimento harmônico simples. É como se movem uma massa numa mola e um pêndulo (em oscilações pequenas), e é o vaivém mais suave possível.",
   mWv_phaseTitle: "Período, frequência e fase",
@@ -105,6 +106,25 @@ const text: Record<string, string> = {
   mWv_key3: "Frequências próximas dão batimentos; harmônicos somados constroem ondas quadradas e dente de serra.",
   mWv_key4: "A e^(−λt) sin(…) vai morrendo: balanços, molas, cordas dedilhadas.",
   mWv_key5: "A partir de um gráfico: C = (máx + mín)/2, A = (máx − mín)/2, T = de pico a pico.",
+  mWv_key6: "y = a + b tg(cx + d): período π/|c|, assíntotas onde cx + d = π/2 + kπ, sem amplitude.",
+  mWv_m6w: "o período de tg(3x) é 2π/3",
+  mWv_m6: "a tangente se repete a cada π, então o período dela é π/|c|",
+
+  mWv_tanTitle: "O gráfico da tangente, esticado e deslocado",
+  mWv_tanBody: "Os mesmos quatro movimentos que moldam uma senoide funcionam na tangente, com uma diferença em cada um. O capítulo do círculo unitário mostrou a tangente simples: ela se repete a cada π, não 2π, e dispara para ±∞ nos ângulos onde o cosseno é zero, π/2 + kπ, onde o gráfico tem assíntotas verticais (retas das quais a curva chega cada vez mais perto sem nunca tocar). Em y = a + b tg(cx + d), a levanta o gráfico, como o deslocamento C levanta uma onda. O número b estica na vertical, mas não é uma amplitude: a tangente não tem ponto mais alto, então b só decide o quanto a curva é íngreme onde cruza o centro, e um b negativo a faz descer. O número c aperta na horizontal, então o período vira π/|c|. E d desliza, então o ponto central, onde a tangente vale 0, vai para x = −d/c.",
+  mWv_eqTan: "A tangente com parâmetros",
+  mWv_wTa: "o deslocamento vertical: os pontos centrais ficam na altura a",
+  mWv_wTb: "o esticamento vertical; b negativo vira o gráfico, mas não existe amplitude",
+  mWv_wTc: "o aperto horizontal: cabem c ramos onde antes cabia um",
+  mWv_wTd: "o deslizamento: o argumento cx + d vale 0 em x = −d/c",
+  mWv_wTp: "o período, a largura de um ramo, de assíntota a assíntota",
+  mWv_tanWords: "A tangente se repete a cada π dividido por c. As paredes dela ficam onde o que está dentro da tangente chega a um ângulo reto mais um número inteiro de meias voltas.",
+  mWv_tanNote: "Compare com o seno: y = A sen(cx + d) + C tem período 2π/|c|. O da tangente é metade disso porque a tangente já se repete depois de meia volta.",
+  mWv_eqTanEx: "Lendo y = 1 + 2 tg(2x − π/2)",
+  mWv_te1: "c = 2, então o período é π/2: cabem quatro ramos em 2π",
+  mWv_te2: "as assíntotas: iguale o argumento a π/2 + kπ e isole x; k = −1 dá x = 0, depois π/2, π, …",
+  mWv_te3: "o ponto central de um ramo: o argumento é 0, a tangente é 0, então y = a = 1",
+  mWv_te4: "mais um ponto um quarto de período adiante, no meio do caminho até a próxima assíntota: o argumento é π/4, onde tg = 1; b = 2 dobra o valor",
 };
 
 export default text;

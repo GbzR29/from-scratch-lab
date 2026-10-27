@@ -601,7 +601,7 @@
   },
   "math/ratios": {
     "created": "2026-09-25",
-    "updated": "2026-10-13"
+    "updated": "2026-10-27"
   },
   "math/divisibility": {
     "created": "2026-09-25",
@@ -721,15 +721,19 @@
   },
   "math/volumes": {
     "created": "2026-09-26",
-    "updated": "2026-10-08"
+    "updated": "2026-10-27"
+  },
+  "math/polyhedra": {
+    "created": "2026-10-27",
+    "updated": "2026-10-27"
   },
   "math/analytic": {
     "created": "2026-09-26",
-    "updated": "2026-10-08"
+    "updated": "2026-10-27"
   },
   "math/transformations": {
     "created": "2026-09-26",
-    "updated": "2026-10-08"
+    "updated": "2026-10-27"
   },
   "math/trig": {
     "created": "2026-09-25",
@@ -757,7 +761,7 @@
   },
   "math/waves": {
     "created": "2026-09-26",
-    "updated": "2026-10-08"
+    "updated": "2026-10-27"
   },
   "math/vectors": {
     "created": "2026-09-25",

@@ -1,7 +1,8 @@
 "use client";
 
 // Arithmetic 4: ratios, rates and proportion (direct and inverse), percent,
-// percentage change and why successive changes multiply, and the fraction-of-
+// percentage change and why successive changes multiply, mixtures (pure part
+// over total, a weighted average), and the fraction-of-
 // the-way idea behind interpolation and changes of scale.
 
 import { Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
@@ -27,6 +28,17 @@ function fahrenheit(v: Record<string, number>) {
   };
 }
 
+// ── Live mixture: pure part over total ───────────────────────────────────────
+
+function mixNumbers(v: Record<string, number>) {
+  const pure = (v.c1 * v.V1 + v.c2 * v.V2) / 100, tot = v.V1 + v.V2, c = pure / tot;
+  return {
+    tex: r`c = \frac{${num(v.c1 / 100)} \cdot ${num(v.V1)} + ${num(v.c2 / 100)} \cdot ${num(v.V2)}}{${num(v.V1)} + ${num(v.V2)}} = \frac{${num(pure)}}{${num(tot)}} \approx \green{${num(100 * c)}\,\%}`,
+    meter: c,
+    meterLabel: `${num(100 * c)} %`,
+  };
+}
+
 export function RatiosContent({ t }: { t: TrackTranslations }) {
   return (
     <Article>
@@ -40,6 +52,7 @@ export function RatiosContent({ t }: { t: TrackTranslations }) {
         "Solve a proportion.",
         "Compute percentages, percentage changes and percentages of percentages.",
         "Find the value a given fraction of the way between two others.",
+        "Find the concentration of a mixture, and how much to add to reach a target.",
       ]} />
 
       <H2>{tx(t, "mRat_ratioTitle", "Ratios")}</H2>
@@ -128,6 +141,39 @@ export function RatiosContent({ t }: { t: TrackTranslations }) {
 
       <RatioFigure t={t} />
 
+      <H3>{tx(t, "mRat_mixTitle", "Mixtures: the percentage of a total")}</H3>
+      <p>
+        {tx(t, "mRat_mixBody",
+          "Pour 30 L of a fuel that is 20 % ethanol into a tank with 10 L of one that is 60 % ethanol. The mixture is not 40 % (the average of 20 and 60), because there is much more of the first fuel. Count the pure ethanol instead: 20 % of 30 L is 6 L, 60 % of 10 L is 6 L, so 12 L of ethanol in 40 L of fuel, and 12/40 = 30 %. The concentration of a mixture is always \"pure part over total\", which makes it an average of the two concentrations weighted by the amounts.")}
+      </p>
+      <Equation label={tx(t, "mRat_eqMix", "Concentration of a mixture")}
+        where={[
+          [r`c_1,\ c_2`, tx(t, "mRat_wC12", "the concentrations of the two parts, as decimals (20 % → 0.2)")],
+          [r`V_1,\ V_2`, tx(t, "mRat_wV12", "the amounts of each part (litres, grams, people: any unit, the same for both)")],
+          [r`c_1 V_1`, tx(t, "mRat_wPure", "the pure amount inside the first part")],
+          [r`c`, tx(t, "mRat_wCmix", "the concentration of the mixture")],
+        ]}
+        words={tx(t, "mRat_mixWords", "Add up the pure parts, add up the totals, divide. The result always lies between the two concentrations, closer to the one there is more of.")}
+        note={tx(t, "mRat_mixNote", "Adding water is the case c₂ = 0: the pure amount c₁V₁ stays the same while the total grows, so c · V stays constant. Diluting 2 L of 15 % juice to 5 L: c = 0.15 · 2 / 5 = 0.06 = 6 %.")}>
+        {r`c = \frac{c_1 V_1 + c_2 V_2}{V_1 + V_2}`}
+      </Equation>
+      <Derivation t={t} label={tx(t, "mRat_eqMixDer", "How much of the 60 % fuel turns 30 L at 20 % into 30 %?")}
+        steps={[
+          { tex: r`0.2 \cdot 30 + 0.6\,x = 0.3\,(30 + x)`, full: true, why: tx(t, "mRat_mx1", "ethanol before plus ethanol added equals 30 % of the new total; x is the amount of the 60 % fuel") },
+          { tex: r`6 + 0.6x = 9 + 0.3x`, full: true, why: tx(t, "mRat_mx2", "multiply out both sides") },
+          { tex: r`0.3x = 3 \;\Rightarrow\; \green{x = 10\ \text{L}}`, full: true, why: tx(t, "mRat_mx3", "collect x on one side and divide by 0.3; it matches the example above") },
+        ]} />
+      <LiveFormula label={tx(t, "mRat_liveMix", "Try it: mixing two solutions")}
+        tex={r`c = \frac{c_1 V_1 + c_2 V_2}{V_1 + V_2}`}
+        vars={[
+          { id: "V1", label: "V₁", min: 1, max: 50, step: 1, value: 30, fmt: num },
+          { id: "c1", label: "c₁ (%)", min: 0, max: 100, step: 5, value: 20, fmt: num },
+          { id: "V2", label: "V₂", min: 0, max: 50, step: 1, value: 10, fmt: num },
+          { id: "c2", label: "c₂ (%)", min: 0, max: 100, step: 5, value: 60, fmt: num },
+        ]}
+        compute={mixNumbers}
+        note={tx(t, "mRat_liveMixNote", "The meter is the mixture's concentration. Make V₂ much bigger than V₁ and it moves towards c₂; set c₂ = 0 and you are adding water. The plain average of c₁ and c₂ is right only when V₁ = V₂.")} />
+
       <H2>{tx(t, "mRat_lerpTitle", "Fraction of the way: interpolation and scales")}</H2>
       <p>
         {tx(t, "mRat_lerpBody",
@@ -198,6 +244,7 @@ export function RatiosContent({ t }: { t: TrackTranslations }) {
         "p % = p/100. Part = p × whole; percentage = part / whole; whole = part / p.",
         "A change of p multiplies by (1 + p); successive changes multiply, they do not add.",
         "t = (x − a)/(b − a) is the fraction of the way; interpolation and scale conversions (°C to °F) are built on it.",
+        "A mixture's concentration is pure part over total, (c₁V₁ + c₂V₂)/(V₁ + V₂), not the plain average.",
       ]} />
     </Article>
   );

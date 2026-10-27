@@ -560,6 +560,17 @@ const text: Record<string, string> = {
   figTeqR2: "cos x = c: ±α com α = arccos c. tan x = c: α + 180°k, uma família.",
   figTeqR3: "Some 360°k (180°k para tan) para ter todas as soluções; |c| > 1 não dá nenhuma para sin e cos.",
   figTeqR4: "Uma inequação vale em arcos entre as soluções da equação: resolva a equação primeiro, depois teste os arcos.",
+
+  // ── TanGraphFigure ──
+  figTan_title: "A tangente, esticada e deslocada",
+  figTan_a: "a (sobe)",
+  figTan_b: "b (estica)",
+  figTan_c: "c (aperta)",
+  figTan_d: "d (desliza)",
+  figTan_period: "período",
+  figTan_centre: "centro",
+  figTan_asym: "assíntotas",
+  figTan_note: "Um seno tem amplitude; a tangente não, ela vai de −∞ a +∞ em cada ramo. Então b não define uma altura: define o quanto o gráfico é íngreme ao cruzar o ponto central, e um b negativo faz todo ramo descer. Só c muda o período, π/|c|; a e d movem o gráfico sem mudar a forma. As assíntotas ficam onde cx + d = π/2 + kπ, os ângulos em que o cosseno é 0.",
 };
 
 export default text;
