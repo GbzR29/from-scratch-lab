@@ -239,6 +239,24 @@ const text: Record<string, string> = {
   mpr_kSubst: "substituição",
   mpr_tkReal: "Resolva e fique só com as soluções verdadeiras",
   mpr_roots4: "Ache as quatro soluções",
+
+  // ── Added 2026-10-27: the algebra tricks chapters ──
+  mpr_tTricks1: "Pratique: multiplicar por 1, somar 0",
+  mpr_kRat: "racionalizar",
+  mpr_kNotable: "contas de cabeça",
+  mpr_trHead: "Calcule de cabeça",
+  mpr_trRat: "Multiplique pelo conjugado e escreva como a + b√n. Ache a e b",
+  mpr_tTricks2: "Pratique: raízes, coeficientes e simetria",
+  mpr_kVieta: "soma e produto",
+  mpr_kCoefSum: "substituir 1, −1, 0",
+  mpr_kRecip: "x + 1/x",
+  mpr_trVieta: "r e q são as raízes. Ache isto sem resolver",
+  mpr_trSumAll: "Ache a soma de todos os coeficientes",
+  mpr_trSumAlt: "Ache c₀ − c₁ + c₂ − c₃ + …, os coeficientes com sinais alternados",
+  mpr_trConst: "Ache o termo constante",
+  mpr_trEven: "Ache a soma dos coeficientes das potências pares (x⁰, x², x⁴, …)",
+  mpr_trOdd: "Ache a soma dos coeficientes das potências ímpares (x¹, x³, x⁵, …)",
+  mpr_trRecip: "Ache isto sem achar x",
 };
 
 export default text;

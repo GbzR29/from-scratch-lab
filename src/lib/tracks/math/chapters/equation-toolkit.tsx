@@ -4,14 +4,14 @@
 // that only go one way (⇒) and can add fake solutions or lose real ones
 // (figure); cross-multiplying after noting what the denominators forbid;
 // factoring instead of dividing by the unknown; square-root equations
-// (isolate, square, check); multiplying by the conjugate (rationalising a
-// denominator, a difference of roots, pointers to complex division and
-// limits); substitution (u = x², u = 2ˣ); the toolkit at a glance; common
-// mistakes; practice.
+// (isolate, square, check); a pointer to the conjugate trick (its full section
+// lives in algebra-tricks.tsx); substitution (u = x², u = 2ˣ); the toolkit at
+// a glance; common mistakes; practice.
 
-import { Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
+import { Callout, H2, LessonTable } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
 import { Derivation } from "@/components/lesson/Derivation";
+import { Related } from "@/components/lesson/Related";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
@@ -32,7 +32,6 @@ export function EquationToolkitContent({ t }: { t: TrackTranslations }) {
         "Tell a move that keeps the solutions from one that can add fake ones or lose real ones.",
         "Clear fractions by cross-multiplying, after noting which values the denominators forbid.",
         "Solve a square-root equation by isolating, squaring and checking.",
-        "Remove square roots from a denominator or a difference by multiplying by the conjugate.",
         "Spot a substitution, and factor instead of dividing by the unknown.",
       ]} />
 
@@ -133,54 +132,9 @@ export function EquationToolkitContent({ t }: { t: TrackTranslations }) {
 
       <H2>{tx(t, "mEqt_conjTitle", "Multiplying by the conjugate")}</H2>
       <p>
-        {tx(t, "mEqt_conjBody",
-          "The conjugate of a sum of two terms, a + b, is the same two terms with the sign between them flipped, a − b. Their product is the difference of squares from the expressions chapter: every cross term cancels and only a² − b² is left. When a or b is a square root, squaring it removes the root. That is the whole trick: to get rid of square roots in a sum or difference, multiply by its conjugate.")}
+        {tx(t, "mEqt_conjMoved",
+          "A square root in a denominator, or a difference of two roots such as √(x + 5) − √x = 1, has its own trick: multiply by the conjugate, the same two terms with the sign between them flipped, because (a + b)(a − b) = a² − b² leaves no root behind. In an equation that means multiplying both sides, so the factor must not be zero, as in the table above. The trick has its own full section, with why it works, a picture and worked examples, in the chapter Algebra Tricks I at the end of this section.")}
       </p>
-      <Equation label={tx(t, "mEqt_eqConj", "A sum times its conjugate")}
-        where={[
-          [r`a + b`, tx(t, "mEqt_wAb", "a sum (or difference) of two terms, at least one with a square root")],
-          [r`a - b`, tx(t, "mEqt_wAmb", "its conjugate: the same terms, the sign between them flipped")],
-          [r`a^2 - b^2`, tx(t, "mEqt_wA2", "the product: the cross terms −ab and +ab cancel, and each square removes a root")],
-        ]}
-        words={tx(t, "mEqt_conjWords", "A sum times the same terms with the sign flipped gives the first term squared minus the second term squared, and squaring a square root removes it.")}>
-        {r`(a + b)(a - b) = a^2 - ab + ab - b^2 = a^2 - b^2 \qquad (\sqrt{5} + \sqrt{2})(\sqrt{5} - \sqrt{2}) = 5 - 2 = 3`}
-      </Equation>
-      <H3>{tx(t, "mEqt_ratTitle", "1. Rationalising a denominator")}</H3>
-      <p>
-        {tx(t, "mEqt_ratBody",
-          "A fraction with a square root in its denominator is usually rewritten without it: it is easier to compare, add and estimate. Multiply the top and the bottom by the same thing, which is multiplying by 1 and changes nothing. A single root needs only itself: 1/√2 = √2/2, because √2 · √2 = 2. A sum or difference with a root needs its conjugate.")}
-      </p>
-      <Derivation t={t} label={tx(t, "mEqt_eqRat", "Rationalising 1/(3 − √2)")}
-        steps={[
-          { full: true, tex: r`\frac{1}{3 - \sqrt{2}}` },
-          { full: true, tex: r`= \frac{1}{3 - \sqrt{2}} \cdot \amber{\frac{3 + \sqrt{2}}{3 + \sqrt{2}}}`, why: tx(t, "mEqt_r1", "multiply by the conjugate over itself: a fraction equal to 1") },
-          { full: true, tex: r`= \frac{3 + \sqrt{2}}{3^2 - (\sqrt{2})^2}`, why: tx(t, "mEqt_r2", "the bottom is a difference of squares") },
-          { full: true, tex: r`= \green{\frac{3 + \sqrt{2}}{7}}`, why: tx(t, "mEqt_r3", "9 − 2 = 7: the root is gone from the bottom") },
-          { full: true, tex: r`\frac{1}{1.5858} \approx 0.6306 \approx \frac{4.4142}{7}\;\checkmark`, why: tx(t, "mEqt_r4", "check with decimals, √2 ≈ 1.4142: both sides give 0.6306") },
-        ]} />
-      <H3>{tx(t, "mEqt_diffTitle", "2. An equation with a difference of roots")}</H3>
-      <p>
-        {tx(t, "mEqt_diffBody",
-          "In √(x + 5) − √x = 1, squaring right away leaves a cross term with a root in it. The conjugate gives a cleaner route. Multiply both sides by √(x + 5) + √x. That sum is positive for every allowed x (it is at least √5), so the move is safe. On the left, the difference of squares leaves (x + 5) − x = 5, and the x disappears.")}
-      </p>
-      <Derivation t={t} label={tx(t, "mEqt_eqDiff", "Solving √(x + 5) − √x = 1")}
-        steps={[
-          { full: true, tex: r`\sqrt{x + 5} - \sqrt{x} = 1 \qquad (x \geq 0)`, why: tx(t, "mEqt_d0", "√x needs x ≥ 0") },
-          { full: true, tex: r`(x + 5) - x = 1 \cdot (\sqrt{x + 5} + \sqrt{x})`, why: tx(t, "mEqt_d1", "multiply both sides by the conjugate √(x + 5) + √x; the left side becomes a difference of squares") },
-          { full: true, tex: r`\sqrt{x + 5} + \sqrt{x} = 5`, why: tx(t, "mEqt_d2", "the left side is just 5; swap the sides") },
-          { full: true, tex: r`2\sqrt{x + 5} = 6`, why: tx(t, "mEqt_d3", "add this equation to the original one: the √x terms cancel") },
-          { full: true, tex: r`\sqrt{x + 5} = 3 \;\Rightarrow\; x + 5 = 9 \;\Rightarrow\; x = \green{4}`, why: tx(t, "mEqt_d4", "divide by 2, square (3 is positive, so nothing fake is added), subtract 5") },
-          { full: true, tex: r`\sqrt{9} - \sqrt{4} = 3 - 2 = 1\;\checkmark`, why: tx(t, "mEqt_d5", "check in the original") },
-        ]} />
-      <H3>{tx(t, "mEqt_elseTitle", "3. Where else the conjugate appears")}</H3>
-      <LessonTable
-        headers={[tx(t, "mEqt_hWhere", "Where"), tx(t, "mEqt_hWhat", "What it removes"), tx(t, "mEqt_hChapter", "Chapter")]}
-        rows={[
-          [tx(t, "mEqt_e1", "Dividing complex numbers, (5 + 5i)/(1 + 2i)"), tx(t, "mEqt_e1w", "the i in the denominator, since (1 + 2i)(1 − 2i) = 1 + 4 = 5"), tx(t, "mEqt_e1c", "Complex Numbers")],
-          [tx(t, "mEqt_e2", "A limit that gives 0/0, such as (√(x + 1) − 1)/x at x = 0"), tx(t, "mEqt_e2w", "the root that keeps the 0/0, so a factor x can cancel"), tx(t, "mEqt_e2c", "Limits & Continuity")],
-          [tx(t, "mEqt_e3", "The derivative of √x from its definition"), tx(t, "mEqt_e3w", "the difference √(x + h) − √x on top"), tx(t, "mEqt_e3c", "The Derivative")],
-        ]}
-      />
 
       <H2>{tx(t, "mEqt_subTitle", "Substitution: find a familiar equation inside")}</H2>
       <p>
@@ -234,13 +188,17 @@ export function EquationToolkitContent({ t }: { t: TrackTranslations }) {
 
       <MathPracticeFigure t={t} set="toolkit" />
 
+      <Related t={t} links={[
+        { track: "Math", id: "algebra-tricks", title: tx(t, "mEqt_rel1", "Algebra Tricks I: Multiply by 1, Add 0"), why: tx(t, "mEqt_rel1b", "multiplying by the conjugate in full: why it works, rationalising, differences of roots, cube roots.") },
+        { track: "Math", id: "algebra-shortcuts", title: tx(t, "mEqt_rel2", "Algebra Tricks II: Roots, Coefficients & Symmetry"), why: tx(t, "mEqt_rel2b", "shortcuts for equations: sum and product of the roots, symmetric systems, x + 1/x.") },
+      ]} />
+
       <KeyIdeas t={t} id="mEqt" items={[
         "A move that can be undone (⇔) keeps the solutions; a one-way move (⇒) turns the answers into candidates that must be checked.",
         "Multiplying by an expression that can be 0, squaring, and some log rules can add fake solutions: check every candidate in the original.",
         "Dividing by an expression that can be 0, and taking a square root without ±, can lose real solutions: factor instead, and write ±.",
         "a/b = c/d ⇔ ad = bc, once b ≠ 0 and d ≠ 0 are written down; it needs one fraction on each side.",
         "For a square root: isolate it, square, then check.",
-        "(a + b)(a − b) = a² − b²: multiplying by the conjugate removes square roots from a denominator or a difference.",
         "Substitution, u = x² or u = 2ˣ, turns a disguised equation into a familiar one; mind the values u cannot take.",
       ]} />
     </Article>

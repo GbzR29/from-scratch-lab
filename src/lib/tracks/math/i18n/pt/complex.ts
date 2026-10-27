@@ -122,6 +122,8 @@ const text: Record<string, string> = {
   mCx_key3: "z̄ = a − bi; z z̄ = |z|²; divida multiplicando em cima e embaixo pelo conjugado.",
   mCx_key4: "zⁿ = rⁿ(cos nθ + i sin nθ); as n raízes de 1 formam um n-ágono regular.",
   mCx_key5: "e^(iθ) = cos θ + i sin θ; um complexo unitário é uma rotação no plano.",
+  mCx_rel1: "Macetes de álgebra I: multiplicar por 1, somar 0",
+  mCx_rel1b: "o mesmo macete do conjugado tirando raízes quadradas, com um desenho de por que os termos cruzados se cancelam.",
 };
 
 export default text;

@@ -10,6 +10,7 @@
 import { Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
 import { Derivation } from "@/components/lesson/Derivation";
+import { Related } from "@/components/lesson/Related";
 import { LiveFormula } from "@/components/lesson/LiveFormula";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
@@ -273,6 +274,10 @@ export function LimitsContent({ t }: { t: TrackTranslations }) {
           [tx(t, "mLim_m5w", "checking only one side"), tx(t, "mLim_m5r", "check both sides at a jump"), tx(t, "mLim_m5", "the two-sided limit needs them to agree")],
         ]}
       />
+
+      <Related t={t} links={[
+        { track: "Math", id: "algebra-tricks", title: tx(t, "mLim_rel1", "Algebra Tricks I: Multiply by 1, Add 0"), why: tx(t, "mLim_rel1b", "multiplying by the conjugate in full: what it is, why it removes a root, and its traps.") },
+      ]} />
 
       <KeyIdeas t={t} id="mLim" items={[
         "lim f(x) = L as x → a: f(x) gets as close to L as you like for x close enough to a (x ≠ a).",

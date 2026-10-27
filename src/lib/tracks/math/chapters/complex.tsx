@@ -10,6 +10,7 @@
 import { Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
 import { Derivation } from "@/components/lesson/Derivation";
+import { Related } from "@/components/lesson/Related";
 import { LiveFormula } from "@/components/lesson/LiveFormula";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
@@ -278,6 +279,10 @@ export function ComplexContent({ t }: { t: TrackTranslations }) {
       <Callout type="info" t={t}>
         {tx(t, "mCx_whyNote", "Why is this chapter in Linear Algebra? Because multiplying by w = c + di is a linear map of the plane, with matrix [[c, −d], [d, c]]: a rotation matrix scaled by |w|. Complex numbers are exactly the 2 × 2 matrices that rotate and scale without shearing or mirroring, written in a compact form that multiplies like ordinary numbers.")}
       </Callout>
+
+      <Related t={t} links={[
+        { track: "Math", id: "algebra-tricks", title: tx(t, "mCx_rel1", "Algebra Tricks I: Multiply by 1, Add 0"), why: tx(t, "mCx_rel1b", "the same conjugate trick removing square roots, with a picture of why the cross terms cancel.") },
+      ]} />
 
       <KeyIdeas t={t} id="mCx" items={[
         "i² = −1; a complex number a + bi is the point (a, b) of the complex plane.",

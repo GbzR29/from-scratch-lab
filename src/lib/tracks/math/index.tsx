@@ -37,6 +37,8 @@ const chapters: Chapter[] = [
   { id: "exponents",       section: ALGEBRA, title: "Exponents & Logarithms",    minRead: 13, load: () => import("./chapters/exponents").then((m) => m.ExpLogContent) },
   { id: "equation-toolkit", section: ALGEBRA, title: "Equation Toolkit: Safe Moves & Tricks", minRead: 22, load: () => import("./chapters/equation-toolkit").then((m) => m.EquationToolkitContent) },
   { id: "sequences",        section: ALGEBRA, title: "Sequences & Series",        minRead: 17, load: () => import("./chapters/sequences").then((m) => m.SequencesContent) },
+  { id: "algebra-tricks",    section: ALGEBRA, title: "Algebra Tricks I: Multiply by 1, Add 0", minRead: 24, load: () => import("./chapters/algebra-tricks").then((m) => m.AlgebraTricksContent) },
+  { id: "algebra-shortcuts", section: ALGEBRA, title: "Algebra Tricks II: Roots, Coefficients & Symmetry", minRead: 22, load: () => import("./chapters/algebra-shortcuts").then((m) => m.AlgebraShortcutsContent) },
 
   { id: "sets",             section: LOGIC, title: "Sets",                       minRead: 20, load: () => import("./chapters/sets").then((m) => m.SetsContent) },
   { id: "logic",            section: LOGIC, title: "Logic & Quantifiers",        minRead: 20, load: () => import("./chapters/logic").then((m) => m.LogicContent) },

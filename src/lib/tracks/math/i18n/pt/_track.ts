@@ -22,6 +22,8 @@ const track = {
     exponents: "Expoentes e logaritmos",
     "equation-toolkit": "Caixa de ferramentas das equações: movimentos seguros e truques",
     sequences: "Sequências e séries",
+    "algebra-tricks": "Macetes de álgebra I: multiplicar por 1, somar 0",
+    "algebra-shortcuts": "Macetes de álgebra II: raízes, coeficientes e simetria",
     sets: "Conjuntos",
     logic: "Lógica e quantificadores",
     proofs: "Métodos de demonstração",

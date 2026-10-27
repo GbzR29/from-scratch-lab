@@ -137,6 +137,8 @@ const text: Record<string, string> = {
   mLim_key4: "sin x / x → 1 quando x → 0, em radianos: o teorema do confronto prova isso.",
   mLim_key5: "Contínua em a: lim f(x) = f(a). As quebras são buracos, saltos ou explosões.",
   mLim_key6: "Uma função contínua que troca de sinal tem uma raiz no meio: a bissecção a encontra.",
+  mLim_rel1: "Macetes de álgebra I: multiplicar por 1, somar 0",
+  mLim_rel1b: "multiplicar pelo conjugado por inteiro: o que é, por que tira a raiz, e as armadilhas.",
 };
 
 export default text;

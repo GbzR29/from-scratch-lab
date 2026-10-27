@@ -24,6 +24,8 @@ import binomial from "./binomial";
 import exponents from "./exponents";
 import equationToolkit from "./equation-toolkit";
 import sequences from "./sequences";
+import algebraTricks from "./algebra-tricks";
+import algebraShortcuts from "./algebra-shortcuts";
 // ── Logic & Proof ──
 import sets from "./sets";
 import logic from "./logic";
@@ -96,7 +98,7 @@ import recurrences from "./recurrences";
 const bundle: LessonText = {
   strings: {
     ...numberLine, ...orderOfOperations, ...fractions, ...ratios, ...divisibility, ...powers, ...bases, ...modular,
-    ...expressions, ...linearEquations, ...inequalities, ...functions, ...linearSystems, ...quadratics, ...polynomials, ...polynomialDivision, ...binomial, ...exponents, ...equationToolkit, ...sequences,
+    ...expressions, ...linearEquations, ...inequalities, ...functions, ...linearSystems, ...quadratics, ...polynomials, ...polynomialDivision, ...binomial, ...exponents, ...equationToolkit, ...sequences, ...algebraTricks, ...algebraShortcuts,
     ...sets, ...logic, ...proofs, ...summation, ...induction,
     ...angles, ...triangles, ...area, ...pythagoras, ...similarity, ...circle, ...volumes, ...analytic, ...transformations,
     ...trig, ...unitCircle, ...triangleLaws, ...identities, ...trigEquations, ...polar, ...waves,

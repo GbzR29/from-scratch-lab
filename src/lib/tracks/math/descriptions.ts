@@ -77,12 +77,20 @@ export const mathDescriptions: LessonDescriptions = {
     pt: "Funções exponenciais e logaritmos: crescimento e decaimento, o log como inverso da potência, propriedades dos logaritmos e equações exponenciais.",
   },
   "equation-toolkit": {
-    en: "Safe moves for solving equations: cross-multiplying, never dividing by the unknown, square-root equations, multiplying by the conjugate, substitution.",
-    pt: "Movimentos seguros para resolver equações: multiplicação em cruz, nunca dividir pela incógnita, equações com raiz, multiplicar pelo conjugado e substituição.",
+    en: "Safe moves for solving equations: which moves add or lose solutions, cross-multiplying, never dividing by the unknown, square-root equations, substitution.",
+    pt: "Movimentos seguros para resolver equações: quais criam ou perdem soluções, multiplicação em cruz, nunca dividir pela incógnita, equações com raiz e substituição.",
   },
   sequences: {
     en: "Arithmetic and geometric sequences: find any term, read Σ notation, sum formulas for both kinds, and when an infinite series has a finite total.",
     pt: "Progressão aritmética e geométrica: termo geral, notação Σ, fórmulas da soma de PA e PG, e quando uma soma infinita tem total finito.",
+  },
+  "algebra-tricks": {
+    en: "Algebra tricks explained: multiplying by the conjugate (what it is and why it removes roots), rationalising, cube roots, completing the square, splitting fractions, mental math.",
+    pt: "Macetes de álgebra explicados: multiplicar pelo conjugado (o que é e por que tira a raiz), racionalizar, raiz cúbica, completar quadrado, separar frações, conta de cabeça.",
+  },
+  "algebra-shortcuts": {
+    en: "Algebra shortcuts: r² + q² from the sum and product of roots, symmetric systems, x + 1/x, coefficient sums with x = 1, testing identities, comparing huge powers.",
+    pt: "Atalhos de álgebra: r² + q² pela soma e produto das raízes, sistemas simétricos, x + 1/x, soma dos coeficientes com x = 1, testar identidades, comparar potências.",
   },
   sets: {
     en: "Set theory basics: notation, subsets and the power set, union, intersection and complement with Venn diagrams, De Morgan, inclusion–exclusion.",

@@ -8,6 +8,7 @@
 import { Callout, H2, H3, LessonTable } from "@/components/lesson/LessonComponents";
 import { Equation } from "@/components/lesson/Tex";
 import { Derivation } from "@/components/lesson/Derivation";
+import { Related } from "@/components/lesson/Related";
 import { LiveFormula } from "@/components/lesson/LiveFormula";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
@@ -230,6 +231,11 @@ export function QuadraticsContent({ t }: { t: TrackTranslations }) {
       />
 
       <MathPracticeFigure t={t} set="quadratics" />
+
+      <Related t={t} links={[
+        { track: "Math", id: "algebra-tricks", title: tx(t, "mQuad_rel1", "Algebra Tricks I: Multiply by 1, Add 0"), why: tx(t, "mQuad_rel1b", "completing the square as one case of adding 0, next to the conjugate and splitting fractions.") },
+        { track: "Math", id: "algebra-shortcuts", title: tx(t, "mQuad_rel2", "Algebra Tricks II: Roots, Coefficients & Symmetry"), why: tx(t, "mQuad_rel2b", "the sum and the product of the roots used to skip solving: r² + q², 1/r + 1/q, symmetric systems.") },
+      ]} />
 
       <KeyIdeas t={t} id="mQuad" items={[
         "y = ax² + bx + c is a parabola: a > 0 opens up, a < 0 down; c is the value at 0.",

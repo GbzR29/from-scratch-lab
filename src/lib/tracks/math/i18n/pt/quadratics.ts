@@ -105,6 +105,10 @@ const text: Record<string, string> = {
   mQuad_key3: "Completar o quadrado soma (b/2)² para formar um quadrado perfeito; isso prova a fórmula.",
   mQuad_key4: "x = (−b ± √(b² − 4ac)) / (2a); Δ = b² − 4ac conta as raízes reais.",
   mQuad_key5: "x₁ + x₂ = −b/a, x₁x₂ = c/a: uma conferência, e um jeito rápido de fatorar à mão.",
+  mQuad_rel1: "Macetes de álgebra I: multiplicar por 1, somar 0",
+  mQuad_rel1b: "completar o quadrado como um caso de somar 0, ao lado do conjugado e de separar frações.",
+  mQuad_rel2: "Macetes de álgebra II: raízes, coeficientes e simetria",
+  mQuad_rel2b: "a soma e o produto das raízes usados para pular a resolução: r² + q², 1/r + 1/q, sistemas simétricos.",
 };
 
 export default text;

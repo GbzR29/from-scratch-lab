@@ -641,7 +641,7 @@
   },
   "math/quadratics": {
     "created": "2026-09-25",
-    "updated": "2026-10-13"
+    "updated": "2026-10-27"
   },
   "math/polynomials": {
     "created": "2026-09-25",
@@ -661,11 +661,19 @@
   },
   "math/equation-toolkit": {
     "created": "2026-10-24",
-    "updated": "2026-10-24"
+    "updated": "2026-10-27"
   },
   "math/sequences": {
     "created": "2026-09-25",
     "updated": "2026-10-19"
+  },
+  "math/algebra-tricks": {
+    "created": "2026-10-27",
+    "updated": "2026-10-27"
+  },
+  "math/algebra-shortcuts": {
+    "created": "2026-10-27",
+    "updated": "2026-10-27"
   },
   "math/sets": {
     "created": "2026-10-17",
@@ -781,7 +789,7 @@
   },
   "math/complex": {
     "created": "2026-09-26",
-    "updated": "2026-10-08"
+    "updated": "2026-10-27"
   },
   "math/quaternions": {
     "created": "2026-09-26",
@@ -789,7 +797,7 @@
   },
   "math/limits": {
     "created": "2026-09-26",
-    "updated": "2026-10-09"
+    "updated": "2026-10-27"
   },
   "math/derivatives": {
     "created": "2026-09-26",
