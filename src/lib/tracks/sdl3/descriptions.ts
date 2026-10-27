@@ -41,7 +41,7 @@ export const sdl3Descriptions: LessonDescriptions = {
     pt: "Triângulo com SDL_GPU, completo: CMake com shaders pelo glslc, device, pipeline e layout de vértices, envio por transfer buffer, gravar e enviar um quadro, cycling e render states da 3.4.",
   },
   platform: {
-    en: "SDL3 time, files and shipping: clocks and timers, save files in the right folder on every platform, threads, hints and logging, and release builds.",
-    pt: "Tempo, arquivos e distribuição no SDL3: relógios e timers, saves na pasta certa em cada plataforma, threads, hints e logs, e builds para lançar.",
+    en: "SDL3 save files and shipping: SDL_GetPrefPath vs SDL_GetBasePath, crash-safe saves (temp file, SDL_FlushIO, SDL_RenamePath), the three clocks, error message boxes, and a release build with CMake install.",
+    pt: "Saves e distribuição no SDL3: SDL_GetPrefPath × SDL_GetBasePath, saves à prova de travamento (arquivo temporário, SDL_FlushIO, SDL_RenamePath), os três relógios, caixas de erro e um build de release com CMake install.",
   },
 };

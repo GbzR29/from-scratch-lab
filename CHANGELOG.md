@@ -12,6 +12,16 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ## Outubro de 2026
 
+### 2026-10-27
+
+- **SDL3: reforma da trilha, aula Time, Files & Shipping (EN e PT).** A última aula antiga da trilha foi reescrita como code-along e fecha o projeto: o recorde fica salvo com a data e o build vira uma pasta que roda num computador sem nada instalado. Fatos conferidos nos fontes do SDL 3.4.18 (`SDL_filesystem.h`, `SDL_sysfilesystem.c` de Windows, macOS, Unix e Emscripten, `SDL_sysfsops.c`, `SDL_iostream.c`, `SDL_genericstorage.c`, `SDL_log.c`, `SDL_hints.h`, `CMakeLists.txt`) e do SDL_ttf 3.2.2.
+  - Conteúdo: os três relógios (ticks, contador de desempenho com a fórmula da duração, relógio de parede só para datas, `SDL_TimeToDateTime`); base path × pref path e as regras para org e app; formato de save em texto com versão, primeira execução e arquivo danificado como casos normais; save seguro com arquivo temporário, `SDL_FlushIO` (FlushFileBuffers, fdatasync, F_FULLFSYNC) e `SDL_RenamePath`; API de storage; custo do flush e `SDL_AsyncIO`; erros fatais numa `SDL_ShowSimpleMessageBox` com a função `fail()`, `SDL_GetError` velho, prioridades de log e o hint `SDL_LOGGING`; `main.cpp` completo com recorde, data e tempo do save medido; `CMakeLists.txt` completo com runtime MSVC estático, `WIN32`, `CMAKE_INSTALL_RPATH`, regras de `install` e licenças (SDL, SDL3_ttf, FreeType, HarfBuzz, OFL); comandos de release; Windows Sandbox para testar; macOS, Linux, Web e mobile; tabela de erros comuns. As listagens completas ficam em `chapters/platformCode.ts`.
+  - Três widgets novos em `figures/sdl3/`:
+    - **Onde o save vai parar?:** base path e pref path em Windows, macOS, Linux (com e sem `XDG_DATA_HOME`) e Web, rodando da pasta de build ou instalado, com org e app editáveis (nome recusado pelo Windows dá o NULL e o erro reais) e o resultado de escrever o best.txt em cada pasta.
+    - **Mate o jogo no meio de um save:** `SDL_SaveFile` × temporário + rename, passo a passo, morte por travamento ou queda de energia em qualquer passo, o conteúdo do disco depois e o que o `loadBest` faz com ele; desmarcar o `SDL_FlushIO` mostra o arquivo vazio depois do rename.
+    - **Desmarque um arquivo e rode num computador limpo:** a pasta `dist/` de Windows e Linux; tirar uma DLL, um asset, as licenças ou uma linha do CMake mostra a mensagem real do carregador (Windows, `ld.so`), a caixa do `fail()` ou o jogo rodando com o defeito.
+  - Descrição de busca e tempo de leitura da aula atualizados.
+
 ### 2026-10-26
 
 - **SDL3: reforma da trilha, lote 4 de 5, Áudio e GPU (EN e PT).** As duas aulas foram reescritas no formato atual. Fatos conferidos nos fontes do SDL 3.4.18 (`SDL_audio.h`, `SDL_audio.c`, `SDL_mixer.c`, `SDL_audioresample.c`, `SDL_gpu.h`, `SDL_gpu.c`, `SDL_render.h`, `testgpurender_effects.c`).

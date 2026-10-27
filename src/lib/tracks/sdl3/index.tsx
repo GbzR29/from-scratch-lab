@@ -18,5 +18,5 @@ export const sdl3Chapters: Chapter[] = [
   { id: "text", section: "Input & 2D",      title: "Text with SDL3_ttf",        minRead: 19, load: () => import("./chapters/text").then((m) => m.TextContent) },
   { id: "audio", section: "Audio & Graphics",     title: "Audio Streams",             minRead: 21, load: () => import("./chapters/audio").then((m) => m.AudioContent) },
   { id: "gpu", section: "Audio & Graphics",       title: "SDL_GPU — Modern Graphics", minRead: 22, load: () => import("./chapters/gpu").then((m) => m.GpuContent) },
-  { id: "platform", section: "Shipping",  title: "Time, Files & Shipping",    minRead: 11, load: () => import("./chapters/platform").then((m) => m.PlatformContent) },
+  { id: "platform", section: "Shipping",  title: "Time, Files & Shipping",    minRead: 22, load: () => import("./chapters/platform").then((m) => m.PlatformContent) },
 ];
