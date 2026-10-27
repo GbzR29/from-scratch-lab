@@ -592,7 +592,7 @@ int main() {
       />
       <p>
         {tx(t, "oglTr_next",
-          "Next, Drawing a Cube folds the square into a cube: how many vertices it needs, whether to use an index buffer, and the depth test that keeps its near faces in front.")}
+          "Next, Rotating a Triangle slows down and practises one thing, in a small program of its own: making the first triangle turn, step by step, with the keyboard. Then Drawing a Cube folds the square of main.cpp into a cube.")}
       </p>
 
       <KeyIdeas t={t} id="oglTr" items={[

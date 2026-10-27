@@ -52,9 +52,17 @@ export const openglDescriptions: LessonDescriptions = {
     en: "Model, view and projection matrices with GLM: move a shape in the vertex shader, follow a vertex through each space, perspective vs orthographic.",
     pt: "Matrizes model, view e projection com GLM: mova uma forma no vertex shader, siga um vértice por cada espaço, e perspectiva vs ortográfica.",
   },
+  "rotate-triangle": {
+    en: "Rotate a triangle in OpenGL step by step with glm::rotate: fix the stretched window with glm::ortho, spin it with time, pause it, steer it with keys, pick a pivot.",
+    pt: "Gire um triângulo em OpenGL passo a passo com glm::rotate: corrija a janela esticada com glm::ortho, gire com o tempo, pause, controle com o teclado e escolha o pivô.",
+  },
   cube: {
     en: "Draw a 3D cube in OpenGL: why it needs 36 corners, glDrawArrays vs an EBO with 8 or 24 vertices, the depth test, and a textured cube.",
     pt: "Desenhe um cubo 3D em OpenGL: por que são 36 cantos, glDrawArrays vs EBO com 8 ou 24 vértices, o teste de profundidade e o cubo texturizado.",
+  },
+  "rotate-cube": {
+    en: "Rotate a cube in OpenGL step by step: one axis at a time, two rotations in the right order, drag with the mouse (yaw and pitch), and many cubes with a moon.",
+    pt: "Gire um cubo em OpenGL passo a passo: um eixo de cada vez, duas rotações na ordem certa, arrastar com o mouse (yaw e pitch) e vários cubos com uma lua.",
   },
   camera: {
     en: "Build an OpenGL camera with glm::lookAt: walk with WASD at the same speed on any machine, look around with the mouse, zoom with the scroll wheel.",

@@ -5,7 +5,7 @@ const text: Record<string, string> = {
   oglCam_goal1: "Andar com W, A, S, D na mesma velocidade em qualquer máquina.",
   oglCam_goal2: "Olhar em volta com o mouse e dar zoom com a roda.",
   oglCam_goal3: "Embrulhar tudo numa classe Camera.",
-  oglCam_intro: "O OpenGL não tem câmera. No capítulo anterior, a \"câmera\" era uma linha: transladar o mundo inteiro por (0, 0, −3). Este capítulo transforma essa linha numa câmera de verdade. Primeiro ela circula a cena sozinha. Depois você anda com o teclado, olha em volta com o mouse e dá zoom com a rodinha, como num jogo em primeira pessoa.",
+  oglCam_intro: "O OpenGL não tem câmera. Em Desenhando um cubo, a \"câmera\" era uma linha: transladar o mundo inteiro por (0, 0, −3). Este capítulo transforma essa linha numa câmera de verdade. Primeiro ela circula a cena sozinha. Depois você anda com o teclado, olha em volta com o mouse e dá zoom com a rodinha, como num jogo em primeira pessoa.",
 
   // ── O que muda ──
   oglCam_alongTitle: "O que este capítulo acrescenta ao main.cpp",
@@ -23,7 +23,7 @@ const text: Record<string, string> = {
   oglCam_a1: "a posição da câmera, em espaço de mundo.",
   oglCam_a2: "um ponto para o qual a câmera olha. Um ponto, não uma direção: o lookAt calcula a direção sozinho, como center − eye.",
   oglCam_a3: "o \"para cima\" do mundo, quase sempre (0, 1, 0). Ele diz ao lookAt como segurar a câmera, para o horizonte ficar nivelado.",
-  oglCam_lookat2: "Com esses números, é a mesma matriz do translate(0, 0, −3) do capítulo anterior, número por número. Então você pode trocar um pelo outro e nada muda na tela. A diferença aparece assim que a câmera não está bem na frente da cena.",
+  oglCam_lookat2: "Com esses números, é a mesma matriz do translate(0, 0, −3) de Desenhando um cubo, número por número. Então você pode trocar um pelo outro e nada muda na tela. A diferença aparece assim que a câmera não está bem na frente da cena.",
   oglCam_insideTitle: "O que o lookAt calcula",
   oglCam_inside1: "Primeiro o lookAt monta os três eixos da própria câmera, cada um com comprimento 1, em três linhas:",
   oglCam_tLine: "Linha",
@@ -52,7 +52,7 @@ const text: Record<string, string> = {
 
   // ── Passo 1 ──
   oglCam_s1Title: "Passo 1: cinco cubos e uma câmera que circula",
-  oglCam_s1a: "Com um cubo só no meio, é difícil saber se quem se move é a câmera ou o cubo. Então primeiro, mais cubos: cinco cópias do mesmo cubo, cada uma com sua própria matriz model (o \"Experimente\" do capítulo anterior). Acrescente as posições no passo 4, junto das locations dos uniforms:",
+  oglCam_s1a: "Com um cubo só no meio, é difícil saber se quem se move é a câmera ou o cubo. Então primeiro, mais cubos: cinco cópias do mesmo cubo, cada uma com sua própria matriz model (o \"Experimente\" de Desenhando um cubo). Acrescente as posições no passo 4, junto das locations dos uniforms:",
   oglCam_s1b: "No loop, a matriz model única e a chamada de desenho viram um laço for. A view e a projection são enviadas uma vez, antes dele, porque são as mesmas para todos os cubos:",
   oglCam_o1: "sin e cos do mesmo ângulo desenham um círculo (conforme o ângulo cresce, (sin, cos) dá a volta num círculo de raio 1); multiplicados por 8, um círculo de raio 8 no plano x–z, o chão. O ângulo cresce 0,5 radiano por segundo, então uma volta (2π) leva 12,6 segundos.",
   oglCam_o2: "onde quer que a câmera esteja no círculo, ela continua olhando para a origem, onde está o primeiro cubo.",
@@ -77,7 +77,7 @@ const text: Record<string, string> = {
   oglCam_tStep: "Passo por quadro",
   oglCam_tPerSec: "Por segundo",
   oglCam_dt2: "O dt vem do relógio que você já lê. Uma variável lembra quando o quadro anterior começou. Inicialize-a logo antes do loop, para o dt do primeiro quadro ser minúsculo em vez de todo o tempo de inicialização:",
-  oglCam_s2Run: "Rode: a visão começa onde a do capítulo anterior começava, 3 unidades à frente do primeiro cubo. W anda em direção a ele, S se afasta, A e D andam de lado. Passe pelos cubos e eles continuam onde estão, girando. Ainda não dá para virar: W sempre vai para −z.",
+  oglCam_s2Run: "Rode: a visão começa onde a de Desenhando um cubo começava, 3 unidades à frente do primeiro cubo. W anda em direção a ele, S se afasta, A e D andam de lado. Passe pelos cubos e eles continuam onde estão, girando. Ainda não dá para virar: W sempre vai para −z.",
 
   // ── Passo 3 ──
   oglCam_s3Title: "Passo 3: olhando em volta com o mouse",

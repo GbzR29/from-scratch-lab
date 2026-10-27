@@ -28,6 +28,8 @@ import picking from "./picking";
 import pipeline from "./pipeline";
 import post from "./post";
 import reflections from "./reflections";
+import rotateCube from "./rotate-cube";
+import rotateTriangle from "./rotate-triangle";
 import setup from "./setup";
 import shaderStages from "./shader-stages";
 import shaders from "./shaders";
@@ -48,7 +50,7 @@ import volumetrics from "./volumetrics";
 import winding from "./winding";
 
 const bundle: LessonText = {
-  strings: { ...advanced, ...camera, ...clustered, ...color, ...compute, ...csm, ...cube, ...decals, ...depthTesting, ...dsa, ...ebo, ...gi, ...legacy, ...lightColor, ...lightingAdvanced, ...lightingBasics, ...linearAlgebra, ...models, ...oit, ...particles, ...pbr, ...performance, ...picking, ...pipeline, ...post, ...reflections, ...setup, ...shaderStages, ...shaders, ...skeletal, ...stencil, ...temporal, ...terrain, ...text, ...texturecompression, ...textures, ...tooling, ...transformations, ...triangle, ...vao, ...vbo, ...vectors, ...volumetrics, ...winding },
+  strings: { ...advanced, ...camera, ...clustered, ...color, ...compute, ...csm, ...cube, ...decals, ...depthTesting, ...dsa, ...ebo, ...gi, ...legacy, ...lightColor, ...lightingAdvanced, ...lightingBasics, ...linearAlgebra, ...models, ...oit, ...particles, ...pbr, ...performance, ...picking, ...pipeline, ...post, ...reflections, ...rotateCube, ...rotateTriangle, ...setup, ...shaderStages, ...shaders, ...skeletal, ...stencil, ...temporal, ...terrain, ...text, ...texturecompression, ...textures, ...tooling, ...transformations, ...triangle, ...vao, ...vbo, ...vectors, ...volumetrics, ...winding },
   titles: track.titles,
   sections: track.sections,
 };

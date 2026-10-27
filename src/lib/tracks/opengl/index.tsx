@@ -35,7 +35,9 @@ export const openGLChapters: Chapter[] = [
   { id: "vectors",         section: TRANSFORMS,      title: "Vectors for 3D",            minRead: 18, load: () => import("./chapters/vectors").then((m) => m.VectorsContent) },
   { id: "linear-algebra",  section: TRANSFORMS,      title: "Matrices for 3D",           minRead: 18, load: () => import("./chapters/linear-algebra").then((m) => m.LinearAlgebraContent) },
   { id: "transformations", section: TRANSFORMS,      title: "Transformations + GLM",     minRead: 18, load: () => import("./chapters/transformations").then((m) => m.TransformationsContent) },
+  { id: "rotate-triangle", section: TRANSFORMS,      title: "Rotating a Triangle",       minRead: 14, load: () => import("./chapters/rotate-triangle").then((m) => m.RotateTriangleContent) },
   { id: "cube",            section: TRANSFORMS,      title: "Drawing a Cube",            minRead: 16, load: () => import("./chapters/cube").then((m) => m.CubeContent) },
+  { id: "rotate-cube",     section: TRANSFORMS,      title: "Rotating the Cube",         minRead: 14, load: () => import("./chapters/rotate-cube").then((m) => m.RotateCubeContent) },
   { id: "camera",          section: TRANSFORMS,      title: "Camera & View Matrix",      minRead: 20, load: () => import("./chapters/camera").then((m) => m.CameraContent) },
   { id: "depth-testing",   section: TRANSFORMS,      title: "Depth Testing",             minRead: 18, load: () => import("./chapters/depth-testing").then((m) => m.DepthTestingContent) },
 

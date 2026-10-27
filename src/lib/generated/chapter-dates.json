@@ -1025,15 +1025,23 @@
   },
   "opengl/transformations": {
     "created": "2026-05-30",
-    "updated": "2026-10-14"
+    "updated": "2026-10-27"
+  },
+  "opengl/rotate-triangle": {
+    "created": "2026-10-27",
+    "updated": "2026-10-27"
   },
   "opengl/cube": {
     "created": "2026-10-14",
-    "updated": "2026-10-14"
+    "updated": "2026-10-27"
+  },
+  "opengl/rotate-cube": {
+    "created": "2026-10-27",
+    "updated": "2026-10-27"
   },
   "opengl/camera": {
     "created": "2026-09-03",
-    "updated": "2026-10-14"
+    "updated": "2026-10-27"
   },
   "opengl/depth-testing": {
     "created": "2026-09-03",

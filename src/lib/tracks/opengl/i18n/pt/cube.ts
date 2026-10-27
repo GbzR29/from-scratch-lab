@@ -2,7 +2,7 @@
 
 const text: Record<string, string> = {
   // ── Intro and what changes ──
-  oglCube_intro: "O capítulo anterior terminou com um quadrado deitado para trás, em perspectiva. Um cubo são seis desses quadrados, dobrados numa caixa. Parece um passo pequeno, mas ele traz três perguntas novas. Quantos vértices um cubo precisa? Precisa de index buffer? E por que as faces de trás aparecem através das da frente? Este capítulo responde uma de cada vez, em três passos curtos.",
+  oglCube_intro: "Transformações + GLM terminou com um quadrado deitado para trás, em perspectiva. Um cubo são seis desses quadrados, dobrados numa caixa. Parece um passo pequeno, mas ele traz três perguntas novas. Quantos vértices um cubo precisa? Precisa de index buffer? E por que as faces de trás aparecem através das da frente? Este capítulo responde uma de cada vez, em três passos curtos.",
   oglCube_goal0: "Contar o que um cubo precisa: 8 cantos, 12 triângulos, 36 cantos para ler.",
   oglCube_goal1: "Escolher entre glDrawArrays, um EBO com 8 vértices e um EBO com 24.",
   oglCube_goal2: "Desenhar um cubo colorido e depois um texturizado, com o teste de profundidade ligado.",
@@ -113,8 +113,8 @@ const text: Record<string, string> = {
   oglCube_p3: "baixo-direita",
   oglCube_s3b: "Um vértice só guarda um (u, v). Dê ao canto 3 o (1, 1) da face da frente, e as faces da direita e de cima recebem a imagem esticada e espelhada. Então cada face ganha os seus próprios 4 vértices, com as suas próprias coordenadas de textura: 6 faces × 4 = 24. As posições se repetem, e tudo bem. Troque os vértices e índices no passo 4b:",
   oglCube_s3c: "Cada face são os mesmos quatro cantos do passo 1, na mesma ordem (cima-esquerda, baixo-esquerda, baixo-direita, cima-direita), agora com as coordenadas de textura do quadrado: (0, 1), (0, 0), (1, 0), (1, 1). Isso deixa a lista de índices bem regular. A face número f usa os vértices 4f até 4f + 3, no padrão 0 1 2, 0 2 3 mais 4f. A face da frente é f = 0, a de trás f = 1, e assim por diante.",
-  oglCube_s3d: "O resto volta a ser como era no capítulo anterior. Cada vértice tem 5 floats de novo, então o atributo 0 ganha stride 5 e o atributo 1, o (u, v), volta:",
-  oglCube_s3e: "E os dois shaders voltam a ser os texturizados do capítulo anterior, com TexCoord e uTexture em vez de vColor. O checkpoint abaixo os mostra. O draw call continua em 36, e o teste de profundidade continua ligado.",
+  oglCube_s3d: "O resto volta a ser como era no fim de Transformações + GLM. Cada vértice tem 5 floats de novo, então o atributo 0 ganha stride 5 e o atributo 1, o (u, v), volta:",
+  oglCube_s3e: "E os dois shaders voltam a ser os texturizados de Transformações + GLM, com TexCoord e uTexture em vez de vColor. O checkpoint abaixo os mostra. O draw call continua em 36, e o teste de profundidade continua ligado.",
   oglCube_s3Run: "Rode: a sua imagem fica em pé em todas as faces de um cubo dando cambalhotas, em perspectiva, e as faces da frente escondem as de trás.",
   oglCube_arraysTitle: "O mesmo cubo sem EBO",
   oglCube_arrays1: "Muitos tutoriais, o LearnOpenGL entre eles, desenham o cubo com o layout A: sem index buffer, 36 vértices, glDrawArrays. Cada face é escrita como os seus dois triângulos completos, 6 linhas por face:",
@@ -162,7 +162,7 @@ const text: Record<string, string> = {
   oglCube_e4b: "funciona, mas é uma configuração, não uma ação: uma vez basta. Ligue no passo 4.",
   oglCube_e5: "Esperar que o glDrawArrays use o EBO",
   oglCube_e5b: "o glDrawArrays nunca lê a lista de índices. Com EBO, desenhe com glDrawElements.",
-  oglCube_next: "Em seguida, Câmera e matriz de visão desenha cinco destes cubos e troca o translate(0, 0, −3) fixo por uma câmera de verdade: glm::lookAt, o mouse para olhar em volta e o teclado para andar.",
+  oglCube_next: "Em seguida, Girando o cubo leva este cubo para o programa spin e o gira um eixo de cada vez, depois com o mouse. Depois disso, Câmera e matriz de visão desenha cinco destes cubos no main.cpp e troca o translate(0, 0, −3) fixo por uma câmera de verdade: glm::lookAt, o mouse para olhar em volta e o teclado para andar.",
 
   // ── Key ideas ──
   oglCube_key0: "Um cubo tem 8 cantos, 6 faces, 12 triângulos e 36 cantos de triângulo. O count do draw call são esses 36, não os 12 triângulos.",

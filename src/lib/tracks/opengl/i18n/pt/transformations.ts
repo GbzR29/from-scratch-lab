@@ -159,7 +159,7 @@ const text: Record<string, string> = {
   oglTr_e5b: "o teste de profundidade não consegue mais separar as superfícies, e elas piscam uma através da outra. Mantenha o near tão grande e o far tão pequeno quanto a cena permitir.",
   oglTr_e6: "Pedir as locations dos uniforms a cada frame",
   oglTr_e6b: "funciona, mas procura no programa pelo nome toda vez. Busque-as uma vez no passo 4.",
-  oglTr_next: "Em seguida, Desenhando um cubo dobra o quadrado num cubo: quantos vértices ele precisa, se vale usar um index buffer, e o teste de profundidade que mantém as faces da frente na frente.",
+  oglTr_next: "Em seguida, Girando um triângulo desacelera e pratica uma coisa só, num programa pequeno à parte: fazer o primeiro triângulo girar, passo a passo, com o teclado. Depois, Desenhando um cubo dobra o quadrado do main.cpp num cubo.",
 
   // ── Key ideas ──
   oglTr_key0:"Um uniform mat4 no vertex shader move todos os vértices: gl_Position = matriz * vec4(aPos, 1.0). Envie-o com glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(m)).",

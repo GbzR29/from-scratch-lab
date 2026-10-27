@@ -26,7 +26,7 @@ export function CameraContent({ t }: { t: TrackTranslations }) {
     <Article>
       <Lead>
         {tx(t, "oglCam_intro",
-          "OpenGL has no camera. In the last chapter, the \"camera\" was one line: translate the whole world by (0, 0, −3). This chapter turns that line into a real camera. First it circles the scene on its own. Then you walk with the keyboard, look around with the mouse and zoom with the scroll wheel, like in a first-person game.")}
+          "OpenGL has no camera. In Drawing a Cube, the \"camera\" was one line: translate the whole world by (0, 0, −3). This chapter turns that line into a real camera. First it circles the scene on its own. Then you walk with the keyboard, look around with the mouse and zoom with the scroll wheel, like in a first-person game.")}
       </Lead>
 
       <Goals t={t} id="oglCam" items={[
@@ -69,7 +69,7 @@ export function CameraContent({ t }: { t: TrackTranslations }) {
       />
       <p>
         {tx(t, "oglCam_lookat2",
-          "With these numbers it is the same matrix as last chapter's translate(0, 0, −3), number for number. So you can swap it in and nothing on screen changes. The difference shows up as soon as the camera is not straight in front of the scene.")}
+          "With these numbers it is the same matrix as the translate(0, 0, −3) of Drawing a Cube, number for number. So you can swap it in and nothing on screen changes. The difference shows up as soon as the camera is not straight in front of the scene.")}
       </p>
 
       <H3>{tx(t, "oglCam_insideTitle", "What lookAt computes")}</H3>
@@ -148,7 +148,7 @@ glm::vec3 up      = glm::cross(right, forward);                   // its own up`
       <H2>{tx(t, "oglCam_s1Title", "Step 1: five cubes and a circling camera")}</H2>
       <p>
         {tx(t, "oglCam_s1a",
-          "One cube in the middle makes it hard to tell whether the camera moves or the cube does. So first, more cubes: five copies of the same cube, each with its own model matrix (the \"Try it\" of the last chapter). Add the positions in step 4, next to the uniform locations:")}
+          "One cube in the middle makes it hard to tell whether the camera moves or the cube does. So first, more cubes: five copies of the same cube, each with its own model matrix (the \"Try it\" of Drawing a Cube). Add the positions in step 4, next to the uniform locations:")}
       </p>
       <CodeBlock lang="cpp" filename="src/main.cpp (step 4d)" t={t}>{`glm::vec3 cubePositions[] = {
     glm::vec3( 0.0f,  0.0f,  0.0f),
@@ -261,7 +261,7 @@ lastFrame  = time;
 processInput(window, dt);`}</CodeBlock>
       <Callout type="info" t={t}>
         {tx(t, "oglCam_s2Run",
-          "Run it: the view starts where the last chapter's did, 3 units in front of the first cube. W walks toward it, S backs away, A and D step sideways. Walk past the cubes and they stay where they are, still spinning. You cannot turn yet: W always goes toward −z.")}
+          "Run it: the view starts where the one in Drawing a Cube did, 3 units in front of the first cube. W walks toward it, S backs away, A and D step sideways. Walk past the cubes and they stay where they are, still spinning. You cannot turn yet: W always goes toward −z.")}
       </Callout>
 
       {/* ── STEP 3 ──────────────────────────────────────────────────────── */}

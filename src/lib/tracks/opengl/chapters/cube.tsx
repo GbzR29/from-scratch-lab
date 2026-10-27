@@ -20,7 +20,7 @@ export function CubeContent({ t }: { t: TrackTranslations }) {
     <Article>
       <Lead>
         {tx(t, "oglCube_intro",
-          "The last chapter ended with a square tilted back in perspective. A cube is six of those squares, folded into a box. That sounds like a small step, but it raises three new questions. How many vertices does a cube need? Do you need an index buffer? And why do the back faces show through the front ones? This chapter answers them one at a time, in three short steps.")}
+          "Transformations + GLM ended with a square tilted back in perspective. A cube is six of those squares, folded into a box. That sounds like a small step, but it raises three new questions. How many vertices does a cube need? Do you need an index buffer? And why do the back faces show through the front ones? This chapter answers them one at a time, in three short steps.")}
       </Lead>
 
       <Goals t={t} id="oglCube" items={[
@@ -290,7 +290,7 @@ GLuint indices[] = {
       </p>
       <p>
         {tx(t, "oglCube_s3d",
-          "The rest goes back to how it was in the last chapter. Each vertex is 5 floats again, so attribute 0 gets a stride of 5 and attribute 1, the (u, v), returns:")}
+          "The rest goes back to how it was at the end of Transformations + GLM. Each vertex is 5 floats again, so attribute 0 gets a stride of 5 and attribute 1, the (u, v), returns:")}
       </p>
       <CodeBlock lang="cpp" filename="src/main.cpp (step 4b, the attributes)" t={t}>{`glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 glEnableVertexAttribArray(0);
@@ -298,7 +298,7 @@ glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * s
 glEnableVertexAttribArray(1);`}</CodeBlock>
       <p>
         {tx(t, "oglCube_s3e",
-          "And the two shaders go back to the textured ones from the last chapter, with TexCoord and uTexture instead of vColor. The checkpoint below shows them. The draw call stays at 36, and the depth test stays on.")}
+          "And the two shaders go back to the textured ones from Transformations + GLM, with TexCoord and uTexture instead of vColor. The checkpoint below shows them. The draw call stays at 36, and the depth test stays on.")}
       </p>
       <Callout type="info" t={t}>
         {tx(t, "oglCube_s3Run",
@@ -549,7 +549,7 @@ for (int i = 0; i < 3; ++i) {
       />
       <p>
         {tx(t, "oglCube_next",
-          "Next, Camera & View Matrix draws five of these cubes and replaces the fixed translate(0, 0, −3) with a real camera: glm::lookAt, the mouse to look around and the keyboard to move.")}
+          "Next, Rotating the Cube brings this cube into the spin program and turns it one axis at a time, then with the mouse. After that, Camera & View Matrix draws five of these cubes in main.cpp and replaces the fixed translate(0, 0, −3) with a real camera: glm::lookAt, the mouse to look around and the keyboard to move.")}
       </p>
 
       <KeyIdeas t={t} id="oglCube" items={[
