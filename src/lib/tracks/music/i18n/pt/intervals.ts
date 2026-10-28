@@ -16,14 +16,14 @@ const text: Record<string, string> = {
   musInt_numTitle: "O número: conte as letras",
   musInt_numBody: "Para achar o número, conte as letras da nota de baixo até a de cima, contando as duas. De dó a sol: dó, ré, mi, fá, sol, cinco letras, então dó–sol é uma quinta. De dó a mi: dó, ré, mi, uma terça. Duas notas na mesma linha ou espaço formam um uníssono (uma letra), a letra seguinte é uma segunda, e oito letras, de dó até o próximo dó, uma oitava.",
   musInt_dNum: "O número a partir das posições na pauta",
-  musInt_n0: "o capítulo 10 deu a cada linha e espaço um número d, um por letra: dó 4 = 28, ré 4 = 29… Os sinais não mudam d",
+  musInt_n0: "o capítulo 11 deu a cada linha e espaço um número d, um por letra: dó 4 = 28, ré 4 = 29… Os sinais não mudam d",
   musInt_n1: "a diferença é quantos degraus da pauta separam as notas: dó 4 → sol 4 são 32 − 28 = 4 degraus",
   musInt_n2: "o nome conta letras, não degraus, e sempre há uma letra a mais que degraus: 4 degraus ligam 5 letras, como 4 vãos entre 5 postes de uma cerca",
   musInt_n3: "uma quinta. E dó 4–dó 5: 35 − 28 + 1 = 8, a oitava",
   musInt_numWhy: "Contar as duas pontas é antigo: era assim que o latim contava. Por isso dizemos \"quinze dias\" para duas semanas, e o francês diz \"huit jours\" (oito dias) para uma semana: conta-se de uma segunda-feira até a outra, as duas incluídas. O preço é que intervalos não se somam como números: uma terça em cima de uma terça é uma quinta, não uma sexta, porque a nota do meio é contada duas vezes (3 + 3 − 1 = 5).",
 
   musInt_sizeTitle: "Mesmo número, tamanhos diferentes",
-  musInt_sizeBody: "O número ignora uma coisa importante. Dó–mi e ré–fá são as duas terças, mas dó–mi tem 4 semitons e ré–fá só 3. O motivo são os dois semitons entre as teclas brancas, mi–fá e si–dó (capítulo 11): todo passo de uma letra para a seguinte vale 2 semitons, menos esses dois, que valem 1. Ré–fá atravessa mi–fá; dó–mi não.",
+  musInt_sizeBody: "O número ignora uma coisa importante. Dó–mi e ré–fá são as duas terças, mas dó–mi tem 4 semitons e ré–fá só 3. O motivo são os dois semitons entre as teclas brancas, mi–fá e si–dó (capítulo 12): todo passo de uma letra para a seguinte vale 2 semitons, menos esses dois, que valem 1. Ré–fá atravessa mi–fá; dó–mi não.",
   musInt_dSize: "O tamanho de um intervalo entre teclas brancas",
   musInt_sSteps: "passos de letra",
   musInt_s0: "um intervalo de número n sobe n − 1 vezes de uma letra para a seguinte",
@@ -53,7 +53,7 @@ const text: Record<string, string> = {
   musInt_t7s: "10 (5: as outras)",
 
   musInt_qualTitle: "A qualidade: justo, maior, menor",
-  musInt_qualBody: "A qualidade é a palavra que separa os dois tamanhos. Uníssonos, quartas, quintas e oitavas aparecem quase sempre num tamanho só entre as teclas brancas, e esse tamanho se chama justo: são os intervalos das razões mais simples, 1 : 1, 4 : 3, 3 : 2 e 2 : 1, os mais lisos do capítulo 12. Segundas, terças, sextas e sétimas aparecem em dois tamanhos comuns: o maior se chama maior, o menor, menor. Um semitom a mais que maior ou justo é aumentado; um semitom a menos que menor ou justo é diminuto.",
+  musInt_qualBody: "A qualidade é a palavra que separa os dois tamanhos. Uníssonos, quartas, quintas e oitavas aparecem quase sempre num tamanho só entre as teclas brancas, e esse tamanho se chama justo: são os intervalos das razões mais simples, 1 : 1, 4 : 3, 3 : 2 e 2 : 1, os mais lisos do capítulo 13. Segundas, terças, sextas e sétimas aparecem em dois tamanhos comuns: o maior se chama maior, o menor, menor. Um semitom a mais que maior ou justo é aumentado; um semitom a menos que menor ou justo é diminuto.",
   musInt_tName: "Intervalo",
   musInt_tAbbr: "Sigla",
   musInt_tHalf: "Semitons",
@@ -75,7 +75,7 @@ const text: Record<string, string> = {
   musInt_qualRef: "Repare na coluna \"a partir do dó\": todo intervalo do dó até uma tecla branca é justo ou maior. Isso dá uma referência simples para medir qualquer intervalo.",
   musInt_eqQual: "A qualidade de um intervalo",
   musInt_wn: "o número, pelas letras: n = d₂ − d₁ + 1",
-  musInt_ws: "o tamanho em semitons, pelas teclas: s = m₂ − m₁ (o capítulo 11 dá m para qualquer nota escrita)",
+  musInt_ws: "o tamanho em semitons, pelas teclas: s = m₂ − m₁ (o capítulo 12 dá m para qualquer nota escrita)",
   musInt_wref: "o tamanho do mesmo número do dó até uma tecla branca: 0 2 4 5 7 9 11 para os números 1 a 7, mais 12 por oitava",
   musInt_wd: "o quanto o intervalo se afasta dessa referência, em semitons",
   musInt_eqQualWords: "Compare o intervalo com o mesmo número contado a partir do dó nas teclas brancas. Números justos (1, 4, 5, 8): igual é justo, um a mais aumentado, um a menos diminuto. Os outros: igual é maior, um a menos menor, dois a menos diminuto, um a mais aumentado.",
@@ -91,7 +91,7 @@ const text: Record<string, string> = {
 
   musInt_enhTitle: "Mesmas teclas, intervalos diferentes",
   musInt_enhBody: "Como o número vem das letras, dois intervalos podem usar exatamente as mesmas teclas e ter nomes diferentes. Dó–mi♭ é uma terça menor (dó, ré, mi: três letras, 3 semitons). Dó–ré♯ é uma segunda aumentada (dó, ré: duas letras, 3 semitons). No piano são as mesmas duas teclas. Na música elas fazem trabalhos diferentes: o mi♭ costuma descer, o ré♯ costuma subir, e a nota que o compositor escreve diz ao músico para onde a música vai. O mesmo vale para o intervalo de 6 semitons, meia oitava, o trítono: fá–si é uma quarta aumentada (quatro letras), si–fá uma quinta diminuta (cinco letras).",
-  musInt_twoHalf: "Isso também dá nome aos dois semitons do capítulo 11. Dó–dó♯ mantém a letra: uma letra, um uníssono aumentado, o semitom cromático. Dó–ré♭ muda a letra: uma segunda menor, o semitom diatônico. No temperamento igual os dois têm 100 cents. Na afinação pura não: a segunda menor é 16 : 15 ≈ 111,7 cents e o semitom cromático 25 : 24 ≈ 70,7 cents, e por isso cantores e instrumentistas de corda, que afinam de ouvido, conseguem diferenciá-los.",
+  musInt_twoHalf: "Isso também dá nome aos dois semitons do capítulo 12. Dó–dó♯ mantém a letra: uma letra, um uníssono aumentado, o semitom cromático. Dó–ré♭ muda a letra: uma segunda menor, o semitom diatônico. No temperamento igual os dois têm 100 cents. Na afinação pura não: a segunda menor é 16 : 15 ≈ 111,7 cents e o semitom cromático 25 : 24 ≈ 70,7 cents, e por isso cantores e instrumentistas de corda, que afinam de ouvido, conseguem diferenciá-los.",
 
   musInt_invTitle: "Inversão: virar um intervalo de cabeça para baixo",
   musInt_invBody: "Suba a nota de baixo uma oitava e o intervalo fica invertido: dó–mi (uma terça) vira mi–dó (uma sexta). Juntos, os dois preenchem exatamente uma oitava, e isso dá regras simples para o número, o tamanho e a qualidade.",
@@ -120,11 +120,11 @@ const text: Record<string, string> = {
   musInt_c0: "cada oitava soma 7 letras, não 8, porque a nota de cima da oitava é a nota de baixo do próximo intervalo: uma nona é uma oitava (8) mais uma segunda (2) menos a nota compartilhada, 8 + 2 − 1 = 9 = 7 + 2",
   musInt_c1: "cada oitava soma 12 semitons",
   musInt_c2: "uma décima cuja forma simples é uma terça de 4 semitons: uma décima maior",
-  musInt_compUse: "Na prática só a nona, a décima primeira e a décima terceira mantêm o nome composto, porque aparecem nas cifras dos acordes (capítulo 18). Para o resto, os músicos dizem só \"uma terça, uma oitava acima\".",
+  musInt_compUse: "Na prática só a nona, a décima primeira e a décima terceira mantêm o nome composto, porque aparecem nas cifras dos acordes (capítulo 19). Para o resto, os músicos dizem só \"uma terça, uma oitava acima\".",
 
   musInt_hearTitle: "Como os intervalos soam",
-  musInt_hearBody: "O capítulo 12 explicou por que alguns intervalos soam parados e outros inquietos: quanto mais simples a razão, mais harmônicos as duas notas dividem. A teoria musical separa os intervalos em três famílias. As consonâncias perfeitas, uníssono, oitava, quinta e quarta, são tão lisas que soam quase vazias. As consonâncias imperfeitas, terças e sextas, são doces e cheias. As dissonâncias, segundas, sétimas e o trítono, soam tensas e parecem querer andar até uma consonância; a música vive desse puxão. A quarta fica na fronteira: lisa sozinha, mas as regras antigas de contraponto a tratavam como dissonância quando ficava acima da voz mais grave.",
-  musInt_tritone: "O trítono tem a fama mais forte. Os cantores medievais evitavam fá–si (capítulo 11), e um ditado latino posterior o chamou de \"diabolus in musica\", o diabo na música. Mesmo assim ele está em todo lugar na música moderna: é a tensão dentro do acorde de sétima da dominante que faz uma cadência puxar para casa (capítulo 20), e Bernstein abriu \"Maria\" com ele.",
+  musInt_hearBody: "O capítulo 13 explicou por que alguns intervalos soam parados e outros inquietos: quanto mais simples a razão, mais harmônicos as duas notas dividem. A teoria musical separa os intervalos em três famílias. As consonâncias perfeitas, uníssono, oitava, quinta e quarta, são tão lisas que soam quase vazias. As consonâncias imperfeitas, terças e sextas, são doces e cheias. As dissonâncias, segundas, sétimas e o trítono, soam tensas e parecem querer andar até uma consonância; a música vive desse puxão. A quarta fica na fronteira: lisa sozinha, mas as regras antigas de contraponto a tratavam como dissonância quando ficava acima da voz mais grave.",
+  musInt_tritone: "O trítono tem a fama mais forte. Os cantores medievais evitavam fá–si (capítulo 12), e um ditado latino posterior o chamou de \"diabolus in musica\", o diabo na música. Mesmo assim ele está em todo lugar na música moderna: é a tensão dentro do acorde de sétima da dominante que faz uma cadência puxar para casa (capítulo 21), e Bernstein abriu \"Maria\" com ele.",
   musInt_songs: "O treino de ouvido começa com essas músicas de referência. Ouça um intervalo, cante-o e pergunte que música começa assim. Com o tempo as músicas deixam de ser necessárias e os intervalos são reconhecidos direto, pela cor: a quinta aberta, a terça maior brilhante, a terça menor mais escura, a sétima maior cheia de saudade.",
 
   musInt_gtTitle: "Intervalos como desenhos no braço",
@@ -135,7 +135,7 @@ const text: Record<string, string> = {
   musInt_practTitle: "Prática",
   musInt_practBody: "Ler intervalos é sempre os mesmos dois movimentos: conte as letras para o número, depois confira o tamanho para a qualidade. Comece só com os números, depois nomes completos nas teclas brancas, depois com sustenidos e bemóis. As rodadas de ouvido começam com os três mais fáceis de separar, a terça maior, a quinta e a oitava, e crescem até os doze.",
 
-  musInt_next: "O capítulo 8 terminou com um padrão de sino da África Ocidental de 7 batidas em 12 pulsos, espaços 2 2 1 2 2 2 1, e o capítulo 9 achou os mesmos espaços entre as teclas brancas a partir do dó. Lidos com os olhos deste capítulo, esses espaços são segundas maiores e menores. O próximo capítulo os põe em ordem e constrói a escala maior: por que toda escala maior é o mesmo padrão de tons e semitons, por que cada uma usa todas as letras uma vez, e como os sustenidos e bemóis de uma tonalidade vêm dessa regra.",
+  musInt_next: "O capítulo 8 terminou com um padrão de sino da África Ocidental de 7 batidas em 12 pulsos, espaços 2 2 1 2 2 2 1, e o capítulo 10 achou os mesmos espaços entre as teclas brancas a partir do dó. Lidos com os olhos deste capítulo, esses espaços são segundas maiores e menores. O próximo capítulo os põe em ordem e constrói a escala maior: por que toda escala maior é o mesmo padrão de tons e semitons, por que cada uma usa todas as letras uma vez, e como os sustenidos e bemóis de uma tonalidade vêm dessa regra.",
 
   musInt_key0: "Um intervalo tem um número, pelas letras contadas com as duas pontas (n = d₂ − d₁ + 1, então dó–sol é uma quinta), e um tamanho, em semitons (s = m₂ − m₁).",
   musInt_key1: "O mesmo número aparece em tamanhos diferentes por causa dos semitons mi–fá e si–dó: entre teclas brancas, s = 2(n − 1) − h.",

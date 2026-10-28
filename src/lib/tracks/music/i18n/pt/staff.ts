@@ -13,9 +13,9 @@ const text: Record<string, string> = {
   musStf_heightSteps: "A regra da pauta é simples: linhas e espaços se alternam, e cada um é a próxima letra das teclas brancas. Se uma linha é mi, o espaço acima dela é fá, a linha seguinte sol, o espaço seguinte lá, e assim por diante. Passar de uma linha ao espaço seguinte (ou de um espaço à linha seguinte) é um grau conjunto, uma letra. Passar de uma linha à linha seguinte pula uma letra, então sobe duas: mi a sol, sol a si. Cinco linhas e os quatro espaços entre elas dão nove posições, nove letras seguidas, da linha de baixo à de cima.",
 
   musStf_findTitle: "Qual nota fica em qual linha?",
-  musStf_findBody: "Contar letras funciona, mas há um jeito mais elegante, o mesmo truque dos números de tecla do capítulo 9. Lá, as 12 teclas de uma oitava eram contadas juntas, e uma divisão por 12 separava o número da tecla em nome e oitava. Na pauta só existem as teclas brancas (as pretas precisam de sinais extras, próximo capítulo), então conte só as brancas: 7 por oitava, numeradas a partir de dó = 0.",
+  musStf_findBody: "Contar letras funciona, mas há um jeito mais elegante, o mesmo truque dos números de tecla do capítulo 10. Lá, as 12 teclas de uma oitava eram contadas juntas, e uma divisão por 12 separava o número da tecla em nome e oitava. Na pauta só existem as teclas brancas (as pretas precisam de sinais extras, próximo capítulo), então conte só as brancas: 7 por oitava, numeradas a partir de dó = 0.",
   musStf_dTitle: "A nota numa posição da pauta",
-  musStf_d0: "dê a cada letra um número ℓ, começando no dó, já que os números de oitava mudam no dó (capítulo 9)",
+  musStf_d0: "dê a cada letra um número ℓ, começando no dó, já que os números de oitava mudam no dó (capítulo 10)",
   musStf_d1: "conte todas as teclas brancas a partir de baixo com um só número d: cada oitava o soma 7 teclas, e a letra soma mais ℓ. O dó central, C4, é d = 7 × 4 + 0 = 28",
   musStf_dBottom: "base",
   musStf_d2: "a clave de sol faz da linha de baixo o mi 4 (E4; a próxima seção mostra por quê). O d dela é 30",
@@ -61,7 +61,7 @@ const text: Record<string, string> = {
   musStf_mnemonic: "Os estudantes decoram as linhas com frases. Em inglês: linhas da clave de sol E G B D F, \"Every Good Boy Does Fine\"; espaços F A C E. Em solfejo, as linhas da clave de sol são mi sol si ré fá, e os espaços fá lá dó mi; na clave de fá, as linhas são sol si ré fá lá, e os espaços lá dó mi sol. Ajuda no começo, mas é lento: os widgets abaixo treinam o jeito mais rápido, os marcos.",
 
   musStf_clefMoves: "A clave muda todas as notas",
-  musStf_clefMovesBody: "O mesmo desenho quer dizer notas diferentes sob claves diferentes. Uma melodia na clave de sol, lida na clave de fá, não fica simplesmente mais grave: cada nota ganha outra letra, e os semitons mi–fá e si–dó (capítulo 9) ficam com as letras, não com as posições. Então alguns passos da melodia mudam de tamanho, e ela soa torta. Ouça no próximo widget.",
+  musStf_clefMovesBody: "O mesmo desenho quer dizer notas diferentes sob claves diferentes. Uma melodia na clave de sol, lida na clave de fá, não fica simplesmente mais grave: cada nota ganha outra letra, e os semitons mi–fá e si–dó (capítulo 10) ficam com as letras, não com as posições. Então alguns passos da melodia mudam de tamanho, e ela soa torta. Ouça no próximo widget.",
 
   musStf_grandTitle: "O sistema de duas pautas e o dó central",
   musStf_grandBody: "O piano cobre muito mais que uma pauta, então a música para piano usa duas ao mesmo tempo, unidas por uma chave: clave de sol em cima para a mão direita, clave de fá embaixo para a esquerda. Isso é o sistema de piano, ou pauta dupla (em inglês, grand staff). As duas pautas se encaixam exatamente, com lugar para uma única linha de nota entre elas, e essa linha é a do dó central.",

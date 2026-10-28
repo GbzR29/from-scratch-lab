@@ -981,35 +981,39 @@
   },
   "music/syncopation": {
     "created": "2026-10-13",
-    "updated": "2026-10-13"
+    "updated": "2026-10-28"
+  },
+  "music/playing-in-time": {
+    "created": "2026-10-28",
+    "updated": "2026-10-28"
   },
   "music/note-names": {
     "created": "2026-10-13",
-    "updated": "2026-10-13"
+    "updated": "2026-10-28"
   },
   "music/staff": {
     "created": "2026-10-13",
-    "updated": "2026-10-13"
+    "updated": "2026-10-28"
   },
   "music/accidentals": {
     "created": "2026-10-13",
-    "updated": "2026-10-14"
+    "updated": "2026-10-28"
   },
   "music/temperament": {
     "created": "2026-10-13",
-    "updated": "2026-10-13"
+    "updated": "2026-10-28"
   },
   "music/intervals": {
     "created": "2026-10-13",
-    "updated": "2026-10-13"
+    "updated": "2026-10-28"
   },
   "music/major-scale": {
     "created": "2026-10-13",
-    "updated": "2026-10-13"
+    "updated": "2026-10-28"
   },
   "music/minor-scale": {
     "created": "2026-10-13",
-    "updated": "2026-10-13"
+    "updated": "2026-10-28"
   },
   "opengl/legacy": {
     "created": "2026-05-30",

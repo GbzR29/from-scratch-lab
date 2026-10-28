@@ -140,7 +140,7 @@ export function MusicIntervalFigure({ t }: { t?: TrackTranslations }) {
         </Row>
         <VolumeSlider t={t} />
       </>}
-      note={tx(t, "figMus_ivNote", "Press two keys: the first sets the lower note, the second the upper one. The number comes from the letters only: count them on the strip, both ends included. The size comes from the keys. Try C–E and D–F: both thirds, but the strip shows a 1 inside D–F (the half step E–F), so it is one key smaller: minor. Then try C–D♯ and C–E♭: the same two keys give a second or a third, depending on the letter. C–C♯ and C–D♭ are the two half steps of chapter 11. Respell any note to see its other names change the interval, and invert to flip it.")}>
+      note={tx(t, "figMus_ivNote", "Press two keys: the first sets the lower note, the second the upper one. The number comes from the letters only: count them on the strip, both ends included. The size comes from the keys. Try C–E and D–F: both thirds, but the strip shows a 1 inside D–F (the half step E–F), so it is one key smaller: minor. Then try C–D♯ and C–E♭: the same two keys give a second or a third, depending on the letter. C–C♯ and C–D♭ are the two half steps of chapter 12. Respell any note to see its other names change the interval, and invert to flip it.")}>
       <div ref={vis.ref}>
         <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block select-none">
           {lines.map(d => <line key={d} x1={X_CLEF - 22} x2={XS - 20} y1={yOf(d)} y2={yOf(d)} stroke={C.fg} strokeOpacity={0.75} strokeWidth={1.2} />)}

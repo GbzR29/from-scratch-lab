@@ -10,6 +10,7 @@ import pulse from "./pulse";
 import durations from "./durations";
 import meter from "./meter";
 import syncopation from "./syncopation";
+import playingInTime from "./playing-in-time";
 import noteNames from "./note-names";
 import staff from "./staff";
 import accidentals from "./accidentals";
@@ -19,7 +20,7 @@ import majorScale from "./major-scale";
 import minorScale from "./minor-scale";
 
 const bundle: LessonText = {
-  strings: { ...whatIsSound, ...pitch, ...timbre, ...loudness, ...pulse, ...durations, ...meter, ...syncopation, ...noteNames, ...staff, ...accidentals, ...temperament, ...intervals, ...majorScale, ...minorScale },
+  strings: { ...whatIsSound, ...pitch, ...timbre, ...loudness, ...pulse, ...durations, ...meter, ...syncopation, ...playingInTime, ...noteNames, ...staff, ...accidentals, ...temperament, ...intervals, ...majorScale, ...minorScale },
   titles: track.titles,
   sections: track.sections,
 };

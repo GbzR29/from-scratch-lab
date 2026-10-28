@@ -56,7 +56,7 @@ export function TemperamentContent({ t }: { t: TrackTranslations }) {
       />
       <p>
         {tx(t, "musTem_pureNames",
-          "The names (fifth, third…) count letters, as chapter 13 will explain; for now, read them as \"7 keys apart\", \"4 keys apart\". The pattern in the table is the important part: for a pure ratio q : p, harmonic q of the lower tone meets harmonic p of the upper one. The smaller the numbers, the lower the meeting point and the louder the shared harmonics, which is why the octave and the fifth sound smoother than the thirds.")}
+          "The names (fifth, third…) count letters, as chapter 14 will explain; for now, read them as \"7 keys apart\", \"4 keys apart\". The pattern in the table is the important part: for a pure ratio q : p, harmonic q of the lower tone meets harmonic p of the upper one. The smaller the numbers, the lower the meeting point and the louder the shared harmonics, which is why the octave and the fifth sound smoother than the thirds.")}
       </p>
 
       <H3>{tx(t, "musTem_beatsTitle", "Beats: hearing a near miss")}</H3>
@@ -294,7 +294,7 @@ export function TemperamentContent({ t }: { t: TrackTranslations }) {
 
       <p>
         {tx(t, "musTem_next",
-          "Fifths, fourths, thirds: this chapter used their names before explaining them, counting only keys and cents. The next chapter, Intervals, names them properly: why a fifth is \"five\" when it spans seven keys, what makes a third major or minor, and why the two kinds of semitone of chapter 11 now matter.")}
+          "Fifths, fourths, thirds: this chapter used their names before explaining them, counting only keys and cents. The next chapter, Intervals, names them properly: why a fifth is \"five\" when it spans seven keys, what makes a third major or minor, and why the two kinds of semitone of chapter 12 now matter.")}
       </p>
 
       <KeyIdeas t={t} id="musTem" items={[

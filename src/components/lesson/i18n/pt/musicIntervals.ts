@@ -56,7 +56,7 @@ const text: Record<string, string> = {
   figMus_ivPlayHarm: "juntas",
   figMus_ivAria: "teclado de piano que escolhe as duas notas do intervalo",
   figMus_ivNeckAria: "braço de violão que escolhe as duas notas do intervalo",
-  figMus_ivNote: "Aperte duas teclas: a primeira escolhe a nota de baixo, a segunda a de cima. O número vem só das letras: conte-as na faixa, as duas pontas incluídas. O tamanho vem das teclas. Experimente dó–mi e ré–fá: as duas são terças, mas a faixa mostra um 1 dentro de ré–fá (o semitom mi–fá), então ela tem uma tecla a menos: menor. Depois experimente dó–ré♯ e dó–mi♭: as mesmas duas teclas dão uma segunda ou uma terça, dependendo da letra. Dó–dó♯ e dó–ré♭ são os dois semitons do capítulo 11. Dê outro nome a qualquer nota para ver o intervalo mudar, e inverta para virá-lo.",
+  figMus_ivNote: "Aperte duas teclas: a primeira escolhe a nota de baixo, a segunda a de cima. O número vem só das letras: conte-as na faixa, as duas pontas incluídas. O tamanho vem das teclas. Experimente dó–mi e ré–fá: as duas são terças, mas a faixa mostra um 1 dentro de ré–fá (o semitom mi–fá), então ela tem uma tecla a menos: menor. Depois experimente dó–ré♯ e dó–mi♭: as mesmas duas teclas dão uma segunda ou uma terça, dependendo da letra. Dó–dó♯ e dó–ré♭ são os dois semitons do capítulo 12. Dê outro nome a qualquer nota para ver o intervalo mudar, e inverta para virá-lo.",
 
   // ── IntervalLadderFigure ──
   figMus_ilTitle: "Os treze intervalos da oitava",

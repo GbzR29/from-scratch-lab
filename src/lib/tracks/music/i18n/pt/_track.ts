@@ -10,6 +10,7 @@ const track = {
     durations: "Duração das notas",
     meter: "Compasso e fórmula de compasso",
     syncopation: "Síncope",
+    "playing-in-time": "Tocar no tempo: dedilhado e metrônomo",
     "note-names": "Nomes das notas e o teclado",
     staff: "A pauta e as claves",
     accidentals: "Sustenidos, bemóis e bequadros",

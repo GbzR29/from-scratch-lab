@@ -188,7 +188,7 @@ export function SyncopationContent({ t }: { t: TrackTranslations }) {
 
       <p>
         {tx(t, "musSyn_next",
-          "This closes the rhythm section: pulse and tempo, durations, meter, and the syncopation that plays against it. The next section turns to the notes themselves: their names, the keys of the piano and why they come in a pattern of 7 white and 5 black. That pattern is already in the last widget: spread 7 notes over 12 pulses and you get the West African bell, gaps 2 2 1 2 2 2 1. Keep it in mind; it will come back as the major scale.")}
+          "That completes the theory of rhythm: pulse and tempo, durations, meter, and the syncopation that plays against it. One more chapter closes the section, with the instrument in your hands: playing a picking pattern in time with a metronome, knowing which notes go with the click and which go between.")}
       </p>
 
       <KeyIdeas t={t} id="musSyn" items={[

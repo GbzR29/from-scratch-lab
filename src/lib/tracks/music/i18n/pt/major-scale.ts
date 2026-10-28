@@ -10,7 +10,7 @@ const text: Record<string, string> = {
   musMaj_goal5: "Transpor uma melodia para outra tonalidade, e tocar uma escala maior de uma oitava no seu instrumento.",
 
   musMaj_patternTitle: "Um padrão de passos",
-  musMaj_patternBody: "Uma escala é um conjunto de notas em ordem de altura, de uma nota até a sua oitava. O capítulo 9 contou os espaços entre as teclas brancas a partir do dó: 2 2 1 2 2 2 1 semitons. O capítulo 13 deu nome a esses espaços: um espaço de 2 é uma segunda maior, um tom; um espaço de 1 é uma segunda menor, um semitom. Então a escala maior é o padrão tom, tom, semitom, tom, tom, tom, semitom. Os dois semitons ficam entre os graus 3 e 4 e entre 7 e 8, e moldam todo o som da escala.",
+  musMaj_patternBody: "Uma escala é um conjunto de notas em ordem de altura, de uma nota até a sua oitava. O capítulo 10 contou os espaços entre as teclas brancas a partir do dó: 2 2 1 2 2 2 1 semitons. O capítulo 14 deu nome a esses espaços: um espaço de 2 é uma segunda maior, um tom; um espaço de 1 é uma segunda menor, um semitom. Então a escala maior é o padrão tom, tom, semitom, tom, tom, tom, semitom. Os dois semitons ficam entre os graus 3 e 4 e entre 7 e 8, e moldam todo o som da escala.",
   musMaj_tDeg: "Grau",
   musMaj_tInC: "Em dó",
   musMaj_tName: "Nome",
@@ -31,23 +31,23 @@ const text: Record<string, string> = {
   musMaj_r5: "a nota mais forte depois da tônica, uma quinta acima dela",
   musMaj_r6: "a meio caminho descendo da tônica até a subdominante",
   musMaj_r7: "um semitom abaixo da tônica: ela se inclina para subir até ela",
-  musMaj_movable: "A coluna \"dó móvel\" usa as sílabas do capítulo 9 para graus, não para letras: em qualquer tonalidade maior a tônica é dó, o segundo grau ré, e assim por diante. Muitos cantores aprendem melodias assim porque as sílabas dizem como cada nota se relaciona com a casa, seja qual for a tonalidade. A canção \"Dó-Ré-Mi\" de A Noviça Rebelde ensina exatamente isso. Onde o dó é sempre o C (dó fixo, como no Brasil e em boa parte da Europa), os músicos simplesmente dizem \"grau 3\".",
+  musMaj_movable: "A coluna \"dó móvel\" usa as sílabas do capítulo 10 para graus, não para letras: em qualquer tonalidade maior a tônica é dó, o segundo grau ré, e assim por diante. Muitos cantores aprendem melodias assim porque as sílabas dizem como cada nota se relaciona com a casa, seja qual for a tonalidade. A canção \"Dó-Ré-Mi\" de A Noviça Rebelde ensina exatamente isso. Onde o dó é sempre o C (dó fixo, como no Brasil e em boa parte da Europa), os músicos simplesmente dizem \"grau 3\".",
 
   musMaj_buildTitle: "O mesmo padrão a partir de qualquer nota",
   musMaj_buildBody: "Como o padrão é uma lista de passos, ele pode começar em qualquer tecla, e sempre vai soar como uma escala maior, só mais aguda ou mais grave: o ouvido escuta os passos, não o ponto de partida. Comece no sol: um tom até lá, um tom até si, um semitom até dó, um tom até ré, um tom até mi, um tom até fá♯ (o fá ficaria só um semitom acima do mi), um semitom até sol. É preciso uma tecla preta, o fá♯, e quem pede é o próprio padrão.",
   musMaj_dBuild: "As notas da escala maior em qualquer tônica",
   musMaj_b0: "some os passos 2 2 1 2 2 2 a partir da tônica: os semitons do grau 1 até o grau k, para k = 1…7 (e 12 para a oitava)",
-  musMaj_b1: "a tecla do grau k é o número de tecla da tônica (capítulo 9) mais essa quantidade de semitons",
+  musMaj_b1: "a tecla do grau k é o número de tecla da tônica (capítulo 10) mais essa quantidade de semitons",
   musMaj_b2: "a letra do grau k: uma letra por grau, contando a partir da letra da tônica (de sol volta para lá)",
   musMaj_bWhite: "branca",
-  musMaj_b3: "o sinal é o que for preciso para levar a tecla branca dessa letra até a tecla m_k (capítulo 11: a = +1 sustenido, −1 bemol)",
+  musMaj_b3: "o sinal é o que for preciso para levar a tecla branca dessa letra até a tecla m_k (capítulo 12: a = +1 sustenido, −1 bemol)",
   musMaj_b4: "um exemplo: o terceiro grau de ré maior é fá♯, não sol♭, porque o grau 3 precisa usar a terceira letra a partir do ré",
 
   musMaj_lettersTitle: "Por que cada letra uma vez",
   musMaj_lettersBody: "Por que insistir numa letra por grau, se fá maior poderia muito bem ser escrito com lá♯ em vez de si♭? Três motivos. Na pauta, uma letra por grau quer dizer uma linha ou espaço por grau: a escala sobe por igual, e uma melodia tem a cara do seu desenho. Cada tonalidade então precisa de um só tipo de sinal, só sustenidos ou só bemóis, e é isso que torna possível a armadura de clave. E os nomes mantêm os intervalos honestos: a partir do fá, si♭ é uma quarta justa, o intervalo que o grau 4 sempre forma, enquanto lá♯ seria uma terça aumentada, um nome que diz algo falso sobre como a nota se comporta.",
 
   musMaj_whyTitle: "Por que se chama maior",
-  musMaj_whyBody: "Meça cada grau a partir da tônica, com os nomes do capítulo 13: dó–ré uma segunda maior, dó–mi uma terça maior, dó–fá uma quarta justa, dó–sol uma quinta justa, dó–lá uma sexta maior, dó–si uma sétima maior, dó–dó uma oitava justa. Todos são maiores ou justos. É esse o sentido do nome: a escala maior é a escala dos intervalos maiores acima da sua tônica. Isso também explica a referência do capítulo 13: \"do dó até uma tecla branca\" era na verdade \"da tônica de uma escala maior\". O mais importante deles é a terça: a terça maior entre os graus 1 e 3 dá à escala a sua cor brilhante, e a escala menor do próximo capítulo é antes de tudo a escala com terça menor.",
+  musMaj_whyBody: "Meça cada grau a partir da tônica, com os nomes do capítulo 14: dó–ré uma segunda maior, dó–mi uma terça maior, dó–fá uma quarta justa, dó–sol uma quinta justa, dó–lá uma sexta maior, dó–si uma sétima maior, dó–dó uma oitava justa. Todos são maiores ou justos. É esse o sentido do nome: a escala maior é a escala dos intervalos maiores acima da sua tônica. Isso também explica a referência do capítulo 14: \"do dó até uma tecla branca\" era na verdade \"da tônica de uma escala maior\". O mais importante deles é a terça: a terça maior entre os graus 1 e 3 dá à escala a sua cor brilhante, e a escala menor do próximo capítulo é antes de tudo a escala com terça menor.",
 
   musMaj_tetraTitle: "Duas metades e a próxima tonalidade",
   musMaj_tetraBody: "Divida a escala maior ao meio: dó ré mi fá e sol lá si dó. Cada metade são quatro notas com os passos tom, tom, semitom, chamada tetracorde (do grego, \"quatro cordas\"), e um tom liga as duas. As duas metades têm o mesmo desenho, e isso explica como as tonalidades se relacionam.",
@@ -60,7 +60,7 @@ const text: Record<string, string> = {
   musMaj_t4: "descer uma quinta vai no sentido contrário: a metade de baixo de dó vira a metade de cima de fá, e a metade de baixo de fá, fá sol lá si, precisa de si♭ para ser tom, tom, semitom. Um bemol novo, no novo quarto grau",
 
   musMaj_lineTitle: "A escala na linha de quintas",
-  musMaj_lineBody: "O capítulo 12 empilhou quintas: dó, sol, ré, lá, mi, si, fá♯… Escreva todos os nomes de nota numa linha só, a uma quinta um do outro, nos dois sentidos: … si♭ fá dó sol ré lá mi si fá♯ dó♯ … Agora veja as notas de dó maior nessa linha: fá dó sol ré lá mi si, sete vizinhas. Toda escala maior são sete vizinhas na linha de quintas, com a tônica em segundo lugar da esquerda, e mudar a tônica uma quinta desliza a janela um lugar. É o argumento dos tetracordes visto de cima: uma nota sai por um lado, e a sua gêmea com sustenido ou bemol entra pelo outro.",
+  musMaj_lineBody: "O capítulo 13 empilhou quintas: dó, sol, ré, lá, mi, si, fá♯… Escreva todos os nomes de nota numa linha só, a uma quinta um do outro, nos dois sentidos: … si♭ fá dó sol ré lá mi si fá♯ dó♯ … Agora veja as notas de dó maior nessa linha: fá dó sol ré lá mi si, sete vizinhas. Toda escala maior são sete vizinhas na linha de quintas, com a tônica em segundo lugar da esquerda, e mudar a tônica uma quinta desliza a janela um lugar. É o argumento dos tetracordes visto de cima: uma nota sai por um lado, e a sua gêmea com sustenido ou bemol entra pelo outro.",
   musMaj_dLine: "Nomes na linha de quintas",
   musMaj_l0: "numere as posições: dó = 0, uma a mais a cada quinta acima, uma a menos a cada quinta abaixo",
   musMaj_l1: "uma quinta acima são 4 letras acima (dó ré mi fá sol), então o índice da letra (dó = 0 … si = 6) da posição q é 4q, dando a volta nas 7 letras",
@@ -88,7 +88,7 @@ const text: Record<string, string> = {
   musMaj_lvSig: "armadura",
 
   musMaj_sigTitle: "Armaduras de clave",
-  musMaj_sigBody: "O capítulo 11 prometeu a história das armaduras de clave; aqui está ela. Uma música em ré maior usa fá♯ e dó♯ o tempo todo, então em vez de escrever os sinais ao lado de cada fá e cada dó, ela os escreve uma vez, logo depois da clave em cada pauta, e eles valem para todas as oitavas. Como cada nova tonalidade acrescenta o próximo sinal da linha de quintas, os sinais aparecem sempre na mesma ordem, e uma armadura é só o começo dessa lista.",
+  musMaj_sigBody: "O capítulo 12 prometeu a história das armaduras de clave; aqui está ela. Uma música em ré maior usa fá♯ e dó♯ o tempo todo, então em vez de escrever os sinais ao lado de cada fá e cada dó, ela os escreve uma vez, logo depois da clave em cada pauta, e eles valem para todas as oitavas. Como cada nova tonalidade acrescenta o próximo sinal da linha de quintas, os sinais aparecem sempre na mesma ordem, e uma armadura é só o começo dessa lista.",
   musMaj_tSigns: "Sinais",
   musMaj_tSharpKeys: "Tonalidades com sustenidos",
   musMaj_tFlatKeys: "Tonalidades com bemóis",
@@ -99,7 +99,7 @@ const text: Record<string, string> = {
   musMaj_t7s: "dó♯ (+ si♯) = ré♭",
   musMaj_t7f: "dó♭ (+ fá♭) = si",
   musMaj_sigTricks: "Dois jeitos rápidos de achar a tonalidade de uma armadura. Com sustenidos, o último sustenido é a sensível, o grau 7, então a tonalidade fica um semitom acima dele: fá♯ dó♯ sol♯ → lá maior. Com bemóis, o último bemol é o novo grau 4, então o penúltimo bemol é a tônica: si♭ mi♭ lá♭ → mi♭ maior (e um bemol, que não tem penúltimo, é fá). A ordem em si é a linha de quintas: fá dó sol ré lá mi si para os sustenidos, e ao contrário, si mi lá ré sol dó fá, para os bemóis.",
-  musMaj_enh: "Existem 15 nomes de tonalidade mas só 12 tônicas no piano: três pares são enarmônicos, os mesmos sons escritos de dois jeitos (capítulo 11). Si maior (5 sustenidos) é dó♭ maior (7 bemóis); fá♯ maior (6 sustenidos) é sol♭ maior (6 bemóis); dó♯ maior (7 sustenidos) é ré♭ maior (5 bemóis). Os compositores costumam escolher a grafia com menos sinais. Onde os dois sentidos se encontram, a linha de quintas se dobra num círculo: o círculo das quintas, que a seção Harmonia vai usar para relacionar tonalidades e acordes.",
+  musMaj_enh: "Existem 15 nomes de tonalidade mas só 12 tônicas no piano: três pares são enarmônicos, os mesmos sons escritos de dois jeitos (capítulo 12). Si maior (5 sustenidos) é dó♭ maior (7 bemóis); fá♯ maior (6 sustenidos) é sol♭ maior (6 bemóis); dó♯ maior (7 sustenidos) é ré♭ maior (5 bemóis). Os compositores costumam escolher a grafia com menos sinais. Onde os dois sentidos se encontram, a linha de quintas se dobra num círculo: o círculo das quintas, que a seção Harmonia vai usar para relacionar tonalidades e acordes.",
 
   musMaj_transTitle: "Transpondo uma melodia",
   musMaj_transBody: "Como toda escala maior tem os mesmos passos, uma melodia escrita em graus pode ser tocada em qualquer tonalidade: \"Brilha, brilha, estrelinha\" é 1 1 5 5 6 6 5, 4 4 3 3 2 2 1 em qualquer tom. Em dó isso é dó dó sol sol lá lá sol; em sol é sol sol ré ré mi mi ré, e a frase que desce não usa fá♯ em lugar nenhum porque o grau 7 nunca aparece. Mudar uma melodia inteira para outra tonalidade se chama transpor. Cantores fazem isso para caber na voz, violonistas com um capotraste, e a melodia continua a mesma canção: todo intervalo dentro dela é mantido, só a altura de partida muda.",

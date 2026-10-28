@@ -99,7 +99,7 @@ const text: Record<string, string> = {
   musSyn_liveEuNote: "3 em 8 é o tresillo e 5 em 8 o cinquillo. 2 em 5 dá 3 + 2, o compasso de Take Five; 3 em 7 dá os 2 e 3 do 7/8 balcânico do capítulo 7. 4 em 16 não tem resto: quatro intervalos iguais, as quatro batidas do 4/4, e nenhuma síncope.",
   musSyn_euSync: "Isso também explica por que esses ritmos são sincopados. Um ciclo de 8 colcheias tem batidas a cada 2 pulsos. Espalhe 3 notas por igual e elas não cabem todas nas batidas, porque 8 não é múltiplo de 3: algumas notas precisam cair entre as batidas e pular a batida seguinte. A uniformidade que faz o tresillo soar equilibrado é justamente o que o faz brigar com a métrica.",
 
-  musSyn_next: "Isto fecha a seção de ritmo: pulso e andamento, durações, compasso, e a síncope que joga contra ele. A próxima seção trata das próprias notas: os seus nomes, as teclas do piano e por que elas vêm num padrão de 7 brancas e 5 pretas. Esse padrão já está no último widget: espalhe 7 notas por 12 pulsos e sai o sino da África Ocidental, intervalos 2 2 1 2 2 2 1. Guarde-o; ele vai voltar como a escala maior.",
+  musSyn_next: "Isso completa a teoria do ritmo: pulso e andamento, durações, compasso, e a síncope que joga contra ele. Mais um capítulo fecha a seção, com o instrumento nas mãos: tocar um dedilhado no tempo com o metrônomo, sabendo quais notas vão junto com o clique e quais vão no meio.",
 
   musSyn_key0: "Uma nota é sincopada quando começa numa posição fraca e a posição mais forte depois dela não recebe nota nova; segurada ou seguida de pausa, tanto faz.",
   musSyn_key1: "A síncope é uma pequena previsão quebrada; quantidades médias são as que mais dão vontade de se mexer (o U invertido de Witek e colegas, 2014).",

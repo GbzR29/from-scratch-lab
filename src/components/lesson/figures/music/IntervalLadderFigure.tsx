@@ -18,7 +18,7 @@ import { abbr, intervalName, type Quality } from "./intervals";
 // tall as its size in half steps (a staircase), coloured by how it sounds
 // together (perfect consonance, imperfect consonance, dissonance). Clicking a
 // column plays the two notes one after the other, then together; the readouts
-// give its name, its size, the pure ratio it stands for (chapter 12) and a
+// give its name, its size, the pure ratio it stands for (chapter 13) and a
 // well-known tune that starts with it, going up or down.
 
 type Kind = "perfect" | "imperfect" | "dissonant";

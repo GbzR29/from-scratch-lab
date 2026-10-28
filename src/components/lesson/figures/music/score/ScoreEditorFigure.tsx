@@ -56,7 +56,7 @@ export function MusicScoreEditorFigure({ t }: { t?: TrackTranslations }) {
   const player = useRhythmPlayer(vis.on, { instrument: true });
   const svg = useRef<SVGSVGElement>(null);
 
-  // On the guitar the treble staff is written an octave above the sound (chapter 10)
+  // On the guitar the treble staff is written an octave above the sound (chapter 11)
   const octaveClef = inst === "guitar" && score.clef === "treble", shift = octaveClef ? -12 : 0;
   const reads = useMemo(() => analyse(score), [score]);
   const phone = useMediaQuery(PHONE);

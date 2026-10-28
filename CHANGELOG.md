@@ -12,6 +12,13 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ## Outubro de 2026
 
+### 2026-10-28
+
+- **Música: aula nova Tocar no tempo: dedilhado e metrônomo (EN e PT).** Pedido do usuário, que tinha dificuldade em saber quais notas do dedilhado vão junto com o clique.
+  - **Aula `playing-in-time`** (Ritmo, depois de Síncope, agora o capítulo 9): o que o clique marca, a grade "1 e 2 e 3 e 4 e" que dá um endereço a cada colcheia (t_k = k·T/2, dedução, tabela a 60 BPM, fórmula ao vivo), semicolcheias, um dedo por corda (p i m a no violão, duas mãos no piano, por que o baixo fica nos tempos fortes: Hove e colegas, 2014), tabela dos dedilhados, 3/4 e 6/8, as 8 etapas para praticar com o metrônomo, assincronia média negativa (Repp, 2005), quando começar a troca de acorde (k = ⌈h/τ⌉, dedução e fórmula ao vivo), truques da troca e tabela de erros comuns.
+  - **Widgets novos:** `PickingGridFigure` (dedilhado na grade da contagem: 7 modelos em 4/4, 3/4 e 6/8, 5 acordes, clique entre as batidas, editável, toca no violão ou no piano), `PlayAlongFigure` (bater a sua parte junto com o metrônomo: só o polegar, só os dedos ou tudo; cada batida aparece adiantada ou atrasada; compassos limpos; escada de andamento +4 BPM) e `ChordChangeFigure` (quando levantar a mão e quanto ela demora; cordas soltas no ar; o 1 atrasado ou tocado no tempo). Lógica comum em `figures/music/picking.ts`; `usePulseLoop` agora toca notas no instrumento escolhido.
+  - **Renumeração:** as referências "capítulo 9" em diante das aulas seguintes (EN e PT) subiram um número; o fim de Síncope agora aponta para a aula nova, e a promessa do sino 7 em 12 passou para o fim dela.
+
 ### 2026-10-27
 
 - **Matemática: lacunas do ENEM em geometria, trigonometria e porcentagem (EN e PT).** Segundo passo do plano de cobrir o 2º dia do ENEM.

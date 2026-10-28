@@ -114,7 +114,7 @@ export function MinorScaleContent({ t }: { t: TrackTranslations }) {
       </p>
       <p>
         {tx(t, "musMin_aug2",
-          "The price is a new gap. Degree 6 stayed where it was, F, so from F to G♯ there are now three half steps: a step and a half, an augmented second (chapter 13: the same keys as a minor third, but between neighbouring letters). The steps of the harmonic minor are 2 1 2 2 1 3 1. That gap has a sound of its own, which many listeners hear as exotic; the same step and a half is central to the Arabic maqam Hijaz and to the freygish mode of klezmer music.")}
+          "The price is a new gap. Degree 6 stayed where it was, F, so from F to G♯ there are now three half steps: a step and a half, an augmented second (chapter 14: the same keys as a minor third, but between neighbouring letters). The steps of the harmonic minor are 2 1 2 2 1 3 1. That gap has a sound of its own, which many listeners hear as exotic; the same step and a half is central to the Arabic maqam Hijaz and to the freygish mode of klezmer music.")}
       </p>
       <p>
         {tx(t, "musMin_written",
@@ -142,7 +142,7 @@ export function MinorScaleContent({ t }: { t: TrackTranslations }) {
       <H3>{tx(t, "musMin_spellTitle", "Spelling any degree of any minor key")}</H3>
       <p>
         {tx(t, "musMin_spellBody",
-          "The line of fifths spells the minor scales as easily as the major. The natural minor's degrees sit at fixed places around the tonic: the 3rd, 6th and 7th to its left, on the flat side. Raising a note by a half step without changing its letter (G to G♯) is a jump of seven places to the right: seven fifths up is four octaves plus that chromatic half step (chapter 11), and the letter comes round to itself because 4 × 7 is a multiple of 7.")}
+          "The line of fifths spells the minor scales as easily as the major. The natural minor's degrees sit at fixed places around the tonic: the 3rd, 6th and 7th to its left, on the flat side. Raising a note by a half step without changing its letter (G to G♯) is a jump of seven places to the right: seven fifths up is four octaves plus that chromatic half step (chapter 12), and the letter comes round to itself because 4 × 7 is a multiple of 7.")}
       </p>
       <LiveFormula label={tx(t, "musMin_liveDeg", "Try it: any degree of any minor key")}
         tex={r`q = r + g_k + 7\rho, \quad \ell = 4q \bmod 7, \quad a = \left\lfloor \tfrac{q + 1}{7} \right\rfloor`}
@@ -191,7 +191,7 @@ export function MinorScaleContent({ t }: { t: TrackTranslations }) {
 
       <p>
         {tx(t, "musMin_next",
-          "The natural minor is the major scale's notes started from degree 6. Nothing stops us starting from the other degrees too: from D on the white keys, from E, from G… Each gives a scale with its own pattern of steps and its own colour, and these are the modes, Dorian, Phrygian, Lydian and the rest, still heard in folk music, jazz and film scores. The next chapter builds all seven, and then removes notes to get the five-note pentatonic scale, the one the black keys have been playing since chapter 9.")}
+          "The natural minor is the major scale's notes started from degree 6. Nothing stops us starting from the other degrees too: from D on the white keys, from E, from G… Each gives a scale with its own pattern of steps and its own colour, and these are the modes, Dorian, Phrygian, Lydian and the rest, still heard in folk music, jazz and film scores. The next chapter builds all seven, and then removes notes to get the five-note pentatonic scale, the one the black keys have been playing since chapter 10.")}
       </p>
 
       <KeyIdeas t={t} id="musMin" items={[

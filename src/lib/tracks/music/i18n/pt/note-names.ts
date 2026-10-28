@@ -24,7 +24,7 @@ const text: Record<string, string> = {
   musNam_mi: "mi",
   musNam_fa: "fá",
   musNam_la: "lá",
-  musNam_german: "O H alemão é um resto da notação medieval, em que a letra B era escrita de dois jeitos: redonda para uma versão da nota e quadrada para outra um pouco mais aguda; o b quadrado parecia um h. Na Alemanha, B ainda quer dizer a mais grave, o si bemol (capítulo 11). Foi assim que Johann Sebastian Bach pôde escrever o próprio nome em notas, B-A-C-H, e compositores citam esse motivo de quatro notas desde então.",
+  musNam_german: "O H alemão é um resto da notação medieval, em que a letra B era escrita de dois jeitos: redonda para uma versão da nota e quadrada para outra um pouco mais aguda; o b quadrado parecia um h. Na Alemanha, B ainda quer dizer a mais grave, o si bemol (capítulo 12). Foi assim que Johann Sebastian Bach pôde escrever o próprio nome em notas, B-A-C-H, e compositores citam esse motivo de quatro notas desde então.",
 
   musNam_findTitle: "Achando as notas no teclado",
   musNam_findBody: "Olhe as teclas pretas, não as brancas. Elas vêm em grupos: duas, um espaço, três, um espaço, duas, três, até o alto. Esses grupos são o mapa. A tecla branca logo à esquerda de cada grupo de duas é um dó (C); a tecla branca logo à esquerda de cada grupo de três é um fá (F). A partir desses dois marcos você dá nome a qualquer tecla branca contando: dó ré mi atravessando o grupo de duas, fá sol lá si atravessando o grupo de três. Repare também onde não há tecla preta: entre mi e fá, e entre si e dó. Esses dois pares de teclas brancas ficam colados, e a próxima seção mostra por quê.",

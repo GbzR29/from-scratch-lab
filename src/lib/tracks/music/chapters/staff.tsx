@@ -51,11 +51,11 @@ export function StaffContent({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "musStf_findTitle", "Which note is on which line?")}</H2>
       <p>
         {tx(t, "musStf_findBody",
-          "Counting letters works, but there is a neater way, the same trick as chapter 9's key numbers. There, the 12 keys of an octave were counted together, and a division by 12 split a key number into a name and an octave. On the staff only the white keys exist (the black ones need extra signs, next chapter), so count only white keys: 7 per octave, numbered from C = 0.")}
+          "Counting letters works, but there is a neater way, the same trick as chapter 10's key numbers. There, the 12 keys of an octave were counted together, and a division by 12 split a key number into a name and an octave. On the staff only the white keys exist (the black ones need extra signs, next chapter), so count only white keys: 7 per octave, numbered from C = 0.")}
       </p>
       <Derivation t={t} label={tx(t, "musStf_dTitle", "The note at a position of the staff")}
         steps={[
-          { tex: r`\ell = 0, 1, 2, 3, 4, 5, 6 \;\leftrightarrow\; \text{C D E F G A B}`, why: tx(t, "musStf_d0", "give each letter a number ℓ, starting from C, since octave numbers change at C (chapter 9)") },
+          { tex: r`\ell = 0, 1, 2, 3, 4, 5, 6 \;\leftrightarrow\; \text{C D E F G A B}`, why: tx(t, "musStf_d0", "give each letter a number ℓ, starting from C, since octave numbers change at C (chapter 10)") },
           { tex: r`d = 7\,o + \ell`, why: tx(t, "musStf_d1", "count every white key from the bottom with one number d: each octave o adds 7 keys, and the letter adds ℓ more. Middle C, C4, is d = 7 × 4 + 0 = 28") },
           { tex: r`d_{\text{${tx(t, "musStf_dBottom", "bottom")}}} = 7 \times 4 + 2 = 30\ (\text{E4})`, why: tx(t, "musStf_d2", "the treble clef makes the bottom line E4 (the next section shows why). Its d is 30") },
           { tex: r`d = d_{\text{${tx(t, "musStf_dBottom", "bottom")}}} + s`, why: tx(t, "musStf_d3", "a note s steps above the bottom line (s counts lines and spaces; negative below) is s white keys higher, because each step of the staff is one letter") },
@@ -112,7 +112,7 @@ export function StaffContent({ t }: { t: TrackTranslations }) {
       <H3>{tx(t, "musStf_clefMoves", "The clef moves every note")}</H3>
       <p>
         {tx(t, "musStf_clefMovesBody",
-          "The same drawing means different notes under different clefs. A melody in treble clef, read in bass clef, is not simply lower: every note gets a different letter, and the half steps E–F and B–C (chapter 9) stay with the letters, not with the positions. So some steps of the tune change size, and it sounds bent. Hear it in the next widget.")}
+          "The same drawing means different notes under different clefs. A melody in treble clef, read in bass clef, is not simply lower: every note gets a different letter, and the half steps E–F and B–C (chapter 10) stay with the letters, not with the positions. So some steps of the tune change size, and it sounds bent. Hear it in the next widget.")}
       </p>
 
       <MusicClefMelodyFigure t={t} />

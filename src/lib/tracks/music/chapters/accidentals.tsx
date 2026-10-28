@@ -45,7 +45,7 @@ export function AccidentalsContent({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "musAcc_stepsTitle", "Half steps and whole steps")}</H2>
       <p>
         {tx(t, "musAcc_stepsBody",
-          "Two keys side by side, with nothing between them, are a half step apart, also called a semitone: the smallest step of the piano, the frequency ratio 2^(1/12) ≈ 1.06 of chapter 2. Two half steps make a whole step, or tone. Chapter 9 found the pattern of the white keys from C: whole, whole, half, whole, whole, whole, half. So most white keys are a whole step apart, with a black key between them, and two pairs are only a half step apart, with no black key: E–F and B–C.")}
+          "Two keys side by side, with nothing between them, are a half step apart, also called a semitone: the smallest step of the piano, the frequency ratio 2^(1/12) ≈ 1.06 of chapter 2. Two half steps make a whole step, or tone. Chapter 10 found the pattern of the white keys from C: whole, whole, half, whole, whole, whole, half. So most white keys are a whole step apart, with a black key between them, and two pairs are only a half step apart, with no black key: E–F and B–C.")}
       </p>
       <p>
         {tx(t, "musAcc_stepsMeaning",
@@ -71,27 +71,27 @@ export function AccidentalsContent({ t }: { t: TrackTranslations }) {
       <Deeper t={t} title={tx(t, "musAcc_histTitle", "Where the signs came from: two kinds of b")}>
       <p>
         {tx(t, "musAcc_histBody",
-          "The first note to get a sign was B. In medieval chant, the step from F up to B spans three whole steps, the tritone, an interval singers found harsh and avoided. So they often sang B a half step lower, and scribes marked the lower B with a round letter b, called \"b molle\" (soft b), and the normal B with a square b, \"b durum\" (hard b). The round b became the flat ♭. The square b became the natural ♮, and a crossed version of it, used to raise other notes, became the sharp ♯. The words stayed too: French bémol and bécarre, Italian bemolle and bequadro. In German, the square b looked like an h, which is why German calls B♭ \"B\" and B natural \"H\", as chapter 9 promised to explain; and the German words for major and minor, Dur and Moll, are the hard and soft b.")}
+          "The first note to get a sign was B. In medieval chant, the step from F up to B spans three whole steps, the tritone, an interval singers found harsh and avoided. So they often sang B a half step lower, and scribes marked the lower B with a round letter b, called \"b molle\" (soft b), and the normal B with a square b, \"b durum\" (hard b). The round b became the flat ♭. The square b became the natural ♮, and a crossed version of it, used to raise other notes, became the sharp ♯. The words stayed too: French bémol and bécarre, Italian bemolle and bequadro. In German, the square b looked like an h, which is why German calls B♭ \"B\" and B natural \"H\", as chapter 10 promised to explain; and the German words for major and minor, Dur and Moll, are the hard and soft b.")}
       </p>
       </Deeper>
 
       <H2>{tx(t, "musAcc_keyTitle", "Which key does a written note ask for?")}</H2>
       <p>
         {tx(t, "musAcc_keyBody",
-          "Chapter 9 turned a key number into a name; chapter 10 turned a position on the staff into a letter and an octave. A sign adds one last step: it moves the white key of that letter left or right. Putting the three together gives the key number of any written note.")}
+          "Chapter 10 turned a key number into a name; chapter 11 turned a position on the staff into a letter and an octave. A sign adds one last step: it moves the white key of that letter left or right. Putting the three together gives the key number of any written note.")}
       </p>
       <Derivation t={t} label={tx(t, "musAcc_dTitle", "From a written note to its key")}
         steps={[
-          { tex: r`\ell,\ o \;\leftarrow\; \text{${tx(t, "musAcc_dStaff", "the staff")}}`, why: tx(t, "musAcc_d0", "read the letter ℓ and the octave o from the line or space, as in chapter 10, ignoring the sign") },
+          { tex: r`\ell,\ o \;\leftarrow\; \text{${tx(t, "musAcc_dStaff", "the staff")}}`, why: tx(t, "musAcc_d0", "read the letter ℓ and the octave o from the line or space, as in chapter 11, ignoring the sign") },
           { tex: r`P(\ell) = 0,\ 2,\ 4,\ 5,\ 7,\ 9,\ 11`, why: tx(t, "musAcc_d1", "how many keys the letter's white key sits above C: C 0, D 2, E 4, F 5, G 7, A 9, B 11. The jumps of 2 are whole steps, the jumps of 1 (E→F, B→C) the two half steps") },
-          { tex: r`m_{\text{${tx(t, "musAcc_dWhite", "white")}}} = 12\,(o + 1) + P(\ell)`, why: tx(t, "musAcc_d2", "chapter 9 wrote every key as m = 12q + pc with octave o = q − 1, so q = o + 1. For a white key, the pitch class pc is P(ℓ)") },
+          { tex: r`m_{\text{${tx(t, "musAcc_dWhite", "white")}}} = 12\,(o + 1) + P(\ell)`, why: tx(t, "musAcc_d2", "chapter 10 wrote every key as m = 12q + pc with octave o = q − 1, so q = o + 1. For a white key, the pitch class pc is P(ℓ)") },
           { tex: r`m = 12\,(o + 1) + P(\ell) + a`, why: tx(t, "musAcc_d3", "each half step is one key, so the sign adds a keys: a = +1 for a sharp, −1 for a flat, 0 for none or a natural, ±2 for the double signs") },
           { tex: r`\text{F}{\sharp}\text{4}:\ 12 \times 5 + 5 + 1 = \amber{66}, \quad f = 440 \cdot 2^{(66 - 69)/12} \approx 369.99\ \text{Hz}`, why: tx(t, "musAcc_d4", "an example: F is letter 3 with P = 5, octave 4, sharp a = +1. The frequency follows from the key number exactly as in chapter 2") },
           { tex: r`\text{B}{\sharp}\text{3}:\ 12 \times 4 + 11 + 1 = 60 = \text{C4}`, why: tx(t, "musAcc_d5", "a surprise: B♯3 is middle C. The octave number belongs to the letter, and B3 is the last key of octave 3, so raising it steps into octave 4. Likewise C♭4 is the key of B3") },
         ]} />
       <Equation label={tx(t, "musAcc_eqKey", "The key of a written note")}
         where={[
-          [r`m`, tx(t, "musAcc_wm", "the key number (MIDI), as in chapters 2 and 9: middle C = 60, A4 = 69")],
+          [r`m`, tx(t, "musAcc_wm", "the key number (MIDI), as in chapters 2 and 10: middle C = 60, A4 = 69")],
           [r`o`, tx(t, "musAcc_wo", "the octave number of the letter, as in C4")],
           [r`P(\ell)`, tx(t, "musAcc_wP", "the white key of letter ℓ, counted in keys above C: 0, 2, 4, 5, 7, 9, 11 for C D E F G A B")],
           [r`a`, tx(t, "musAcc_wa", "the sign: +1 sharp, −1 flat, 0 natural or none, +2 double sharp, −2 double flat")],
@@ -131,11 +131,11 @@ export function AccidentalsContent({ t }: { t: TrackTranslations }) {
       />
       <p>
         {tx(t, "musAcc_whichName",
-          "Which name is right? Both, and the choice is not free: it depends on what the music is doing. A melody climbing from F to G through the black key usually writes F♯ (raise the note you are leaving); one falling from G to F writes G♭. That is why the chromatic scale, all twelve keys in a row, is usually written with sharps going up and flats coming down. The deeper reason comes with scales (chapter 14): a scale uses each letter once, so the letters, not the keys, decide the spelling.")}
+          "Which name is right? Both, and the choice is not free: it depends on what the music is doing. A melody climbing from F to G through the black key usually writes F♯ (raise the note you are leaving); one falling from G to F writes G♭. That is why the chromatic scale, all twelve keys in a row, is usually written with sharps going up and flats coming down. The deeper reason comes with scales (chapter 15): a scale uses each letter once, so the letters, not the keys, decide the spelling.")}
       </p>
       <p>
         {tx(t, "musAcc_twoSemitones",
-          "This gives two kinds of half step. C to C♯ keeps the letter: a chromatic half step. C to D♭ changes the letter: a diatonic half step, like E–F and B–C. On the piano they are the same key, same sound. On paper they are different, and that difference will matter when intervals are named in chapter 13.")}
+          "This gives two kinds of half step. C to C♯ keeps the letter: a chromatic half step. C to D♭ changes the letter: a diatonic half step, like E–F and B–C. On the piano they are the same key, same sound. On paper they are different, and that difference will matter when intervals are named in chapter 14.")}
       </p>
 
       <H2>{tx(t, "musAcc_enhTitle", "One key, many names")}</H2>
@@ -205,7 +205,7 @@ export function AccidentalsContent({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "musAcc_readTitle", "Reading sharps and flats")}</H2>
       <p>
         {tx(t, "musAcc_readBody",
-          "Reading a note with a sign takes two moves, and it helps to keep them apart. First the position, exactly as in chapter 10: the letter and the octave, as if the sign were not there. Then the sign: one key right for a sharp, one key left for a flat, counting every key whatever its colour. With practice the two moves merge into one look, but at first, slow and in order is faster than guessing.")}
+          "Reading a note with a sign takes two moves, and it helps to keep them apart. First the position, exactly as in chapter 11: the letter and the octave, as if the sign were not there. Then the sign: one key right for a sharp, one key left for a flat, counting every key whatever its colour. With practice the two moves merge into one look, but at first, slow and in order is faster than guessing.")}
       </p>
 
       <MusicAccidentalQuizFigure t={t} />
@@ -213,7 +213,7 @@ export function AccidentalsContent({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "musAcc_writeTitle", "Write it yourself")}</H2>
       <p>
         {tx(t, "musAcc_writeBody",
-          "Reading is half of notation; the other half is writing. Everything since the Rhythm section now fits on one staff: the values and dots of chapter 6, the bars and time signatures of chapter 7, the lines and clefs of chapter 10 and the signs of this chapter. The editor below checks the two things beginners most often get wrong. First, every bar must add up to its time signature: in 4/4, a half note, a quarter and two eighths make exactly four beats, and a note that would run past the bar line has to be split into two notes joined by a tie. Second, the signs follow the rule of the bar line, so the editor shows which notes sound sharp or flat because of a sign written earlier.")}
+          "Reading is half of notation; the other half is writing. Everything since the Rhythm section now fits on one staff: the values and dots of chapter 6, the bars and time signatures of chapter 7, the lines and clefs of chapter 11 and the signs of this chapter. The editor below checks the two things beginners most often get wrong. First, every bar must add up to its time signature: in 4/4, a half note, a quarter and two eighths make exactly four beats, and a note that would run past the bar line has to be split into two notes joined by a tie. Second, the signs follow the rule of the bar line, so the editor shows which notes sound sharp or flat because of a sign written earlier.")}
       </p>
       <p>
         {tx(t, "musAcc_writeTry",

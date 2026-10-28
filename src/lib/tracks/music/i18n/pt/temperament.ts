@@ -25,7 +25,7 @@ const text: Record<string, string> = {
   musTem_tMaj3M: "5º = 4º",
   musTem_tMin3: "terça menor",
   musTem_tMin3M: "6º = 5º",
-  musTem_pureNames: "Os nomes (quinta, terça…) contam letras, como o capítulo 13 vai explicar; por enquanto, leia-os como \"7 teclas de distância\", \"4 teclas de distância\". O que importa é o padrão da tabela: numa razão pura q : p, o harmônico q do som grave encontra o harmônico p do agudo. Quanto menores os números, mais baixo o ponto de encontro e mais fortes os harmônicos em comum, e por isso a oitava e a quinta soam mais lisas que as terças.",
+  musTem_pureNames: "Os nomes (quinta, terça…) contam letras, como o capítulo 14 vai explicar; por enquanto, leia-os como \"7 teclas de distância\", \"4 teclas de distância\". O que importa é o padrão da tabela: numa razão pura q : p, o harmônico q do som grave encontra o harmônico p do agudo. Quanto menores os números, mais baixo o ponto de encontro e mais fortes os harmônicos em comum, e por isso a oitava e a quinta soam mais lisas que as terças.",
 
   musTem_beatsTitle: "Batimentos: ouvindo um quase acerto",
   musTem_beatsBody: "E se os dois harmônicos quase se encontram? Dois sons a poucos hertz de distância não soam como dois sons. Eles se fundem num som só, cujo volume cresce e some, uá-uá-uá: os batimentos. Todo afinador de piano, de violão e de orquestra presta atenção neles, porque os batimentos são o jeito de o ouvido medir um quase acerto.",
@@ -172,7 +172,7 @@ const text: Record<string, string> = {
   musTem_stretchTitle: "Cordas de verdade esticam a oitava",
   musTem_stretchBody: "Uma última volta. Uma corda de piano de verdade é aço rígido, não a corda ideal do capítulo 3, e a rigidez empurra os harmônicos um pouco para cima: o harmônico 2 fica um pouco acima de 2f. Um afinador que deixa uma oitava sem batimentos casa a nota de cima com esse harmônico alto, então a oitava sai um pouco mais larga que 2 : 1. Repetido pelo teclado, as notas do topo acabam uns 30 cents acima dos números do temperamento igual e as de baixo outro tanto abaixo: uma afinação esticada (a curva de Railsback). Ela soa certa justamente porque segue os harmônicos das próprias cordas. O temperamento igual é o plano; os instrumentos de verdade o dobram à sua física.",
 
-  musTem_next: "Quintas, quartas, terças: este capítulo usou esses nomes antes de explicá-los, contando só teclas e cents. O próximo capítulo, Intervalos, dá o nome certo a eles: por que uma quinta é \"cinco\" se ela abrange sete teclas, o que faz uma terça ser maior ou menor, e por que os dois tipos de semitom do capítulo 11 agora importam.",
+  musTem_next: "Quintas, quartas, terças: este capítulo usou esses nomes antes de explicá-los, contando só teclas e cents. O próximo capítulo, Intervalos, dá o nome certo a eles: por que uma quinta é \"cinco\" se ela abrange sete teclas, o que faz uma terça ser maior ou menor, e por que os dois tipos de semitom do capítulo 12 agora importam.",
 
   musTem_key0: "Num intervalo puro q : p, o harmônico q do som grave encontra o harmônico p do agudo; se eles erram, o som bate |p·f₂ − q·f₁| vezes por segundo.",
   musTem_key1: "Quintas puras nunca fecham o círculo: 12 quintas passam de 7 oitavas pela coma pitagórica (23,46 ¢), e quatro quintas dão uma terça 21,51 ¢ larga demais (a coma sintônica).",

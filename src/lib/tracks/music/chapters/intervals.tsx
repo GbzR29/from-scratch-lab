@@ -58,7 +58,7 @@ export function IntervalsContent({ t }: { t: TrackTranslations }) {
       </p>
       <Derivation t={t} label={tx(t, "musInt_dNum", "The number from the staff positions")}
         steps={[
-          { tex: r`d = 7\,o + \ell`, why: tx(t, "musInt_n0", "chapter 10 gave every line and space a number d, one per letter: C4 = 28, D4 = 29… Signs do not change d") },
+          { tex: r`d = 7\,o + \ell`, why: tx(t, "musInt_n0", "chapter 11 gave every line and space a number d, one per letter: C4 = 28, D4 = 29… Signs do not change d") },
           { tex: r`d_2 - d_1`, why: tx(t, "musInt_n1", "the difference is how many steps of the staff separate the notes: C4 → G4 is 32 − 28 = 4 steps") },
           { tex: r`n = d_2 - d_1 + 1`, why: tx(t, "musInt_n2", "the name counts letters, not steps, and there is always one more letter than steps: 4 steps join 5 letters, like 4 gaps between 5 fence posts") },
           { tex: r`\text{C4}\!-\!\text{G4}:\ n = 32 - 28 + 1 = \amber{5}`, why: tx(t, "musInt_n3", "a fifth. And C4–C5: 35 − 28 + 1 = 8, the octave") },
@@ -71,7 +71,7 @@ export function IntervalsContent({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "musInt_sizeTitle", "Same number, different sizes")}</H2>
       <p>
         {tx(t, "musInt_sizeBody",
-          "The number ignores something important. C–E and D–F are both thirds, but C–E spans 4 half steps and D–F only 3. The reason is the two half steps among the white keys, E–F and B–C (chapter 11): every move from one letter to the next is 2 half steps, except those two, which are 1. D–F crosses E–F; C–E does not.")}
+          "The number ignores something important. C–E and D–F are both thirds, but C–E spans 4 half steps and D–F only 3. The reason is the two half steps among the white keys, E–F and B–C (chapter 12): every move from one letter to the next is 2 half steps, except those two, which are 1. D–F crosses E–F; C–E does not.")}
       </p>
       <Derivation t={t} label={tx(t, "musInt_dSize", "The size of an interval between white keys")}
         steps={[
@@ -95,7 +95,7 @@ export function IntervalsContent({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "musInt_qualTitle", "The quality: perfect, major, minor")}</H2>
       <p>
         {tx(t, "musInt_qualBody",
-          "The quality is the word that tells the two sizes apart. Unisons, fourths, fifths and octaves come almost always in one size among the white keys, and that size is called perfect: these are the intervals of the simplest ratios, 1 : 1, 4 : 3, 3 : 2 and 2 : 1, the smoothest of chapter 12. Seconds, thirds, sixths and sevenths come in two common sizes: the larger is major, the smaller minor. One half step more than major or perfect is augmented; one half step less than minor or perfect is diminished.")}
+          "The quality is the word that tells the two sizes apart. Unisons, fourths, fifths and octaves come almost always in one size among the white keys, and that size is called perfect: these are the intervals of the simplest ratios, 1 : 1, 4 : 3, 3 : 2 and 2 : 1, the smoothest of chapter 13. Seconds, thirds, sixths and sevenths come in two common sizes: the larger is major, the smaller minor. One half step more than major or perfect is augmented; one half step less than minor or perfect is diminished.")}
       </p>
       <LessonTable
         headers={[tx(t, "musInt_tName", "Interval"), tx(t, "musInt_tAbbr", "Short"), tx(t, "musInt_tHalf", "Half steps"), tx(t, "musInt_tFromC", "From C"), tx(t, "musInt_tPureR", "Pure ratio")]}
@@ -122,7 +122,7 @@ export function IntervalsContent({ t }: { t: TrackTranslations }) {
       <Equation label={tx(t, "musInt_eqQual", "The quality of an interval")}
         where={[
           [r`n`, tx(t, "musInt_wn", "the number, from the letters: n = d₂ − d₁ + 1")],
-          [r`s`, tx(t, "musInt_ws", "the size in half steps, from the keys: s = m₂ − m₁ (chapter 11 gives m for any written note)")],
+          [r`s`, tx(t, "musInt_ws", "the size in half steps, from the keys: s = m₂ − m₁ (chapter 12 gives m for any written note)")],
           [r`s_{\text{ref}}(n)`, tx(t, "musInt_wref", "the size of the same number from C to a white key: 0 2 4 5 7 9 11 for numbers 1 to 7, plus 12 per octave")],
           [r`\Delta`, tx(t, "musInt_wd", "how far the interval is from that reference, in half steps")],
         ]}
@@ -151,7 +151,7 @@ export function IntervalsContent({ t }: { t: TrackTranslations }) {
       </p>
       <p>
         {tx(t, "musInt_twoHalf",
-          "This also names the two half steps of chapter 11. C–C♯ keeps the letter: one letter, an augmented unison, the chromatic half step. C–D♭ changes the letter: a minor second, the diatonic half step. In equal temperament both are 100 cents. In pure tuning they are not: the minor second is 16 : 15 ≈ 111.7 cents and the chromatic half step 25 : 24 ≈ 70.7 cents, which is why singers and string players, who tune by ear, can tell them apart.")}
+          "This also names the two half steps of chapter 12. C–C♯ keeps the letter: one letter, an augmented unison, the chromatic half step. C–D♭ changes the letter: a minor second, the diatonic half step. In equal temperament both are 100 cents. In pure tuning they are not: the minor second is 16 : 15 ≈ 111.7 cents and the chromatic half step 25 : 24 ≈ 70.7 cents, which is why singers and string players, who tune by ear, can tell them apart.")}
       </p>
 
       <H2>{tx(t, "musInt_invTitle", "Inversion: turning an interval upside down")}</H2>
@@ -194,17 +194,17 @@ export function IntervalsContent({ t }: { t: TrackTranslations }) {
         ]} />
       <p>
         {tx(t, "musInt_compUse",
-          "In practice only the ninth, eleventh and thirteenth keep their compound names, because they appear in chord names (chapter 18). For everything else, musicians just say \"a third, an octave up\".")}
+          "In practice only the ninth, eleventh and thirteenth keep their compound names, because they appear in chord names (chapter 19). For everything else, musicians just say \"a third, an octave up\".")}
       </p>
 
       <H2>{tx(t, "musInt_hearTitle", "How the intervals sound")}</H2>
       <p>
         {tx(t, "musInt_hearBody",
-          "Chapter 12 explained why some intervals sound still and others restless: the simpler the ratio, the more harmonics the two notes share. Music theory sorts the intervals into three families. The perfect consonances, unison, octave, fifth and fourth, are so smooth they sound almost empty. The imperfect consonances, thirds and sixths, are sweet and full. The dissonances, seconds, sevenths and the tritone, sound tense and seem to want to move to a consonance; music lives on that pull. The fourth sits on the border: smooth on its own, but older rules of counterpoint treated it as a dissonance when it stood above the lowest voice.")}
+          "Chapter 13 explained why some intervals sound still and others restless: the simpler the ratio, the more harmonics the two notes share. Music theory sorts the intervals into three families. The perfect consonances, unison, octave, fifth and fourth, are so smooth they sound almost empty. The imperfect consonances, thirds and sixths, are sweet and full. The dissonances, seconds, sevenths and the tritone, sound tense and seem to want to move to a consonance; music lives on that pull. The fourth sits on the border: smooth on its own, but older rules of counterpoint treated it as a dissonance when it stood above the lowest voice.")}
       </p>
       <p>
         {tx(t, "musInt_tritone",
-          "The tritone has the strongest reputation. Medieval singers avoided F–B (chapter 11), and a later Latin saying called it \"diabolus in musica\", the devil in music. Yet it is everywhere in modern music: it is the tension inside the dominant seventh chord that makes a cadence pull home (chapter 20), and Bernstein opened \"Maria\" with it.")}
+          "The tritone has the strongest reputation. Medieval singers avoided F–B (chapter 12), and a later Latin saying called it \"diabolus in musica\", the devil in music. Yet it is everywhere in modern music: it is the tension inside the dominant seventh chord that makes a cadence pull home (chapter 21), and Bernstein opened \"Maria\" with it.")}
       </p>
 
       <MusicIntervalLadderFigure t={t} />
@@ -239,7 +239,7 @@ export function IntervalsContent({ t }: { t: TrackTranslations }) {
 
       <p>
         {tx(t, "musInt_next",
-          "Chapter 8 ended with a West African bell pattern of 7 strokes in 12 pulses, gaps 2 2 1 2 2 2 1, and chapter 9 found the same gaps between the white keys from C. Read with this chapter's eyes, those gaps are major and minor seconds. The next chapter puts them in order and builds the major scale: why every major scale is the same pattern of whole and half steps, why each one uses every letter once, and how the sharps and flats of a key come from that rule.")}
+          "Chapter 8 ended with a West African bell pattern of 7 strokes in 12 pulses, gaps 2 2 1 2 2 2 1, and chapter 10 found the same gaps between the white keys from C. Read with this chapter's eyes, those gaps are major and minor seconds. The next chapter puts them in order and builds the major scale: why every major scale is the same pattern of whole and half steps, why each one uses every letter once, and how the sharps and flats of a key come from that rule.")}
       </p>
 
       <KeyIdeas t={t} id="musInt" items={[

@@ -69,7 +69,7 @@ export function NoteNamesContent({ t }: { t: TrackTranslations }) {
       />
       <p>
         {tx(t, "musNam_german",
-          "The German H is a leftover from medieval notation, where the letter B was written two ways, round for one version of the note and square for a slightly higher one; the square b looked like an h. In Germany B still means the lower one, B flat (chapter 11). That is how Johann Sebastian Bach could spell his own name in notes, B-A-C-H, and composers have quoted that four-note motif ever since.")}
+          "The German H is a leftover from medieval notation, where the letter B was written two ways, round for one version of the note and square for a slightly higher one; the square b looked like an h. In Germany B still means the lower one, B flat (chapter 12). That is how Johann Sebastian Bach could spell his own name in notes, B-A-C-H, and composers have quoted that four-note motif ever since.")}
       </p>
 
       <H2>{tx(t, "musNam_findTitle", "Finding the notes on the keyboard")}</H2>

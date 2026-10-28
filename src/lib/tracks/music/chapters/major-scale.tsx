@@ -45,7 +45,7 @@ export function MajorScaleContent({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "musMaj_patternTitle", "A pattern of steps")}</H2>
       <p>
         {tx(t, "musMaj_patternBody",
-          "A scale is a set of notes in order of pitch, from one note to its octave. Chapter 9 counted the gaps between the white keys from C: 2 2 1 2 2 2 1 half steps. Chapter 13 gave those gaps names: a gap of 2 is a major second, a whole step; a gap of 1 a minor second, a half step. So the major scale is the pattern whole, whole, half, whole, whole, whole, half. The two half steps sit between degrees 3 and 4 and between 7 and 8, and they shape the whole sound of the scale.")}
+          "A scale is a set of notes in order of pitch, from one note to its octave. Chapter 10 counted the gaps between the white keys from C: 2 2 1 2 2 2 1 half steps. Chapter 14 gave those gaps names: a gap of 2 is a major second, a whole step; a gap of 1 a minor second, a half step. So the major scale is the pattern whole, whole, half, whole, whole, whole, half. The two half steps sit between degrees 3 and 4 and between 7 and 8, and they shape the whole sound of the scale.")}
       </p>
       <LessonTable
         headers={[tx(t, "musMaj_tDeg", "Degree"), tx(t, "musMaj_tInC", "In C"), tx(t, "musMaj_tName", "Name"), tx(t, "musMaj_tSolfa", "Movable do"), tx(t, "musMaj_tRole", "What it does")]}
@@ -61,7 +61,7 @@ export function MajorScaleContent({ t }: { t: TrackTranslations }) {
       />
       <p>
         {tx(t, "musMaj_movable",
-          "The column \"movable do\" uses the syllables of chapter 9 for degrees, not for letters: in any major key the tonic is do, the second re, and so on. Singers learn melodies this way because the syllables then say how each note relates to home, whatever the key. The song \"Do-Re-Mi\" from The Sound of Music teaches exactly this. Where do is always C (fixed do, as in Brazil and much of Europe), musicians simply say \"degree 3\" instead.")}
+          "The column \"movable do\" uses the syllables of chapter 10 for degrees, not for letters: in any major key the tonic is do, the second re, and so on. Singers learn melodies this way because the syllables then say how each note relates to home, whatever the key. The song \"Do-Re-Mi\" from The Sound of Music teaches exactly this. Where do is always C (fixed do, as in Brazil and much of Europe), musicians simply say \"degree 3\" instead.")}
       </p>
 
       <H2>{tx(t, "musMaj_buildTitle", "The same pattern from any note")}</H2>
@@ -72,9 +72,9 @@ export function MajorScaleContent({ t }: { t: TrackTranslations }) {
       <Derivation t={t} label={tx(t, "musMaj_dBuild", "The notes of the major scale on any tonic")}
         steps={[
           { tex: r`M(k) = 0,\ 2,\ 4,\ 5,\ 7,\ 9,\ 11`, why: tx(t, "musMaj_b0", "add up the steps 2 2 1 2 2 2 from the tonic: the half steps from degree 1 to degree k, for k = 1…7 (and 12 for the octave)") },
-          { tex: r`m_k = m_1 + M(k)`, why: tx(t, "musMaj_b1", "the key of degree k is the tonic's key number (chapter 9) plus that many half steps") },
+          { tex: r`m_k = m_1 + M(k)`, why: tx(t, "musMaj_b1", "the key of degree k is the tonic's key number (chapter 10) plus that many half steps") },
           { tex: r`\ell_k = \ell_1 + (k - 1)`, why: tx(t, "musMaj_b2", "the letter of degree k: one letter per degree, counting up from the tonic's letter (wrapping G → A)") },
-          { tex: r`a_k = m_k - m_{\text{${tx(t, "musMaj_bWhite", "white")}}}(\ell_k)`, why: tx(t, "musMaj_b3", "the sign is whatever it takes to move that letter's white key onto key m_k (chapter 11: a = +1 sharp, −1 flat)") },
+          { tex: r`a_k = m_k - m_{\text{${tx(t, "musMaj_bWhite", "white")}}}(\ell_k)`, why: tx(t, "musMaj_b3", "the sign is whatever it takes to move that letter's white key onto key m_k (chapter 12: a = +1 sharp, −1 flat)") },
           { tex: r`\text{D: } k = 3:\ m = 62 + 4 = 66,\ \ \ell = \text{F},\ \ a = 66 - 65 = +1 \;\Rightarrow\; \amber{\text{F}{\sharp}}`, why: tx(t, "musMaj_b4", "an example: the third degree of D major is F♯, not G♭, because degree 3 must use the third letter from D") },
         ]} />
 
@@ -89,7 +89,7 @@ export function MajorScaleContent({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "musMaj_whyTitle", "Why it is called major")}</H2>
       <p>
         {tx(t, "musMaj_whyBody",
-          "Measure every degree from the tonic, with chapter 13's names: C–D a major second, C–E a major third, C–F a perfect fourth, C–G a perfect fifth, C–A a major sixth, C–B a major seventh, C–C a perfect octave. Every one is major or perfect. That is the meaning of the name: the major scale is the scale of the major intervals above its tonic. It also explains chapter 13's reference: \"from C to a white key\" was really \"from the tonic of a major scale\". The most important of these is the third: the major third between degrees 1 and 3 gives the scale its bright colour, and the next chapter's minor scale is above all the scale with a minor third.")}
+          "Measure every degree from the tonic, with chapter 14's names: C–D a major second, C–E a major third, C–F a perfect fourth, C–G a perfect fifth, C–A a major sixth, C–B a major seventh, C–C a perfect octave. Every one is major or perfect. That is the meaning of the name: the major scale is the scale of the major intervals above its tonic. It also explains chapter 14's reference: \"from C to a white key\" was really \"from the tonic of a major scale\". The most important of these is the third: the major third between degrees 1 and 3 gives the scale its bright colour, and the next chapter's minor scale is above all the scale with a minor third.")}
       </p>
 
       <H2>{tx(t, "musMaj_tetraTitle", "Two halves and the next key")}</H2>
@@ -109,7 +109,7 @@ export function MajorScaleContent({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "musMaj_lineTitle", "The scale on the line of fifths")}</H2>
       <p>
         {tx(t, "musMaj_lineBody",
-          "Chapter 12 stacked fifths: C, G, D, A, E, B, F♯… Write every note name on one line, a fifth apart, extending both ways: … B♭ F C G D A E B F♯ C♯ … Now look at C major's notes on that line: F C G D A E B, seven neighbours. Every major scale is seven neighbours on the line of fifths, the tonic second from the left, and moving the tonic a fifth slides the window by one place. That is the tetrachord argument seen from above: one note leaves on one side, its sharpened or flattened twin enters on the other.")}
+          "Chapter 13 stacked fifths: C, G, D, A, E, B, F♯… Write every note name on one line, a fifth apart, extending both ways: … B♭ F C G D A E B F♯ C♯ … Now look at C major's notes on that line: F C G D A E B, seven neighbours. Every major scale is seven neighbours on the line of fifths, the tonic second from the left, and moving the tonic a fifth slides the window by one place. That is the tetrachord argument seen from above: one note leaves on one side, its sharpened or flattened twin enters on the other.")}
       </p>
       <Derivation t={t} label={tx(t, "musMaj_dLine", "Names on the line of fifths")}
         steps={[
@@ -145,7 +145,7 @@ export function MajorScaleContent({ t }: { t: TrackTranslations }) {
       <H2>{tx(t, "musMaj_sigTitle", "Key signatures")}</H2>
       <p>
         {tx(t, "musMaj_sigBody",
-          "Chapter 11 promised the story of key signatures; here it is. A piece in D major uses F♯ and C♯ all the time, so instead of writing the signs beside every F and C, it writes them once, right after the clef on every staff, and they hold for every octave. Because each new key adds the next sign on the line of fifths, the signs always appear in the same order, and a signature is just the first few of that list.")}
+          "Chapter 12 promised the story of key signatures; here it is. A piece in D major uses F♯ and C♯ all the time, so instead of writing the signs beside every F and C, it writes them once, right after the clef on every staff, and they hold for every octave. Because each new key adds the next sign on the line of fifths, the signs always appear in the same order, and a signature is just the first few of that list.")}
       </p>
       <LessonTable
         headers={[tx(t, "musMaj_tSigns", "Signs"), tx(t, "musMaj_tSharpKeys", "Sharp keys"), tx(t, "musMaj_tFlatKeys", "Flat keys")]}
@@ -166,7 +166,7 @@ export function MajorScaleContent({ t }: { t: TrackTranslations }) {
       </p>
       <p>
         {tx(t, "musMaj_enh",
-          "There are 15 key names but only 12 tonic keys on the piano: three pairs are enharmonic, the same sounds spelled two ways (chapter 11). B major (5 sharps) is C♭ major (7 flats); F♯ major (6 sharps) is G♭ major (6 flats); C♯ major (7 sharps) is D♭ major (5 flats). Composers usually pick the spelling with fewer signs. Where the two directions meet, the line of fifths bends into a circle: the circle of fifths, which the Harmony section will use to relate keys and chords.")}
+          "There are 15 key names but only 12 tonic keys on the piano: three pairs are enharmonic, the same sounds spelled two ways (chapter 12). B major (5 sharps) is C♭ major (7 flats); F♯ major (6 sharps) is G♭ major (6 flats); C♯ major (7 sharps) is D♭ major (5 flats). Composers usually pick the spelling with fewer signs. Where the two directions meet, the line of fifths bends into a circle: the circle of fifths, which the Harmony section will use to relate keys and chords.")}
       </p>
 
       <H2>{tx(t, "musMaj_transTitle", "Transposing a melody")}</H2>

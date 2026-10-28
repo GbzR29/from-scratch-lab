@@ -48,6 +48,7 @@ import musicTuning from "./musicTuning";
 import musicIntervals from "./musicIntervals";
 import musicScales from "./musicScales";
 import musicMinor from "./musicMinor";
+import musicPlaying from "./musicPlaying";
 import ocean from "./ocean";
 import pbr from "./pbr";
 import perf from "./perf";
@@ -78,6 +79,6 @@ import vulkan from "./vulkan";
 import sdl3 from "./sdl3";
 import water from "./water";
 
-const bundle: Record<string, string> = { ...advgl, ...ai, ...aiNeural, ...aiDeep, ...aiRl, ...asm, ...asmFlow, ...asmC, ...asmPerf, ...chemistry, ...advlighting, ...blackhole, ...cLang, ...cppLang, ...cppOwn, ...cppObj, ...cppGen, ...cppStd, ...cppSys, ...figures, ...fire, ...fog, ...gamedev, ...gems, ...glass, ...glintro, ...glsl, ...lighting, ...markov, ...math, ...mathAlgebra, ...mathGeometry, ...mathTrig, ...mathLinAlg, ...mathCalculus, ...mathProbability, ...mathPractice, ...mathTricks, ...mathCombinatorics, ...mathLogic, ...mathDiscrete, ...mathAnalysis, ...music, ...musicScore, ...musicTuning, ...musicIntervals, ...musicScales, ...musicMinor, ...ocean, ...pbr, ...perf, ...physics, ...physicsDyn, ...physicsCons, ...physicsWave, ...physicsHeat, ...physicsElec, ...physicsLight, ...physicsMech, ...physicsRel, ...physicsQuantum, ...physicsQuantum2, ...physicsCosmos, ...pool, ...post, ...practice, ...river, ...rt, ...sdl3, ...shatter, ...sky, ...snow, ...special, ...tech, ...underwater, ...vulkan, ...water };
+const bundle: Record<string, string> = { ...advgl, ...ai, ...aiNeural, ...aiDeep, ...aiRl, ...asm, ...asmFlow, ...asmC, ...asmPerf, ...chemistry, ...advlighting, ...blackhole, ...cLang, ...cppLang, ...cppOwn, ...cppObj, ...cppGen, ...cppStd, ...cppSys, ...figures, ...fire, ...fog, ...gamedev, ...gems, ...glass, ...glintro, ...glsl, ...lighting, ...markov, ...math, ...mathAlgebra, ...mathGeometry, ...mathTrig, ...mathLinAlg, ...mathCalculus, ...mathProbability, ...mathPractice, ...mathTricks, ...mathCombinatorics, ...mathLogic, ...mathDiscrete, ...mathAnalysis, ...music, ...musicScore, ...musicTuning, ...musicIntervals, ...musicScales, ...musicMinor, ...musicPlaying, ...ocean, ...pbr, ...perf, ...physics, ...physicsDyn, ...physicsCons, ...physicsWave, ...physicsHeat, ...physicsElec, ...physicsLight, ...physicsMech, ...physicsRel, ...physicsQuantum, ...physicsQuantum2, ...physicsCosmos, ...pool, ...post, ...practice, ...river, ...rt, ...sdl3, ...shatter, ...sky, ...snow, ...special, ...tech, ...underwater, ...vulkan, ...water };
 
 export default bundle;

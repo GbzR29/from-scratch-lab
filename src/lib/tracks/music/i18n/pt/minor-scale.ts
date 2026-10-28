@@ -63,7 +63,7 @@ const text: Record<string, string> = {
 
   musMin_harmTitle: "A sensível que falta: menor harmônica",
   musMin_harmBody: "Na escala maior, o grau 7 fica um semitom abaixo da tônica e se inclina para ela: o si puxa para o dó. Esse puxão é o que faz uma melodia parecer ter chegado em casa. A menor natural o perdeu: a sua 7ª, sol em lá menor, fica um tom abaixo da tônica, a subtônica, e o final soa macio e aberto. Há séculos os músicos em tonalidades menores simplesmente sobem a 7ª um semitom quando querem uma chegada forte: sol♯ em lá menor. A escala com essa 7ª elevada é a menor harmônica, chamada assim porque dá aos acordes (a harmonia) da tonalidade a sua sensível, que a seção Harmonia vai precisar.",
-  musMin_aug2: "O preço é um espaço novo. O grau 6 ficou onde estava, fá, então de fá a sol♯ agora há três semitons: um tom e meio, uma segunda aumentada (capítulo 13: as mesmas teclas de uma terça menor, mas entre letras vizinhas). Os passos da menor harmônica são 2 1 2 2 1 3 1. Esse espaço tem um som próprio, que muitos ouvintes acham exótico; o mesmo tom e meio é central no maqam Hijaz árabe e no modo freygish da música klezmer.",
+  musMin_aug2: "O preço é um espaço novo. O grau 6 ficou onde estava, fá, então de fá a sol♯ agora há três semitons: um tom e meio, uma segunda aumentada (capítulo 14: as mesmas teclas de uma terça menor, mas entre letras vizinhas). Os passos da menor harmônica são 2 1 2 2 1 3 1. Esse espaço tem um som próprio, que muitos ouvintes acham exótico; o mesmo tom e meio é central no maqam Hijaz árabe e no modo freygish da música klezmer.",
   musMin_written: "A 7ª elevada não entra na armadura. A armadura de lá menor continua vazia e todo sol♯ é escrito como acidente, toda vez; dó menor mantém três bemóis e escreve si♮. A armadura é sempre a da menor natural, a que divide as notas com a relativa maior. Isso dá a pista que a seção anterior prometeu: uma peça com um sustenido na armadura e muitos ré♯ está em mi menor, porque ré♯ é a sensível de mi; sem nenhum ré♯ ela provavelmente está em sol maior.",
 
   musMin_melTitle: "Alisando o espaço: menor melódica",
@@ -76,7 +76,7 @@ const text: Record<string, string> = {
   musMin_eqFormsWords: "As três menores dividem os cinco primeiros graus, com a terça menor; só diferem no jeito de chegar à oitava.",
 
   musMin_spellTitle: "Soletrando qualquer grau de qualquer tonalidade menor",
-  musMin_spellBody: "A linha de quintas soletra as escalas menores tão fácil quanto a maior. Os graus da menor natural ficam em lugares fixos em volta da tônica: a 3ª, a 6ª e a 7ª à esquerda dela, do lado dos bemóis. Elevar uma nota um semitom sem mudar a letra (sol para sol♯) é um salto de sete lugares para a direita: sete quintas acima são quatro oitavas mais aquele semitom cromático (capítulo 11), e a letra volta a ela mesma porque 4 × 7 é múltiplo de 7.",
+  musMin_spellBody: "A linha de quintas soletra as escalas menores tão fácil quanto a maior. Os graus da menor natural ficam em lugares fixos em volta da tônica: a 3ª, a 6ª e a 7ª à esquerda dela, do lado dos bemóis. Elevar uma nota um semitom sem mudar a letra (sol para sol♯) é um salto de sete lugares para a direita: sete quintas acima são quatro oitavas mais aquele semitom cromático (capítulo 12), e a letra volta a ela mesma porque 4 × 7 é múltiplo de 7.",
   musMin_liveDeg: "Experimente: qualquer grau de qualquer tonalidade menor",
   musMin_liveR: "tônica (r)",
   musMin_liveK: "grau (k)",
@@ -108,7 +108,7 @@ const text: Record<string, string> = {
   musMin_practTitle: "Prática",
   musMin_practBody: "Primeiro aprenda a ouvir maior contra menor: escute a terceira nota da escala. Depois acrescente o tom e meio da menor harmônica perto do alto, e por fim a menor melódica, que soa maior em cima e menor embaixo. No papel, pratique achar a tonalidade menor de uma armadura e a relativa de qualquer tonalidade, nos dois sentidos.",
 
-  musMin_next: "A menor natural são as notas da escala maior começadas no grau 6. Nada impede começar nos outros graus também: do ré nas teclas brancas, do mi, do sol… Cada um dá uma escala com o seu padrão de passos e a sua cor, e esses são os modos, dórico, frígio, lídio e os outros, ainda ouvidos na música folclórica, no jazz e em trilhas de cinema. O próximo capítulo monta os sete, e depois tira notas para chegar à escala pentatônica de cinco notas, a que as teclas pretas vêm tocando desde o capítulo 9.",
+  musMin_next: "A menor natural são as notas da escala maior começadas no grau 6. Nada impede começar nos outros graus também: do ré nas teclas brancas, do mi, do sol… Cada um dá uma escala com o seu padrão de passos e a sua cor, e esses são os modos, dórico, frígio, lídio e os outros, ainda ouvidos na música folclórica, no jazz e em trilhas de cinema. O próximo capítulo monta os sete, e depois tira notas para chegar à escala pentatônica de cinco notas, a que as teclas pretas vêm tocando desde o capítulo 10.",
 
   musMin_key0: "A menor natural são as notas da escala maior a partir do grau 6: passos tom, semitom, tom, tom, semitom, tom, tom (2 1 2 2 1 2 2), tamanhos 0 2 3 5 7 8 10 a partir da tônica.",
   musMin_key1: "Comparados com a escala maior da mesma tônica, os graus 3, 6 e 7 são um semitom mais baixos; a terça menor acima da tônica dá à tonalidade o seu nome e a sua cor mais escura.",
