@@ -87,6 +87,15 @@ const approxNumbers = (t: TrackTranslations) => (v: Record<string, number>) => {
   };
 };
 
+function betaNumbers(v: Record<string, number>) {
+  const { a, b, p } = v;
+  const B = (fact(a - 1) * fact(b - 1)) / fact(a + b - 1);
+  const k = p ** (a - 1) * (1 - p) ** (b - 1), f = k / B;
+  return {
+    tex: r`f(${num(p)}) = \frac{${num(p)}^{${a - 1}} \cdot ${num(1 - p)}^{${b - 1}}}{${num(B)}} = \green{${num(f)}} \qquad E[p] = \frac{${a}}{${a + b}} \approx ${num(a / (a + b))}`,
+  };
+}
+
 export function DistributionsContent({ t }: { t: TrackTranslations }) {
   return (
     <Article>
@@ -100,6 +109,7 @@ export function DistributionsContent({ t }: { t: TrackTranslations }) {
         "Compute probabilities with the binomial, geometric and Poisson distributions.",
         "Use the uniform and exponential distributions for continuous waiting times.",
         "Work with the normal distribution.",
+        "Describe an unknown probability with the beta distribution.",
       ]} />
 
       <H2>{tx(t, "mDist_binTitle", "Bernoulli and binomial: successes in n trials")}</H2>
@@ -363,6 +373,41 @@ export function DistributionsContent({ t }: { t: TrackTranslations }) {
         {tx(t, "mDist_normWarn", "Not everything is normal. Waiting times, incomes and city sizes are strongly lopsided, and a normal model would give negative waits or badly underestimate the chance of extreme values. Check the story, or plot the data, before reaching for the bell.")}
       </Callout>
 
+      <H2>{tx(t, "mDist_betaTitle", "The beta distribution: a density for a probability")}</H2>
+      <p>
+        {tx(t, "mDist_betaBody",
+          "Sometimes the unknown quantity is itself a probability: the chance p that a coin lands heads, the hit rate of a player. Its possible values fill the interval from 0 to 1, so it needs a density on [0, 1]. The beta family is the standard choice. Its shape is set by two numbers a and b, and it reads like a record of evidence: a − 1 successes and b − 1 failures seen so far. Beta(1, 1) has seen nothing and is flat, the uniform on [0, 1]; Beta(8, 4) leans towards 2/3 and is narrow.")}
+      </p>
+      <Equation label={tx(t, "mDist_eqBeta", "The beta density")}
+        where={[
+          [r`p`, tx(t, "mDist_wBp", "the unknown probability, a number between 0 and 1")],
+          [r`a,\ b`, tx(t, "mDist_wBab", "the two shape numbers, both positive; a pulls the weight towards 1, b towards 0")],
+          [r`p^{a-1}(1-p)^{b-1}`, tx(t, "mDist_wBker", "the kernel: the only part that depends on p. It decides the shape")],
+          [r`B(a, b)`, tx(t, "mDist_wBB", "the beta function: the area under the kernel, the constant that makes the total area 1. For whole numbers, B(a, b) = (a − 1)!(b − 1)!/(a + b − 1)!")],
+        ]}
+        words={tx(t, "mDist_betaWords", "The density is the kernel divided by its own area. The mean is a/(a + b): the successes' share of all the evidence.")}
+        note={tx(t, "mDist_betaNote", "Writing f(p) ∝ p^(a−1)(1 − p)^(b−1) (\"proportional to\") keeps only the kernel. That is enough for comparing two values of p, because the constant cancels in any ratio f(p₁)/f(p₂). Bayesian calculations use this all the time: see the Metropolis chapter.")}>
+        {r`f(p) = \frac{p^{a-1}(1-p)^{b-1}}{B(a, b)}, \qquad 0 \le p \le 1, \qquad E[p] = \frac{a}{a + b}`}
+      </Equation>
+      <Derivation t={t} label={tx(t, "mDist_betaDer", "Beta(3, 2): the constant and the mean")}
+        steps={[
+          { tex: r`\int_0^1 p^2(1-p)\,dp = \int_0^1 (p^2 - p^3)\,dp = \tfrac13 - \tfrac14 = \tfrac{1}{12}`, full: true, why: tx(t, "mDist_bb1", "the kernel of Beta(3, 2) is p²(1 − p); its area is found by expanding and integrating term by term") },
+          { tex: r`B(3, 2) = \frac{2!\,1!}{4!} = \frac{2}{24} = \frac{1}{12} \qquad f(p) = 12\,p^2(1-p)`, full: true, why: tx(t, "mDist_bb2", "the factorial formula gives the same area, so the density is the kernel times 12") },
+          { tex: r`E[p] = \int_0^1 p \cdot 12\,p^2(1-p)\,dp = 12\left(\tfrac14 - \tfrac15\right) = \tfrac{12}{20} = \tfrac35`, full: true, why: tx(t, "mDist_bb3", "the mean of a continuous variable is ∫ x f(x) dx; and 3/5 is a/(a + b) = 3/(3 + 2), as the formula says") },
+        ]} />
+      <LiveFormula label={tx(t, "mDist_liveBeta", "Try it: the beta density at a point")}
+        tex={r`f(p) = \frac{p^{a-1}(1-p)^{b-1}}{B(a, b)}`}
+        vars={[
+          { id: "a", label: "a", min: 1, max: 12, step: 1, value: 3, fmt: v => String(v) },
+          { id: "b", label: "b", min: 1, max: 12, step: 1, value: 2, fmt: v => String(v) },
+          { id: "p", label: "p", min: 0, max: 1, step: 0.05, value: 0.5, fmt: v => v.toFixed(2) },
+        ]}
+        compute={betaNumbers}
+        note={tx(t, "mDist_liveBetaNote", "a = b = 1 gives 1 everywhere: the uniform. Raise a and b together and the density narrows around the same mean, the way more evidence makes you surer.")} />
+      <Callout type="tip" t={t}>
+        {tx(t, "mDist_betaTip", "A beta prior combined with binomial data gives a beta posterior again: Beta(a, b) and y successes in n trials give Beta(a + y, b + n − y). It is a useful check on a numerical answer, though exercises often ask you to get there another way.")}
+      </Callout>
+
       <H2>{tx(t, "mDist_sumTitle", "Summary")}</H2>
       <LessonTable
         headers={[tx(t, "mDist_tName", "distribution"), tx(t, "mDist_tStory", "story"), tx(t, "mDist_tForm", "P(X = k) or f(x)"), tx(t, "mDist_tMean", "mean"), tx(t, "mDist_tVar", "variance")]}
@@ -374,6 +419,7 @@ export function DistributionsContent({ t }: { t: TrackTranslations }) {
           ["Uniform(a, b)", tx(t, "mDist_sUnif", "no point favoured"), "1/(b − a)", "(a + b)/2", "(b − a)²/12"],
           ["Exponential(λ)", tx(t, "mDist_sExp", "time until the next event"), "λe^(−λx)", "1/λ", "1/λ²"],
           ["Normal(μ, σ²)", tx(t, "mDist_sNorm", "sum of many small effects"), "e^(−(x − μ)²/2σ²)/(σ√(2π))", "μ", "σ²"],
+          ["Beta(a, b)", tx(t, "mDist_sBeta", "an unknown probability"), "pᵃ⁻¹(1 − p)ᵇ⁻¹/B(a, b)", "a/(a + b)", "ab/((a + b)²(a + b + 1))"],
         ]}
       />
 
@@ -406,6 +452,7 @@ export function DistributionsContent({ t }: { t: TrackTranslations }) {
         "Normal(μ, σ²): the bell; standardise with z = (x − μ)/σ and read Φ from a table.",
         "68–95–99.7% of a normal lies within 1, 2, 3 standard deviations of the mean.",
         "A binomial with large np(1 − p) is nearly normal; use the continuity correction of ½.",
+        "Beta(a, b): a density for a probability, f(p) ∝ pᵃ⁻¹(1 − p)ᵇ⁻¹, mean a/(a + b).",
       ]} />
     </Article>
   );

@@ -917,7 +917,7 @@
   },
   "math/distributions": {
     "created": "2026-09-26",
-    "updated": "2026-10-09"
+    "updated": "2026-11-03"
   },
   "math/sampling": {
     "created": "2026-09-26",
@@ -934,6 +934,22 @@
   "math/absorbing-chains": {
     "created": "2026-10-09",
     "updated": "2026-10-09"
+  },
+  "math/chains-with-memory": {
+    "created": "2026-11-03",
+    "updated": "2026-11-03"
+  },
+  "math/bayes-metropolis": {
+    "created": "2026-11-03",
+    "updated": "2026-11-03"
+  },
+  "math/queues": {
+    "created": "2026-11-03",
+    "updated": "2026-11-03"
+  },
+  "math/discretizing-processes": {
+    "created": "2026-11-03",
+    "updated": "2026-11-03"
   },
   "math/graphs-intro": {
     "created": "2026-10-17",

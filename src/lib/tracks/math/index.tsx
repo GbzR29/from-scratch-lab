@@ -112,6 +112,10 @@ const chapters: Chapter[] = [
   { id: "regression",        section: PROBABILITY, title: "Correlation & Linear Regression", minRead: 21, load: () => import("./chapters/regression").then((m) => m.RegressionContent) },
   { id: "markov-chains",     section: PROBABILITY, title: "Markov Chains",                   minRead: 34, load: () => import("./chapters/markov-chains").then((m) => m.MarkovChainsContent) },
   { id: "absorbing-chains",  section: PROBABILITY, title: "Absorbing Chains & Hitting Times", minRead: 38, load: () => import("./chapters/absorbing-chains").then((m) => m.AbsorbingChainsContent) },
+  { id: "chains-with-memory", section: PROBABILITY, title: "Chains with Memory: Choosing the States", minRead: 18, load: () => import("./chapters/chains-with-memory").then((m) => m.ChainsWithMemoryContent) },
+  { id: "bayes-metropolis",  section: PROBABILITY, title: "Bayes on a Grid & the Metropolis Algorithm", minRead: 22, load: () => import("./chapters/bayes-metropolis").then((m) => m.BayesMetropolisContent) },
+  { id: "queues",            section: PROBABILITY, title: "Queues as Markov Chains",         minRead: 24, load: () => import("./chapters/queues").then((m) => m.QueuesContent) },
+  { id: "discretizing-processes", section: PROBABILITY, title: "From a Continuous Process to a Chain: the AR(1)", minRead: 20, load: () => import("./chapters/discretizing-processes").then((m) => m.DiscretizingProcessesContent) },
 
   { id: "graphs-intro",    section: DISCRETE, title: "Graphs: Vertices, Edges & Degrees",  minRead: 21, load: () => import("./chapters/graphs-intro").then((m) => m.GraphsIntroContent) },
   { id: "euler-paths",     section: DISCRETE, title: "Euler & Hamilton: One-Stroke Routes", minRead: 20, load: () => import("./chapters/euler-paths").then((m) => m.EulerPathsContent) },
@@ -215,6 +219,10 @@ const requires: Record<string, string[]> = {
   "regression":        ["descriptive-stats", "partial-derivatives", "dot"],
   "markov-chains":     ["conditional", "random-variables", "matrices", "sequences"],
   "absorbing-chains":  ["markov-chains", "expectation", "inverse"],
+  "chains-with-memory": ["markov-chains", "absorbing-chains"],
+  "bayes-metropolis":  ["conditional", "distributions", "markov-chains"],
+  "queues":            ["distributions", "markov-chains"],
+  "discretizing-processes": ["distributions", "markov-chains"],
 
   "graphs-intro":    ["sets", "summation", "combinations", "matrices"],
   "euler-paths":     ["graphs-intro", "proofs"],

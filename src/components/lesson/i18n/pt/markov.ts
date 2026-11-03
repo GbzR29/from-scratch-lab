@@ -396,6 +396,63 @@ const text: Record<string, string> = {
   figMkPat_chainSays: "a cadeia dá",
   figMkPat_play: "lançar a moeda",
   figMkPat_flips: "lançamentos",
+
+  // ── MemoryWalkFigure (2026-11-03) ──
+  figMem_title: "Uma caminhada com memória, tornada markoviana",
+  figMem_one: "lembra o último passo",
+  figMem_two: "lembra dois passos",
+  figMem_posts: "postos N",
+  figMem_r: "continuar → (r)",
+  figMem_l: "continuar ← (l)",
+  figMem_s: "continuar após iguais (s)",
+  figMem_q: "continuar após virada (q)",
+  figMem_states: "estados",
+  figMem_play: "deixar o caminhante andar",
+  figMem_steps: "passos",
+  figMem_fast: "rápido",
+  figMem_note: "As barras são a fração exata de longo prazo do tempo em cada posto: o π da cadeia aumentada, com os estados de cada posto somados. Os pontos são o que o caminhante fez de fato até agora; deixe-o andar (o botão rápido dá 200 passos de cada vez) e eles assentam nas barras. As etiquetas embaixo do corredor são os estados que podem ocorrer: o posto, depois o sentido do último passo e, no modo de dois passos, o sentido do passo anterior. Nas pontas só um sentido pode chegar, e por isso há menos estados que postos × sentidos. Ponha r = l, ou s = q, e veja o que não muda.",
+
+  // ── MetropolisFigure (2026-11-03) ──
+  figMet_title: "Metropolis numa grade",
+  figMet_K: "pontos da grade",
+  figMet_n: "tentativas n",
+  figMet_y: "sucessos y",
+  figMet_a: "priori a",
+  figMet_b: "priori b",
+  figMet_data: "dados",
+  figMet_chain: "cadeia",
+  figMet_acc: "aceitas",
+  figMet_play: "rodar a cadeia",
+  figMet_steps: "passos",
+  figMet_fast: "rápido",
+  figMet_note: "g(p) = p^(a−1+y) (1 − p)^(b−1+n−y) é o núcleo da priori vezes a verossimilhança; a cadeia só usa razões de g. As barras são a distribuição estacionária da cadeia, obtida resolvendo πP = π (exatamente, em frações, para até 9 pontos): é a posteriori na grade, sem nunca dividir g pela sua soma. Aperte play: o caminhante propõe um vizinho, uma seta verde é um movimento aceito, uma vermelha uma rejeição (ele fica e aquele ponto é contado de novo). Subidas são sempre aceitas; descidas só às vezes. Use o rápido e veja os pontos assentarem nas barras.",
+
+  // ── QueueFigure (2026-11-03) ──
+  figQue_title: "Uma fila como cadeia de Markov",
+  figQue_lam: "chegadas λ /min",
+  figQue_svc: "atendimento médio (min)",
+  figQue_c: "atendentes c",
+  figQue_K: "capacidade K",
+  figQue_fullQ: "chegada + saída com o sistema cheio:",
+  figQue_stay: "o recém-chegado ocupa o lugar",
+  figQue_drop: "o recém-chegado é perdido",
+  figQue_chain: "cadeia, h =",
+  figQue_exact: "exato (h → 0)",
+  figQue_play: "rodar a fila",
+  figQue_stepNote: "⏭ = um minuto",
+  figQue_note: "Barras: a distribuição estacionária da cadeia, π(n) = probabilidade de n clientes no sistema. Pontos: a resposta exata em tempo contínuo. W e Wq saem da lei de Little com as chegadas que entram, λ(1 − π(K)). Diminua h e as barras vão para cima dos pontos. A escolha embaixo dos controles é a única convenção que a discretização deixa em aberto: com o sistema cheio, se uma chegada e uma saída caem no mesmo intervalo, o recém-chegado ocupa o lugar liberado ou já tinha sido recusado? Isso importa cada vez menos à medida que h diminui. Aperte play para ver a cadeia rodar, um minuto simulado por segundo.",
+
+  // ── DiscretizeFigure (2026-11-03) ──
+  figDisc_title: "Um processo AR(1) como cadeia de Markov",
+  figDisc_range: "pontos até ±",
+  figDisc_k: "passos k",
+  figDisc_x0: "início x₀",
+  figDisc_c: "limiar c",
+  figDisc_states: "estados",
+  figDisc_chain: "cadeia",
+  figDisc_exact: "exato",
+  figDisc_var: "variância estacionária",
+  figDisc_note: "Barras azuis: o π da cadeia dividido pela largura da faixa, para poder comparar com uma densidade; as duas faixas de fora, que vão até ±∞, aparecem como blocos hachurados da sua probabilidade. Curva âmbar: a densidade estacionária exata. Diminua w e aumente o alcance, e as barras seguem a curva; com w = 1/11 e pontos até ±6 a cadeia tem 133 estados, resolvidos aqui num instante. A segunda linha de números responde a uma pergunta de k passos dos dois jeitos: a cadeia multiplica a linha de partida por P k vezes; a resposta exata usa X(n+k) | x₀ ~ N(φᵏx₀, σ²(1 − φ²ᵏ)/(1 − φ²)).",
 };
 
 export default text;

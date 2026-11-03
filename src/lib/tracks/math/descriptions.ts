@@ -352,6 +352,22 @@ export const mathDescriptions: LessonDescriptions = {
     en: "Absorbing Markov chains and hitting times: the fundamental matrix N = (I − Q)⁻¹, expected time to absorption, absorption probabilities, coin-flip patterns.",
     pt: "Cadeias de Markov absorventes e tempos de chegada: a matriz fundamental N = (I − Q)⁻¹, tempo esperado até a absorção, probabilidades e padrões de moedas.",
   },
+  "chains-with-memory": {
+    en: "Markov chains with memory: when the obvious states are not Markov, enlarge the state (position and direction, last two days), build P, solve πP = π and add states back up.",
+    pt: "Cadeias de Markov com memória: quando os estados óbvios não são markovianos, aumente o estado (posição e direção, os dois últimos dias), monte P, resolva πP = π e some os estados.",
+  },
+  "bayes-metropolis": {
+    en: "Bayesian estimation of a probability on a grid and the Metropolis algorithm: prior × likelihood, the transition matrix with neighbour proposals, detailed balance, posterior mean.",
+    pt: "Estimação bayesiana de uma probabilidade numa grade e o algoritmo de Metropolis: priori × verossimilhança, matriz de transição com vizinhos, balanço detalhado, média a posteriori.",
+  },
+  queues: {
+    en: "Queues as Markov chains: Poisson arrivals in short intervals, exponential service, the M/M/c/K chain, birth–death solution, L, Lq, W, Wq and Little's law.",
+    pt: "Filas como cadeias de Markov: chegadas de Poisson em intervalos curtos, atendimento exponencial, a cadeia M/M/c/K, solução de nascimento e morte, L, Lq, W, Wq e a lei de Little.",
+  },
+  "discretizing-processes": {
+    en: "The Gaussian AR(1) process as a Markov chain: stationary distribution σ²/(1 − φ²), k-step laws, bands and representative points, and solving large chains.",
+    pt: "O processo AR(1) gaussiano como cadeia de Markov: distribuição estacionária σ²/(1 − φ²), k passos à frente, faixas e pontos representativos, e cadeias grandes.",
+  },
   "graphs-intro": {
     en: "Graph theory basics: vertices, edges and degrees, the handshake lemma, complete, bipartite and regular graphs, isomorphism, and the adjacency matrix.",
     pt: "Teoria dos grafos: vértices, arestas e graus, o lema do aperto de mãos, grafos completos, bipartidos e regulares, isomorfismo e matriz de adjacência.",

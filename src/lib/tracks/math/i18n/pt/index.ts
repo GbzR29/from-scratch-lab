@@ -96,6 +96,10 @@ import sampling from "./sampling";
 import regression from "./regression";
 import markovChains from "./markov-chains";
 import absorbingChains from "./absorbing-chains";
+import chainsWithMemory from "./chains-with-memory";
+import bayesMetropolis from "./bayes-metropolis";
+import queues from "./queues";
+import discretizingProcesses from "./discretizing-processes";
 // ── Discrete Mathematics ──
 import graphsIntro from "./graphs-intro";
 import eulerPaths from "./euler-paths";
@@ -113,7 +117,7 @@ const bundle: LessonText = {
     ...vectors, ...matrices, ...determinant, ...inverse, ...eigen, ...complex, ...quaternions,
     ...limits, ...derivatives, ...derivativeRules, ...derivativeUses, ...integrals, ...ftc, ...integrationTechniques, ...series, ...partialDerivatives, ...multipleIntegrals, ...differentialEquations, ...vectorFields, ...lineIntegrals, ...greenStokes, ...fourier, ...calculusOfVariations, ...pde,
     ...counting, ...permutations, ...arrangements, ...combinations, ...countingAdvanced, ...countingTricks,
-    ...descriptiveStats, ...probability, ...conditional, ...randomVariables, ...expectation, ...distributions, ...sampling, ...regression, ...markovChains, ...absorbingChains,
+    ...descriptiveStats, ...probability, ...conditional, ...randomVariables, ...expectation, ...distributions, ...sampling, ...regression, ...markovChains, ...absorbingChains, ...chainsWithMemory, ...bayesMetropolis, ...queues, ...discretizingProcesses,
     ...graphsIntro, ...eulerPaths, ...treesMath, ...planarColoring, ...recurrences,
   },
   titles: track.titles,

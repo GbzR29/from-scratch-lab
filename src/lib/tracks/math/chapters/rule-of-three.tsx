@@ -61,7 +61,7 @@ export function RuleOfThreeContent({ t }: { t: TrackTranslations }) {
         ]}
         words={tx(t, "mR3_directWords", "In a direct rule of three, each column changes by the same factor: the ratio down one column equals the ratio down the other. Cross-multiply and divide by the number facing x.")}
         note={tx(t, "mR3_eqDirectNote", "The fuel question with km as the first column: a = 75 km goes with b = 6 L, and c = 200 km goes with x litres. 75/200 = 6/x, so 75x = 6 · 200 = 1200 and x = 1200/75 = 16 L.")}>
-        {r`\frac{\sym{a}{a}}{\sym{c}{c}} = \frac{\sym{b}{b}}{\sym{x}{x}} \;\Rightarrow\; a\,x = b\,c \;\Rightarrow\; x = \frac{b\,c}{a}`}
+        {r`\frac{a}{c} = \frac{b}{x} \;\Rightarrow\; a\,x = b\,c \;\Rightarrow\; x = \frac{b\,c}{a}`}
       </Equation>
       <Derivation t={t} label={tx(t, "mR3_derUnit", "Why cross-multiplying gives the same as the unit rate")}
         steps={[
@@ -105,7 +105,7 @@ export function RuleOfThreeContent({ t }: { t: TrackTranslations }) {
         ]}
         words={tx(t, "mR3_invWords", "In an inverse rule of three the product stays the same, so the ratio of the x column equals the other ratio upside down. Equivalently: multiply the known pair, divide by the new value.")}
         note={tx(t, "mR3_eqInverseNote", "Check every inverse answer by multiplying: 60 × 4 and 80 × 3 must both give the same 240. If you had cross-multiplied without flipping, you would get x = 80 · 4/60 ≈ 5.3 h: going faster and arriving later, which the doubling test rules out at once.")}>
-        {r`\frac{\sym{b}{b}}{\sym{x}{x}} = \frac{\sym{c}{c}}{\sym{a}{a}} \;\Rightarrow\; a\,b = c\,x \;\Rightarrow\; x = \frac{a\,b}{c}`}
+        {r`\frac{b}{x} = \frac{c}{a} \;\Rightarrow\; a\,b = c\,x \;\Rightarrow\; x = \frac{a\,b}{c}`}
       </Equation>
 
       <H2>{tx(t, "mR3_arrowTitle", "The arrow method")}</H2>
@@ -135,7 +135,7 @@ export function RuleOfThreeContent({ t }: { t: TrackTranslations }) {
         ]}
         words={tx(t, "mR3_compWords", "The ratio of the unknown's column equals the product of all the other ratios, each one flipped if its quantity works against the unknown. Add one factor per quantity; there is no limit.")}
         note={tx(t, "mR3_eqCompoundNote", "With only one p and no q this is the direct rule of three; with only one q, the inverse one. The simple rule is the compound rule with one factor.")}>
-        {r`\frac{\sym{x0}{x_0}}{x} = \frac{\sym{p}{p_0}}{\sym{p}{p_1}} \cdot \frac{\sym{q}{q_1}}{\sym{q}{q_0}} \cdot \ldots`}
+        {r`\frac{x_0}{x} = \frac{p_0}{p_1} \cdot \frac{q_1}{q_0} \cdot \ldots`}
       </Equation>
 
       <H3>{tx(t, "mR3_wallTitle", "With an inverse quantity: the wall")}</H3>
