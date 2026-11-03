@@ -24,6 +24,7 @@ import { coefSum, notable, rationalise, reciprocal, vieta } from "./tricks";
 import { cntAdvanced, cntArr, cntComb, cntFactorial, cntPerm, cntPrinciple } from "./combinatorics";
 import { r3Compound, r3Direct, r3Inverse } from "./ruleofthree";
 import { limConj, limExp, limRational, limRoot } from "./liminf";
+import { bbAbove, bbMean, bbPrior, bbUpdate, mhAlpha, mhCont, mhEntry } from "./bayes";
 import { arStep, arVar, memCorridor, memWeather, metEntry, metMean, mkStat2, mkStat3, mkStatWalk, mkTwoStep, queMM1, queMM2 } from "./stochastic";
 
 export type Kind = { id: string; label: [string, string]; make: Gen };
@@ -166,6 +167,17 @@ export const SETS = {
   metropolis: { title: ["mpr_tMetro", "Practice: Metropolis on a grid"], kinds: [
     { id: "entry", label: ["mpr_kMetEntry", "matrix entries"], make: metEntry },
     { id: "mean", label: ["mpr_kMetMean", "posterior mean"], make: metMean },
+  ] },
+  betaBinomial: { title: ["mpr_tBB", "Practice: beta prior and binomial data"], kinds: [
+    { id: "update", label: ["mpr_kBBUpdate", "update the prior"], make: bbUpdate },
+    { id: "mean", label: ["mpr_kBBMean", "posterior mean"], make: bbMean },
+    { id: "prior", label: ["mpr_kBBPrior", "choose a prior"], make: bbPrior },
+    { id: "above", label: ["mpr_kBBAbove", "P(p > ½)"], make: bbAbove },
+  ] },
+  mh: { title: ["mpr_tMH", "Practice: Metropolis–Hastings"], kinds: [
+    { id: "alpha", label: ["mpr_kMHAlpha", "acceptance α"], make: mhAlpha },
+    { id: "entry", label: ["mpr_kMHEntry", "matrix entries"], make: mhEntry },
+    { id: "cont", label: ["mpr_kMHCont", "continuous p"], make: mhCont },
   ] },
   queues: { title: ["mpr_tQueues", "Practice: queues"], kinds: [
     { id: "mm1", label: ["mpr_kQueMM1", "one server"], make: queMM1 },

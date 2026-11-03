@@ -927,6 +927,10 @@
     "created": "2026-09-26",
     "updated": "2026-10-09"
   },
+  "math/likelihood-beta": {
+    "created": "2026-11-03",
+    "updated": "2026-11-03"
+  },
   "math/regression": {
     "created": "2026-09-26",
     "updated": "2026-10-09"
@@ -944,6 +948,10 @@
     "updated": "2026-11-03"
   },
   "math/bayes-metropolis": {
+    "created": "2026-11-03",
+    "updated": "2026-11-03"
+  },
+  "math/metropolis-hastings": {
     "created": "2026-11-03",
     "updated": "2026-11-03"
   },

@@ -687,6 +687,21 @@ const text: Record<string, string> = {
   figCntR2: "Ordem ignorada: divida por k!, as ordens de cada grupo, para obter C(n, k).",
   figCntR3: "C(n, k) = C(n, n − k): escolher quem vai é escolher quem fica.",
   figCntR4: "Repetição permitida: nᵏ sequências com ordem, C(n + k − 1, k) multiconjuntos sem ordem.",
+
+  // ── BetaBinomialFigure (2026-11-03) ──
+  figBB_title: "Priori × verossimilhança → posteriori",
+  figBB_prior: "priori",
+  figBB_lik: "verossimilhança",
+  figBB_post: "posteriori",
+  figBB_presets: "priori:",
+  figBB_n: "tentativas n",
+  figBB_y: "sucessos y",
+  figBB_priorMean: "média a priori",
+  figBB_strength: "força",
+  figBB_postMean: "média a posteriori",
+  figBB_sd: "dp",
+  figBB_weight: "peso da priori",
+  figBB_note: "Âmbar: o que você acreditava antes dos dados (a priori). Azul tracejado: o quanto cada p explica y sucessos em n tentativas (a verossimilhança, reescalada para área 1). Verde: a posteriori, priori vezes verossimilhança, reescalada. Os triângulos sob o eixo marcam os três centros: a média a posteriori sempre fica entre a média a priori e y/n, à fração w do caminho que vai de y/n até a média a priori. Experimente uma priori firme com poucos dados, depois aumente n mantendo a mesma proporção de sucessos: a priori deixa de importar e a curva verde se estreita sobre y/n.",
 };
 
 export default text;

@@ -37,8 +37,8 @@ export function BayesMetropolisContent({ t }: { t: TrackTranslations }) {
 
       <H2>{tx(t, "mMet_bayesTitle", "Prior, likelihood, posterior")}</H2>
       <p>
-        {tx(t, "mMet_bayesBody",
-          "Before the data we describe what we believe about p with a prior density f(p); a beta distribution is the natural choice for a probability. The data are y successes in n independent trials, whose probability for a given p is the binomial likelihood. Bayes' theorem combines the two exactly as it did for events: the new weight of each value is its old weight times how well it explains the data, divided by the total.")}
+        {tx(t, "mMet_bayesRecap",
+          "A short recap of the Likelihood, Beta Priors & Bayesian Updating chapter, which builds each piece slowly. Before the data, a prior density f(p), here a beta, says what we believe about p. The data are y successes in n independent trials; their probability, read as a function of p, is the likelihood. Bayes' rule multiplies the two and rescales: the new weight of each value is its old weight times how well it explains the data, divided by the total.")}
       </p>
       <Equation label={tx(t, "mMet_eqBayes", "Bayes' theorem for a probability p")}
         where={[
@@ -102,7 +102,7 @@ export function BayesMetropolisContent({ t }: { t: TrackTranslations }) {
           [r`P_{ii}`, tx(t, "mMet_wPii", "staying: everything left over, so the row adds up to 1. It includes rejected proposals and proposals off the grid")],
         ]}
         words={tx(t, "mMet_pWords", "Moving to a neighbour = proposing it (½) and accepting it (the ratio, capped at 1). Every other move has probability 0; staying gets what is left.")}
-        note={tx(t, "mMet_pNote", "At an end of the grid the proposal off the grid still has its ½; it turns into staying. Do not replace it by always proposing the inside neighbour: that would make proposals unequal and the chain would no longer target g.")}>
+        note={tx(t, "mMet_pNote2", "At an end of the grid the proposal off the grid still has its ½; it turns into staying. Do not replace it by always proposing the inside neighbour: that would make proposals unequal and, with this acceptance rule, the chain would no longer target g. The Metropolis–Hastings chapter shows the extra factor that repairs uneven proposals.")}>
         {r`P_{ij} = \tfrac12 \min\!\left(1, \frac{g_j}{g_i}\right) \ \ (j = i \pm 1), \qquad P_{ii} = 1 - \sum_{j \ne i} P_{ij}`}
       </Equation>
       <H3>{tx(t, "mMet_ftTitle", "The free-throw chain")}</H3>
@@ -150,8 +150,8 @@ export function BayesMetropolisContent({ t }: { t: TrackTranslations }) {
 
       <H2>{tx(t, "mMet_runTitle", "Running the chain instead of solving it")}</H2>
       <p>
-        {tx(t, "mMet_runBody",
-          "For a big problem nobody writes P down. The chain is simulated: start anywhere, take many steps, and average whatever you want over the values visited. The long-run average of a Markov chain equals the average under π (the ergodic result of the Markov-chains chapter), so the average of the visited p tends to the posterior mean. Three practical points. The first steps still remember the starting point, so they are usually thrown away (burn-in). Successive values are correlated, so 10 000 steps carry less information than 10 000 independent draws. And the acceptance rate tells you about the step size: proposals that are almost always accepted are too timid, and proposals that are almost never accepted go too far. For a continuous p the proposal is p′ = p + a small random step, accepted with the same min(1, g(p′)/g(p)), where g is 0 outside [0, 1].")}
+        {tx(t, "mMet_runBody2",
+          "For a big problem nobody writes P down. The chain is simulated: start anywhere, take many steps, and average whatever you want over the values visited. The long-run average of a Markov chain equals the average under π (the ergodic result of the Markov-chains chapter), so the average of the visited p tends to the posterior mean. Running a chain well (a continuous p, uneven proposals, burn-in, step size and acceptance rate) is the subject of the Metropolis–Hastings chapter.")}
       </p>
 
       <H2>{tx(t, "mMet_recipeTitle", "Solving a Metropolis exercise, step by step")}</H2>
@@ -185,6 +185,8 @@ export function BayesMetropolisContent({ t }: { t: TrackTranslations }) {
         { track: "Math", id: "conditional", title: tx(t, "mMet_rel1", "Conditional Probability & Bayes"), why: tx(t, "mMet_rel1b", "Bayes' theorem for events, which this chapter extends to a whole distribution.") },
         { track: "Math", id: "distributions", title: tx(t, "mMet_rel2", "Common Distributions"), why: tx(t, "mMet_rel2b", "the beta distribution and its kernel.") },
         { track: "Math", id: "markov-chains", title: tx(t, "mMet_rel3", "Markov Chains"), why: tx(t, "mMet_rel3b", "detailed balance, πP = π and long-run averages.") },
+        { track: "Math", id: "likelihood-beta", title: tx(t, "mMet_rel4", "Likelihood, Beta Priors & Bayesian Updating"), why: tx(t, "mMet_rel4b", "the likelihood, the beta prior and the exact beta posterior, built step by step.") },
+        { track: "Math", id: "metropolis-hastings", title: tx(t, "mMet_rel5", "The Metropolis–Hastings Algorithm"), why: tx(t, "mMet_rel5b", "uneven proposals, a continuous p, burn-in and tuning.") },
       ]} />
 
       <KeyIdeas t={t} id="mMet" items={[

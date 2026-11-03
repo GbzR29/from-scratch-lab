@@ -99,6 +99,8 @@ import markovChains from "./markov-chains";
 import absorbingChains from "./absorbing-chains";
 import chainsWithMemory from "./chains-with-memory";
 import bayesMetropolis from "./bayes-metropolis";
+import likelihoodBeta from "./likelihood-beta";
+import metropolisHastings from "./metropolis-hastings";
 import queues from "./queues";
 import discretizingProcesses from "./discretizing-processes";
 // ── Discrete Mathematics ──
@@ -118,7 +120,7 @@ const bundle: LessonText = {
     ...vectors, ...matrices, ...determinant, ...inverse, ...eigen, ...complex, ...quaternions,
     ...limits, ...limitsAtInfinity, ...derivatives, ...derivativeRules, ...derivativeUses, ...integrals, ...ftc, ...integrationTechniques, ...series, ...partialDerivatives, ...multipleIntegrals, ...differentialEquations, ...vectorFields, ...lineIntegrals, ...greenStokes, ...fourier, ...calculusOfVariations, ...pde,
     ...counting, ...permutations, ...arrangements, ...combinations, ...countingAdvanced, ...countingTricks,
-    ...descriptiveStats, ...probability, ...conditional, ...randomVariables, ...expectation, ...distributions, ...sampling, ...regression, ...markovChains, ...absorbingChains, ...chainsWithMemory, ...bayesMetropolis, ...queues, ...discretizingProcesses,
+    ...descriptiveStats, ...probability, ...conditional, ...randomVariables, ...expectation, ...distributions, ...sampling, ...likelihoodBeta, ...regression, ...markovChains, ...absorbingChains, ...chainsWithMemory, ...bayesMetropolis, ...metropolisHastings, ...queues, ...discretizingProcesses,
     ...graphsIntro, ...eulerPaths, ...treesMath, ...planarColoring, ...recurrences,
   },
   titles: track.titles,

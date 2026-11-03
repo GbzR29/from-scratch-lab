@@ -344,6 +344,10 @@ export const mathDescriptions: LessonDescriptions = {
     en: "Sampling and statistical inference: the law of large numbers, the central limit theorem, confidence intervals, and hypothesis tests with p-values.",
     pt: "Amostragem e inferência estatística: lei dos grandes números, teorema central do limite, intervalos de confiança e testes de hipótese com valor-p.",
   },
+  "likelihood-beta": {
+    en: "Bayesian inference for a probability step by step: building the binomial likelihood, the maximum at y/n, choosing a beta prior, the beta–binomial posterior, its mean and P(p > ½).",
+    pt: "Inferência bayesiana de uma probabilidade passo a passo: montar a verossimilhança binomial, o máximo em y/n, escolher a priori beta, a posteriori beta-binomial, sua média e P(p > ½).",
+  },
   regression: {
     en: "Correlation and linear regression: covariance, the correlation coefficient, the least-squares line, residuals and R², and straightening curved data.",
     pt: "Correlação e regressão linear: covariância, coeficiente de correlação, a reta de mínimos quadrados, resíduos e R², e como linearizar dados curvos.",
@@ -363,6 +367,10 @@ export const mathDescriptions: LessonDescriptions = {
   "bayes-metropolis": {
     en: "Bayesian estimation of a probability on a grid and the Metropolis algorithm: prior × likelihood, the transition matrix with neighbour proposals, detailed balance, posterior mean.",
     pt: "Estimação bayesiana de uma probabilidade numa grade e o algoritmo de Metropolis: priori × verossimilhança, matriz de transição com vizinhos, balanço detalhado, média a posteriori.",
+  },
+  "metropolis-hastings": {
+    en: "The Metropolis–Hastings algorithm: the acceptance ratio with the proposal correction, detailed balance, random-walk steps by hand, proposals from the prior, burn-in and acceptance rate.",
+    pt: "O algoritmo de Metropolis-Hastings: a razão de aceitação com a correção da proposta, balanço detalhado, passeio aleatório à mão, propostas da priori, aquecimento e taxa de aceitação.",
   },
   queues: {
     en: "Queues as Markov chains: Poisson arrivals in short intervals, exponential service, the M/M/c/K chain, birth–death solution, L, Lq, W, Wq and Little's law.",

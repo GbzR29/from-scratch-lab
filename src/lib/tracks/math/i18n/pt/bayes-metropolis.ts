@@ -8,7 +8,7 @@ const text: Record<string, string> = {
   mMet_goal4: "Resolver πP = π para a cadeia e calcular a média a posteriori a partir dela.",
 
   mMet_bayesTitle: "Priori, verossimilhança, posteriori",
-  mMet_bayesBody: "Antes dos dados, descrevemos o que acreditamos sobre p com uma densidade a priori f(p); uma distribuição beta é a escolha natural para uma probabilidade. Os dados são y sucessos em n tentativas independentes, cuja probabilidade para um p dado é a verossimilhança binomial. O teorema de Bayes combina as duas exatamente como fazia com eventos: o novo peso de cada valor é o peso antigo vezes o quanto ele explica bem os dados, dividido pelo total.",
+  mMet_bayesRecap: "Um resumo rápido do capítulo Verossimilhança, priori beta e atualização bayesiana, que constrói cada peça com calma. Antes dos dados, uma densidade a priori f(p), aqui uma beta, diz o que acreditamos sobre p. Os dados são y sucessos em n tentativas independentes; a probabilidade deles, lida como função de p, é a verossimilhança. A regra de Bayes multiplica as duas e reescala: o novo peso de cada valor é o peso antigo vezes o quanto ele explica bem os dados, dividido pelo total.",
   mMet_eqBayes: "Teorema de Bayes para uma probabilidade p",
   mMet_wPrior: "a priori: quão plausível cada valor de p era antes dos dados",
   mMet_wLik: "a verossimilhança: a probabilidade dos dados se a taxa de acerto fosse p, aqui C(n, y) pʸ(1 − p)ⁿ⁻ʸ",
@@ -45,7 +45,7 @@ const text: Record<string, string> = {
   mMet_wAcc: "a chance de aceitá-lo; gⱼ é abreviação de g(pⱼ)",
   mMet_wPii: "ficar: tudo o que sobra, para a linha somar 1. Inclui propostas rejeitadas e propostas fora da grade",
   mMet_pWords: "Ir a um vizinho = propô-lo (½) e aceitá-lo (a razão, limitada a 1). Todo outro movimento tem probabilidade 0; ficar recebe o que sobra.",
-  mMet_pNote: "Numa ponta da grade, a proposta para fora continua com o seu ½, que vira ficar. Não troque isso por propor sempre o vizinho de dentro: as propostas deixariam de ser iguais e a cadeia não teria mais g como alvo.",
+  mMet_pNote2: "Numa ponta da grade, a proposta para fora continua com o seu ½, que vira ficar. Não troque isso por propor sempre o vizinho de dentro: as propostas deixariam de ser iguais e, com esta regra de aceitação, a cadeia não teria mais g como alvo. O capítulo de Metropolis-Hastings mostra o fator extra que conserta propostas desiguais.",
   mMet_ftTitle: "A cadeia dos lances livres",
   mMet_derRows: "Linha por linha, com g ∝ (9, 64, 81)",
   mMet_r1: "de 1/4: a proposta 1/2 é morro acima, sempre aceita; na outra metade das vezes a proposta cai fora da grade e a cadeia fica",
@@ -70,7 +70,7 @@ const text: Record<string, string> = {
   mMet_conj: "Sem a grade, uma priori Beta(2, 2) e 3 acertos em 4 dão a posteriori Beta(5, 3), cuja média é 5/8 = 0,625. A resposta da grade, 0,617, fica perto; uma grade mais fina chega mais perto. Experimente 19 pontos na figura.",
 
   mMet_runTitle: "Rodando a cadeia em vez de resolvê-la",
-  mMet_runBody: "Num problema grande ninguém escreve P. A cadeia é simulada: comece em qualquer lugar, dê muitos passos e tire a média do que quiser sobre os valores visitados. A média de longo prazo de uma cadeia de Markov é igual à média sob π (o resultado ergódico do capítulo de cadeias de Markov), então a média dos p visitados tende à média a posteriori. Três pontos práticos. Os primeiros passos ainda lembram o ponto de partida, então costumam ser descartados (aquecimento, ou burn-in). Valores sucessivos são correlacionados, então 10 000 passos carregam menos informação que 10 000 sorteios independentes. E a taxa de aceitação diz algo sobre o tamanho do passo: propostas quase sempre aceitas são tímidas demais, e propostas quase nunca aceitas vão longe demais. Para um p contínuo, a proposta é p′ = p + um pequeno passo aleatório, aceita com o mesmo min(1, g(p′)/g(p)), em que g é 0 fora de [0, 1].",
+  mMet_runBody2: "Num problema grande ninguém escreve P. A cadeia é simulada: comece em qualquer lugar, dê muitos passos e tire a média do que quiser sobre os valores visitados. A média de longo prazo de uma cadeia de Markov é igual à média sob π (o resultado ergódico do capítulo de cadeias de Markov), então a média dos p visitados tende à média a posteriori. Rodar bem uma cadeia (um p contínuo, propostas desiguais, aquecimento, tamanho do passo e taxa de aceitação) é o assunto do capítulo de Metropolis-Hastings.",
 
   mMet_mistakesTitle: "Erros comuns",
   mMet_tWrong: "Errado",
@@ -96,6 +96,10 @@ const text: Record<string, string> = {
   mMet_rel2b: "a distribuição beta e o seu núcleo.",
   mMet_rel3: "Cadeias de Markov",
   mMet_rel3b: "balanço detalhado, πP = π e médias de longo prazo.",
+  mMet_rel4: "Verossimilhança, priori beta e atualização bayesiana",
+  mMet_rel4b: "a verossimilhança, a priori beta e a posteriori beta exata, construídas passo a passo.",
+  mMet_rel5: "O algoritmo de Metropolis-Hastings",
+  mMet_rel5b: "propostas desiguais, um p contínuo, aquecimento e ajuste do passo.",
 
   mMet_key0: "Posteriori ∝ priori × verossimilhança; com uma priori Beta(a, b) e y de n, g(p) = p^(a−1+y)(1 − p)^(b−1+n−y).",
   mMet_key1: "A constante de normalização é um número só; ela se cancela em toda razão g(pⱼ)/g(pᵢ).",
