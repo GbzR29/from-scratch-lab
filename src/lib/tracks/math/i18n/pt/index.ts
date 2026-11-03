@@ -7,6 +7,7 @@ import numberLine from "./number-line";
 import orderOfOperations from "./order-of-operations";
 import fractions from "./fractions";
 import ratios from "./ratios";
+import ruleOfThree from "./rule-of-three";
 import divisibility from "./divisibility";
 import powers from "./powers";
 import bases from "./bases";
@@ -104,7 +105,7 @@ import recurrences from "./recurrences";
 
 const bundle: LessonText = {
   strings: {
-    ...numberLine, ...orderOfOperations, ...fractions, ...ratios, ...divisibility, ...powers, ...bases, ...modular,
+    ...numberLine, ...orderOfOperations, ...fractions, ...ratios, ...ruleOfThree, ...divisibility, ...powers, ...bases, ...modular,
     ...expressions, ...linearEquations, ...inequalities, ...functions, ...linearSystems, ...quadratics, ...polynomials, ...polynomialDivision, ...binomial, ...exponents, ...equationToolkit, ...sequences, ...algebraTricks, ...algebraShortcuts,
     ...sets, ...logic, ...proofs, ...summation, ...induction,
     ...angles, ...triangles, ...area, ...pythagoras, ...similarity, ...circle, ...volumes, ...polyhedra, ...analytic, ...transformations,

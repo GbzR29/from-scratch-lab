@@ -20,6 +20,10 @@ export const mathDescriptions: LessonDescriptions = {
     en: "Ratios, rates and proportion, percentages and percentage change, percentages of percentages, and finding a value part of the way between two others.",
     pt: "Razão, taxa e proporção, porcentagem e variação percentual, porcentagem de porcentagem, e achar o valor a uma fração do caminho entre dois outros.",
   },
+  "rule-of-three": {
+    en: "The rule of three, simple and compound: direct and inverse proportion, the doubling test, the arrow method, why the ratios multiply, and practice problems.",
+    pt: "Regra de três simples e composta: grandezas diretamente e inversamente proporcionais, o teste do dobro, o método das setas, por que as razões se multiplicam e exercícios.",
+  },
   divisibility: {
     en: "Division with remainder, prime numbers and prime factorisation, GCD with Euclid's algorithm, LCM, and remainders as clock arithmetic.",
     pt: "Divisão com resto, números primos e fatoração, MDC pelo algoritmo de Euclides, MMC, e restos como aritmética do relógio.",

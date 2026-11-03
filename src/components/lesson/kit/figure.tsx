@@ -139,15 +139,18 @@ export function Grid({ p, step = 1, labels = true, major }: { p: Plot; step?: nu
   for (let x = Math.ceil(p.x0 / step) * step; x <= p.x1 + 1e-9; x += step) xs.push(+x.toFixed(6));
   for (let y = Math.ceil(p.y0 / step) * step; y <= p.y1 + 1e-9; y += step) ys.push(+y.toFixed(6));
   const isMajor = (v: number) => major !== undefined && Math.abs(v / major - Math.round(v / major)) < 1e-6;
+  // a tick label centred on the very edge would be cut in half by the drawing's border: skip it
+  const inX = (x: number) => p.X(x) > 9 && p.X(x) < p.W - 9;
+  const inY = (y: number) => p.Y(y) > 6 && p.Y(y) < p.H - 4;
   return (
     <g pointerEvents="none">
       {xs.map(x => <line key={`x${x}`} x1={p.X(x)} x2={p.X(x)} y1={0} y2={p.H} stroke={C.grid} strokeWidth={isMajor(x) ? 1 : 0.6} />)}
       {ys.map(y => <line key={`y${y}`} y1={p.Y(y)} y2={p.Y(y)} x1={0} x2={p.W} stroke={C.grid} strokeWidth={isMajor(y) ? 1 : 0.6} />)}
       {p.x0 <= 0 && p.x1 >= 0 && <line x1={p.X(0)} x2={p.X(0)} y1={0} y2={p.H} stroke={C.axis} strokeWidth={1.2} />}
       {p.y0 <= 0 && p.y1 >= 0 && <line y1={p.Y(0)} y2={p.Y(0)} x1={0} x2={p.W} stroke={C.axis} strokeWidth={1.2} />}
-      {labels && xs.filter(x => x !== 0 && (major === undefined || isMajor(x))).map(x =>
+      {labels && xs.filter(x => x !== 0 && inX(x) && (major === undefined || isMajor(x))).map(x =>
         <text key={`lx${x}`} x={p.X(x)} y={clamp(p.Y(0) + 11, 10, p.H - 3)} fontSize={8.5} fill={C.axis} textAnchor="middle" fontFamily="monospace">{+x.toFixed(3)}</text>)}
-      {labels && ys.filter(y => y !== 0 && (major === undefined || isMajor(y))).map(y =>
+      {labels && ys.filter(y => y !== 0 && inY(y) && (major === undefined || isMajor(y))).map(y =>
         <text key={`ly${y}`} x={clamp(p.X(0) - 4, 16, p.W - 3)} y={p.Y(y) + 3} fontSize={8.5} fill={C.axis} textAnchor="end" fontFamily="monospace">{+y.toFixed(3)}</text>)}
     </g>
   );

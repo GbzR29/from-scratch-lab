@@ -14,6 +14,7 @@ import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { RatioFigure } from "@/components/lesson/figures/math/RatioFigure";
 import { MathPracticeFigure } from "@/components/lesson/figures/math/MathPracticeFigure";
+import { Related } from "@/components/lesson/Related";
 
 const r = String.raw;
 
@@ -103,6 +104,9 @@ export function RatiosContent({ t }: { t: TrackTranslations }) {
         note={tx(t, "mRat_eqPropNote", "Solving a proportion: 3 notebooks cost 45; what do 7 cost? 3/45 = 7/x, and cross-multiplying gives 3x = 45 · 7 = 315, so x = 315/3 = 105. Or find the unit rate first, 45/3 = 15 each, then 7 × 15 = 105: the same thing in two steps. Inverse: 4 painters finish a house in 6 days, so the job is 4 × 6 = 24 painter-days. 8 painters need 24/8 = 3 days and 3 painters need 24/3 = 8 days: more workers, fewer days, product fixed.")}>
         {r`\frac{a}{b} = \frac{c}{x} \;\Rightarrow\; x = \frac{b\,c}{a} \qquad y = k\,x \qquad y = \frac{k}{x}`}
       </Equation>
+      <p>
+        {tx(t, "mRat_r3Link", "Finding a missing fourth number like this is called the rule of three. The next chapter turns it into a method that tells direct from inverse at a glance and also handles three or more quantities at once (the compound rule of three).")}
+      </p>
 
       <H2>{tx(t, "mRat_pctTitle", "Percent")}</H2>
       <p>
@@ -236,6 +240,10 @@ export function RatiosContent({ t }: { t: TrackTranslations }) {
       </Callout>
 
       <MathPracticeFigure t={t} set="percent" />
+
+      <Related t={t} links={[
+        { track: "Math", id: "rule-of-three", title: tx(t, "mRat_rel1", "Rule of Three: Simple and Compound"), why: tx(t, "mRat_rel1b", "the arrow method for direct and inverse proportion, with three or more quantities.") },
+      ]} />
 
       <KeyIdeas t={t} id="mRat" items={[
         "A ratio a : b compares by division; a is the share a/(a + b) of the total.",

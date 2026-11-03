@@ -329,9 +329,9 @@ export function InteractiveNDC3D({ t }: { t?: TrackTranslations }) {
   }\n};`;
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(code).then(() => {
+    navigator.clipboard?.writeText(code).then(() => {
       setCopied(true); setTimeout(() => setCopied(false), 1800);
-    });
+    }, () => {});
   };
 
   const reset = () => {

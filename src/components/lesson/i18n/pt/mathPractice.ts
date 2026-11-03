@@ -257,6 +257,20 @@ const text: Record<string, string> = {
   mpr_trEven: "Ache a soma dos coeficientes das potências pares (x⁰, x², x⁴, …)",
   mpr_trOdd: "Ache a soma dos coeficientes das potências ímpares (x¹, x³, x⁵, …)",
   mpr_trRecip: "Ache isto sem achar x",
+  // ── Rule of three ──
+  mpr_tR3: "Pratique: regra de três",
+  mpr_kR3Direct: "simples, direta",
+  mpr_kR3Inverse: "simples, inversa",
+  mpr_kR3Compound: "composta",
+  mpr_r3Pct: "b é p % de um número x. Quanto vale x?",
+  mpr_r3Price: "a kg de café custaram b. Quanto custam c kg?",
+  mpr_r3Fuel: "Um carro roda b km com a litros. Quanto ele roda com c litros?",
+  mpr_r3Print: "Uma impressora imprime b páginas em a minutos. Quantas páginas em c minutos?",
+  mpr_r3Workers: "a operários terminam um serviço em b dias. Quantos dias c operários levam, no mesmo ritmo?",
+  mpr_r3Taps: "a torneiras iguais enchem um tanque em b horas. Quantas horas c torneiras levam?",
+  mpr_r3Speed: "A a km/h uma viagem leva b horas. Quantas horas a c km/h?",
+  mpr_r3Machines: "a máquinas fazem b peças em c dias. Quantas peças d máquinas fazem em e dias?",
+  mpr_r3Wall: "a operários, trabalhando b horas por dia, constroem c m de muro em d dias. Quantos dias e operários, trabalhando f horas por dia, levam para g m?",
 };
 
 export default text;

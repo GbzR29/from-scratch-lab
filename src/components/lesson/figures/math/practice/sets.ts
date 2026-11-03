@@ -22,6 +22,7 @@ import { binomialChoose, binomialCoef, collect, evaluate, explog, linear, quadra
 import { conjugate, crossMul, radical, substitution } from "./toolkit";
 import { coefSum, notable, rationalise, reciprocal, vieta } from "./tricks";
 import { cntAdvanced, cntArr, cntComb, cntFactorial, cntPerm, cntPrinciple } from "./combinatorics";
+import { r3Compound, r3Direct, r3Inverse } from "./ruleofthree";
 
 export type Kind = { id: string; label: [string, string]; make: Gen };
 export type PracticeSet = { title: [string, string]; kinds: Kind[] };
@@ -31,6 +32,11 @@ export const SETS = {
   order:      { title: ["mpr_tOrder", "Practice: order of operations"], kinds: [{ id: "order", label: ["mpr_kOrder", "order of operations"], make: order }] },
   fractions:  { title: ["mpr_tFractions", "Practice: fractions"], kinds: [{ id: "fractions", label: ["mpr_kFractions", "fractions"], make: fractions }] },
   percent:    { title: ["mpr_tPercent", "Practice: percent and proportion"], kinds: [{ id: "percent", label: ["mpr_kPercent", "percent"], make: percent }] },
+  ruleOfThree: { title: ["mpr_tR3", "Practice: rule of three"], kinds: [
+    { id: "direct", label: ["mpr_kR3Direct", "simple, direct"], make: r3Direct },
+    { id: "inverse", label: ["mpr_kR3Inverse", "simple, inverse"], make: r3Inverse },
+    { id: "compound", label: ["mpr_kR3Compound", "compound"], make: r3Compound },
+  ] },
   divisors:   { title: ["mpr_tDivisors", "Practice: gcd and lcm"], kinds: [{ id: "gcd", label: ["mpr_kGcd", "gcd and lcm"], make: gcdLcm }] },
   powers:     { title: ["mpr_tPowers", "Practice: powers and roots"], kinds: [{ id: "powers", label: ["mpr_kPowers", "powers"], make: powers }] },
   bases:      { title: ["mpr_tBases", "Practice: number bases"], kinds: [{ id: "bases", label: ["mpr_kBases", "bases"], make: bases }] },

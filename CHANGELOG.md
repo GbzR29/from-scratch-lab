@@ -10,6 +10,19 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ---
 
+## Novembro de 2026
+
+### 2026-11-03
+
+- **Matemática: aula nova Regra de três simples e composta (EN e PT).** Pedido do usuário; faltava na trilha (a proporção só aparecia em Razões, sem o nome e sem a composta), e é assunto frequente do ENEM.
+  - **Aula `rule-of-three`** (Aritmética, logo depois de Razões): a regra simples direta com cada termo explicado e a dedução de por que multiplicar cruzado é a taxa unitária; o teste do dobro (direta, inversa ou nenhuma), com tabela de pares e os casos que não são proporcionais (área do quadrado, táxi com bandeirada, idade e altura); a regra simples inversa (produto fixo); o método das setas em cinco passos; a regra composta com fórmula geral, o exemplo das máquinas e o do muro (com grandezas inversas) passo a passo e conferido pela constante; a dedução de por que as razões se multiplicam (a constante se cancela); fórmula ao vivo do muro; exemplos (porcentagem como regra de três, receita, bombas); tabela de erros comuns; Objetivos, Ideias-chave e Relacionados.
+  - **Widget novo `RuleOfThreeFigure`:** o leitor vira a seta de cada coluna (mesmo sentido ou contrário), a conta se monta ao vivo com as razões invertidas em roxo, e a resposta fica verde quando todas as setas estão certas; cada coluna diz o porquê quando acerta, ou faz a pergunta do dobro quando erra. Quatro casos: combustível, viagem, fábrica e muro.
+  - **Prática nova "regra de três"** (`practice/ruleofthree.ts`): simples direta (preço, combustível, impressora, porcentagem), simples inversa (operários, torneiras, velocidade) e composta (máquinas, e muro com grandezas inversas), montadas de trás para frente a partir de uma resposta inteira; 27 000 sorteios conferidos pela constante, nenhum errado.
+  - **Razões:** a seção Proporção agora dá o nome "regra de três" e aponta para a aula nova (frase + Relacionados).
+- **Passada de qualidade, varredura automática dos widgets de Matemática e OpenGL** (164 aulas: todos os botões e sliders acionados, procurando erros, NaN/undefined, texto cortado e rolagem lateral):
+  - **Rótulos de eixo cortados:** o `Grid` do kit desenhava o número do último traço em cima da borda do desenho (o "−7" virava "7"); agora rótulos colados na borda não são desenhados. Corrige uns 25 widgets de uma vez (funções, sistemas, vetores, matrizes, derivadas, séries…).
+  - **Erro no console:** tela cheia do ShaderPlayground e botões "copiar" (CodeBlock, NDC 2D e 3D) não tratavam a recusa do navegador (iframe, sem permissão); agora falham em silêncio, e "copiado" só aparece quando a cópia funcionou.
+
 ## Outubro de 2026
 
 ### 2026-10-28

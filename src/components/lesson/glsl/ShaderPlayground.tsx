@@ -249,8 +249,9 @@ export function ShaderPlayground({ presets, t, title, aspect = 16 / 9, initialPr
     return () => document.removeEventListener("fullscreenchange", f);
   }, []);
   const toggleFull = () => {
-    if (document.fullscreenElement) document.exitFullscreen();
-    else rootRef.current?.requestFullscreen?.();
+    // both return a promise that rejects when the browser refuses (an iframe, no user gesture)
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    else rootRef.current?.requestFullscreen?.().catch(() => {});
   };
 
   // ── Pointer: uMouse, and orbit in mesh mode ──

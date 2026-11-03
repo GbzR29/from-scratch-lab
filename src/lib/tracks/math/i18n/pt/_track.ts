@@ -6,6 +6,7 @@ const track = {
     "order-of-operations": "Ordem das operações",
     fractions: "Frações e decimais",
     ratios: "Razões, proporção e porcentagem",
+    "rule-of-three": "Regra de três simples e composta",
     divisibility: "Divisibilidade, primos, MDC e MMC",
     powers: "Potências e raízes",
     bases: "Bases numéricas",

@@ -601,7 +601,11 @@
   },
   "math/ratios": {
     "created": "2026-09-25",
-    "updated": "2026-10-27"
+    "updated": "2026-11-03"
+  },
+  "math/rule-of-three": {
+    "created": "2026-11-03",
+    "updated": "2026-11-03"
   },
   "math/divisibility": {
     "created": "2026-09-25",

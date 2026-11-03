@@ -87,9 +87,11 @@ export function CodeBlock({
   }, [reference]);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(children);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    // writeText rejects when the page may not use the clipboard; say "copied" only when it worked
+    navigator.clipboard?.writeText(children).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }, () => {});
   };
 
   // Clean look: long listings (a whole main.cpp) start folded to their first lines
