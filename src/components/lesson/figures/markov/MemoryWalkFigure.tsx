@@ -6,6 +6,7 @@ import type { TrackTranslations } from "@/lib/tracks/types";
 import { Btn, C, Choice, Figure, Readout, Row, Slider, Sliders, T, useFrame, useVisible } from "@/components/lesson/kit/figure";
 import { Transport } from "@/components/lesson/kit/Transport";
 import { dec, stationaryOf, stepFrom, type Mat } from "./numeric";
+import { NumMatrix } from "./NumMatrix";
 
 // ── What this figure shows ────────────────────────────────────────────────────
 // A walker on a corridor of N posts whose next step depends on its past, made
@@ -69,6 +70,7 @@ export function MemoryWalkFigure({ t }: { t?: TrackTranslations }) {
   const [steps, setSteps] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [fast, setFast] = useState(false);
+  const [showP, setShowP] = useState(false);
   const acc = useRef(0);
   const vis = useVisible<HTMLDivElement>();
   const reset = () => { setCur(0); setVisits(new Array(N).fill(0)); setSteps(0); acc.current = 0; };
@@ -107,6 +109,7 @@ export function MemoryWalkFigure({ t }: { t?: TrackTranslations }) {
         </Sliders>
         <Row>
           <Readout>{`${tx(t, "figMem_states", "states")}: ${states.length}`}</Readout>
+          {states.length <= 10 && <Btn active={showP} onClick={() => setShowP(v => !v)}>{tx(t, "figMem_showP", "matrix P")}</Btn>}
           {share.map((s, i) => <Readout key={i} color={C.blue}>{`${i + 1}: ${dec(s, 4)}`}</Readout>)}
         </Row>
       </>}
@@ -139,6 +142,9 @@ export function MemoryWalkFigure({ t }: { t?: TrackTranslations }) {
             </span>
           ))}
         </div>
+        {showP && states.length <= 10 && (
+          <NumMatrix t={t} P={order.map(i => order.map(j => P[i][j]))} names={order.map(i => label(states[i]))} row={order.indexOf(cur)} />
+        )}
         <Transport t={t} playing={playing}
           onPlay={() => setPlaying(p => !p)}
           playLabel={tx(t, "figMem_play", "let the walker run")}

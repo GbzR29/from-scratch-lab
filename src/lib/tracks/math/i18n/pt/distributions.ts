@@ -180,6 +180,12 @@ const text: Record<string, string> = {
   mDist_key4: "Normal(μ, σ²): o sino; padronize com z = (x − μ)/σ e leia Φ numa tabela.",
   mDist_key5: "68–95–99,7% de uma normal fica a até 1, 2, 3 desvios-padrão da média.",
   mDist_key6: "Uma binomial com np(1 − p) grande é quase normal; use a correção de continuidade de ½.",
+  mDist_rel1: "Bayes numa grade e o algoritmo de Metropolis",
+  mDist_rel1b: "a distribuição beta como priori de uma probabilidade desconhecida.",
+  mDist_rel2: "Filas como cadeias de Markov",
+  mDist_rel2b: "chegadas de Poisson e atendimentos exponenciais num modelo de verdade.",
+  mDist_rel3: "De um processo contínuo a uma cadeia",
+  mDist_rel3b: "somas de normais e Φ usadas para montar uma matriz de transição.",
 };
 
 export default text;

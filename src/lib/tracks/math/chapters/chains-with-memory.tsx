@@ -15,6 +15,7 @@ import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { Related } from "@/components/lesson/Related";
 import { MemoryWalkFigure } from "@/components/lesson/figures/markov/MemoryWalkFigure";
+import { MathPracticeFigure } from "@/components/lesson/figures/math/MathPracticeFigure";
 
 const r = String.raw;
 
@@ -145,6 +146,8 @@ export function ChainsWithMemoryContent({ t }: { t: TrackTranslations }) {
         <li>{tx(t, "mMem_c5", "Write each row of P and check that it adds up to 1.")}</li>
         <li>{tx(t, "mMem_c6", "Solve πP = π, then add states up to answer the question about the original quantity.")}</li>
       </ol>
+
+      <MathPracticeFigure t={t} set="memory" />
 
       <H2>{tx(t, "mMem_mistakesTitle", "Common mistakes")}</H2>
       <LessonTable

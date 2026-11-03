@@ -15,6 +15,7 @@ import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { Related } from "@/components/lesson/Related";
 import { DiscretizeFigure } from "@/components/lesson/figures/markov/DiscretizeFigure";
+import { MathPracticeFigure } from "@/components/lesson/figures/math/MathPracticeFigure";
 
 const r = String.raw;
 
@@ -125,6 +126,21 @@ export function DiscretizingProcessesContent({ t }: { t: TrackTranslations }) {
       </p>
 
       <DiscretizeFigure t={t} />
+
+      <H2>{tx(t, "mDisc_recipeTitle", "Solving a discretisation exercise, step by step")}</H2>
+      <LessonTable
+        headers={[tx(t, "mDisc_tStep", "Step"), tx(t, "mDisc_tDo", "What to do")]}
+        rows={[
+          ["1", tx(t, "mDisc_rc1", "List the bands and their points; make the two outer bands reach −∞ and +∞.")],
+          ["2", tx(t, "mDisc_rc2", "For each point cᵢ: the next value is N(φcᵢ, σ²). Standardise every band limit: z = (limit − φcᵢ)/σ.")],
+          ["3", tx(t, "mDisc_rc3", "P_ij = Φ(z upper) − Φ(z lower). Check that each row adds up to 1; use symmetry to save work.")],
+          ["4", tx(t, "mDisc_rc4", "Solve πP = π with Σπ = 1 (by hand for 3 bands; by elimination or iteration for many).")],
+          ["5", tx(t, "mDisc_rc5", "Exact comparison: band probabilities under N(0, σ²/(1 − φ²)).")],
+          ["6", tx(t, "mDisc_rc6", "k-step questions: row of the starting band times P, k times, then add the bands asked for; exact: N(φᵏx, σ²(1 − φ²ᵏ)/(1 − φ²)).")],
+        ]}
+      />
+
+      <MathPracticeFigure t={t} set="ar1" />
 
       <H2>{tx(t, "mDisc_mistakesTitle", "Common mistakes")}</H2>
       <LessonTable

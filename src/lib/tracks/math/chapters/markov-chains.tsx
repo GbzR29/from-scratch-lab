@@ -22,6 +22,8 @@ import { MatrixPathsFigure } from "@/components/lesson/figures/markov/PathsFigur
 import { MarkovDistributionFigure } from "@/components/lesson/figures/markov/DistributionFigure";
 import { StationaryFigure } from "@/components/lesson/figures/markov/StationaryFigure";
 import { AbsorbFigure } from "@/components/lesson/figures/markov/AbsorbFigure";
+import { MathPracticeFigure } from "@/components/lesson/figures/math/MathPracticeFigure";
+import { Related } from "@/components/lesson/Related";
 
 const r = String.raw;
 
@@ -490,6 +492,8 @@ export function MarkovChainsContent({ t }: { t: TrackTranslations }) {
       <p>{tx(t, "mMk_pr8", "8. A fair game (p = 1/2) with target 10, starting with 3 coins: reaching 10 has probability 3/10, and the game lasts 3 · 7 = 21 rounds on average.")}</p>
       <p>{tx(t, "mMk_pr9", "9. Weather chain: a shop sells 30 umbrellas on a rainy day, 5 on a cloudy day and none on a sunny day. In the long run it sells 21/46 · 0 + 13/46 · 5 + 12/46 · 30 = (65 + 360)/46 = 425/46 ≈ 9.2 umbrellas per day.")}</p>
       <p>{tx(t, "mMk_pr10", "10. The rows of P = (0.5 0.3 0.2; 0.2 0.5 0.3; 0.3 0.2 0.5) add up to 1, and so do its columns: 0.5 + 0.2 + 0.3 = 0.3 + 0.5 + 0.2 = 0.2 + 0.3 + 0.5 = 1. So π = (1/3, 1/3, 1/3), and each state comes back every 3 steps on average.")}</p>
+      <p>{tx(t, "mMk_prGen", "For as many more as you like, the round below makes new ones every time: two-step probabilities, two-state chains, neighbour walks by detailed balance, and general 3-state chains solved with πP = π. Answers are fractions, typed as 21/46 or as decimals.")}</p>
+      <MathPracticeFigure t={t} set="markov" />
 
       <H2>{tx(t, "mMk_mistakesTitle", "Common mistakes")}</H2>
       <LessonTable
@@ -509,6 +513,14 @@ export function MarkovChainsContent({ t }: { t: TrackTranslations }) {
           [tx(t, "mMk_m10w", "tᵢ = q·tᵢ₋₁ + p·tᵢ₊₁"), "tᵢ = 1 + q·tᵢ₋₁ + p·tᵢ₊₁", tx(t, "mMk_m10", "the first step itself takes one unit of time")],
         ]}
       />
+
+      <Related t={t} links={[
+        { track: "Math", id: "absorbing-chains", title: tx(t, "mMk_rel1", "Absorbing Chains & Hitting Times"), why: tx(t, "mMk_rel1b", "the fundamental matrix, expected times and which pattern comes first.") },
+        { track: "Math", id: "chains-with-memory", title: tx(t, "mMk_rel2", "Chains with Memory"), why: tx(t, "mMk_rel2b", "when the obvious states are not Markov: put the memory in the state.") },
+        { track: "Math", id: "bayes-metropolis", title: tx(t, "mMk_rel3", "Bayes on a Grid & the Metropolis Algorithm"), why: tx(t, "mMk_rel3b", "a chain designed so that its stationary distribution is a posterior.") },
+        { track: "Math", id: "queues", title: tx(t, "mMk_rel4", "Queues as Markov Chains"), why: tx(t, "mMk_rel4b", "birth–death chains, L, W and Little's law.") },
+        { track: "Math", id: "discretizing-processes", title: tx(t, "mMk_rel5", "From a Continuous Process to a Chain"), why: tx(t, "mMk_rel5b", "the AR(1) process cut into bands, and solving chains with hundreds of states.") },
+      ]} />
 
       <KeyIdeas t={t} id="mMk" items={[
         tx(t, "mMk_k1", "Markov property: given the present state, the past does not change the probabilities of the future."),

@@ -18,6 +18,7 @@ import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { DistributionFigure } from "@/components/lesson/figures/math/DistributionFigure";
 import { binomPmf, binomTail, choose, fact, Phi } from "@/components/lesson/figures/math/distMath";
+import { Related } from "@/components/lesson/Related";
 
 const r = String.raw;
 
@@ -443,6 +444,12 @@ export function DistributionsContent({ t }: { t: TrackTranslations }) {
           [tx(t, "mDist_m6w", "exponential: mean wait λ"), tx(t, "mDist_m6r", "mean wait 1/λ"), tx(t, "mDist_m6", "a high rate means short waits")],
         ]}
       />
+
+      <Related t={t} links={[
+        { track: "Math", id: "bayes-metropolis", title: tx(t, "mDist_rel1", "Bayes on a Grid & the Metropolis Algorithm"), why: tx(t, "mDist_rel1b", "the beta distribution as a prior for an unknown probability.") },
+        { track: "Math", id: "queues", title: tx(t, "mDist_rel2", "Queues as Markov Chains"), why: tx(t, "mDist_rel2b", "Poisson arrivals and exponential services in a real model.") },
+        { track: "Math", id: "discretizing-processes", title: tx(t, "mDist_rel3", "From a Continuous Process to a Chain"), why: tx(t, "mDist_rel3b", "sums of normals and Φ used to build a transition matrix.") },
+      ]} />
 
       <KeyIdeas t={t} id="mDist" items={[
         "Binomial(n, p): C(n, k) pᵏ(1 − p)ⁿ⁻ᵏ successes in n independent trials; mean np, variance np(1 − p).",

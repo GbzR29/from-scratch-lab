@@ -22,6 +22,7 @@ import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { MazeFigure } from "@/components/lesson/figures/markov/MazeFigure";
 import { PatternFigure } from "@/components/lesson/figures/markov/PatternFigure";
 import { Phi } from "@/components/lesson/figures/math/distMath";
+import { Related } from "@/components/lesson/Related";
 
 const r = String.raw;
 
@@ -402,6 +403,11 @@ export function AbsorbingChainsContent({ t }: { t: TrackTranslations }) {
           [tx(t, "mAbs_m10w", "ARL = 1/P(two points in a row outside) = 1/(2p²)"), "ARL = (1 + p)/(2p²)", tx(t, "mAbs_m10", "consecutive pairs share a point, like the flips in HH, so the wait is not geometric; the chain counts the overlap")],
         ]}
       />
+
+      <Related t={t} links={[
+        { track: "Math", id: "markov-chains", title: tx(t, "mAbs_rel1", "Markov Chains"), why: tx(t, "mAbs_rel1b", "transition matrices, πP = π and first-step analysis for walks.") },
+        { track: "Math", id: "chains-with-memory", title: tx(t, "mAbs_rel2", "Chains with Memory"), why: tx(t, "mAbs_rel2b", "the same \"remember just enough\" rule for walkers with a direction and for two-day weather.") },
+      ]} />
 
       <KeyIdeas t={t} id="mAbs" items={[
         "First-step analysis works for any chain: tᵢ = 1 + Σⱼ pᵢⱼ tⱼ for expected times, hᵢ = Σⱼ pᵢⱼ hⱼ for the chance of an ending.",

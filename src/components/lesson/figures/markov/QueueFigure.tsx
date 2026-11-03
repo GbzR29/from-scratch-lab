@@ -3,9 +3,10 @@
 import { useMemo, useRef, useState } from "react";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
-import { C, Choice, Figure, Row, Slider, Sliders, T, useFrame, useVisible } from "@/components/lesson/kit/figure";
+import { Btn, C, Choice, Figure, Row, Slider, Sliders, T, useFrame, useVisible } from "@/components/lesson/kit/figure";
 import { Transport } from "@/components/lesson/kit/Transport";
 import { birthDeath, dec } from "./numeric";
+import { NumMatrix } from "./NumMatrix";
 
 // ── What this figure shows ────────────────────────────────────────────────────
 // A queue with c servers and room for K customers, as a discrete-time Markov
@@ -66,6 +67,7 @@ export function QueueFigure({ t }: { t?: TrackTranslations }) {
   const [n, setN] = useState(0);
   const [clock, setClock] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [showP, setShowP] = useState(false);
   const acc = useRef(0);
   const vis = useVisible<HTMLDivElement>();
   const reset = () => { setN(0); setClock(0); };
@@ -114,6 +116,7 @@ export function QueueFigure({ t }: { t?: TrackTranslations }) {
           <Choice value={full} onChange={v => change(() => setFull(v))} options={[
             ["stay", tx(t, "figQue_stay", "the arrival takes the place")], ["drop", tx(t, "figQue_drop", "the arrival is lost")],
           ]} />
+          {Kc <= 6 && <Btn active={showP} onClick={() => setShowP(v => !v)}>{tx(t, "figQue_showP", "matrix P")}</Btn>}
         </Row>
         <div className="overflow-x-auto">
           <table className="border-collapse font-mono text-[11px] tabular-nums">
@@ -171,6 +174,11 @@ export function QueueFigure({ t }: { t?: TrackTranslations }) {
           })}
           {shown < Kc + 1 && <T x={W - 18} y={BASE - 6} anchor="end" color={C.muted} size={9}>{`… ${Kc}`}</T>}
         </svg>
+        {showP && Kc <= 6 && (
+          <NumMatrix t={t} digits={5} row={n} names={Array.from({ length: Kc + 1 }, (_, k) => String(k))}
+            P={Array.from({ length: Kc + 1 }, (_, i) => Array.from({ length: Kc + 1 }, (_, j) =>
+              j === i + 1 ? up[i] : j === i - 1 ? down[i] : j === i ? 1 - up[i] - down[i] : 0))} />
+        )}
         <Transport t={t} playing={playing}
           onPlay={() => setPlaying(p => !p)}
           playLabel={tx(t, "figQue_play", "run the queue")}

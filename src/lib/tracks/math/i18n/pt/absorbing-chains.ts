@@ -226,6 +226,10 @@ const text: Record<string, string> = {
   mAbs_key3: "t = N·1 (somas das linhas) dá os tempos esperados; B = N·R dá a chance de cada final.",
   mAbs_key4: "A diagonal: N_jj = 1/(1 − f), onde f é a chance de voltar a j antes da absorção.",
   mAbs_key5: "Escolha como estado aquilo que você precisa lembrar para continuar: o progresso rumo a um padrão, de quem é a vez, o último resultado.",
+  mAbs_rel1: "Cadeias de Markov",
+  mAbs_rel1b: "matrizes de transição, πP = π e análise do primeiro passo para passeios.",
+  mAbs_rel2: "Cadeias com memória",
+  mAbs_rel2b: "a mesma regra de “lembrar só o necessário” para caminhantes com sentido e para o tempo de dois dias.",
 };
 
 export default text;

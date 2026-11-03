@@ -929,11 +929,11 @@
   },
   "math/markov-chains": {
     "created": "2026-09-28",
-    "updated": "2026-10-09"
+    "updated": "2026-11-03"
   },
   "math/absorbing-chains": {
     "created": "2026-10-09",
-    "updated": "2026-10-09"
+    "updated": "2026-11-03"
   },
   "math/chains-with-memory": {
     "created": "2026-11-03",

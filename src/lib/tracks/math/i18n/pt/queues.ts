@@ -111,6 +111,21 @@ const text: Record<string, string> = {
   mQue_key3: "Só movimentos de ±1: o balanço detalhado dá π(n + 1) = π(n)·P(n→n+1)/P(n+1→n).",
   mQue_key4: "L = Σ nπ(n), Lq = Σ (n − c)π(n); W = L/λ_ef e Wq = Lq/λ_ef com λ_ef = λ(1 − π(K)).",
   mQue_key5: "Quando h → 0 a cadeia tende à fila contínua M/M/c/K, π(n) ∝ Π λ/(min(k, c)μ).",
+  mQue_derTwoSrv: "Dois atendentes: λ = 1, μ = 1 por atendente, K = 3 (tempo contínuo)",
+  mQue_s1: "um fator λ/(min(k, 2)μ) por nível: o primeiro cliente tem um atendente trabalhando (÷1), do segundo em diante os dois estão ocupados (÷2)",
+  mQue_s2: "multiplique por 4 para tirar as frações; os pesos somam 11",
+  mQue_s3: "só o estado 3 tem alguém esperando (3 − 2 = 1); com 2 clientes, os dois estão sendo atendidos",
+  mQue_s4: "lei de Little com as chegadas que entram; e W − Wq = 1 = 1/μ, o atendimento médio",
+  mQue_recipeTitle: "Resolvendo um exercício de fila, passo a passo",
+  mQue_tStep: "Passo",
+  mQue_tDo: "O que fazer",
+  mQue_r1: "Estados: o número no sistema, de 0 a K (K conta os que estão sendo atendidos).",
+  mQue_r2: "Por intervalo: a = 1 − e^(−λh), e dₙ = 1 − e^(−min(n, c)μh) para cada n (d₀ = 0).",
+  mQue_r3: "Linhas de P: subir a(1 − dₙ), descer (1 − a)dₙ, ficar o resto; em K a chegada sozinha é perdida (e escolha a convenção para chegada + saída).",
+  mQue_r4: "π pelo balanço detalhado: π(n + 1) = π(n)·subir(n)/descer(n + 1), depois divida pelo total.",
+  mQue_r5: "L = Σ nπ(n), Lq = Σ (n − c)π(n) para n > c.",
+  mQue_r6: "λ_ef = λ(1 − π(K)), W = L/λ_ef, Wq = Lq/λ_ef. Confira: W − Wq ≈ 1/μ.",
+  mQue_r7: "Compare com a resposta contínua M/M/c/K; uma diferença grande quer dizer h grande demais ou uma linha errada.",
 };
 
 export default text;

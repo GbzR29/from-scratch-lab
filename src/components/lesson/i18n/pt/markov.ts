@@ -410,6 +410,9 @@ const text: Record<string, string> = {
   figMem_play: "deixar o caminhante andar",
   figMem_steps: "passos",
   figMem_fast: "rápido",
+  figMem_showP: "matriz P",
+  figQue_showP: "matriz P",
+  figDisc_showP: "matriz P",
   figMem_note: "As barras são a fração exata de longo prazo do tempo em cada posto: o π da cadeia aumentada, com os estados de cada posto somados. Os pontos são o que o caminhante fez de fato até agora; deixe-o andar (o botão rápido dá 200 passos de cada vez) e eles assentam nas barras. As etiquetas embaixo do corredor são os estados que podem ocorrer: o posto, depois o sentido do último passo e, no modo de dois passos, o sentido do passo anterior. Nas pontas só um sentido pode chegar, e por isso há menos estados que postos × sentidos. Ponha r = l, ou s = q, e veja o que não muda.",
 
   // ── MetropolisFigure (2026-11-03) ──

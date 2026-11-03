@@ -3,9 +3,10 @@
 import { useMemo, useState } from "react";
 import { tx } from "@/lib/tracks/tx";
 import type { TrackTranslations } from "@/lib/tracks/types";
-import { C, Choice, Figure, Readout, Row, Slider, Sliders, T } from "@/components/lesson/kit/figure";
+import { Btn, C, Choice, Figure, Readout, Row, Slider, Sliders, T } from "@/components/lesson/kit/figure";
 import { Phi, normPdf } from "@/components/lesson/figures/math/distMath";
 import { dec, stationaryOf, vecTimes, type Mat } from "./numeric";
+import { NumMatrix } from "./NumMatrix";
 
 // ── What this figure shows ────────────────────────────────────────────────────
 // The AR(1) process X(n+1) = φ·X(n) + ε, ε ~ N(0, σ²), turned into a finite
@@ -44,6 +45,7 @@ export function DiscretizeFigure({ t }: { t?: TrackTranslations }) {
   const [k, setK] = useState(2);
   const [x0i, setX0i] = useState(0);        // offset from the middle point, in bands
   const [ci, setCi] = useState(0);          // threshold: the lower edge of band (middle + ci + 1)
+  const [showP, setShowP] = useState(false);
   const w = wOf(ws);
   const { pts, lo, P } = useMemo(() => chain(phi, sigma, w, range), [phi, sigma, w, range]);
   const pi = useMemo(() => stationaryOf(P), [P]);
@@ -88,8 +90,12 @@ export function DiscretizeFigure({ t }: { t?: TrackTranslations }) {
           <Slider label={tx(t, "figDisc_x0", "start x₀")} value={x0i} min={-M} max={M} step={1} onChange={setX0i} fmt={() => dec(pts[xi], 3)} />
           <Slider label={tx(t, "figDisc_c", "threshold c")} value={ci} min={-M} max={M - 1} step={1} onChange={setCi} fmt={() => dec(c, 3)} />
         </Sliders>
+        {showP && pts.length <= 7 && (
+          <NumMatrix t={t} P={P} names={pts.map(p => dec(p, 2).replace(/\.?0+$/, "") || "0")} row={xi} />
+        )}
         <Row>
           <Readout>{`${tx(t, "figDisc_states", "states")}: ${pts.length}`}</Readout>
+          {pts.length <= 7 && <Btn active={showP} onClick={() => setShowP(v => !v)}>{tx(t, "figDisc_showP", "matrix P")}</Btn>}
           <Readout color={C.blue}>{`P(Xₙ₊ₖ ≥ c | x₀) ${tx(t, "figDisc_chain", "chain")} ${dec(chainK, 4)}`}</Readout>
           <Readout color={C.amber}>{`${tx(t, "figDisc_exact", "exact")} ${dec(exactK, 4)}`}</Readout>
         </Row>

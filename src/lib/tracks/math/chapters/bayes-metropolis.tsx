@@ -15,6 +15,7 @@ import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { Related } from "@/components/lesson/Related";
 import { MetropolisFigure } from "@/components/lesson/figures/markov/MetropolisFigure";
+import { MathPracticeFigure } from "@/components/lesson/figures/math/MathPracticeFigure";
 
 const r = String.raw;
 
@@ -152,6 +153,21 @@ export function BayesMetropolisContent({ t }: { t: TrackTranslations }) {
         {tx(t, "mMet_runBody",
           "For a big problem nobody writes P down. The chain is simulated: start anywhere, take many steps, and average whatever you want over the values visited. The long-run average of a Markov chain equals the average under π (the ergodic result of the Markov-chains chapter), so the average of the visited p tends to the posterior mean. Three practical points. The first steps still remember the starting point, so they are usually thrown away (burn-in). Successive values are correlated, so 10 000 steps carry less information than 10 000 independent draws. And the acceptance rate tells you about the step size: proposals that are almost always accepted are too timid, and proposals that are almost never accepted go too far. For a continuous p the proposal is p′ = p + a small random step, accepted with the same min(1, g(p′)/g(p)), where g is 0 outside [0, 1].")}
       </p>
+
+      <H2>{tx(t, "mMet_recipeTitle", "Solving a Metropolis exercise, step by step")}</H2>
+      <LessonTable
+        headers={[tx(t, "mMet_tStep", "Step"), tx(t, "mMet_tDo", "What to do")]}
+        rows={[
+          ["1", tx(t, "mMet_rc1", "Kernel: g(p) = p^(a−1+y)(1 − p)^(b−1+n−y). Drop every constant.")],
+          ["2", tx(t, "mMet_rc2", "Evaluate g at each grid point; scale to whole numbers if you like (only ratios matter).")],
+          ["3", tx(t, "mMet_rc3", "Neighbour entries: P_ij = ½ min(1, gⱼ/gᵢ). Diagonal: 1 minus the rest (it holds the off-grid ½ at the ends).")],
+          ["4", tx(t, "mMet_rc4", "Check that every row adds up to 1.")],
+          ["5", tx(t, "mMet_rc5", "Solve πP = π with Σπ = 1; for a neighbour walk, balance each edge: πᵢPᵢⱼ = πⱼPⱼᵢ.")],
+          ["6", tx(t, "mMet_rc6", "Posterior mean: Σ pₖ π(pₖ). Sanity check: π should be proportional to g.")],
+        ]}
+      />
+
+      <MathPracticeFigure t={t} set="metropolis" />
 
       <H2>{tx(t, "mMet_mistakesTitle", "Common mistakes")}</H2>
       <LessonTable

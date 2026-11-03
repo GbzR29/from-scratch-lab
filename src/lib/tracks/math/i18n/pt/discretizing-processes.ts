@@ -91,6 +91,15 @@ const text: Record<string, string> = {
   mDisc_key3: "Faixas + pontos representativos: P_ij = Φ((uⱼ − φcᵢ)/σ) − Φ((lⱼ − φcᵢ)/σ), faixas de fora até ±∞.",
   mDisc_key4: "O π e o Pᵏ da cadeia aproximam as respostas exatas; faixas mais estreitas aproximam melhor.",
   mDisc_key5: "Cadeias grandes são resolvidas por eliminação com Σπ = 1 ou iterando π ← πP.",
+  mDisc_recipeTitle: "Resolvendo um exercício de discretização, passo a passo",
+  mDisc_tStep: "Passo",
+  mDisc_tDo: "O que fazer",
+  mDisc_rc1: "Liste as faixas e os pontos delas; faça as duas faixas de fora irem até −∞ e +∞.",
+  mDisc_rc2: "Para cada ponto cᵢ: o próximo valor é N(φcᵢ, σ²). Padronize cada limite de faixa: z = (limite − φcᵢ)/σ.",
+  mDisc_rc3: "P_ij = Φ(z superior) − Φ(z inferior). Confira que cada linha soma 1; use a simetria para economizar trabalho.",
+  mDisc_rc4: "Resolva πP = π com Σπ = 1 (à mão para 3 faixas; por eliminação ou iteração para muitas).",
+  mDisc_rc5: "Comparação exata: probabilidades das faixas sob N(0, σ²/(1 − φ²)).",
+  mDisc_rc6: "Perguntas de k passos: a linha da faixa de partida vezes P, k vezes, depois some as faixas pedidas; exato: N(φᵏx, σ²(1 − φ²ᵏ)/(1 − φ²)).",
 };
 
 export default text;

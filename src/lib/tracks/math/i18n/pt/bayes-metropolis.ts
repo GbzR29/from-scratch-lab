@@ -103,6 +103,15 @@ const text: Record<string, string> = {
   mMet_key3: "g_i P_ij = ½ min(g_i, g_j) = g_j P_ji: balanço detalhado, então a posteriori é a distribuição estacionária.",
   mMet_key4: "Resolva πP = π (ou rode a cadeia); a média a posteriori é Σ pₖ π(pₖ).",
   mMet_key5: "Cadeias simuladas precisam de aquecimento e de muitos passos, porque valores sucessivos são correlacionados.",
+  mMet_recipeTitle: "Resolvendo um exercício de Metropolis, passo a passo",
+  mMet_tStep: "Passo",
+  mMet_tDo: "O que fazer",
+  mMet_rc1: "Núcleo: g(p) = p^(a−1+y)(1 − p)^(b−1+n−y). Descarte toda constante.",
+  mMet_rc2: "Calcule g em cada ponto da grade; se quiser, reescale para números inteiros (só as razões importam).",
+  mMet_rc3: "Entradas dos vizinhos: P_ij = ½ min(1, gⱼ/gᵢ). Diagonal: 1 menos o resto (ela guarda o ½ de fora da grade nas pontas).",
+  mMet_rc4: "Confira que cada linha soma 1.",
+  mMet_rc5: "Resolva πP = π com Σπ = 1; num passeio entre vizinhos, equilibre cada aresta: πᵢPᵢⱼ = πⱼPⱼᵢ.",
+  mMet_rc6: "Média a posteriori: Σ pₖ π(pₖ). Conferência: π deve ser proporcional a g.",
 };
 
 export default text;

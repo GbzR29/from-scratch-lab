@@ -283,6 +283,17 @@ const text: Record<string, string> = {
   mMk_k8: "Irredutível: π é única. Duas ou mais classes fechadas: muitas soluções. Estados transitórios recebem π = 0.",
   mMk_k10: "Um ganho c(i) por passo no estado i dá em média Σᵢ π(i)·c(i) por passo no longo prazo, qualquer que seja o início. Se as colunas de P também somam 1 (duplamente estocástica), π é uniforme: 1/n para cada estado.",
   mMk_k9: "Cadeias absorventes: condicione no primeiro passo. hᵢ = Σⱼ pᵢⱼ hⱼ para a chance de um desfecho, tᵢ = 1 + Σⱼ pᵢⱼ tⱼ para o tempo esperado. Para o passeio, hᵢ = (1 − rⁱ)/(1 − rᵏ) com r = q/p (ruína do apostador).",
+  mMk_prGen: "Para quantos mais você quiser, a rodada abaixo cria exercícios novos toda vez: probabilidades de dois passos, cadeias de dois estados, passeios entre vizinhos pelo balanço detalhado e cadeias gerais de 3 estados resolvidas com πP = π. As respostas são frações, digitadas como 21/46 ou em decimal.",
+  mMk_rel1: "Cadeias absorventes e tempos de chegada",
+  mMk_rel1b: "a matriz fundamental, tempos esperados e qual padrão sai primeiro.",
+  mMk_rel2: "Cadeias com memória",
+  mMk_rel2b: "quando os estados óbvios não são markovianos: ponha a memória no estado.",
+  mMk_rel3: "Bayes numa grade e o algoritmo de Metropolis",
+  mMk_rel3b: "uma cadeia construída para que a distribuição estacionária seja uma posteriori.",
+  mMk_rel4: "Filas como cadeias de Markov",
+  mMk_rel4b: "cadeias de nascimento e morte, L, W e a lei de Little.",
+  mMk_rel5: "De um processo contínuo a uma cadeia",
+  mMk_rel5b: "o processo AR(1) cortado em faixas, e como resolver cadeias com centenas de estados.",
 };
 
 export default text;

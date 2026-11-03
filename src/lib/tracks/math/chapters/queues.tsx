@@ -15,6 +15,7 @@ import type { TrackTranslations } from "@/lib/tracks/types";
 import { KeyIdeas, Article, Lead, Goals } from "@/components/lesson/Prose";
 import { Related } from "@/components/lesson/Related";
 import { QueueFigure } from "@/components/lesson/figures/markov/QueueFigure";
+import { MathPracticeFigure } from "@/components/lesson/figures/math/MathPracticeFigure";
 
 const r = String.raw;
 
@@ -174,6 +175,30 @@ export function QueuesContent({ t }: { t: TrackTranslations }) {
         {tx(t, "mQue_bigBody",
           "Nothing changes with c servers except dₙ, which grows with the number busy until all c are working. A large capacity K is no harder either: the product formula has one factor per level. When K is large and λ < cμ (fewer arrivals than the servers can handle), the probabilities of the top levels are tiny, the loss π(K) is practically 0, and the queue behaves like one with unlimited room. If λ ≥ cμ, the line grows without limit in an unlimited queue, and in a limited one it stays close to full.")}
       </p>
+
+      <Derivation t={t} label={tx(t, "mQue_derTwoSrv", "Two servers: λ = 1, μ = 1 per server, K = 3 (continuous time)")}
+        steps={[
+          { tex: r`\pi \propto \left(1,\ \tfrac{1}{1},\ \tfrac{1}{1}\cdot\tfrac{1}{2},\ \tfrac{1}{1}\cdot\tfrac12\cdot\tfrac12\right) = \left(1,\ 1,\ \tfrac12,\ \tfrac14\right)`, full: true, why: tx(t, "mQue_s1", "one factor λ/(min(k, 2)μ) per level: the first customer has one server working (÷1), from the second on both are busy (÷2)") },
+          { tex: r`\pi = \tfrac{1}{11}\,(4,\ 4,\ 2,\ 1)`, full: true, why: tx(t, "mQue_s2", "multiply by 4 to clear the fractions; the weights add up to 11") },
+          { tex: r`L = \tfrac{0 \cdot 4 + 1 \cdot 4 + 2 \cdot 2 + 3 \cdot 1}{11} = 1, \qquad L_q = \tfrac{1 \cdot 1}{11} = \tfrac{1}{11}`, full: true, why: tx(t, "mQue_s3", "only state 3 has someone waiting (3 − 2 = 1); with 2 customers both are being served") },
+          { tex: r`\lambda_{\text{ef}} = 1\left(1 - \tfrac{1}{11}\right) = \tfrac{10}{11}, \quad W = \tfrac{1}{10/11} = 1.1, \quad W_q = \tfrac{1/11}{10/11} = 0.1`, full: true, why: tx(t, "mQue_s4", "Little's law with the arrivals that get in; and W − Wq = 1 = 1/μ, the mean service") },
+        ]} />
+
+      <H2>{tx(t, "mQue_recipeTitle", "Solving a queue exercise, step by step")}</H2>
+      <LessonTable
+        headers={[tx(t, "mQue_tStep", "Step"), tx(t, "mQue_tDo", "What to do")]}
+        rows={[
+          ["1", tx(t, "mQue_r1", "States: the number in the system, 0 to K (K counts those being served).")],
+          ["2", tx(t, "mQue_r2", "Per interval: a = 1 − e^(−λh), and dₙ = 1 − e^(−min(n, c)μh) for each n (d₀ = 0).")],
+          ["3", tx(t, "mQue_r3", "Rows of P: up a(1 − dₙ), down (1 − a)dₙ, stay the rest; at K the lone arrival is lost (and pick the convention for arrival + departure).")],
+          ["4", tx(t, "mQue_r4", "π by detailed balance: π(n + 1) = π(n)·up(n)/down(n + 1), then divide by the total.")],
+          ["5", tx(t, "mQue_r5", "L = Σ nπ(n), Lq = Σ (n − c)π(n) for n > c.")],
+          ["6", tx(t, "mQue_r6", "λ_ef = λ(1 − π(K)), W = L/λ_ef, Wq = Lq/λ_ef. Check: W − Wq ≈ 1/μ.")],
+          ["7", tx(t, "mQue_r7", "Compare with the continuous M/M/c/K answer; a big gap means h is too large or a row is wrong.")],
+        ]}
+      />
+
+      <MathPracticeFigure t={t} set="queues" />
 
       <H2>{tx(t, "mQue_mistakesTitle", "Common mistakes")}</H2>
       <LessonTable

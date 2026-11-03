@@ -23,6 +23,8 @@ import { conjugate, crossMul, radical, substitution } from "./toolkit";
 import { coefSum, notable, rationalise, reciprocal, vieta } from "./tricks";
 import { cntAdvanced, cntArr, cntComb, cntFactorial, cntPerm, cntPrinciple } from "./combinatorics";
 import { r3Compound, r3Direct, r3Inverse } from "./ruleofthree";
+import { limConj, limExp, limRational, limRoot } from "./liminf";
+import { arStep, arVar, memCorridor, memWeather, metEntry, metMean, mkStat2, mkStat3, mkStatWalk, mkTwoStep, queMM1, queMM2 } from "./stochastic";
 
 export type Kind = { id: string; label: [string, string]; make: Gen };
 export type PracticeSet = { title: [string, string]; kinds: Kind[] };
@@ -150,6 +152,34 @@ export const SETS = {
     { id: "arr", label: ["mpr_kCntArr", "arrangements"], make: cntArr },
     { id: "comb", label: ["mpr_kCntComb", "combinations"], make: cntComb },
     { id: "adv", label: ["mpr_kCntAdv", "repetition, groups, derangements"], make: cntAdvanced },
+  ] },
+  markov: { title: ["mpr_tMarkov", "Practice: Markov chains"], kinds: [
+    { id: "two", label: ["mpr_kMkTwo", "two steps"], make: mkTwoStep },
+    { id: "stat2", label: ["mpr_kMkStat2", "two states"], make: mkStat2 },
+    { id: "walk", label: ["mpr_kMkWalk", "detailed balance"], make: mkStatWalk },
+    { id: "stat3", label: ["mpr_kMkStat3", "solve πP = π"], make: mkStat3 },
+  ] },
+  memory: { title: ["mpr_tMemory", "Practice: chains with memory"], kinds: [
+    { id: "corridor", label: ["mpr_kMemCorr", "walker with a direction"], make: memCorridor },
+    { id: "weather", label: ["mpr_kMemW", "two-day memory"], make: memWeather },
+  ] },
+  metropolis: { title: ["mpr_tMetro", "Practice: Metropolis on a grid"], kinds: [
+    { id: "entry", label: ["mpr_kMetEntry", "matrix entries"], make: metEntry },
+    { id: "mean", label: ["mpr_kMetMean", "posterior mean"], make: metMean },
+  ] },
+  queues: { title: ["mpr_tQueues", "Practice: queues"], kinds: [
+    { id: "mm1", label: ["mpr_kQueMM1", "one server"], make: queMM1 },
+    { id: "mm2", label: ["mpr_kQueMM2", "two servers"], make: queMM2 },
+  ] },
+  limitsInf: { title: ["mpr_tLimInf", "Practice: limits at infinity"], kinds: [
+    { id: "rational", label: ["mpr_kLiRational", "ratios of polynomials"], make: limRational },
+    { id: "root", label: ["mpr_kLiRoot", "square roots"], make: limRoot },
+    { id: "conj", label: ["mpr_kLiConj", "∞ − ∞, conjugate"], make: limConj },
+    { id: "exp", label: ["mpr_kLiExp", "exponentials"], make: limExp },
+  ] },
+  ar1: { title: ["mpr_tAr1", "Practice: the AR(1) process"], kinds: [
+    { id: "var", label: ["mpr_kArVar", "stationary variance"], make: arVar },
+    { id: "step", label: ["mpr_kArStep", "k steps ahead"], make: arStep },
   ] },
 } satisfies Record<string, PracticeSet>;
 
