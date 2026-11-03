@@ -60,7 +60,7 @@ const FNS: Fn[] = [
 const sup = (k: number) => String(k).split("").map(d => "⁰¹²³⁴⁵⁶⁷⁸⁹"[+d]).join("");
 const fmt = (v: number) =>
   (!Number.isFinite(v) ? "—" : Math.abs(v) >= 1e5 ? v.toExponential(2) : Math.abs(v) >= 100 ? v.toFixed(1) : v.toFixed(4)).replace("-", "−");
-const fmtR = (R: number) => (R >= 1e4 ? "10 000" : R >= 100 ? Math.round(R).toString() : R.toFixed(1));
+const fmtR = (R: number) => (R >= 9999.5 ? "10 000" : String(Math.round(R)));
 /** A round grid spacing that gives about `n` lines over `span`. */
 function niceStep(span: number, n = 6) {
   const raw = span / n, p = 10 ** Math.floor(Math.log10(raw)), m = raw / p;
@@ -70,24 +70,29 @@ const label = (v: number) => (Math.abs(v) >= 1000 ? `${+(v / 1000).toFixed(1)}k`
 
 // ── The drawing ───────────────────────────────────────────────────────────────
 
-/** Grid with its own spacing on each axis (x runs to thousands, y stays small). */
-function AxisGrid({ p }: { p: Plot }) {
+/** Grid with its own spacing on each axis (x runs to thousands, y stays small).
+ *  `numbers` draws only the tick labels, with a halo, so they can go on top of the curves. */
+function AxisGrid({ p, numbers = false }: { p: Plot; numbers?: boolean }) {
   const sx = niceStep(p.x1 - p.x0), sy = niceStep(p.y1 - p.y0, 5);
   const xs: number[] = [], ys: number[] = [];
   for (let x = Math.ceil(p.x0 / sx) * sx; x <= p.x1 + 1e-9; x += sx) xs.push(x);
   for (let y = Math.ceil(p.y0 / sy) * sy; y <= p.y1 + 1e-9; y += sy) ys.push(y);
   const yAxis = clamp(p.X(0), 0, p.W);
+  if (numbers) return (
+    <g pointerEvents="none" fontSize={8.5} fill={C.axis} fontFamily="monospace" stroke={C.bg} strokeWidth={3} paintOrder="stroke">
+      {xs.filter(x => Math.abs(x) > 1e-9 && p.X(x) > 14 && p.X(x) < p.W - 14).map(x =>
+        <text key={`lx${x}`} x={p.X(x)} y={p.H - 4} textAnchor="middle">{label(x)}</text>)}
+      {ys.filter(y => p.Y(y) > 8 && p.Y(y) < p.H - 14).map(y =>
+        <text key={`ly${y}`} x={yAxis < p.W / 2 ? Math.max(yAxis + 4, 16) : Math.min(yAxis - 4, p.W - 16)} y={p.Y(y) - 2}
+          textAnchor={yAxis < p.W / 2 ? "start" : "end"}>{label(y)}</text>)}
+    </g>
+  );
   return (
     <g pointerEvents="none">
       {xs.map(x => <line key={`x${x}`} x1={p.X(x)} x2={p.X(x)} y1={0} y2={p.H} stroke={C.grid} strokeWidth={0.6} />)}
       {ys.map(y => <line key={`y${y}`} y1={p.Y(y)} y2={p.Y(y)} x1={0} x2={p.W} stroke={C.grid} strokeWidth={0.6} />)}
       {p.y0 <= 0 && p.y1 >= 0 && <line y1={p.Y(0)} y2={p.Y(0)} x1={0} x2={p.W} stroke={C.axis} strokeWidth={1.2} />}
       <line x1={yAxis} x2={yAxis} y1={0} y2={p.H} stroke={C.axis} strokeWidth={1.2} />
-      {xs.filter(x => Math.abs(x) > 1e-9 && p.X(x) > 14 && p.X(x) < p.W - 14).map(x =>
-        <text key={`lx${x}`} x={p.X(x)} y={p.H - 4} fontSize={8.5} fill={C.axis} textAnchor="middle" fontFamily="monospace">{label(x)}</text>)}
-      {ys.filter(y => p.Y(y) > 8 && p.Y(y) < p.H - 14).map(y =>
-        <text key={`ly${y}`} x={yAxis < p.W / 2 ? yAxis + 4 : yAxis - 4} y={p.Y(y) - 2} fontSize={8.5} fill={C.axis}
-          textAnchor={yAxis < p.W / 2 ? "start" : "end"} fontFamily="monospace">{label(y)}</text>)}
     </g>
   );
 }
@@ -112,11 +117,12 @@ function InfinityDrawing({ fn, side, R }: { fn: Fn; side: Side; R: number }) {
     <AxisGrid p={pr} />
     {end.L !== null && <>
       <line x1={0} x2={W} y1={pr.Y(end.L)} y2={pr.Y(end.L)} stroke={C.green} strokeWidth={1.4} strokeDasharray="6 4" />
-      <T x={side === 1 ? W - 6 : 6} y={pr.Y(end.L) - 5} color={C.green} bold anchor={side === 1 ? "end" : "start"}>{`y = ${fmt(end.L).replace(/\.?0+$/, "")}`}</T>
+      <T x={side === 1 ? W - 18 : 18} y={pr.Y(end.L) - 5} color={C.green} bold anchor={side === 1 ? "end" : "start"}>{`y = ${fmt(end.L).replace(/\.?0+$/, "")}`}</T>
     </>}
     <path d={fnPath(pr, end.dom, a, b, n)} fill="none" stroke={C.amber} strokeWidth={2} strokeDasharray="7 5" />
     <path d={fnPath(pr, fn.f, a, b, n)} fill="none" stroke={C.sky} strokeWidth={2.2} />
     {Number.isFinite(yEnd) && <circle cx={pr.X(xEnd) - side * 3} cy={pr.Y(yEnd)} r={4.5} fill={C.sky} />}
+    <AxisGrid p={pr} numbers />
   </>;
 }
 
@@ -158,7 +164,7 @@ export function InfinityFigure({ t }: { t?: TrackTranslations }) {
   const controls = <>
     <Row>{FNS.map(e => <Btn key={e.key} active={key === e.key} onClick={() => choose(e.key)}>{e.label}</Btn>)}</Row>
     <Row>
-      <Readout color={C.sky}>{`f(${fmt(x)}) = ${fmt(fx)}`}</Readout>
+      <Readout color={C.sky}>{`f(${fmtR(R).replace(/^/, side === 1 ? "" : "−")}) = ${fmt(fx)}`}</Readout>
       <Readout color={C.amber}>{`${tx(t, "figInf_dom", "dominant")}: ${end.domText}`}</Readout>
     </Row>
     <Row>

@@ -25,7 +25,7 @@ const text: Record<string, string> = {
   mLim_sidedNote: "Como 1 ≠ 2, o degrau não tem limite (bilateral) em 1, mesmo tendo um valor perfeitamente bom ali.",
   mLim_infTitle: "Infinito nos limites",
   mLim_infBody: "Infinito (∞) não é um número, mas aparece nos limites de dois jeitos. Primeiro, f(x) pode crescer sem limite quando x tende a a: 1/x² fica maior que qualquer número que você diga quando x → 0 (em x = 0,001 já é um milhão). Escrevemos lim 1/x² = ∞, que é um jeito preciso de dizer que o limite não existe porque os valores fogem; o gráfico tem uma assíntota vertical ali. Segundo, o próprio x pode crescer sem limite, e perguntamos para onde f(x) está indo: 1/x → 0 quando x → ∞, porque dividir 1 por um número enorme dá um número minúsculo. O gráfico então tem uma assíntota horizontal, uma reta da qual ele se aproxima devagar.",
-  mLim_infBody3: "Para uma razão de polinômios quando x → ∞, só as maiores potências importam, porque crescem mais que todo o resto. Divida o numerador e o denominador pela maior potência do denominador.",
+  mLim_infNext: "Os limites no infinito têm um capítulo só deles, o próximo: como achá-los passo a passo para qualquer razão de polinômios, para raízes quadradas (onde o sinal em −∞ é uma armadilha), para ∞ − ∞ e para exponenciais.",
   mLim_infBody4: "Você já encontrou dois limites no infinito: a série geométrica no capítulo de sequências (rⁿ → 0 quando |r| < 1) e o número e = lim (1 + 1/n)ⁿ no capítulo de expoentes.",
   mLim_eqInf: "Limites envolvendo infinito",
   mLim_wInfty: "“sem limite”: maior que qualquer número que você escolha, não um número em si",
@@ -103,10 +103,6 @@ const text: Record<string, string> = {
 
   // ── In words, derivations, live formulas (2026-10-08) ──
   mLim_defWords: "Conforme x chega cada vez mais perto de a, por qualquer lado, os valores f(x) chegam cada vez mais perto do número L.",
-  mLim_eqRatio: "Uma razão de polinômios no infinito",
-  mLim_r1: "divida cada termo, em cima e embaixo, por x², a maior potência do denominador; o valor da fração não muda",
-  mLim_r2: "1/x² e 5/x² vão para 0, porque dividir por um número enorme dá um número minúsculo",
-  mLim_r3: "sobram só os coeficientes principais 3 e 1",
   mLim_epsWords: "Por menor que seja a tolerância que você exija na saída, existe uma distância em volta de a tal que todo x dentro dela, exceto o próprio a, dá uma saída dentro dessa tolerância de L.",
   mLim_eqConj: "Tirando uma raiz quadrada com o conjugado",
   mLim_c1: "multiplique em cima e embaixo pelo conjugado; multiplicar por algo sobre ele mesmo não muda nada",
@@ -139,6 +135,8 @@ const text: Record<string, string> = {
   mLim_key6: "Uma função contínua que troca de sinal tem uma raiz no meio: a bissecção a encontra.",
   mLim_rel1: "Macetes de álgebra I: multiplicar por 1, somar 0",
   mLim_rel1b: "multiplicar pelo conjugado por inteiro: o que é, por que tira a raiz, e as armadilhas.",
+  mLim_rel2: "Limites no infinito",
+  mLim_rel2b: "o método passo a passo para x → ±∞: graus, raízes, ∞ − ∞ e exponenciais.",
 };
 
 export default text;

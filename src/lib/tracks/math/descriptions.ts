@@ -224,6 +224,10 @@ export const mathDescriptions: LessonDescriptions = {
     en: "Limits and continuity: what a limit means, one-sided limits and limits at infinity, the ε–δ definition, continuity, and bisection with the IVT.",
     pt: "Limites e continuidade: o que é um limite, limites laterais e no infinito, a definição ε–δ, continuidade e bissecção pelo teorema do valor intermediário.",
   },
+  "limits-at-infinity": {
+    en: "Limits at infinity step by step: ratios of polynomials by degree, the sign of square roots at −∞, ∞ − ∞ with the conjugate, exponentials vs powers, and (1 + k/x)ˣ → eᵏ.",
+    pt: "Limites no infinito passo a passo: razões de polinômios pelo grau, o sinal das raízes em −∞, ∞ − ∞ com o conjugado, exponenciais contra potências e (1 + k/x)ˣ → eᵏ.",
+  },
   derivatives: {
     en: "The derivative from scratch: from average to instantaneous rate of change, the limit definition, notation and units, second derivatives, and where it fails.",
     pt: "A derivada do zero: da taxa média à taxa instantânea, a definição por limite, notação e unidades, derivada segunda e onde a derivada não existe.",

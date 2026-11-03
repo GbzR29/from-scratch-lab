@@ -108,16 +108,9 @@ export function LimitsContent({ t }: { t: TrackTranslations }) {
           "Infinity (∞) is not a number, but it appears in limits in two ways. First, f(x) may grow without bound as x approaches a: 1/x² gets bigger than any number you name as x → 0 (at x = 0.001 it is already a million). We write lim 1/x² = ∞, which is a precise way of saying that the limit does not exist because the values run away; the graph has a vertical asymptote there. Second, x itself may grow without bound, and we ask where f(x) is heading: 1/x → 0 as x → ∞, because dividing 1 by a huge number gives a tiny one. The graph then has a horizontal asymptote, a line it creeps toward.")}
       </p>
       <p>
-        {tx(t, "mLim_infBody3",
-          "For a ratio of polynomials as x → ∞, only the highest powers matter, because they outgrow everything else. Divide top and bottom by the highest power in the denominator.")}
+        {tx(t, "mLim_infNext",
+          "Limits at infinity have a chapter of their own, the next one: how to find them step by step for any ratio of polynomials, for square roots (where the sign at −∞ is a trap), for ∞ − ∞ and for exponentials.")}
       </p>
-      <Derivation t={t} label={tx(t, "mLim_eqRatio", "A ratio of polynomials at infinity")}
-        steps={[
-          { tex: r`\lim_{x \to \infty} \frac{3x^2 + 1}{x^2 + 5}` },
-          { tex: r`= \lim_{x \to \infty} \frac{3 + 1/x^2}{1 + 5/x^2}`, why: tx(t, "mLim_r1", "divide every term, top and bottom, by x², the highest power in the denominator; the fraction's value does not change") },
-          { tex: r`= \frac{3 + 0}{1 + 0}`, why: tx(t, "mLim_r2", "1/x² and 5/x² go to 0, because dividing by a huge number gives a tiny one") },
-          { tex: r`= \green{3}`, why: tx(t, "mLim_r3", "only the leading coefficients 3 and 1 are left") },
-        ]} />
       <p>
         {tx(t, "mLim_infBody4",
           "You have met two limits at infinity already: the geometric series in the sequences chapter (rⁿ → 0 when |r| < 1) and the number e = lim (1 + 1/n)ⁿ in the exponents chapter.")}
@@ -127,7 +120,7 @@ export function LimitsContent({ t }: { t: TrackTranslations }) {
           [r`\infty`, tx(t, "mLim_wInfty", "\"without bound\": larger than any number you choose, not a number itself")],
           [r`x \to \infty`, tx(t, "mLim_wXInf", "x grows past every number")],
         ]}>
-        {r`\lim_{x \to 0} \frac{1}{x^2} = \infty \qquad \lim_{x \to \infty} \frac{1}{x} = 0 \qquad \lim_{x \to \infty} \frac{3x^2 + 1}{x^2 + 5} = 3`}
+        {r`\lim_{x \to 0} \frac{1}{x^2} = \infty \qquad \lim_{x \to \infty} \frac{1}{x} = 0`}
       </Equation>
 
       <H2>{tx(t, "mLim_epsTitle", "The precise definition: ε and δ")}</H2>
@@ -277,6 +270,7 @@ export function LimitsContent({ t }: { t: TrackTranslations }) {
 
       <Related t={t} links={[
         { track: "Math", id: "algebra-tricks", title: tx(t, "mLim_rel1", "Algebra Tricks I: Multiply by 1, Add 0"), why: tx(t, "mLim_rel1b", "multiplying by the conjugate in full: what it is, why it removes a root, and its traps.") },
+        { track: "Math", id: "limits-at-infinity", title: tx(t, "mLim_rel2", "Limits at Infinity"), why: tx(t, "mLim_rel2b", "the step-by-step method for x → ±∞: degrees, roots, ∞ − ∞ and exponentials.") },
       ]} />
 
       <KeyIdeas t={t} id="mLim" items={[

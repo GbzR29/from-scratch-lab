@@ -57,6 +57,7 @@ const track = {
     complex: "Números complexos",
     quaternions: "Quatérnios e rotação 3D",
     limits: "Limites e continuidade",
+    "limits-at-infinity": "Limites no infinito",
     derivatives: "A derivada",
     "derivative-rules": "Regras de derivação",
     "derivative-uses": "Aplicações da derivada",

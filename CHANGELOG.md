@@ -14,6 +14,12 @@ Totais em 2026-10-09: 9 trilhas e 243 lições (OpenGL 70 · Matemática 62 · G
 
 ### 2026-11-03
 
+- **Matemática: nova aula Limites no infinito (`limits-at-infinity`, logo depois de Limites e continuidade), EN e PT.** Pedido do usuário: não conseguiu aprender a resolver limites com x → ∞, a seção antiga tinha um parágrafo e um único exemplo.
+  - **Conteúdo:** o que x → ∞ significa (tabela do custo por peça, versão com N e ε); os três blocos (c/xᵏ → 0, xᵏ → ∞, sinal das potências em −∞); aritmética do infinito e as formas indeterminadas; polinômios seguem o termo dominante; o método em 4 passos para razões de polinômios e os três casos de grau, cada um com derivação; o atalho (a/b)·x^(m−n) com tabela; raízes com √(x²) = |x| e o sinal em −∞; ∞ − ∞ com o conjugado; a ordem ln ≪ xᵖ ≪ aˣ com tabela e o porquê; 1^∞ e (1 + k/x)ˣ → eᵏ com fórmula ao vivo; assíntota inclinada; lista "qual ferramenta"; 9 exemplos resolvidos; erros comuns.
+  - **Widget novo** `InfinityFigure` ("Afastando o zoom"): 6 funções, x → +∞ ou −∞, a janela cresce de 10 a 10 000, a curva e o seu termo dominante se fundem e f / dominante vai para 1.
+  - **Prática gerada** (`practice/liminf.ts`, conjunto `limitsInf`): razões de polinômios, raízes, ∞ − ∞ com conjugado e exponenciais, respostas exatas; 4800 sorteios conferidos numericamente e com o KaTeX, nenhum errado.
+  - **Limites e continuidade:** a seção de infinito agora aponta para a aula nova (a derivação repetida saiu) e ganhou um Relacionado.
+
 - **Matemática: revisão das aulas usadas na Lista 2 (cadeias de Markov e processos estocásticos), EN e PT.** Pedido do usuário: melhorar o máximo possível.
   - **Prática gerada nova** (`practice/stochastic.ts`, 12 geradores, respostas em fração exata): Cadeias de Markov ganhou uma rodada (dois passos, dois estados, balanço detalhado, resolver πP = π com 3 estados), além dos 10 exercícios fixos; Cadeias com memória (caminhante com sentido em 3 a 5 postos, tempo com memória de dois dias), Metropolis (entradas da matriz na grade {1/4, 1/2, 3/4}, média a posteriori), Filas (M/M/1/K e M/M/2/K exatas: π(0), L, Lq, W, Wq) e AR(1) (variância estacionária, média e variância k passos à frente). 54 000 sorteios conferidos por um caminho independente (cadeia numérica resolvida por eliminação), nenhum errado.
   - **Matriz P visível nos widgets** (`markov/NumMatrix.tsx`, botão "matriz P"): na caminhada com memória (até 10 estados), na fila (K até 6) e no AR(1) (até 7 faixas), para conferir a matriz montada à mão.

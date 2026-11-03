@@ -62,6 +62,7 @@ import complex from "./complex";
 import quaternions from "./quaternions";
 // ── Calculus ──
 import limits from "./limits";
+import limitsAtInfinity from "./limits-at-infinity";
 import derivatives from "./derivatives";
 import derivativeRules from "./derivative-rules";
 import derivativeUses from "./derivative-uses";
@@ -115,7 +116,7 @@ const bundle: LessonText = {
     ...angles, ...triangles, ...area, ...pythagoras, ...similarity, ...circle, ...volumes, ...polyhedra, ...analytic, ...transformations,
     ...trig, ...unitCircle, ...triangleLaws, ...identities, ...trigEquations, ...polar, ...waves,
     ...vectors, ...matrices, ...determinant, ...inverse, ...eigen, ...complex, ...quaternions,
-    ...limits, ...derivatives, ...derivativeRules, ...derivativeUses, ...integrals, ...ftc, ...integrationTechniques, ...series, ...partialDerivatives, ...multipleIntegrals, ...differentialEquations, ...vectorFields, ...lineIntegrals, ...greenStokes, ...fourier, ...calculusOfVariations, ...pde,
+    ...limits, ...limitsAtInfinity, ...derivatives, ...derivativeRules, ...derivativeUses, ...integrals, ...ftc, ...integrationTechniques, ...series, ...partialDerivatives, ...multipleIntegrals, ...differentialEquations, ...vectorFields, ...lineIntegrals, ...greenStokes, ...fourier, ...calculusOfVariations, ...pde,
     ...counting, ...permutations, ...arrangements, ...combinations, ...countingAdvanced, ...countingTricks,
     ...descriptiveStats, ...probability, ...conditional, ...randomVariables, ...expectation, ...distributions, ...sampling, ...regression, ...markovChains, ...absorbingChains, ...chainsWithMemory, ...bayesMetropolis, ...queues, ...discretizingProcesses,
     ...graphsIntro, ...eulerPaths, ...treesMath, ...planarColoring, ...recurrences,

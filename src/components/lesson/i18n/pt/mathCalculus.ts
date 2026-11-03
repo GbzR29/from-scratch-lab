@@ -820,6 +820,13 @@ const text: Record<string, string> = {
   figGsR2: "A circulação de cada celinha é rotacional × área, então ∮ F · dr = ∬ rot F dA (Green).",
   figGsR3: "O mesmo com o que sai: ∮ F · n ds = ∬ div F dA (o teorema da divergência no plano).",
   figGsR4: "A borda vai no sentido anti-horário, e F precisa ser suave na região inteira: um buraco quebra o teorema.",
+
+  // ── InfinityFigure (2026-11-03) ──
+  figInf_title: "Afastando o zoom: o termo dominante assume",
+  figInf_zoom: "afastar o zoom",
+  figInf_dom: "dominante",
+  figInf_lim: "limite com x →",
+  figInf_note: "Aperte play, ou ⏭, para afastar o zoom: a janela cresce de |x| ≤ 10 até |x| ≤ 10 000. A curva azul é a função; a curva âmbar tracejada fica só com o termo dominante, a parte que cresce mais rápido em cima sobre a parte que cresce mais rápido embaixo. Perto de 0 as duas discordam, às vezes muito, mas conforme a janela cresce a curva azul se funde com a âmbar e f / dominante se fecha em 1. Então o limite de f é o limite do seu termo dominante, que é fácil: um número (a reta verde, uma assíntota horizontal), ou uma curva que foge para ±∞. Troque para x → −∞ e veja a raiz e o conjugado mudarem de resposta.",
 };
 
 export default text;

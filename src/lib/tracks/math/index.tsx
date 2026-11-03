@@ -78,7 +78,8 @@ const chapters: Chapter[] = [
   { id: "quaternions", section: LINEAR_ALGEBRA, title: "Quaternions & 3D Rotation", minRead: 20, load: () => import("./chapters/quaternions").then((m) => m.QuaternionsContent) },
 
   { id: "limits",           section: CALCULUS, title: "Limits & Continuity",         minRead: 19, load: () => import("./chapters/limits").then((m) => m.LimitsContent) },
-  { id: "derivatives",      section: CALCULUS, title: "The Derivative",              minRead: 19, load: () => import("./chapters/derivatives").then((m) => m.DerivativesContent) },
+  { id: "limits-at-infinity", section: CALCULUS, title: "Limits at Infinity",        minRead: 22, load: () => import("./chapters/limits-at-infinity").then((m) => m.LimitsInfinityContent) },
+  { id: "derivatives",      section: CALCULUS, title: "The Derivative",             minRead: 19, load: () => import("./chapters/derivatives").then((m) => m.DerivativesContent) },
   { id: "derivative-rules", section: CALCULUS, title: "Rules of Differentiation",    minRead: 20, load: () => import("./chapters/derivative-rules").then((m) => m.DerivativeRulesContent) },
   { id: "derivative-uses",  section: CALCULUS, title: "Using Derivatives",           minRead: 21, load: () => import("./chapters/derivative-uses").then((m) => m.DerivativeUsesContent) },
   { id: "integrals",        section: CALCULUS, title: "Integrals: Area by Strips",   minRead: 19, load: () => import("./chapters/integrals").then((m) => m.IntegralsContent) },
@@ -185,6 +186,7 @@ const requires: Record<string, string[]> = {
   "quaternions": ["complex", "cross", "matrices"],
 
   "limits":                 ["algebra", "sequences"],
+  "limits-at-infinity":     ["limits", "polynomials", "exponents"],
   "derivatives":            ["limits"],
   "derivative-rules":       ["derivatives", "exponents", "identities"],
   "derivative-uses":        ["derivative-rules"],
